@@ -1,0 +1,7 @@
+The C-mount connection is described in the specification 1-32UN-2A. It is an imperial thread with a diameter of one inch and a pitch of 32 threads per inch. 
+This means that it virtually corresponds to a metric thread M25.5 x 0.75 mm.
+
+The back focal distance of a C-mount connector is 17.526 mm. This makes it exactly 5 mm longer than the back focal distance of the CS-mount connector. 
+This means that a C-mount connector can be used on a camera with a CS-mount connector if a CS-mount adapter (5 mm spacer ring) is inserted between the lens and the camera.
+
+Because of its relatively small diameter of 1 inch (25.4 mm), a C-mount connector is not suitable for larger sensors such as those used in high- resolution cameras or line scan cameras.
