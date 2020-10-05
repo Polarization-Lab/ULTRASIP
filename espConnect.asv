@@ -51,11 +51,7 @@ if isempty(CURRENT_DECEL)
 end
 
 for n = 1:3
-    fprintf(esp301,sprintf('%dVA%0.5f', n, CURRENT_SPEED)); % Set axis 3 velocity
-    fprintf(esp301,sprintf('%dAC%0.5f', n, CURRENT_ACCEL)); % Set axis 3 accel
-    fprintf(esp301,sprintf('%dAG%0.5f', n, CURRENT_DECEL)); % Set axis 3 decel
+    Send(sprintf('%dVA%0.5f', n, CURRENT_SPEED)); % Set axis 3 velocity
+    Send(sprintf('%dAC%0.5f', n, CURRENT_ACCEL)); % Set axis 3 accel
+    Send(sprintf('%dAG%0.5f', n, CURRENT_DECEL)); % Set axis 3 decel
 end
-
-fclose(esp301)
-
-%% NEED TO ADD HOMING COMMANDS

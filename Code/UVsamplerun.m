@@ -1,12 +1,12 @@
 %create HDF5 dataset
 
 %writefilepath
-fp = 'C:\Stepper Polarimeter\VVR_Analysis_Temp\'; %change
+fp = 'C:\UV Polarimeter Computer Backup\ULTRASIP\Calibration\'; %change
 date = date();
 starttime = datestr(now);
 
-usernotes = 'taken by jheath ; VVR Measurements 9/15/2020 '; %change
-fn = 'VVR'; %change
+usernotes = 'taken by jheath ; UV Air Measurements '; %change
+fn = 'AirCalibrationUV'; %change
 name = strcat(fp,fn,'-',date,'.h5');
 
 num_meas = 64;
@@ -17,7 +17,7 @@ for i = 1:31
     exposure = exposures(i);
     framesPerTrigger = 3;
     homeMotor(xps)
-    wavelengthSweep(name,wavelength,exposure ,vid,num_meas, COMmono,COMdmm, xps, framesPerTrigger)    
+    wavelengthSweep(name,wavelength,exposure ,vid, num_meas, COMmono, esp301, framesPerTrigger)    
 end
 
 endtime = datestr(now);

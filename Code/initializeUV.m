@@ -11,6 +11,7 @@ instrreset %clear and reset any existing port communications
 
 % DMM = initializeUV_DMM();
 
+comPort = 'COM6'; %Whichever port the ESP301 is plugged in
 
 %%Initialization
 ROI =  [274 274 1500 1500];
@@ -18,6 +19,7 @@ mode = 1 ; % 1x1 binning
 framespertrigger = 3;
 
 % xps = initializeMotor();
+espConnect(comPort)
 
 vid = initializeUVCamera(mode,ROI,framespertrigger);
 src = getselectedsource(vid);

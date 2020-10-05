@@ -34,7 +34,7 @@ function success = Connect()
     %%
     
     Send('VE')
-	%%
+
 	if ~Send('1AU5000') % Set max accel/decel
 		success = false;
 		return;
