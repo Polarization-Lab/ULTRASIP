@@ -5,7 +5,7 @@ Files include instrument control, calibration, and data reduction for UV mueller
 
 Project name: Stepper Mueller Matrix Imaging Polarimeter
 
-Description: This document describes Matlab software written for the control of the "UV Stokes Imaging Polarimeter" located in Meinel 767. 
+Description: This document describes Matlab software written for the control of the "UV Stokes Imaging Polarimeter" located in Meinel 765. 
 
 Installation: download matlab into your chosen path folder. 
 
