@@ -1,7 +1,7 @@
 % Automate Data Collection 
 %Define starting directory 
-starting_dir = 'C:\ULTRASIP_DATA\';
-cd(starting_dir)
+saving_dir = 'C:\ULTRASIP\';
+
 %Create data directory 
 date=datestr(now,'yyyy-mm-dd');
 
@@ -22,7 +22,7 @@ prompt = 'Azimuth? ';
 azimuth = input(prompt);
 
 
-filename = [date '_' time '_' num2str(azimuth) '_' num2str(altitude) '.h5'];
+filename = [saving_dir '' date '_' time '_' num2str(azimuth) '_' num2str(altitude) '.h5'];
 
 usernotes = 'Taken by James Heath. Clear sky measurements for polarization characterization';
 

@@ -12,13 +12,12 @@ instrreset %clear and reset any existing port communications
 
 % DMM = initializeUV_DMM();
 %% Connect to ESP Motor
-comPort = 'COM1'; %Whichever port the ESP301 is plugged in
-esp301 = espConnect(comPort);
+%comPort = 'COM1'; %Whichever port the ESP301 is plugged in
+%esp301 = espConnect(comPort);
 
 %% Connect to piezo Motor
-%comPort = 'COM1'; %Whichever port the ESP301 is plugged in
-% xps = initializeMotor();
-%ELL14 = ELL14Connect(comPort);
+comPort = 'COM1'; %Whichever port the ESP301 is plugged in
+ELL14 = ELL14Connect(comPort);
 
 %% Connect to Camera 
 %Initialization

@@ -22,5 +22,12 @@ end
 vid.FramesPerTrigger = FramesPerTrigger; 
 vid.ROIPosition = ROIPosition;
 
+%ensure that fan is ON
+src = getselectedsource(vid);
+src.HighDynamicRangeMode = 'on';
+src.SensorCoolerFan = 'on';
+
+
+
 end
 
