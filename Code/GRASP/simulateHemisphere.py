@@ -4,7 +4,7 @@ import numpy as np
 import datetime as dt
 
 # Path to the YAML file you want to use for the aerosol and surface definition
-fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/settings_FWD_IQU_POLAR_1lambda.yml'
+fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/settings_first_sim.yml'
 
 # paths to your GRASP binary and kernels (replace everything up to grasp_open with the path to your GRASP repository)
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
@@ -22,13 +22,13 @@ Nvza = len(vza)
 Nazimth = len(azmthΑng)
 thtv_g = np.tile(vza, len(msTyp)*len(azmthΑng))
 phi_g = np.tile(np.concatenate([np.repeat(φ, len(vza)) for φ in azmthΑng]), len(msTyp))
-nbvm = len(thtv_g)/len(msTyp)*np.ones(len(msTyp), np.int)
+nbvm = len(thtv_g)/len(msTyp)*np.ones(len(msTyp), int)
 meas = np.r_[np.repeat(0.1, nbvm[0]), np.repeat(0.01, nbvm[1]), np.repeat(0.01, nbvm[2])] # dummy values
 
 # define the "pixel" we want to simulate
 nowPix = pixel(dt.datetime.now(), 1, 1, 0, 0, masl=0, land_prct=100)
 for wvl in wvls: nowPix.addMeas(wvl, msTyp, nbvm, sza, thtv_g, phi_g, meas)
-
+print('made it here')
 # setup instance of graspRun class, add the above pixel, run grasp and read the output to gr.invRslt[0] (dict)
 # releaseYAML=True tmeans that the python will adjust the YAML file to make it correspond to Nwvls (if it does not already)
 gr = graspRun(pathYAML=fwdModelYAMLpath, releaseYAML=True, verbose=True)
