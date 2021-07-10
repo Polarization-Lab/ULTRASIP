@@ -6,7 +6,7 @@ output:
 retrieval:
     
     general: {path_to_internal_files: /usr/local/share/grasp/kernels/}    
-    mode: forward_model
+    mode: forward
     
     inversion:
         regime: single_pixel
