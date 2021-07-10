@@ -1,12 +1,8 @@
 # YML file for running a backward example of GSFC1 
 
-
-
-
- 
 input: {driver: sdata, file: bench.sdat}
 output:
-    segment: {function: classic, stream: bench_FWD_IQU_rslts.txt}
+    segment: {function: classic, stream: bench_first_sim_rslts.txt}
 retrieval:
     
     general: {path_to_internal_files: /usr/local/share/grasp/kernels/}    
@@ -32,7 +28,7 @@ retrieval:
                 standard_deviation:  0.005
                 measurement_type[1]:
                     type: aod
-                    index_of_wavelength_involved: [ 1, 2, 3, 4, 5, 6, 7, 8]
+                    index_of_wavelength_involved: [ 1, 2]
 
     forward_model:
         phase_matrix:
@@ -75,7 +71,7 @@ retrieval:
     debug:
         additional_information: false
         verbose: true
-        
+        #BB_2101 from OMI paper
     constraints:
         characteristic[1]: 
             type: size_distribution_lognormal
@@ -138,13 +134,13 @@ retrieval:
             retrieved: false
             mode[1]: 
                 initial_guess: 
-                    value:                        [1.401,   1.401,   1.401,   1.401,   1.401,   1.401,   1.401,   1.401]
-                    min:                          [1.33,    1.33,    1.33,    1.33,    1.33,    1.33,    1.33,    1.33]
-                    max:                          [1.6,     1.6,     1.6,     1.6,     1.6,     1.6,     1.6,     1.6]
-                    index_of_wavelength_involved: [1,       2,       3,       4,       5,       6,       7,       8]
+                    value:                        [1.401,   1.401]
+                    min:                          [1.33,    1.33]
+                    max:                          [1.6,     1.6]
+                    index_of_wavelength_involved: [1,       2]
                 single_pixel:
                     a_priori_estimates:
-                        lagrange_multiplier:      [0,       0,       0,       0,       0,       0,       0,       0]
+                        lagrange_multiplier:      [0,       0]
                     smoothness_constraints:
                         difference_order: 1
                         lagrange_multiplier: 10.0
@@ -154,13 +150,13 @@ retrieval:
             retrieved: false
             mode[1]: 
                 initial_guess: 
-                    value:                        [0.0030,  0.0030,  0.0030,  0.0030,  0.0030,  0.0030,  0.0030,  0.0030]
-                    min:                          [0.0005,  0.0005,  0.0005,  0.0005,  0.0005,  0.0005,  0.0005,  0.0005]
-                    max:                          [0.1,     0.1,     0.1,     0.1,     0.1,     0.1,     0.1,     0.1]
-                    index_of_wavelength_involved: [1,       2,       3,       4,       5,       6,       7,       8]
+                    value:                        [0.0030,  0.0030]
+                    min:                          [0.0005,  0.0005]
+                    max:                          [0.1,     0.1]
+                    index_of_wavelength_involved: [1,       2]
                 single_pixel:
                     a_priori_estimates:
-                        lagrange_multiplier:      [0,       0,       0,       0,       0,       0,       0,       0]
+                        lagrange_multiplier:      [0,       0]
                     smoothness_constraints:
                         difference_order: 1
                         lagrange_multiplier: 1.e-1
