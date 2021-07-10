@@ -6,7 +6,7 @@ output:
 retrieval:
     
     general: {path_to_internal_files: /usr/local/share/grasp/kernels/}    
-    mode: forward
+    mode: forward_model
     
     inversion:
         regime: single_pixel
@@ -131,7 +131,7 @@ retrieval:
 
         characteristic[3]: 
             type: real_part_of_refractive_index_spectral_dependent
-            retrieved: false
+            retrieved: true
             mode[1]: 
                 initial_guess: 
                     value:                        [1.401,   1.401]
@@ -147,7 +147,7 @@ retrieval:
 
         characteristic[4]: 
             type: imaginary_part_of_refractive_index_spectral_dependent
-            retrieved: false
+            retrieved: true
             mode[1]: 
                 initial_guess: 
                     value:                        [0.0030,  0.0030]
@@ -163,7 +163,7 @@ retrieval:
 
         characteristic[5]: 
             type: sphere_fraction
-            retrieved: false
+            retrieved: true
             mode[1]: 
                 initial_guess: 
                     value:                        [0.999]
