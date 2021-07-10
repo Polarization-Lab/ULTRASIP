@@ -4,11 +4,11 @@ import numpy as np
 import datetime as dt
 
 # Path to the YAML file you want to use for the aerosol and surface definition
-fwdModelYAMLpath = '/Users/wrespino/Synced/Local_Code_MacBook/MADCAP_Analysis/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda.yml'
+fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/settings_FWD_IQU_POLAR_1lambda.yml'
 
 # paths to your GRASP binary and kernels (replace everything up to grasp_open with the path to your GRASP repository)
-binPathGRASP = '/Users/wrespino/Synced/local_Code_MacBook/grasp_open/build/bin/grasp'
-krnlPathGRASP = '/Users/wrespino/Synced/Local_Code_MacBook/grasp_open/src/retrieval/internal_files'
+binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
+krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files'
 
 sza = 30 # solar zenith angle
 wvls = [0.355, 0.550] # wavelengths in μm
@@ -37,6 +37,7 @@ gr.runGRASP(binPathGRASP=binPathGRASP, krnlPathGRASP=krnlPathGRASP)
 
 # hemisphere plotting code
 Nwvl = len(wvls)
+print(Nwvl)
 fig, ax = plt.subplots(Nwvl, 2, subplot_kw=dict(projection='polar'), figsize=(10,3+3*Nwvl))
 if Nwvl == 1: ax = ax[None,:]
 pxInd = 0
