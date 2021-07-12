@@ -34,6 +34,7 @@ print('made it here')
 gr = graspRun(pathYAML=fwdModelYAMLpath, releaseYAML=True, verbose=True)
 gr.addPix(nowPix)
 gr.runGRASP(binPathGRASP=binPathGRASP, krnlPathGRASP=krnlPathGRASP)
+#gr.runGRASP(binPathGRASP=None, krnlPathGRASP=krnlPathGRASP)
 
 # hemisphere plotting code
 Nwvl = len(wvls)
