@@ -1,6 +1,6 @@
 % Automate Data Collection 
 %Define starting directory 
-saving_dir = 'C:\ULTRASIP\';
+saving_dir = 'C:\ULTRASIP_Data\June2021';
 
 %Create data directory 
 date=datestr(now,'yyyy-mm-dd');
@@ -24,7 +24,7 @@ azimuth = input(prompt);
 
 filename = [saving_dir '' date '_' time '_' num2str(azimuth) '_' num2str(altitude) '.h5'];
 
-usernotes = 'Taken by James Heath. Clear sky measurements for polarization characterization';
+usernotes = 'Taken by Atkin Hyatt. Test measurement with the integrating sphere and fiber optic light';
 
 % Polarizer angles 
 Degree = [0 45 90 135];

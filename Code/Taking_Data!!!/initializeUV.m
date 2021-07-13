@@ -16,19 +16,28 @@ instrreset %clear and reset any existing port communications
 %esp301 = espConnect(comPort);
 
 %% Connect to piezo Motor
+disp('Connecting ELL14')
 comPort = 'COM1'; %Whichever port the ESP301 is plugged in
 ELL14 = ELL14Connect(comPort);
+disp('ELL14 connected')
 
 %% Connect to Camera 
 %Initialization
 mode = 1; % 1x1 binning
-
+%exposureTime = 6; % in seconds
 framesPerTrigger = 1;
 
 vid = CameraConnect(mode,framesPerTrigger);
 src = getselectedsource(vid);
 
 src.TriggerConnector = 'bnc';
-src.ExposureTime = 6; %Exposure time of Camera
 
+%ensure that fan is ON
+src.SensorCoolerFan = 'on';
 
+% Change exposure after initialize
+
+src.ExposureTime = 0.3; %Exposure time of Camera 
+%if exposureTime >= 5
+%    vid.Timeout = 2 * exposureTime;
+%end

@@ -9,16 +9,17 @@ function ELL14 = ELL14Connect(comPort)
 %%
 ELL14 = serial(comPort);
 set(ELL14, 'baudrate', 9600,'databits',8,'stopbits',1);
+
 %%
 %Ask for position
 fopen(ELL14);
 
 %set home position and home
 fprintf(ELL14,'0so00000000');
-query(ELL14,'0ho1')
+query(ELL14,'0ho1');
 
 %set jog to 45 degrees
-fprintf(ELL14,'0sj00004600');
+%fprintf(ELL14,'0sj00004600');
 fclose(ELL14);
 
 

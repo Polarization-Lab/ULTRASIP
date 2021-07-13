@@ -15,7 +15,7 @@ function image = UV_data(vid,framesPerTrigger)
 %%
 % Configure the object for manual trigger mode.
 
-% Measure the time to acquire 20 frames.
+% Measure the time to acquire 20 frames. 
 im = zeros(framesPerTrigger,512,512);
 
 for i = 1:framesPerTrigger
