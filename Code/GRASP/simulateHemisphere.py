@@ -4,7 +4,7 @@ import numpy as np
 import datetime as dt
 
 # Path to the YAML file you want to use for the aerosol and surface definition
-fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/settings_first_sim.yml'
+fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/settings_FWD_IQU_POLAR_2lambda.yml'
 
 # paths to your GRASP binary and kernels (replace everything up to grasp_open with the path to your GRASP repository)
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
@@ -20,7 +20,7 @@ clrMap = plt.cm.jet # color map for plots
 # prep geometry inputs for GRASP
 Nvza = len(vza)
 Nazimth = len(azmthΑng)
-thtv_g = np.tile(vza, len(msTyp)*len(azmthΑng))
+thtv_g = np.tile(vza, len(msTyp)*len(azmthΑng)) 
 phi_g = np.tile(np.concatenate([np.repeat(φ, len(vza)) for φ in azmthΑng]), len(msTyp))
 nbvm = len(thtv_g)/len(msTyp)*np.ones(len(msTyp), int)
 meas = np.r_[np.repeat(0.1, nbvm[0]), np.repeat(0.01, nbvm[1]), np.repeat(0.01, nbvm[2])] # dummy values
@@ -68,7 +68,7 @@ for l in range(Nwvl):
     wvStr = ' ($%4.2f\\mu m$)' % wvls[l]
     ax[l,0].set_ylabel('I' + wvStr, labelpad=30)
     ax[l,1].set_ylabel('DoLP' + wvStr, labelpad=30)
-ttlStr = 'Some Title'
+ttlStr = "BIO-2 From OMI"
 plt.suptitle(ttlStr)
 plt.tight_layout(rect=[0.01, 0.01,0.98, 0.98])
 plt.ion()
