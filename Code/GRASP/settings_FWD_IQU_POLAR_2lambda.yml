@@ -33,7 +33,7 @@ retrieval:
             number_of_elements: 4
             radius:
                 mode[1]: {max: 15.0, min: 0.05}
-                #mode[2]: {max: 150.0, min: 0.05} # <- UNCOMMENT THIS FOR 2ND AEROSOL MODE
+                mode[2]: {max: 150.0, min: 0.05} # <- UNCOMMENT THIS FOR 2ND AEROSOL MODE
         radiative_transfer:
             absolute_error_rt_calculations: 1.0e-06
             aerosol_profile_vertical_type: gaussian
@@ -75,6 +75,13 @@ retrieval:
                     min:   [0.00000001]
                     value: [0.1]
             retrieved: true
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [5.00001]
+                    min:   [0.00000001]
+                    value: [0.1]
+            retrieved: true
             type: aerosol_concentration
         characteristic[2]:
             mode[1]:
@@ -84,13 +91,13 @@ retrieval:
                     min:   [0.02, 0.02]
                     value: [1.147,1.537]
             retrieved: true
-            # mode[2]:
-            #     initial_guess:
-            #         index_of_wavelength_involved: [0]
-            #         max:   [100.0, 10.0]
-            #         min:   [0.02, 0.02]
-            #         value: [64.8142,2.203]
-            # retrieved: true
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [100.0, 10.0]
+                    min:   [0.02, 0.02]
+                    value: [64.8142,2.203]
+            retrieved: true
             type: size_distribution_lognormal
         characteristic[3]:
             mode[1]:
@@ -100,9 +107,23 @@ retrieval:
                     min:   [1.33]
                     value: [1.50]
             retrieved: true
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [1.65]
+                    min:   [1.33]
+                    value: [1.50]
+            retrieved: true
             type: real_part_of_refractive_index_spectral_dependent
         characteristic[4]:
             mode[1]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [0.1]
+                    min:   [1e-10]
+                    value: [0.005]
+            retrieved: true
+            mode[2]:
                 initial_guess:
                     index_of_wavelength_involved: [0]
                     max:   [0.1]
