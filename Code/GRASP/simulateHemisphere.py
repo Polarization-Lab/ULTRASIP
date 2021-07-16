@@ -4,14 +4,14 @@ import numpy as np
 import datetime as dt
 
 # Path to the YAML file you want to use for the aerosol and surface definition
-fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/settings_FWD_IQU_POLAR_2lambda.yml'
+fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_FWD_IQU_POLAR_2lambda.yml'
 
 # paths to your GRASP binary and kernels (replace everything up to grasp_open with the path to your GRASP repository)
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
 krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files'
 
 sza = 30 # solar zenith angle
-wvls = [0.350, 0.550] # wavelengths in μm
+wvls = [0.340, 0.550] # wavelengths in μm
 msTyp = [41, 42, 43] # grasp measurements types (I, Q, U) [must be in ascending order]
 azmthΑng = np.r_[0:180:10] # azimuth angles to simulate (0,10,...,175)
 vza = 180-np.r_[0:75:5] # viewing zenith angles to simulate [in GRASP cord. sys.]
@@ -39,7 +39,7 @@ gr.runGRASP(binPathGRASP=binPathGRASP, krnlPathGRASP=krnlPathGRASP)
 # hemisphere plotting code
 Nwvl = len(wvls)
 print(Nwvl)
-fig, ax = plt.subplots(Nwvl, 3, subplot_kw=dict(projection='polar'), figsize=(10,3+3*Nwvl))
+fig, ax = plt.subplots(Nwvl, 2, subplot_kw=dict(projection='polar'), figsize=(10,3+3*Nwvl))
 if Nwvl == 1: ax = ax[None,:]
 pxInd = 0
 
@@ -49,7 +49,7 @@ for l in range(Nwvl):
     theta = gr.invRslt[pxInd]['fis'][:,l].reshape(Nazimth, Nvza)/180*np.pi
     r = np.vstack([r, np.flipud(r)]) # mirror symmetric about principle plane
     theta = np.vstack([theta, np.flipud(2*np.pi-theta)]) # mirror symmetric about principle plane
-    for i in range(3):
+    for i in range(2):
         data = gr.invRslt[pxInd]['fit_I'][:,l]
         # if i==0: data = gr.invRslt[pxInd]['sca_ang'][:,l]
         if i==1:
@@ -71,7 +71,9 @@ for l in range(Nwvl):
     wvStr = ' ($%4.2f\\mu m$)' % wvls[l]
     ax[l,0].set_ylabel('I' + wvStr, labelpad=30)
     ax[l,1].set_ylabel('DoLP' + wvStr, labelpad=30)
-ttlStr = "BIO-2 From OMI"
+ttlStr = "BIO-2102 From OMI"
+#ttlStr = "WA-1104 From OMI"
+#ttlStr = "Dust-Model 3 From OMI"
 plt.suptitle(ttlStr)
 plt.tight_layout(rect=[0.01, 0.01,0.98, 0.98])
 plt.ion()
