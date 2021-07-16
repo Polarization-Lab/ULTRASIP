@@ -11,7 +11,7 @@ binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
 krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files'
 
 sza = 30 # solar zenith angle
-wvls = [0.355, 0.550] # wavelengths in μm
+wvls = [0.350, 0.550] # wavelengths in μm
 msTyp = [41, 42, 43] # grasp measurements types (I, Q, U) [must be in ascending order]
 azmthΑng = np.r_[0:180:10] # azimuth angles to simulate (0,10,...,175)
 vza = 180-np.r_[0:75:5] # viewing zenith angles to simulate [in GRASP cord. sys.]
@@ -39,22 +39,25 @@ gr.runGRASP(binPathGRASP=binPathGRASP, krnlPathGRASP=krnlPathGRASP)
 # hemisphere plotting code
 Nwvl = len(wvls)
 print(Nwvl)
-fig, ax = plt.subplots(Nwvl, 2, subplot_kw=dict(projection='polar'), figsize=(10,3+3*Nwvl))
+fig, ax = plt.subplots(Nwvl, 3, subplot_kw=dict(projection='polar'), figsize=(10,3+3*Nwvl))
 if Nwvl == 1: ax = ax[None,:]
 pxInd = 0
+
 for l in range(Nwvl):
     r = gr.invRslt[pxInd]['vis'][:,l].reshape(Nazimth, Nvza)
     if vza.max()>90: r = 180 - r
     theta = gr.invRslt[pxInd]['fis'][:,l].reshape(Nazimth, Nvza)/180*np.pi
     r = np.vstack([r, np.flipud(r)]) # mirror symmetric about principle plane
     theta = np.vstack([theta, np.flipud(2*np.pi-theta)]) # mirror symmetric about principle plane
-    for i in range(2):
+    for i in range(3):
         data = gr.invRslt[pxInd]['fit_I'][:,l]
         # if i==0: data = gr.invRslt[pxInd]['sca_ang'][:,l]
         if i==1:
             Q = gr.invRslt[pxInd]['fit_Q'][:,l]
             U = gr.invRslt[pxInd]['fit_U'][:,l]
             data = np.sqrt(Q**2+U**2)/data
+        #if i==2:
+            
         clrMin = data.min()
         clrMax = data.max()
         v = np.linspace(clrMin, clrMax, 200, endpoint=True)
@@ -73,4 +76,3 @@ plt.suptitle(ttlStr)
 plt.tight_layout(rect=[0.01, 0.01,0.98, 0.98])
 plt.ion()
 plt.show()
-plt.savefig(ttlStr +'2.png')

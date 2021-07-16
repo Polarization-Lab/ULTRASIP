@@ -769,8 +769,8 @@ class graspRun():
                     if rs[key].shape[-1] == nsd*Nwvlth:
                         rs[key] = rs[key].reshape(nsd,-1) # we double check that -1 -> Nwvlth on next line
                     assert rs[key].shape[-1]==Nwvlth, 'Length of the last dimension of %s was %d, not matching Nλ=%d' % (key, rs[key].shape[-1], Nwvlth)
-                for λflatKey in [k for k in ['n','k'] if k in rs.keys()]: # check if spectrally flat RI values used
-                    for mode in rs[λflatKey]: mode[mode==0] = mode[0] # fill zero values with first value
+ #               for λflatKey in [k for k in ['n','k'] if k in rs.keys()]: # check if spectrally flat RI values used
+#                    for mode in rs[λflatKey]: mode[mode==0] = mode[0] # fill zero values with first value
                 if 'βext' in rs:
                     rs['range'] = rs['range'].reshape(nsd,-1)
                     rs['βext'] = rs['βext'].reshape(nsd,-1)
