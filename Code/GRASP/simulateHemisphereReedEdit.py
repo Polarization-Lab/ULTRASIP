@@ -10,7 +10,7 @@ fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_Dust
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
 krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files'
 
-ttlStr = 'TEST AEROSOL MODEL RESULTS' # Top Title
+ttlStr = 'DUST AEROSOL MODEL RESULTS' # Top Title
 wvStrFrmt =  '($%4.2f\\mu m$)' # Format of Y-axis labels 
 sza = 30 # solar zenith angle
 wvls = [0.34, 0.550] # wavelengths in μm
