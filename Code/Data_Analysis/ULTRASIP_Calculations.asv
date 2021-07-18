@@ -2,13 +2,11 @@
 %% ULTRASIP_Calculations
 %% Calculations performed on flux images: This code performs
 %% non-uniformity correction, and calculates stokes parameters, DoLP and AoLP
-close all; clear all;
+
 % Define flux images 
 %image = h5read(filename,'/measurement/images');
-%image = 
-%load('1659.mat');
-%load('clouds_1025_n264741_180448.mat')
-load('bluesky2_1354.mat')
+%image = load('1659.mat');
+load('clouds_1025_n264741_180448.mat')
 %Separate measurement into the 4 images (0,45,90,135)
 range = 1:512;
 img0 = squeeze(image(1,range,range));
@@ -78,9 +76,7 @@ subplot(2,2,1);imagesc(img0fix);axis off;title('Corrected 0 deg');colorbar;
 subplot(2,2,2);imagesc(img45fix);axis off;title('Corrected 45 deg');colorbar;
 subplot(2,2,3);imagesc(img90fix);axis off;title('Corrected 90 deg');colorbar;
 subplot(2,2,4);imagesc(img135fix);axis off;title('Corrected 135 deg');colorbar;
-
-saveas(figure(1),'C:\Users\deleo\Desktop\flux.png')
-saveas(figure(2),'C:\Users\deleo\Desktop\NUC_flux.png');
+saveas(2,'test.png')
 % S0fix = img0fix./2 + img90fix./2 + img45fix./2 + img135fix./2;
 % figure;imagesc(S0fix);axis on;title('S0');colorbar;
 

@@ -4,7 +4,7 @@ C = ImgCorrection(image2correct,gamma0,M,B,Avg_M,Avg_B);
 
 A = fftshift(fft2(fftshift(C)));
 A_mod = abs(A);
-% new annular mask
+
 x = -255:256;
 y = -255:256;
 [xx yy] = meshgrid(x,y);
