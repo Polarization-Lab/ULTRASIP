@@ -1,4 +1,4 @@
-function ELL14 = ELL14Connect(comPort)
+function ELL14 = ELL14Connect(comPort, home)
 % This function will automatically connect the esp301 motion controller
 % using the virtual serial port (usually COM3), and configuring it
 % appropriately.  To my knowledge, the only two parameters of the ESP301
@@ -15,8 +15,9 @@ set(ELL14, 'baudrate', 9600,'databits',8,'stopbits',1);
 fopen(ELL14);
 
 %set home position and home
-fprintf(ELL14,'0so00000000');
-query(ELL14,'0ho1');
+fprintf(ELL14,"%s", "0so" + home);
+%query(ELL14,'0ho1');
+fprintf(ELL14, '0ho0');
 
 %set jog to 45 degrees
 %fprintf(ELL14,'0sj00004600');

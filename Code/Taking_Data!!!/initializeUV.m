@@ -18,7 +18,12 @@ instrreset %clear and reset any existing port communications
 %% Connect to piezo Motor
 disp('Connecting ELL14')
 comPort = 'COM1'; %Whichever port the ESP301 is plugged in
-ELL14 = ELL14Connect(comPort);
+
+% Set home position
+global home
+home = 'FFFF9C72';
+
+ELL14 = ELL14Connect(comPort, home);
 disp('ELL14 connected')
 
 %% Connect to Camera 

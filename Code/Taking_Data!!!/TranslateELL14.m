@@ -2,9 +2,10 @@
 % to decimal degrees also taking two's compliment into account
 %
 % Written by Atkin Hyatt 07/08/2021
-% Last modified by Atkin Hyatt 07/08/2021
+% Last modified by Atkin Hyatt 07/19/2021
 
-function decPos = TranslateELL14(hex, pulsPerDeg)
+function decPos = TranslateELL14(hex)
+    pulsPerDeg = 398.22222222222;
     if hex(4) == '0'            % if position is positive
         % extract position data
         [~, pos] = strtok(hex, '0');

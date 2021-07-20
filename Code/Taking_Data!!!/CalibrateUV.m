@@ -1,53 +1,58 @@
 % CalibrateUV -- Scan over desired angles of interest for a new home
 % postion.  Use when any polarizing elements are added/subtracted from
-% setup or when 
+% setup.  Change variable "home" in initializeUV.m
+%
+% Run Calibrate.m
 %
 % Written by Atkin Hyatt 07/09/2021
-% Last modified by Atkin Hyatt 07/11/2021
+% Last modified by Atkin Hyatt 07/19/2021
 
-function CalibrateUV(ELL14, dmin, dmax, del, count, src, vid, framesPerTrigger, plotSize)
-deg = dmin : del : dmax; L = length(deg);
+function CalibrateUV(ELL14, dmin, dmax, del, count, src, vid, framesPerTrigger, plotSize, dark)
+deg = dmin : del : dmax; L = length(deg); trueDeg = zeros(1,L); stdev = zeros(1,L);
 avcounts = zeros(1, L); maxRes = 0.01;
 
+% check resolution
 if del == maxRes / 10   % exit recursion
-    home = dmin + 10*del;
-    hexhome = dec2hex(round(home * 398.22222222),8);
-    fprintf('Done\nSet home to %0.6f or %s\n', home, hexhome)
+    % get optimized home
+    newhome = dmin + 10*del;
+    
+    % find the new offset from current home
+    offset = home + newhome;
+    hexhome = dec2hex(round(offset * 398.22222222),8);
+    
+    % tell user new offset
+    fprintf('Done\nSet home to %0.6f or %s\n', offset, hexhome)
+    stop(vid)
 else   % continue recursion
     fprintf('Scanning for del = %0.2f\n\n', del);
     
-    % set up measurement
-    Move_motor(dmin,ELL14);
-    fopen(ELL14); fprintf(ELL14,'%s', "0sj" + dec2hex(round(398.2222222 * del),8));
-    
     % take data
     for N = 1 : L
-  
+        trueDeg(N) = Move_motor(deg(N), ELL14);
         % check fan
         if src.SensorCoolerFan ~= 'on'
             src.SensorCoolerFan = 'on';
         end
         
-        %for M = 1 : 2
-            image = UV_data(vid,framesPerTrigger); %take picture
-        %end
-        fprintf('Image taken\n')
-    
-        avcounts(N) = mean(mean(image));  % compensate for noise in image, treat as one pixel
-        fprintf('%f\n\n', avcounts(N))
-        
-        if deg(N) ~= dmax
-            % move forward by del
-            fprintf(ELL14,'0fw');
-            hex = query(ELL14, "0gp");
-            fprintf("Actual Position: %0.6f degrees\n", TranslateELL14(hex, 398.222222222222222));
+        image = zeros(1, 512, 512);
+        for M = 1 : 2
+            pic = UV_data(vid,framesPerTrigger); %take picture
+            image = image + pic;
         end
+        image = image ./ 2;
+        fprintf('Image taken\n')
+        
+        
+        im = reshape(image,512,512) - dark;
+        stdev(N) = std(reshape(im, 1, 512*512));
+        
+        avcounts(N) = mean(mean(im));  % compensate for noise in image, treat as one pixel
+        fprintf('%f\n\n', avcounts(N))
     end
-    fclose(ELL14);
     
     % plot data
     subplot(plotSize, plotSize, count)
-    plot(deg, avcounts); title('Average Counts vs Polarizer Angle')
+    errorbar(trueDeg, avcounts, stdev); title('Average Counts vs Polarizer Angle')
     xlabel('Angle Relative to Previous Home (deg)'); ylabel('Average Counts')
     
     % find max
@@ -62,6 +67,6 @@ else   % continue recursion
     % start next iteration
     count = count + 1; dmin = deg(N) - del; dmax = deg(N) + del;
     del = del / 10;
-    CalibrateUV(ELL14, dmin, dmax, del, count, src, vid, framesPerTrigger, plotSize);
+    CalibrateUV(ELL14, dmin, dmax, del, count, src, vid, framesPerTrigger, plotSize, dark)
 end
 end

@@ -2,9 +2,9 @@
 % to position an ELL14 rotation stage
 %
 % Written by Atkin Hyatt 06/18/2021
-% Last modified by Atkin Hyatt 07/08/2021
+% Last modified by Atkin Hyatt 07/19/2021
 
-function y = Move_motor(deg,ELL14)
+function pos = Move_motor(deg,ELL14)
 
 % Constants
 pulsPerDeg = 398.222222222;
@@ -12,8 +12,8 @@ deviceAddress = '0';
 
 % Open ELL14
 if ~isempty(instrfind(ELL14,'Status','closed'))
-    comPort = 'COM1';
-    ELL14 = ELL14Connect(comPort);
+    %comPort = 'COM1';
+    %ELL14 = ELL14Connect(comPort, home);
     fopen(ELL14);
 %    disp('ELL14 now open')
 %else
@@ -36,6 +36,6 @@ fclose(ELL14);
 %pos = strtok(pos);
 %pos = hex2dec(pos) / pulsPerDeg;
 
-pos = TranslateELL14(hex, pulsPerDeg);
+pos = TranslateELL14(hex);
 fprintf("Actual Position: %0.6f degrees\n", pos);
 end

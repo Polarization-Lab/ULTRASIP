@@ -3,7 +3,7 @@
 % date(yyy-mm-dd)_time_exposureTime_delta_description.h5
 %
 % Written by Atkin Hyatt 06/23/2021
-% Last modified by Atkin Hyatt 07/08/2021
+% Last modified by Atkin Hyatt 07/19/2021
 
 initializeUV
 % Define saving  directory 
@@ -44,7 +44,7 @@ usernotes = input('Notes - ', 's');
 %'Taken by Atkin Hyatt. Test measurement with the integrating sphere and fiber optic light';
 
 % Polarizer angles 
-Degree = [0, delta, 45, 45 + delta, 90, 90 + delta, 135, 135 + delta];
+Degree = [0, 45, 90, 135];
 
 %Set trigger config of camera to manual
 framesPerTrigger = 3;

@@ -2,6 +2,7 @@
 % a function of exposure time in seconds.  NOTE: min exposure time is 30 ms
 %
 % Written by Atkin Hyatt 07/01/2021
+% Last modified by Atkin Hyatt 07/19/2021
 
 % Initialize
 initializeUV
@@ -10,7 +11,6 @@ expo = 0.1 : 0.01 : 1; L = length(expo);
 avcounts0 = zeros(1,L);
 avcounts90 = zeros(1,L);
 image = zeros(1,512,512);
-hold on
 
 % 0 deg
 Move_motor(0, ELL14); fprintf('\n\n0 degrees\n')
@@ -28,6 +28,9 @@ for N = 1 : L
     clear src.ExposureTime
 end
 plot(expo, avcounts0);
+legend({'0 deg', '90 deg'}, 'FontSize', 14)
+title('Average Counts vs Exposure Time'); xlabel('Exposure Time (sec)'); ylabel('Average Counts');
+hold on
 
 % 90 deg
 Move_motor(90,ELL14); fprintf('\n\n90 degrees\n')
@@ -48,7 +51,8 @@ plot(expo, avcounts90);
 legend({'0 deg', '90 deg'}, 'FontSize', 14)
 title('Average Counts vs Exposure Time'); xlabel('Exposure Time (sec)'); ylabel('Average Counts');
 
-% Find min exposure time
+% Find min exposure time (only run this part of the script to figure this
+% out)
 %for N = 1 : length(expo)
 %    g = L - N + 1;
 %    disp(expo(g))
