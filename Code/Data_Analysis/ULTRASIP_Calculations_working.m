@@ -20,7 +20,7 @@ img90 = squeeze(image(3,range,range));
 img135 = squeeze(image(4,range,range));
 
 figure(1);
-subplot(2,2,1);imagesc(img0);axis off;title('0 deg');colorbar;
+subplot(2,2,1);imagesc(img0);axis off;title('0 deg','FontSize',20);colorbar('FontSize',15);
 subplot(2,2,2);imagesc(img45);axis off;title('45 deg');colorbar;
 subplot(2,2,3);imagesc(img90);axis off;title('90 deg');colorbar;
 subplot(2,2,4);imagesc(img135);axis off;title('135 deg');colorbar;
@@ -64,18 +64,18 @@ Avg_B = mean(B(:));
 %Correction for polish marks
 %close all;
 %gamma_initial = 1;
-%gamma0 = fmincon(@(gamma_initial)StdDevCorrected(gamma_initial,img0,Avg_M,Avg_B,M,B),3,[],[],[],[],3,4.5);
-gamma0 = fminunc(@(gamma)StdDevCorrected(gamma,img0,Avg_M,Avg_B,M,B),3);
-img0fix = ImgCorrection(img0,gamma0,M,B,Avg_M,Avg_B);
-imagesc(img0fix);axis off;title('Corrected 0 deg');colorbar;
-gamma45 = fmincon(@(gamma_initial)StdDevCorrected(gamma_initial,img45,Avg_M,Avg_B,M,B),3,[],[],[],[],3,4.5);
-img45fix = ImgCorrection(img45,gamma45,M,B,Avg_M,Avg_B);
+gamma0 = fmincon(@(gamma_initial)StdDevCorrected_working(gamma_initial,img0,Avg_M,Avg_B,M,B),3,[],[],[],[],3,4.5);
+%gamma0 = fminunc(@(gamma)StdDevCorrected_working(gamma,img0,Avg_M,Avg_B,M,B),3);
+img0fix = ImgCorrection_working(img0,gamma0,M,B,Avg_M,Avg_B);
+figure(4);imagesc(img0fix);axis off;title('Corrected 0 deg','FontSize',20);colorbar('FontSize',15);
+gamma45 = fmincon(@(gamma_initial)StdDevCorrected_working(gamma_initial,img45,Avg_M,Avg_B,M,B),3,[],[],[],[],3,4.5);
+img45fix = ImgCorrection_working(img45,gamma45,M,B,Avg_M,Avg_B);
 
-gamma90 = fmincon(@(gamma_initial)StdDevCorrected(gamma_initial,img90,Avg_M,Avg_B,M,B),3,[],[],[],[],3,4.5);
-img90fix = ImgCorrection(img90,gamma90,M,B,Avg_M,Avg_B);
+gamma90 = fmincon(@(gamma_initial)StdDevCorrected_working(gamma_initial,img90,Avg_M,Avg_B,M,B),3,[],[],[],[],3,4.5);
+img90fix = ImgCorrection_working(img90,gamma90,M,B,Avg_M,Avg_B);
 
-gamma135 = fmincon(@(gamma_initial)StdDevCorrected(gamma_initial,img135,Avg_M,Avg_B,M,B),3,[],[],[],[],3,4.5);
-img135fix = ImgCorrection(img135,gamma135,M,B,Avg_M,Avg_B);
+gamma135 = fmincon(@(gamma_initial)StdDevCorrected_working(gamma_initial,img135,Avg_M,Avg_B,M,B),3,[],[],[],[],3,4.5);
+img135fix = ImgCorrection_working(img135,gamma135,M,B,Avg_M,Avg_B);
 
 % For checking if noise remains run these
 figure(2);
@@ -84,8 +84,10 @@ subplot(2,2,2);imagesc(img45fix);axis off;title('Corrected 45 deg');colorbar;
 subplot(2,2,3);imagesc(img90fix);axis off;title('Corrected 90 deg');colorbar;
 subplot(2,2,4);imagesc(img135fix);axis off;title('Corrected 135 deg');colorbar;
 %%
-saveas(figure(1),'C:\Users\deleo\Desktop\flux2.png')
-saveas(figure(2),'C:\Users\deleo\Desktop\NUC_flux2.png');
+saveas(figure(1),'C:\Users\deleo\Desktop\og.png')
+saveas(figure(3),'C:\Users\deleo\Desktop\DFT.png');
+saveas(figure(4),'C:\Users\deleo\Desktop\CorrectImg.png');
+
 % S0fix = img0fix./2 + img90fix./2 + img45fix./2 + img135fix./2;
 % figure;imagesc(S0fix);axis on;title('S0');colorbar;
 

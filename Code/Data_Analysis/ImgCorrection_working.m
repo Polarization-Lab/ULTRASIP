@@ -1,4 +1,4 @@
-function img = ImgCorrection(image2correct,gamma,M,B,Avg_M,Avg_B)
+function img = ImgCorrection_working(image2correct,gamma,M,B,Avg_M,Avg_B)
 %% Load Image
 
 for ii = 1:512
