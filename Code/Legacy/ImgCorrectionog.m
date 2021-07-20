@@ -1,4 +1,4 @@
-function img = ImgCorrection(image2correct,gamma0,M,B,Avg_M,Avg_B)
+function img = ImgCorrectionog(image2correct,gamma0,M,B,Avg_M,Avg_B)
 
 %% Load Image
 
