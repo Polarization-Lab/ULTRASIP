@@ -4,13 +4,13 @@ import numpy as np
 import datetime as dt
 
 # Path to the YAML file you want to use for the aerosol and surface definition
-fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_Dust.yml'
+fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning.yml'
 
 # paths to your GRASP binary and kernels (replace everything up to grasp_open with the path to your GRASP repository)
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
 krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files'
 
-ttlStr = 'DUST AEROSOL MODEL RESULTS' # Top Title
+ttlStr = 'BIOMASS BURNING AEROSOL MODEL RESULTS' # Top Title
 wvStrFrmt =  '($%4.2f\\mu m$)' # Format of Y-axis labels 
 sza = 30 # solar zenith angle
 wvls = [0.34, 0.550] # wavelengths in μm
@@ -76,7 +76,7 @@ for i in range(2):
         data2D = data[-1].reshape(Nazimth, Nvza)
         dataFullHemisphere = np.vstack([data2D, np.flipud(data2D)]) # mirror symmetric about principle plane
         c = ax[l,i].contourf(theta, r, dataFullHemisphere, v, cmap=clrMap)
-        ax[l,i].plot(np.pi, sza, '.',  color=[1,1,0], markersize=10)
+        ax[l,i].plot(np.pi, sza, '.',  color=[1,1,0], markersize=20)
         cb = plt.colorbar(c, orientation='horizontal', ax=ax[l,i], ticks=ticks)
         ax[l,i].set_ylim([0, r.max()])
         ax[l,i].set_ylabel(labels[-1], labelpad=30)
@@ -85,5 +85,5 @@ ax[0,1].set_title('DOLP [%]')
 plt.suptitle(ttlStr)
 plt.tight_layout(rect=[0.01, 0.01,0.98, 0.98])
 plt.ion()
-plt.savefig('/home/cdeleon/ULTRASIP/Code/GRASP/Plots/dustfig.png')
+plt.savefig('/home/cdeleon/ULTRASIP/Code/GRASP/Plots/bbfig.png')
 plt.show()

@@ -73,14 +73,14 @@ retrieval:
                     index_of_wavelength_involved: [0]
                     max:   [5.00001]
                     min:   [0.00000001]
-                    value: [2.986]
+                    value: [0.0468]
             retrieved: true
             mode[2]:
                 initial_guess:
                     index_of_wavelength_involved: [0]
                     max:   [5.00001]
                     min:   [0.00000001]
-                    value: [2.986] #frac_vol
+                    value: [0.0468] #frac_vol
             retrieved: true
             type: aerosol_concentration
         characteristic[2]:
