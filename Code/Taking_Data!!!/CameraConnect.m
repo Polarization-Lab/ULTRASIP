@@ -1,4 +1,4 @@
-function [vid] = initializeUVCamera(mode,FramesPerTrigger)
+function [vid] = CameraConnect(mode,FramesPerTrigger)
 %INITIALIZECAMERA Summary of this function goes here
 %James Heath heathjam@email.arizona.edu
 %Sept. 25 2020
@@ -18,7 +18,6 @@ else
 end
 
 vid.FramesPerTrigger = FramesPerTrigger; 
-
 
 disp('done')
 
