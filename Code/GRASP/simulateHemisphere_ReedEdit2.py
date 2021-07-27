@@ -7,7 +7,7 @@ import datetime as dt
 
 # Path to the YAML file you want to use for the aerosol and surface definition
 #fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning.yml'
-fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_WeaklyAbsorbing1101.yml'
+fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_Dust_model1.yml'
 # paths to your GRASP binary and kernels (replace everything up to grasp_open with the path to your GRASP repository)
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
 krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files'
@@ -73,6 +73,7 @@ for i in range(2):
             labels.append(wvStr)
             titlestr = 'DoLP'
             name = str(l)
+            cmap = 'RdPu'
             if i==0: 
                 data[-1] = 1*(np.log10(data[-1]))
                 clrMin = -1.5 #data[-1].min()
@@ -82,7 +83,8 @@ for i in range(2):
                # clrMin = data[-1].min(0)
                # clrMax = data[-1].max(100)
             #clrMap = clrMapReg
-            name = str(l)    
+            name = str(l)  
+            cmap = 'GnBu'  
         else: # this is a difference plot      
 #             if i==1:
             data.append(data[l-Nwvl+1] - data[0])
@@ -90,6 +92,7 @@ for i in range(2):
             titlestr = 'Difference'
             wvStr = '(0.55μm - 0.34μm)'
             name = str(l)+str(i)
+            cmap = 'coolwarm'
   #           else:
 #                 data.append(1 - (data[l-Nwvl+1]/data[0]))
 #                 labels.append("1 - " + labels[l-Nwvl+1] + "/" + labels[0])
@@ -99,11 +102,11 @@ for i in range(2):
         #fig=plt.figure()
         fig = plt.figure()
         ax = plt.subplots(subplot_kw=dict(projection='polar'))#, figsize=(6,6+3*(Nwvl-1)))
-        v = np.linspace(clrMin, clrMax, 200, endpoint=True)
+        v = np.linspace(clrMin, clrMax, 10, endpoint=True)
         ticks = np.linspace(clrMin, clrMax, 7, endpoint=True)
         data2D = data[-1].reshape(Nazimth, Nvza)
         dataFullHemisphere = np.vstack([data2D, np.flipud(data2D)]) # mirror symmetric about principle plane
-        c = plt.contourf(theta, r, dataFullHemisphere, v, cmap='tab20c')
+        c = plt.contourf(theta, r, dataFullHemisphere, v, cmap='RdBu')#cmap='tab20c')
         #plt.title(titlestr)
         plt.ylabel(wvStr, labelpad=35)
         plt.plot(np.pi, sza, '.',  color=[1,1,0], markersize=25)
@@ -111,9 +114,9 @@ for i in range(2):
         #if i==0: 
 #ax.set_ylabel(labels[-1], labelpad=80)
 
-        #cb = plt.colorbar(c, orientation='horizontal', ticks=ticks,pad=0.1)
-        plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/NEW1{name}wa1101{titlestr}.png')
-        #plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/colorbar.png')
+        cb = plt.colorbar(c, orientation='horizontal', ticks=ticks,pad=0.9)
+        #plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/NEW2{name}d1{titlestr}.png')
+        plt.savefig('/home/cdeleon/ULTRASIP/Code/GRASP/Plots/RdBucolorbar.png')
 
 #cb = plt.colorbar(c, orientation='horizontal', ax=ax[l,i], ticks=ticks)
 #cb = plt.colorbar(c, orientation='horizontal', ax=ax[l,i], ticks=ticks)
