@@ -7,7 +7,7 @@ import datetime as dt
 
 # Path to the YAML file you want to use for the aerosol and surface definition
 #fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning.yml'
-fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_Dust_model1.yml'
+fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning2101.yml'
 # paths to your GRASP binary and kernels (replace everything up to grasp_open with the path to your GRASP repository)
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
 krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files'
@@ -89,7 +89,7 @@ for i in range(2):
             labels.append(labels[l-Nwvl+1] + " – " + labels[0])
             titlestr = 'Difference'
             wvStr = '(0.55μm - 0.34μm)'
-            name = 'diff'
+            name = str(l)
   #           else:
 #                 data.append(1 - (data[l-Nwvl+1]/data[0]))
 #                 labels.append("1 - " + labels[l-Nwvl+1] + "/" + labels[0])
@@ -112,7 +112,7 @@ for i in range(2):
 #ax.set_ylabel(labels[-1], labelpad=80)
 
         cb = plt.colorbar(c, orientation='vertical', ticks=ticks,pad=0.1)
-        plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/{name}dustmodel1{titlestr}.png')
+        plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/{name}bb2101{titlestr}.png')
 
 #cb = plt.colorbar(c, orientation='horizontal', ax=ax[l,i], ticks=ticks)
 #cb = plt.colorbar(c, orientation='horizontal', ax=ax[l,i], ticks=ticks)
