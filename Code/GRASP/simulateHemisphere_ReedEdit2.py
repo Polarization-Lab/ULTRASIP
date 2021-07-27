@@ -7,7 +7,7 @@ import datetime as dt
 
 # Path to the YAML file you want to use for the aerosol and surface definition
 #fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning.yml'
-fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning2101.yml'
+fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_Dust_model1.yml'
 # paths to your GRASP binary and kernels (replace everything up to grasp_open with the path to your GRASP repository)
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
 krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files'
@@ -41,7 +41,7 @@ gr.addPix(nowPix)
 gr.runGRASP(binPathGRASP=binPathGRASP, krnlPathGRASP=krnlPathGRASP)
 print('AOD at %5.3f μm was %6.4f.' % (gr.invRslt[0]['lambda'][-1],gr.invRslt[0]['aod'][-1]))
 #Global Font Size 
-plt.rcParams.update({'font.size': 16})
+plt.rcParams.update({'font.size': 19})
 # hemisphere plotting code
 Nwvl = len(wvls)
 # print(Nwvl)
@@ -89,7 +89,7 @@ for i in range(2):
             labels.append(labels[l-Nwvl+1] + " – " + labels[0])
             titlestr = 'Difference'
             wvStr = '(0.55μm - 0.34μm)'
-            name = str(l)
+            name = str(l)+str(i)
   #           else:
 #                 data.append(1 - (data[l-Nwvl+1]/data[0]))
 #                 labels.append("1 - " + labels[l-Nwvl+1] + "/" + labels[0])
@@ -111,8 +111,9 @@ for i in range(2):
         #if i==0: 
 #ax.set_ylabel(labels[-1], labelpad=80)
 
-        cb = plt.colorbar(c, orientation='vertical', ticks=ticks,pad=0.1)
-        plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/{name}bb2101{titlestr}.png')
+        cb = plt.colorbar(c, orientation='horizontal', ticks=ticks,pad=0.1)
+        #plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/new{name}dust1{titlestr}.png')
+        plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/colorbar.png')
 
 #cb = plt.colorbar(c, orientation='horizontal', ax=ax[l,i], ticks=ticks)
 #cb = plt.colorbar(c, orientation='horizontal', ax=ax[l,i], ticks=ticks)
