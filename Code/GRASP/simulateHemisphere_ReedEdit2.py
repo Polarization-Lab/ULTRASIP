@@ -7,7 +7,7 @@ import datetime as dt
 
 # Path to the YAML file you want to use for the aerosol and surface definition
 #fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning.yml'
-fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_Dust_model1.yml'
+fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_WeaklyAbsorbing1101.yml'
 # paths to your GRASP binary and kernels (replace everything up to grasp_open with the path to your GRASP repository)
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
 krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files'
@@ -74,10 +74,10 @@ for i in range(2):
             titlestr = 'DoLP'
             name = str(l)
             if i==0: 
-                data[-1] = -1*(np.log10(data[-1]))
+                data[-1] = 1*(np.log10(data[-1]))
                 clrMin = -1.5 #data[-1].min()
                 clrMax = 1.5 #data[-1].max()
-                titlestr='-log(Reflectance)'
+                titlestr='log(Reflectance)'
             #else:
                # clrMin = data[-1].min(0)
                # clrMax = data[-1].max(100)
@@ -111,9 +111,9 @@ for i in range(2):
         #if i==0: 
 #ax.set_ylabel(labels[-1], labelpad=80)
 
-        cb = plt.colorbar(c, orientation='horizontal', ticks=ticks,pad=0.1)
-        #plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/new{name}dust1{titlestr}.png')
-        plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/colorbar.png')
+        #cb = plt.colorbar(c, orientation='horizontal', ticks=ticks,pad=0.1)
+        plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/NEW1{name}wa1101{titlestr}.png')
+        #plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/colorbar.png')
 
 #cb = plt.colorbar(c, orientation='horizontal', ax=ax[l,i], ticks=ticks)
 #cb = plt.colorbar(c, orientation='horizontal', ax=ax[l,i], ticks=ticks)
@@ -126,6 +126,7 @@ for i in range(2):
 #plt.tight_layout(rect=[0.01, 0.01,0.98, 0.98])
 #plt.ion()
 #plt.show()
-
-#fig=plt.figure()      
-#plt.hist(data[2])
+#x=range(len(data[2]))
+#fig=plt.figure() 
+#plt.scatter(x,data[2])     
+#plt.hist(data[2],facecolor='blue',edgecolor='red',bins=6)
