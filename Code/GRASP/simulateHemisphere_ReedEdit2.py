@@ -7,7 +7,10 @@ import datetime as dt
 
 # Path to the YAML file you want to use for the aerosol and surface definition
 #fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning.yml'
-fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_Dust_model1.yml'
+#fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_Dust_model1.yml'
+#fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_WeaklyAbsorbing1101.yml'
+fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning2101.yml'
+
 # paths to your GRASP binary and kernels (replace everything up to grasp_open with the path to your GRASP repository)
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
 krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files'
@@ -84,7 +87,7 @@ for i in range(2):
                # clrMax = data[-1].max(100)
             #clrMap = clrMapReg
             name = str(l)  
-            cmap = 'GnBu'  
+            cmap = 'RdPu'  
         else: # this is a difference plot      
 #             if i==1:
             data.append(data[l-Nwvl+1] - data[0])
@@ -106,17 +109,19 @@ for i in range(2):
         ticks = np.linspace(clrMin, clrMax, 7, endpoint=True)
         data2D = data[-1].reshape(Nazimth, Nvza)
         dataFullHemisphere = np.vstack([data2D, np.flipud(data2D)]) # mirror symmetric about principle plane
-        c = plt.contourf(theta, r, dataFullHemisphere, v, cmap='RdBu')#cmap='tab20c')
+        c = plt.contourf(theta, r, dataFullHemisphere, v, cmap='RdPu')#cmap='tab20c')
         #plt.title(titlestr)
         plt.ylabel(wvStr, labelpad=35)
         plt.plot(np.pi, sza, '.',  color=[1,1,0], markersize=25)
+        plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/NEW2{name}bb2101{titlestr}.png')
+
 #ax.set_ylim([0, r.max()])
         #if i==0: 
 #ax.set_ylabel(labels[-1], labelpad=80)
-
-        cb = plt.colorbar(c, orientation='horizontal', ticks=ticks,pad=0.9)
+    
+        cb = plt.colorbar(c, orientation='horizontal', ticks=ticks,pad=0.3)
         #plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/NEW2{name}d1{titlestr}.png')
-        plt.savefig('/home/cdeleon/ULTRASIP/Code/GRASP/Plots/RdBucolorbar.png')
+        #plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/{cmap}colorbar.png')
 
 #cb = plt.colorbar(c, orientation='horizontal', ax=ax[l,i], ticks=ticks)
 #cb = plt.colorbar(c, orientation='horizontal', ax=ax[l,i], ticks=ticks)
