@@ -21,9 +21,11 @@ comPort = 'COM1'; %Whichever port the ESP301 is plugged in
 
 % Set home position
 global home
-home = 'FFFF9C72';
+home = '00004DC7';
 
 ELL14 = ELL14Connect(comPort, home);
+fopen(ELL14);
+query(ELL14, "0sv48");
 disp('ELL14 connected')
 
 %% Connect to Camera 
@@ -46,3 +48,25 @@ src.ExposureTime = 0.3; %Exposure time of Camera
 %if exposureTime >= 5
 %    vid.Timeout = 2 * exposureTime;
 %end
+
+%% Measure darkfield
+fprintf("Turn off source for darkfield measurement\n")
+triggerconfig(vid, 'manual');
+start(vid)
+
+fprintf("Measuring darkfield in\n")
+for ii = 0 : 9
+   fprintf("%d\n", 10 - ii)
+   pause(1)
+end
+
+fprintf("Starting measurement...\n")
+sum = zeros(1, 512, 512);
+for ii = 1 : 3
+    dark = UV_data(vid,framesPerTrigger); %take picture
+    sum = dark + sum;
+end
+dark = sum ./ 3;
+stop(vid)
+fprintf("Measurement complete, camera stopped\n")
+fprintf("Initialization complete\n")
