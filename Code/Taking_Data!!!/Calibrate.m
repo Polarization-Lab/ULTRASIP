@@ -4,6 +4,7 @@
 %
 % Written by Atkin Hyatt 07/09/2021
 % Last modified by Atkin Hyatt 07/19/2021
+initializeUV
 
 maxRes = 0.01; count = 1; dark = zeros(1,512,512); pic = zeros(1,512,512);
 dmin = input('Enter minimum angle to scan: ');
@@ -24,11 +25,11 @@ start(vid)
 
 % take dark measurement
 input('Turn off source for dark measurement, enter any character to continue: ', 's');
-for N = 1 : 2
+for N = 1 : 3
     pic = UV_data(vid,framesPerTrigger);
     dark = dark + pic;
 end
-dark = reshape(dark, 512, 512) ./ 2;
+dark = reshape(dark, 512, 512) ./ 3;
 input('Turn on source for alignement measurement, enter any character to continue: ', 's');
 
 CalibrateUV(ELL14, dmin, dmax, del, count, src, vid, framesPerTrigger, plotSize, dark)

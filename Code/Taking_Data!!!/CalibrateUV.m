@@ -17,11 +17,11 @@ if del == maxRes / 10   % exit recursion
     newhome = dmin + 10*del;
     
     % find the new offset from current home
-    offset = home + newhome;
-    hexhome = dec2hex(round(offset * 398.22222222),8);
+    %offset = home + newhome;
+    hexhome = dec2hex(round(newhome * 398.22222222),8);
     
     % tell user new offset
-    fprintf('Done\nSet home to %0.6f or %s\n', offset, hexhome)
+    fprintf('Done\nSet home to %0.6f or %s\n', newhome, hexhome)
     stop(vid)
 else   % continue recursion
     fprintf('Scanning for del = %0.2f\n\n', del);
@@ -52,8 +52,8 @@ else   % continue recursion
     
     % plot data
     subplot(plotSize, plotSize, count)
-    errorbar(trueDeg, avcounts, stdev); title('Average Counts vs Polarizer Angle')
-    xlabel('Angle Relative to Previous Home (deg)'); ylabel('Average Counts')
+    errorbar(trueDeg, avcounts, stdev); title('Av Counts vs Polarizer Angle')
+    xlabel('Angle Relative to Current Home (deg)'); ylabel('Average Counts')
     
     % find max
     maxCounts = max(avcounts);
@@ -65,7 +65,7 @@ else   % continue recursion
     fprintf('Max counts at %f degrees\n', deg(N))
     
     % start next iteration
-    count = count + 1; dmin = deg(N) - del; dmax = deg(N) + del;
+    count = count - 1; dmin = deg(N) - del; dmax = deg(N) + del;
     del = del / 10;
     CalibrateUV(ELL14, dmin, dmax, del, count, src, vid, framesPerTrigger, plotSize, dark)
 end
