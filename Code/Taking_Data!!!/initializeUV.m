@@ -67,6 +67,7 @@ for ii = 1 : 3
     sum = dark + sum;
 end
 dark = sum ./ 3;
-stop(vid)
+
+stop(vid); clear ii; clear sum;
 fprintf("Measurement complete, camera stopped\n")
 fprintf("Initialization complete\n")

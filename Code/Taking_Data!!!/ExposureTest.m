@@ -5,9 +5,9 @@
 % Last modified by Atkin Hyatt 07/19/2021
 
 % Initialize
-initializeUV
+%initializeUV
 
-expo = 0.1 : 0.01 : 1; L = length(expo);
+expo = 0.5 : 0.01 : 2; L = length(expo);
 avcounts0 = zeros(1,L);
 avcounts90 = zeros(1,L);
 image = zeros(1,512,512);
