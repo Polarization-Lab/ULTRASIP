@@ -2,7 +2,11 @@
 %% ULTRASIP_Calculations
 %% Calculations performed on flux images: This code performs
 %% non-uniformity correction, and calculates stokes parameters, DoLP and AoLP
-close all;  clear all;
+close all;  %clear all;
+
+addpath('C:\ULTRASIP_Data\June2021\FixExposure');
+addpath('C:\ULTRASIP_Data\FPN_Data');
+addpath('C:\ULTRASIP_Data\July2021\Uncorrected Data');
 
 % Define flux images 
 %******CHANGE PATH******************
@@ -16,7 +20,7 @@ img90 = squeeze(image(3,range,range));
 img135 = squeeze(image(4,range,range));
 
 figure(1);
-subplot(2,2,1); imagesc(img0);axis off;colorbar('FontSize',15);
+subplot(2,2,1); imagesc(img0);axis off;title('0 deg');colorbar('FontSize',15);
 subplot(2,2,2);imagesc(img45);axis off;title('45 deg');colorbar;
 subplot(2,2,3);imagesc(img90);axis off;title('90 deg');colorbar;
 subplot(2,2,4);imagesc(img135);axis off;title('135 deg');colorbar;
@@ -64,7 +68,7 @@ img0fix = ImgCorrection(img0,gamma0,M,B,Avg_M,Avg_B);
 gamma45 = fmincon(@(gamma_initial)StdDevCorrected(gamma_initial,img45,Avg_M,Avg_B,M,B),3,[],[],[],[],3,4.5);
 img45fix = ImgCorrection(img45,gamma45,M,B,Avg_M,Avg_B);
 
-gamma90 = fmincon(@(gamma_initial)StdDevCorrected_working(gamma_initial,img90,Avg_M,Avg_B,M,B),3,[],[],[],[],3,4.5);
+gamma90 = fmincon(@(gamma_initial)StdDevCorrected(gamma_initial,img90,Avg_M,Avg_B,M,B),3,[],[],[],[],3,4.5);
 img90fix = ImgCorrection(img90,gamma90,M,B,Avg_M,Avg_B);
 
 gamma135 = fmincon(@(gamma_initial)StdDevCorrected(gamma_initial,img135,Avg_M,Avg_B,M,B),3,[],[],[],[],3,4.5);
@@ -78,8 +82,8 @@ subplot(2,2,3);imagesc(img90fix);axis off;title('Corrected 90 deg');colorbar;
 subplot(2,2,4);imagesc(img135fix);axis off;title('Corrected 135 deg');colorbar;
 % Save figures
 %*******************CHANGE PATH*******************************
-saveas(figure(1),'C:\Users\deleo\Desktop\original.png')
-saveas(figure(2),'C:\Users\deleo\Desktop\corrected.png');
+saveas(figure(1),'C:\ULTRASIP_Data\June2021\FixExposure\original.png')
+saveas(figure(2),'C:\ULTRASIP_Data\June2021\FixExposure\corrected.png');
 
 % S0fix = img0fix./2 + img90fix./2 + img45fix./2 + img135fix./2;
 % figure;imagesc(S0fix);axis on;title('S0');colorbar;
@@ -111,7 +115,7 @@ s2 = S2./S0;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % AoLP and DoLP
 DoLP = sqrt(S1.^2 + S2.^2)./S0;
-AoLP = 0.5*atan2(S2,S1);
+AoLP = rad2deg(0.5*atan2(S2,S1));
 
 %AoLPdeg = AoLP*180/pi;
 DoLP = DoLP.*100;

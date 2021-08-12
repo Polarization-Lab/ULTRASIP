@@ -5,9 +5,11 @@
 
 clear all; close all;
 
+addpath('C:\ULTRASIP\Code\Matlab_Formatting');
+
 %*******CHANGE FILENAME************%
 % Define h5 file 
-filename = '2021-06-23_1749_0.1.h5'; 
+filename = '2021-07-29_1023_1_0_ThursdayTest2.h5'; 
 %Display h5 file
 h5disp(filename);
 
@@ -54,6 +56,7 @@ DoLP = squeeze(linearpol(rows,columns1));
 AoLP = squeeze(linearpol(rows,columns2));
 
 %Display AoLP and DoLP --need to fix up how these are presented--CD :S
-figure;imagesc(DoLP);colorbar;colormap(bone);set(gca,'FontSize',15);axis off;title('DoLP %');
-figure;imagesc(AoLP);set(gca,'FontSize',15);axis off;title('AoLP');colorbar;
+clims = [0 100];
+figure;imagesc(DoLP,clims);colorbar;colormap(bone);set(gca,'FontSize',15);axis off;title('DoLP %');
+figure;imagesc(AoLP,clims);set(gca,'FontSize',15);axis off;title('AoLP');colorbar;
 

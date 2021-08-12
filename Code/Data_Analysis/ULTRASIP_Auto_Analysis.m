@@ -8,7 +8,8 @@ clear all; close all;
 %For data after May 5th, 2021 for older data see UVanalysis in legacy code
 %*******CHANGE FILENAME, FOR MULTIPLE PUT 'common_name*.h5'**************
 global filename 
-filename = '2021-06-23_1749_0.1.h5';
+filename = '2021-07-29_1023_1_0_ThursdayTest2.h5';
+savedir = 'C:\ULTRASIP_Data\July2021\Intermediate images\';
 
 disp('starting analysis')
 
@@ -23,15 +24,16 @@ stokes = [S0 s1 s2];
 linearpol  = [DoLP AoLP];
 
 disp('saving...')
+file = [savedir '' filename];
 %create new branch for calculated data
-h5create(filename,'/measurement/polarization/radiometric',size(image),"Chunksize",[323 275]);
-h5create(filename,'/measurement/polarization/stokes',size(stokes),"Chunksize",[323 275]);
-h5create(filename,'/measurement/polarization/polarizationmetric',size(linearpol),"Chunksize",[323 275]);
+h5create(file,'/measurement/polarization/radiometric',size(image),"Chunksize",[323 275]);
+h5create(file,'/measurement/polarization/stokes',size(stokes),"Chunksize",[323 275]);
+h5create(file,'/measurement/polarization/polarizationmetric',size(linearpol),"Chunksize",[323 275]);
 
 %write data to branch
-h5write(filename,'/measurement/polarization/radiometric/',image);
-h5write(filename,'/measurement/polarization/stokes/',stokes);
-h5write(filename,'/measurement/polarization/polarizationmetric/',linearpol);
+h5write(file,'/measurement/polarization/radiometric/',image);
+h5write(file,'/measurement/polarization/stokes/',stokes);
+h5write(file,'/measurement/polarization/polarizationmetric/',linearpol);
 
 %save metadata--work in progress --CMD :S
 % h5writeatt(filename,'/measurement/images/','meas_time', finaltime);
