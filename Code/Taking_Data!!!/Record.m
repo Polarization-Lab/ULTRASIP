@@ -7,10 +7,10 @@
 %initializeUV
 
 triggerconfig(vid, 'manual');
-src.ExposureTime = 0.7;
+src.ExposureTime = 2;
 
 start(vid)
-%count(0) = 0; im(0) = mean(mean(UV_data(vid,framesPerTrigger)));
+
 for i = 1 : 1000
     tic;
     image = UV_data(vid,framesPerTrigger) - dark;
