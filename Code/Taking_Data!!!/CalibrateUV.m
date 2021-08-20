@@ -21,7 +21,7 @@ if del == maxRes / 10   % exit recursion
     hexhome = dec2hex(round(newhome * 398.22222222),8);
     
     % tell user new offset
-    fprintf('Done\nSet home to %0.6f or %s\n', newhome, hexhome)
+    fprintf('Done\nOffset home by %0.6f or %s\n', newhome, hexhome)
     stop(vid)
 else   % continue recursion
     fprintf('Scanning for del = %0.2f\n\n', del);
@@ -34,16 +34,10 @@ else   % continue recursion
             src.SensorCoolerFan = 'on';
         end
         
-        image = zeros(1, 512, 512);
-        for M = 1 : 2
-            pic = UV_data(vid,framesPerTrigger); %take picture
-            image = image + pic;
-        end
-        image = image ./ 2;
+        image = UV_data(vid,framesPerTrigger) - dark; %take picture
         fprintf('Image taken\n')
         
-        
-        im = reshape(image,512,512) - dark;
+        im = reshape(image,512,512);
         stdev(N) = std(reshape(im, 1, 512*512));
         
         avcounts(N) = mean(mean(im));  % compensate for noise in image, treat as one pixel

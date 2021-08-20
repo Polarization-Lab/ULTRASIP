@@ -7,7 +7,7 @@
 % Initialize
 %initializeUV
 
-expo = 0.5 : 0.01 : 2; L = length(expo);
+expo = 0.01 : 0.01 : 0.3; L = length(expo);
 avcounts0 = zeros(1,L);
 avcounts90 = zeros(1,L);
 image = zeros(1,512,512);
@@ -53,11 +53,10 @@ title('Average Counts vs Exposure Time'); xlabel('Exposure Time (sec)'); ylabel(
 
 % Find min exposure time (only run this part of the script to figure this
 % out)
-%for N = 1 : length(expo)
-%    g = L - N + 1;
-%    disp(expo(g))
-%    src.ExposureTime = expo(g);
+% for N = length(expo) : -1 : 1
+%    disp(expo(N))
+%    src.ExposureTime = expo(N);
 %    disp('done')
 %    clear src.ExposureTime
 %    pause(0.1);
-%end
+% end
