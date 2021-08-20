@@ -2,22 +2,26 @@
 % camera, output these images as well as DoLP and AoLP information
 %
 % Written by Atkin Hyatt 08/09/2021
-% Last modified by Atkin Hyatt 08/10/2021
+% Last modified by Atkin Hyatt 08/13/2021
 
-function [correctImage, DoLP, AoLP] = IntegratingSphere_Correction(f, n)
+function [correctImage, DoLP, AoLP, S0, S1, S2] = IntegratingSphere_Correction(f, n, type)
 addpath('C:\ULTRASIP_Data\FPN_Data');
 addpath('C:\ULTRASIP_Data\July2021\Uncorrected Data');
 
-image = h5read(f,'/measurement/images');
-
-% Separate measurement into the 4 images (0,45,90,135)
-range = 1:512;
 N = 4*n - 3;
+% pull from filename "f" if prompted
+if type == "file"
+    image = h5read(f,'/measurement/images');
+elseif type == "pic"
+    image = f;
+end
+    % Separate measurement into the 4 images (0,45,90,135)
+    range = 1:512;
 
-img0 = squeeze(image(N,range,range));
-img45 = squeeze(image(N+1,range,range));
-img90 = squeeze(image(N+2,range,range));
-img135 = squeeze(image(N+3,range,range));
+    img0 = squeeze(image(N,range,range));
+    img45 = squeeze(image(N+1,range,range));
+    img90 = squeeze(image(N+2,range,range));
+    img135 = squeeze(image(N+3,range,range));
 
 global flattest
 flattest = load('FPN_flatfieldSys.mat').flat;
