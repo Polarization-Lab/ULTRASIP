@@ -2,22 +2,24 @@
 % to decimal degrees also taking two's compliment into account
 %
 % Written by Atkin Hyatt 07/08/2021
-% Last modified by Atkin Hyatt 07/19/2021
+% Last modified by Atkin Hyatt 08/13/2021
 
 function decPos = TranslateELL14(hex)
     pulsPerDeg = 398.22222222222;
-    if hex(4) == '0'            % if position is positive
-        % extract position data
-        [~, pos] = strtok(hex, '0');
-        pos = strtok(pos);
-        
-        % convert to degrees in decimal
-        decPos = hex2dec(pos) / pulsPerDeg;
-    elseif hex(4) == 'F'        % if postion is negative
-        % extract position data (two's compliment)
-        [~, pos] = strtok(hex, 'F');
-        pos = strtok(pos);
-        
+
+    % extract position data
+    if length(hex) ~= 8
+        if hex(4) == '0'            % if position is positive
+            [~, pos] = strtok(hex, '0');
+        elseif hex(4) == 'F'        % if postion is negative
+            [~, pos] = strtok(hex, 'F');
+        end
+    else
+        pos = hex;
+    end
+    
+    % correct if postion is negative
+    if pos(1) == 'F'      
         % convert two's compliment
         for N = 1 : 8
             pos(N) = 118 - pos(N);
@@ -38,8 +40,8 @@ function decPos = TranslateELL14(hex)
             end
         end
         
-        % convert to degree in decimal, taking negative into account
-        decDeg = hex2dec(pos);
-        decPos = -1 * decDeg / pulsPerDeg;
+        % take negative into account
+        pulsPerDeg = pulsPerDeg * -1;
     end
+    decPos = hex2dec(pos) / pulsPerDeg;
 end
