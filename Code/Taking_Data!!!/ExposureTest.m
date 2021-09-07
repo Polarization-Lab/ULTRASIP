@@ -7,7 +7,8 @@
 % Initialize
 %initializeUV
 
-expo = 0.01 : 0.01 : 0.3; L = length(expo);
+%expo = 0.01 : 0.01 : 0.1; L = length(expo);
+expo = 0.5;
 avcounts0 = zeros(1,L);
 avcounts90 = zeros(1,L);
 image = zeros(1,512,512);
