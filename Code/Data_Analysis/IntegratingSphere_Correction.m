@@ -6,7 +6,7 @@
 
 function [correctImage, DoLP, AoLP, S0, S1, S2] = IntegratingSphere_Correction(f, n, type)
 addpath('C:\ULTRASIP_Data\FPN_Data');
-addpath('C:\ULTRASIP_Data\July2021\Uncorrected Data');
+addpath('C:\ULTRASIP_Data\August2021\Uncorrected Data');
 
 N = 4*n - 3;
 % pull from filename "f" if prompted

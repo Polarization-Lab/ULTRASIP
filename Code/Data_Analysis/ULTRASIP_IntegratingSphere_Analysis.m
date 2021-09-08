@@ -4,48 +4,37 @@
 % Written by Atkin Hyatt 08/12/2021
 % Last modified by Atkin Hyatt 08/12/2021
 
-addpath('C:\ULTRASIP_Data\July2021\Uncorrected Data');
-addpath('C:\ULTRASIP_Data\July2021\Corrected Data');
+addpath('C:\ULTRASIP_Data\August2021\Uncorrected Data');
+addpath('C:\ULTRASIP_Data\August2021\Corrected Data');
 
-savedir = 'C:\ULTRASIP_Data\July2021\Corrected Data\';
+savedir = 'C:\ULTRASIP_Data\August2021\Corrected Data\';
 
 %% Fix data
-% Data from first scan
-[correctData1, DoLP1, AoLP1, S01, S11, S21] = IntegratingSphere_Correction(filename, 1, "file");
+correctedImage = zeros(4*iter,323,275); stdevDOLP = zeros(1,iter); stdevAOLP = zeros(1,iter);
+for ii = 1 : iter
+    [correctData, DoLP, AoLP, S0, S1, S2] = IntegratingSphere_Correction(filename, ii, "file");
+    
+    correctedImage((4*ii-3) : (4*ii), :, :) = correctData;
+    stdevData(1,ii) = std(reshape(DoLP, 1, 323*275));
+    stdevData(2,ii) = std(reshape(AoLP, 1, 323*275));
 
-stdevDOLP(1) = std(reshape(DoLP1, 1, 323*275));
-stdevAOLP(1) = std(reshape(AoLP1, 1, 323*275));
-
-D1 = mean(mean(DoLP1));
-A1 = mean(mean(AoLP1));
-
-% Data from second scan
-[correctData2, DoLP2, AoLP2, S02, S12, S22] = IntegratingSphere_Correction(filename, 2, "file");
-
-stdevDOLP(2) = std(reshape(DoLP2, 1, 323*275));
-stdevAOLP(2) = std(reshape(AoLP2, 1, 323*275));
-
-D2 = mean(mean(DoLP2));
-A2 = mean(mean(AoLP2));
-
-% Save data
-correctImage = [correctData1; correctData2]; 
-stdevData = [stdevDOLP; stdevAOLP];
-stokes(1,:,:) = S01; stokes(2,:,:) = S11; stokes(3,:,:) = S21;
-stokes(4,:,:) = S02; stokes(5,:,:) = S12; stokes(6,:,:) = S22; 
-correctData(1,:,:) = DoLP1; correctData(2,:,:) = DoLP2;
-correctData(3,:,:) = AoLP1; correctData(4,:,:) = AoLP2;
+    S(3*ii-2,:,:) = S0; S(3*ii-1,:,:) = S1; S(3*ii,:,:) = S2; 
+    
+    rawData(1,ii,:,:) = DoLP; rawData(2,ii,:,:) = AoLP;
+end
 
 %% Save data to computer
 f = [savedir '' file];
 % create new branch for calculated data
-h5create(f,'/measurement/polarization/radiometric',size(correctImage),"Chunksize",[8 323 275]);
-h5create(f,'/measurement/polarization/polarizationmetric',size(correctData),"Chunksize",[4 323 275]);
-h5create(f,'/measurement/polarization/error',size(stdevData),"Chunksize",[2 2]);
-h5create(f,'/measurement/polarization/stokes',size(stokes),"Chunksize",[6 323 275]);
+h5create(f,'/measurement/polarization/radiometric',size(correctedImage),"Chunksize",[4*iter 323 275]);
+h5create(f,'/measurement/polarization/polarizationmetric',size(rawData),"Chunksize",[2 iter 323 275]);
+h5create(f,'/measurement/polarization/error',size(stdevData),"Chunksize",[2 iter]);
+h5create(f,'/measurement/polarization/stokes',size(S),"Chunksize",[3*iter 323 275]);
+h5create(f,'/measurement/polarization/datapoints',size(iter),"Chunksize", [size(iter)]);
 
 % Write data to branch
-h5write(f,'/measurement/polarization/radiometric/',correctImage);
-h5write(f,'/measurement/polarization/polarizationmetric/',correctData);
+h5write(f,'/measurement/polarization/radiometric/',correctedImage);
+h5write(f,'/measurement/polarization/polarizationmetric/',rawData);
 h5write(f,'/measurement/polarization/error',stdevData);
-h5write(f,'/measurement/polarization/stokes',stokes);
+h5write(f,'/measurement/polarization/stokes',S);
+h5write(f,'/measurement/polarization/datapoints',iter);
