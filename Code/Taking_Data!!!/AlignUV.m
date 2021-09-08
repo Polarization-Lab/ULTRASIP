@@ -19,7 +19,7 @@ src.ExposureTime = input('Exposure time in seconds: ');
 start(vid);
 
 for Z = 1 : N
-    fprintf("\n")
+    fprintf("\nData point %d\n", Z)
     for N = 1 : L
         Move_motor(deg(N),ELL14);
 

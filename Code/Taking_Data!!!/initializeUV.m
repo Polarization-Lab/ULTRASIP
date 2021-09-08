@@ -21,7 +21,7 @@ comPort = 'COM1'; %Whichever port the ESP301 is plugged in
 
 % Set home position
 global home
-home = '00009F50';
+home = '0000C03B';
 speedPer = 72;
 
 ELL14 = ELL14Connect(comPort, home);
