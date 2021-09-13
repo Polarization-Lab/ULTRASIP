@@ -79,9 +79,37 @@ addpath('C:\ULTRASIP_Data\August2021\Corrected Data');
 % axis off;title('AoLP2');caxis([-90, 90])
 
 %% Extract Data
+interImage = h5read(f,'/measurement/polarization/radiometric/');
 stdevData = h5read(f,'/measurement/polarization/error/');
 iter = h5read(f,'/measurement/polarization/datapoints/');
 rawData = h5read(f,'/measurement/polarization/polarizationmetric/');
+
+%% Intermediate Images Movie
+imVid = VideoWriter('TntermediateImages.avi','Motion JPEG AVI'); open(imVid);
+
+for N = 1 : iter
+    %% plot images
+    subplot(2,2,1);
+    imagesc(image(N));set(gca,'FontSize',15);colorbar;
+    colormap(parula);axis off;title('0 deg'); caxis([0, 65535])
+    
+    subplot(2,2,2);
+    imagesc(image(N+1));set(gca,'FontSize',15);colorbar;
+    colormap(parula);axis off;title('45 deg'); caxis([0, 65535])
+    
+    subplot(2,2,3);
+    imagesc(image(N+2));set(gca,'FontSize',15);colorbar;
+    colormap(parula);axis off;title('90 deg'); caxis([0, 65535])
+    
+    subplot(2,2,4);
+    imagesc(image(N+3));set(gca,'FontSize',15);colorbar;
+    colormap(parula);axis off;title('135 deg'); caxis([0, 65535])
+    
+    %% movie
+    frame = getframe(gcf);
+    writeVideo(imVid, frame);
+end
+close(imVid)
 
 %% Process DOLP and AOLP
 %DOLP = rawData(1,:,:,:); AOLP = rawData(2,:,:,:);
