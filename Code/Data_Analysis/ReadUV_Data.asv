@@ -209,6 +209,11 @@ scatter(stokes1, stokes2, 25, 'filled'); title('S2 vs S1');
 xlabel('S1'); ylabel('S2'); set(gca,'FontSize',15);
 set(gcf,'position',[100,100,700,650])
 
+sMat = [ones(1,length(stokes1)); -sotkes1.^2]';
+sMat = [sMat'*sMat, sMat'*(stokes2.^2)']; c = sMat(:,3);
+
+rad1 = sqrt(c(1) / c(2)); rad2 = sqrt(c(1));
+
 S2S1_name = ['C:\ULTRASIP_Data\Data2021\S2 vs S1\' name '_S2S1.png'];
 exportgraphics(gcf,S2S1_name,'Resolution',300)
 

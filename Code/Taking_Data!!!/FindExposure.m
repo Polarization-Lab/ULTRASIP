@@ -1,8 +1,7 @@
-% ExposureTest -- Take picture of setup with varying exposures and plot counts as
-% a function of exposure time in seconds.  NOTE: min exposure time is 30 ms
+% ExposureTest -- Find optimum exposure time by scanning for linear region
 %
-% Written by Atkin Hyatt 07/01/2021
-% Last modified by Atkin Hyatt 07/19/2021
+% Written by Atkin Hyatt 09/10/2021
+% Last modified by Atkin Hyatt 09/13/2021
 
 %% Initialize
 stop(vid)
@@ -27,11 +26,15 @@ count = 0;
 while countFeedback < a1 || countFeedback > a2 && expo1 > 0
     count = count + 1; fprintf("Test #%d\n", count);
     if countFeedback < a1
-        expo1 = expo1 + guess/0.01;
+        expo1 = expo1 + guess;
     elseif countFeedback > a2
         expo1 = expo1 - guess/10;
     end
     src.ExposureTime = expo1;
+    if expo1 >= 5
+        vid.Timeout = 2 * guess;
+    end
+    fprintf("Exposure time = %0.3f\n", src.ExposureTime)
     image = UV_data(vid,framesPerTrigger); % take picture
     countFeedback = max(max(image)); fprintf("%f counts\n", countFeedback)
 end
@@ -56,8 +59,17 @@ image = UV_data(vid,framesPerTrigger); % take picture
 avCounts2 = max(max(image));
 fprintf("%f counts\n", avCounts2)
 
-stop(vid)
 %% Estimate Optimum Exposure
 m = (avCounts2 - avCounts1) / (expo2 - expo1);
 opEx = (a - avCounts1) / m + expo1;
 fprintf("Optimum exposure is %f\n", opEx)
+
+%% Sample Image (double check)
+src.ExposureTime = opEx;
+sam = UV_data(vid,framesPerTrigger);
+
+figure()
+imagesc(reshape(sam,512,512));set(gca,'FontSize',15);colorbar;
+colormap(parula);axis off;title('Sample (Uncorrected) Image'); caxis([0, 65535])
+
+stop(vid)

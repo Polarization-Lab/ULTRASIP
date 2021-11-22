@@ -1,7 +1,7 @@
 %James Heath heathjam@email.arizona.edu
 %Sept 25 2020
 %This script initializes UV Polarimeter instruments
-% Last modified by Atkin Hyatt 08/15/2021
+% Last modified by Atkin Hyatt 10/18/2021
 
 %Instrument Reset
 fclose('all');
@@ -17,12 +17,14 @@ instrreset %clear and reset any existing port communications
 
 %% Connect to piezo Motor
 disp('Connecting ELL14')
-comPort = 'COM1'; %Whichever port the ESP301 is plugged in
+comPort = 'COM1'; %Whichever port the ELL14 is plugged in
 
 % Set home position
 global home
-home = '0000C03B';
-speedPer = 72;
+home = '00008C9D';
+
+% Percent of max speed
+speedPer = 100;
 
 ELL14 = ELL14Connect(comPort, home);
 fopen(ELL14);
@@ -37,7 +39,7 @@ mode = 1; % 1x1 binning
 framesPerTrigger = 1;
 
 vid = CameraConnect(mode,framesPerTrigger);
-src = getselectedsource(vid);
+src = vid.Source;
 
 src.TriggerConnector = 'bnc';
 
@@ -45,8 +47,10 @@ src.TriggerConnector = 'bnc';
 src.SensorCoolerFan = 'on';
 
 % Change exposure after initialize
+% FindExposure
+% src.ExposureTime = opEx; %Exposure time of Camera
 
-src.ExposureTime = input('Exposure time in seconds? '); %Exposure time of Camera 
+src.ExposureTime = input('Exposure Time in seconds? ');
 %if exposureTime >= 5
 %    vid.Timeout = 2 * exposureTime;
 %end
@@ -54,12 +58,16 @@ src.ExposureTime = input('Exposure time in seconds? '); %Exposure time of Camera
 %% Measure darkfield
 fprintf("Turn off source for darkfield measurement\n")
 triggerconfig(vid, 'manual');
+
+% Get around Hamamatsu driver issue with exposure time (idk why but it works)
+start(vid)
+stop(vid)
 start(vid)
 
 % Countdown
 fprintf("Measuring darkfield in\n")
-for ii = 0 : 9
-   fprintf("%d\n", 10 - ii)
+for ii = 0 : 2
+   fprintf("%d\n", 3 - ii)
    pause(1)
 end
 

@@ -1,17 +1,17 @@
 % ExposureTest -- Take picture of setup with varying exposures and plot counts as
-% a function of exposure time in seconds.  NOTE: min exposure time is 30 ms
+% a function of exposure time in seconds.
 %
 % Written by Atkin Hyatt 07/01/2021
-% Last modified by Atkin Hyatt 07/19/2021
+% Last modified by Atkin Hyatt 09/13/2021
 
 % Initialize
 %initializeUV
 stop(vid)
 hold off
-clear src.ExposureTime
+clear src.ExposureTime expo avcounts0
 
 expo1 = 0.001; %L = length(expo);
-expo2 = 1;
+expo2 = 3;
 dexpo = 0.001;
 
 image = zeros(1,512,512);
@@ -65,11 +65,11 @@ stop(vid)
 % Find min exposure time (only run this part of the script to figure this
 % out)
 %initializeUV
-% expo = 0 : 0.001 : 0.1;
-% for N = length(expo) : -1 : 1
-%    disp(expo(N))
-%    src.ExposureTime = expo(N);
-%    disp('done')
-%    clear src.ExposureTime
-%    pause(0.1);
-% end
+expo = 0 : 0.001 : 0.05;
+for N = length(expo) : -1 : 1
+   disp(expo(N))
+   src.ExposureTime = expo(N);
+   disp('done')
+   clear src.ExposureTime
+   pause(0.01);
+end

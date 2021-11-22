@@ -2,15 +2,15 @@
 %% ULTRASIP_Calculations
 %% Calculations performed on flux images: This code performs
 %% non-uniformity correction, and calculates stokes parameters, DoLP and AoLP
-close all;  %clear all;
+%close all;  %clear all;
 
-addpath('C:\ULTRASIP_Data\June2021\FixExposure');
-addpath('C:\ULTRASIP_Data\FPN_Data');
-addpath('C:\ULTRASIP_Data\July2021\Uncorrected Data');
-
-% Define flux images 
-%******CHANGE PATH******************
-image = h5read(filename,'/measurement/images');
+% addpath('C:\ULTRASIP_Data\June2021\FixExposure');
+% addpath('C:\ULTRASIP_Data\FPN_Data');
+% addpath('C:\ULTRASIP_Data\July2021\Uncorrected Data');
+% 
+% % Define flux images 
+% %******CHANGE PATH******************
+% image = h5read(filename,'/measurement/images');
 
 %Separate measurement into the 4 images (0,45,90,135)
 range = 1:512;
@@ -82,8 +82,8 @@ subplot(2,2,3);imagesc(img90fix);axis off;title('Corrected 90 deg');colorbar;
 subplot(2,2,4);imagesc(img135fix);axis off;title('Corrected 135 deg');colorbar;
 % Save figures
 %*******************CHANGE PATH*******************************
-saveas(figure(1),'C:\ULTRASIP_Data\June2021\FixExposure\original.png')
-saveas(figure(2),'C:\ULTRASIP_Data\June2021\FixExposure\corrected.png');
+%saveas(figure(1),'C:\ULTRASIP_Data\June2021\FixExposure\original.png')
+%saveas(figure(2),'C:\ULTRASIP_Data\June2021\FixExposure\corrected.png');
 
 % S0fix = img0fix./2 + img90fix./2 + img45fix./2 + img135fix./2;
 % figure;imagesc(S0fix);axis on;title('S0');colorbar;

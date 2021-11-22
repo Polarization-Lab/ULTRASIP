@@ -36,7 +36,7 @@ end
 hex = dec2hex(round(398.222222222 * mean(A)),8);
 
 newHome = dec2hex(round(398.222222 * (TranslateELL14(home) + TranslateELL14(hex))),8);
-% home = newHome; ELL14Connect(comPort, home);
+%home = newHome; ELL14Connect(comPort, home);
 
 fprintf("\nAverage offset of %f degrees\nHome set to %s\n", mean(A), newHome);
 stop(vid)

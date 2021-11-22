@@ -5,10 +5,10 @@
 % Last modified by Atkin Hyatt 08/10/2021
 
 %initializeUV
-
+clear im time
 triggerconfig(vid, 'manual');
-src.ExposureTime = 2;
-
+src.ExposureTime = 0.148;
+stop(vid)
 start(vid)
 
 for i = 1 : 1000

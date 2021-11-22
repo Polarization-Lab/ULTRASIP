@@ -80,7 +80,7 @@ disp('Done')
 
 
 %test variables
-finaltime = 1.8;
+%finaltime = 1.8;
 % Save data
 %save('Darkfield.mat','Darkfield');
 %save('clouds_1907_301603_3380118.mat','image');
