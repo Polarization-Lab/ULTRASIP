@@ -6,11 +6,11 @@ import datetime as dt
 
 
 # Path to the YAML file you want to use for the aerosol and surface definition
-#fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning.yml'
-fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_Dust_model1.yml'
+fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning.yml'
+#fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_Dust_model1.yml'
 #fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_WeaklyAbsorbing1101.yml'
 #fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning2101.yml'
-
+#fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_Dust_model1.yml'
 # paths to your GRASP binary and kernels (replace everything up to grasp_open with the path to your GRASP repository)
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
 krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files'
@@ -18,9 +18,9 @@ krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files'
 ttlStr = 'Dust (multi scattering)' # Top Title
 wvStrFrmt =  '($%4.2f\\mu m$)' # Format of Y-axis labels 
 sza = 30 # solar zenith angle
-wvls = [0.34, 0.550] # wavelengths in μm
+wvls = [0.55] # wavelengths in μm
 msTyp = [41, 42, 43] # grasp measurements types (I, Q, U) [must be in ascending order]
-azmthΑng = np.r_[0:180:10] # azimuth angles to simulate (0,10,...,175)
+azmthΑng = np.r_[0:190:10] # azimuth angles to simulate (0,10,...,175)
 vza = 180-np.r_[0:75:5] # viewing zenith angles to simulate [in GRASP cord. sys.]
 clrMapReg = plt.cm.jet # color map for plots
 clrMapDiff = plt.cm.seismic # color map for plots
@@ -42,24 +42,25 @@ for wvl in wvls: nowPix.addMeas(wvl, msTyp, nbvm, sza, thtv_g, phi_g, meas)
 gr = graspRun(pathYAML=fwdModelYAMLpath, releaseYAML=True, verbose=True)
 gr.addPix(nowPix)
 gr.runGRASP(binPathGRASP=binPathGRASP, krnlPathGRASP=krnlPathGRASP)
-print('AOD at %5.3f μm was %6.4f.' % (gr.invRslt[0]['lambda'][-1],gr.invRslt[0]['aod'][-1]))
+#print('AOD at %5.3f μm was %6.4f.' % (gr.invRslt[0]['lambda'][-1],gr.invRslt[0]['aod'][-1]))
 #Global Font Size 
 plt.rcParams.update({'font.size': 19})
 # hemisphere plotting code
 Nwvl = len(wvls)
 # print(Nwvl)
-ax = plt.subplots(2*Nwvl-1, 2, subplot_kw=dict(projection='polar'))#, figsize=(6,6+3*(Nwvl-1)))
+#ax = plt.subplots(2*Nwvl-1, 2, subplot_kw=dict(projection='polar'))#, figsize=(6,6+3*(Nwvl-1)))
 #ax = plt.plot(dict(projection='polar'))#, figsize=(6,6+3*(Nwvl-1)))
 #fig = plt.figure()
 #ax = fig.add_subplot(projection='polar')
-if Nwvl == 1: 
-    ax = ax[None,:]
+#if Nwvl == 1: 
+ #   ax = ax[None,:]
 pxInd = 0
 r = gr.invRslt[pxInd]['vis'][:,0].reshape(Nazimth, Nvza)
 if vza.max()>90: r = 180 - r
 theta = gr.invRslt[pxInd]['fis'][:,0].reshape(Nazimth, Nvza)/180*np.pi
 r = np.vstack([r, np.flipud(r)]) # mirror symmetric about principle plane
 theta = np.vstack([theta, np.flipud(2*np.pi-theta)]) # mirror symmetric about principle plane
+#DoLP diff between BB at UV band
 for i in range(2):
     data = []
     labels = []
@@ -67,59 +68,108 @@ for i in range(2):
         if l<Nwvl:
             wvStr = wvStrFrmt % wvls[l]
             data.append(gr.invRslt[pxInd]['fit_I'][:,l])
-            if i==1: # we need to find DoLP
+           
+
+            if i==0: #1# we need to find DoLP
                 Q = gr.invRslt[pxInd]['fit_Q'][:,l]
                 U = gr.invRslt[pxInd]['fit_U'][:,l]
-                data[-1] = (np.sqrt(Q**2+U**2)/data[-1]) #* 100
-                clrMin = -1.5#data[-1].min(0)
-                clrMax = 1.5#1data[-1].max(100)
+                data[-1] = (np.sqrt(Q**2+U**2)/data[-1]) * 100
+                
+
+                titlestr='DoLP [%]'
+                titlestrdiff='DoLP [%] Difference'
+            clrMin = data[-1].min()
+            clrMax = data[-1].max()
+            print(clrMax)
+            #ticksy = np.linspace(clrMin, clrMax,
+
             labels.append(wvStr)
-            titlestr = 'DoLP'
+            # titlestr = 'DoLP'
             name = str(l)
-            cmap = 'Blues'
-            if i==0: 
-                data[-1] = 1*(np.log10(data[-1]))
-                clrMin = -1.5 #data[-1].min()
-                clrMax = 1.5 #data[-1].max()
-                titlestr='log(Reflectance)'
-            #else:
-               # clrMin = data[-1].min(0)
-               # clrMax = data[-1].max(100)
-            #clrMap = clrMapReg
-            name = str(l)  
-            cmap = 'Blues'  
-        else: # this is a difference plot      
+            cmap = 'gist_ncar'
+            ticksy = np.linspace(-5,40,5)
+
+                
+            if i==10: #0
+            #     data[-1] = 1*(np.log10(data[-1]))
+            #     titlestr='log(Reflectance)'
+            #     titlestrdiff='log(Reflectance) Difference'
+
+            # clrMin = 0#data[-1].min()
+            # clrMax = 45#data[-1].max()
+            # #ticksy = np.linspace(clrMin, clrMax,5)
+            # #else:
+            #    # clrMin = data[-1].min(0)
+            #    # clrMax = data[-1].max(100)
+            # #clrMap = clrMapReg
+            # name = str(l)  
+            # cmap = 'cool'  
+             ticksy = np.linspace(-5, 40,5)
+        if i==300:
+        #else: # this is a difference plot      
 #             if i==1:
-            data.append(data[l-Nwvl+1] - data[0])
-            labels.append(labels[l-Nwvl+1] + " – " + labels[0])
-            titlestr = 'Difference'
-            wvStr = '(0.55μm - 0.34μm)'
-            name = str(l)+str(i)
-            cmap = 'coolwarm'
-  #           else:
-#                 data.append(1 - (data[l-Nwvl+1]/data[0]))
-#                 labels.append("1 - " + labels[l-Nwvl+1] + "/" + labels[0])
-            clrMax = 1.5
-            clrMin = -clrMax
+#             data.append(data[l-Nwvl+1] - data[0])
+#             labels.append(labels[l-Nwvl+1] + " – " + labels[0])
+#             titlestr = titlestrdiff
+#             wvStr = '(0.55μm (n = 0.01 + i0.01)- 0.34μm (n = 0.01 + i0.001))'
+#             name = str(l)+str(i)
+#             cmap = 'seismic'
+#   #           else:
+# #                 data.append(1 - (data[l-Nwvl+1]/data[0]))
+# #                 labels.append("1 - " + labels[l-Nwvl+1] + "/" + labels[0])
+#             clrMax = np.abs(data[-1]).max()
+#             clrMin = -clrMax
+              ticksy = np.linspace(clrMin, clrMax,5)
+
             #clrMap = clrMapDiff
-        #fig=plt.figure()
-        fig = plt.figure()
-        ax = plt.subplots(subplot_kw=dict(projection='polar'))#, figsize=(6,6+3*(Nwvl-1)))
-        v = np.linspace(clrMin, clrMax, 20, endpoint=True)
-        ticks = np.linspace(clrMin, clrMax, 7, endpoint=True)
+            #fig=plt.figure()
+        #unfig = plt.figure()
+        
+        #unax = plt.subplots(subplot_kw=dict(projection='polar'))#, figsize=(6,6+3*(Nwvl-1)))
+       # ax = plt.subplots()#, figsize=(6,6+3*(Nwvl-1)))
+
+        #unv = np.linspace(clrMin, clrMax, 120, endpoint=True)
+        #unticks = np.linspace(clrMin, clrMax, 4, endpoint=True)
+        #ticks = np.linspace(0, 45, 5)
+
         data2D = data[-1].reshape(Nazimth, Nvza)
-        dataFullHemisphere = np.vstack([data2D, np.flipud(data2D)]) # mirror symmetric about principle plane
-        c = plt.contourf(theta, r, dataFullHemisphere, v, cmap=cmap)#cmap='tab20c')
-        #plt.title(titlestr)
+        
+
+        #fixed phi at 0 deg 
+        
+   #     undataFullHemisphere = np.vstack([data2D, np.flipud(data2D)]) # mirror symmetric about principle plane
+    #    unc = plt.contourf(theta, r, dataFullHemisphere, v, cmap=cmap)#cmap='tab20c')
+       # c = plt.hist(data[0])#cmap='tab20c')
+
+       # unplt.title(wvStr)
         plt.ylabel(wvStr, labelpad=35)
-        plt.plot(np.pi, sza, '.',  color=[1,1,0], markersize=25)
-        plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/NEW3{name}d1{titlestr}.png')
+       # unplt.plot(np.pi, sza, '.',  color=[1,1,0], markersize=25)
+       # plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/NEW3{name}d1{titlestr}.png')
 
 #ax.set_ylim([0, r.max()])
         #if i==0: 
 #ax.set_ylabel(labels[-1], labelpad=80)
     
-       # cb = plt.colorbar(c, orientation='horizontal', ticks=ticks,pad=0.3)
+       #un cb= plt.colorbar(c, orientation='vertical', ticks=ticks,pad=0.1)
+        
+        plt.gcf()
+        fig2 = plt.figure(figsize=(8, 5))
+        slice2D_0deg = data2D[0,:]
+        slice2D_180deg = np.flipud(data2D[int(np.median(np.arange(Nazimth)+1)),:])
+        #slice2D = np.hstack([slice2D_0deg,slice2D_180deg]) <--- OG 
+        slice2D = np.hstack([slice2D_180deg,slice2D_0deg]) #<-- FIXED
+        slicetheta = np.linspace(-90,90,2*Nvza)
+       
+
+        # plt.title(wvStr)
+        # plt.xlabel("Zenith Angle [degrees]")
+        # plt.yticks(ticksy)
+        # plt.xticks([-90,-60,-30,0,30,60,90])
+        # #plt.yticks(ticksy)
+        # plt.ylabel(titlestr)
+        plt.plot(slicetheta,slice2D)
+        #plt.show()
+    
         #plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/NEW2{name}d1{titlestr}.png')
         #plt.savefig(f'/home/cdeleon/ULTRASIP/Code/GRASP/Plots/{cmap}colorbar.png')
 

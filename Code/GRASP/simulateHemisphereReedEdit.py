@@ -60,7 +60,7 @@ for i in range(2):
             if i==1: # we need to find DoLP
                 Q = gr.invRslt[pxInd]['fit_Q'][:,l]
                 U = gr.invRslt[pxInd]['fit_U'][:,l]
-                data[-1] = (np.sqrt(Q**2+U**2)/data[-1]) * 100
+                data[-1] = (np.sqrt(Q**2+U**2)/data[-1]) #* 100
             labels.append(wvStr)
             clrMin = data[-1].min()
             clrMax = data[-1].max()
@@ -85,5 +85,5 @@ ax[0,1].set_title('DOLP [%]')
 plt.suptitle(ttlStr)
 plt.tight_layout(rect=[0.01, 0.01,0.98, 0.98])
 plt.ion()
-plt.savefig('/home/cdeleon/ULTRASIP/Code/GRASP/Plots/bbfig.png')
+#plt.savefig('/home/cdeleon/ULTRASIP/Code/GRASP/Plots/bbfig.png')
 plt.show()

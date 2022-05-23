@@ -89,7 +89,7 @@ retrieval:
                     index_of_wavelength_involved: [0]
                     max:   [10.0, 10.0]
                     min:   [0.02, 0.02]
-                    value: [0.1514,0.4298]
+                    value: [0.1514,0.4298] #add 0.03um#OG 0.1514
             retrieved: true
             mode[2]:
                 initial_guess:
@@ -118,17 +118,17 @@ retrieval:
         characteristic[4]:
             mode[1]:
                 initial_guess:
-                    index_of_wavelength_involved: [0]
-                    max:   [0.1]
-                    min:   [1e-10]
-                    value: [0.01]
+                    index_of_wavelength_involved: [1,2]
+                    max:   [0.4,0.4]
+                    min:   [1e-10,1e-10]
+                    value: [0.001,0.001]
             retrieved: true
             mode[2]:
                 initial_guess:
-                    index_of_wavelength_involved: [0]
-                    max:   [0.1]
-                    min:   [1e-10]
-                    value: [0.01]
+                    index_of_wavelength_involved: [1,2]
+                    max:   [0.4,0.4]
+                    min:   [1e-10,1e-10]
+                    value: [0.001,0.001]
             retrieved: true
             type: imaginary_part_of_refractive_index_spectral_dependent
         characteristic[5]:
@@ -158,7 +158,7 @@ retrieval:
                     index_of_wavelength_involved: [0]
                     max:   [0.9999999]
                     min:    [0.0000001]
-                    value: [0.9999998]
+                    value: [0.9999998] #changed to 0.8
             retrieved: true
             type: sphere_fraction
         characteristic[7]:
