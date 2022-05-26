@@ -11,7 +11,7 @@ instrreset %clear and reset any existing port communications
 
 % DMM = initializeUV_DMM();
 
-comPort = 'COM6'; %Whichever port the ESP301 is plugged in
+comPort = 'COM1'; %Whichever port the ESP301 is plugged in
 
 %%Initialization
 ROI =  [274 274 1500 1500];
