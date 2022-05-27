@@ -1,4 +1,4 @@
-input: {driver: sdata, file: airmspi_sdata.sdat}
+input: {driver: sdata, file: /home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/airmspi_sdata.sdat}
 output:
     segment: {function: classic, stream: bench_airmspi1rslts.txt}
 retrieval:
@@ -94,9 +94,9 @@ retrieval:
             mode[2]:
                 initial_guess:
                     index_of_wavelength_involved: [0]
-                    max:   [15.0, 15.0]
+                    max:   [5.0, 5.0]
                     min:   [0.02, 0.02]
-                    value: [6.48142,2.203]
+                    value: [1.2,0.8]
             retrieved: true
             type: size_distribution_lognormal
         characteristic[3]:
