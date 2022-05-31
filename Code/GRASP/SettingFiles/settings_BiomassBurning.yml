@@ -1,6 +1,6 @@
-input: {driver: sdata, file: airmspi_sdata.sdat}
+input: {driver: sdata, file: airmspi_sheridan_7.sdat}
 output:
-    segment: {function: classic, stream: /home/cdeleon/ULTRASIP/bench_FWD_IQU_rslts.txt}
+    segment: {function: classic, stream: /home/cdeleon/ULTRASIP/sheridan7_FWD_IQU_rslts.txt}
 retrieval:
     general: {path_to_internal_files: /usr/local/share/grasp/kernels/}
     mode: inversion #forward
