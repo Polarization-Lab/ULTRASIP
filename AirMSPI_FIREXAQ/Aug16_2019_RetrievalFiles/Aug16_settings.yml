@@ -1,0 +1,138 @@
+input: {driver: sdata, file: airmspi_sheridan_7.sdat}
+output:
+    segment: {function: classic, stream: /home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Aug16_2019_RetrievalFiles/Aug16_rslts.txt}
+retrieval:
+    general: {path_to_internal_files: /usr/local/share/grasp/kernels/}
+    mode: inversion #forward
+    inversion:
+        regime: single_pixel
+        convergence: {maximum_iterations_for_stopping: 20, maximum_iterations_of_Levenberg-Marquardt: 20, minimization_convention: logarithm, normal_system_solver: sparse_matrix_solver, scale_for_finite_difference: 1.0e-03, shift_for_applying_logarithm_to_negative_values: 1.1, threshold_for_stopping: 0.001, threshold_for_stopping_Q_iterations: 1.0e-05}
+        measurement_fitting: {polarization: absolute_polarization_components}
+        noises:
+            noise[1]:
+                error_type: relative
+                measurement_type[1]:
+                    index_of_wavelength_involved: [1]
+                    type: I
+                standard_deviation: 0.03
+                standard_deviation_synthetic: 0.0
+            noise[2]:
+                error_type: absolute
+                measurement_type[1]:
+                    index_of_wavelength_involved: [1]
+                    type: Q
+                measurement_type[2]:
+                    index_of_wavelength_involved: [1]
+                    type: U
+                standard_deviation: 0.005
+                standard_deviation_synthetic: 0.0
+    forward_model:
+        phase_matrix:
+            kernels_folder: KERNELS_BASE/
+            size_binning_method_for_triangle_bins: logarithm
+            number_of_elements: 4
+            radius:
+                mode[1]: {max: 15.0, min: 0.05}
+                mode[2]: {max: 15.0, min: 0.05} # <- UNCOMMENT THIS FOR 2ND AEROSOL MODE
+        radiative_transfer:
+            absolute_error_rt_calculations: 1.0e-06
+            aerosol_profile_vertical_type: gaussian
+            molecular_profile_vertical_type: exponential
+            number_of_layers: 50
+            reference_plane_for_polarization: principal_plane
+            simulating_derivatives:
+                number_of_fourier_expansion_coefficients: 6
+                number_of_gaussian_quadratures_for_expansion_coefficients: 10
+                number_of_guassian_quadratures_for_fourier_expansion_coefficients: 20
+                order_of_scattering: multiple_scattering
+                #derivatives
+            simulating_observation:
+                number_of_fourier_expansion_coefficients: 6
+                number_of_gaussian_quadratures_for_expansion_coefficients: 10
+                number_of_guassian_quadratures_for_fourier_expansion_coefficients: 20
+                #order_of_scattering: multiple_scattering
+                order_of_scattering: single_scattering
+
+    debug:
+        additional_information: false
+        verbose: true
+
+    products:
+        aerosol: {chemistry: false, lidar: false, optical_properties: true, particulate_matter: false, phase_matrix: true, refractive_index: true, theoretical_bimodal_extinction: false, theoretical_bimodal_parameters: false, type: false}
+        error_estimation:
+            aerosol: {lidar: false, optical_properties: false}
+            parameters: false
+        forcing: {broadband_flux: false, forcing: false}
+        retrieval: {fitting: true, parameters: true, residual: true}
+        surface: false
+
+    constraints:
+        characteristic[1]:
+            mode[1]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [5.00001]
+                    min:   [0.00000001]
+                    value: [0.0468]
+            retrieved: true
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [5.00001]
+                    min:   [0.00000001]
+                    value: [0.0468] #frac_vol
+            retrieved: true
+            type: aerosol_concentration
+        characteristic[2]:
+            mode[1]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [10.0, 10.0]
+                    min:   [0.02, 0.02]
+                    value: [0.1514,0.4298] #add 0.03um#OG 0.1514
+            retrieved: true
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [10.0, 10.0]
+                    min:   [0.02, 0.02]
+                    value: [3.6842,0.7898]
+            retrieved: true
+            type: size_distribution_lognormal
+        characteristic[3]:
+            mode[1]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [1.65]
+                    min:   [1.33]
+                    value: [1.50]
+            retrieved: true
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [1.65]
+                    min:   [1.33]
+                    value: [1.50]
+            retrieved: true
+            type: real_part_of_refractive_index_spectral_dependent
+        characteristic[4]:
+            mode[1]:
+                initial_guess:
+                    index_of_wavelength_involved: [1,2]
+                    max:   [0.4,0.4]
+                    min:   [1e-10,1e-10]
+                    value: [0.001,0.001]
+            retrieved: true
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [1,2]
+                    max:   [0.4,0.4]
+                    min:   [1e-10,1e-10]
+                    value: [0.001,0.001]
+            retrieved: true
+            type: imaginary_part_of_refractive_index_spectral_dependent
+       
+        
+
+settings:
+    strict: true
