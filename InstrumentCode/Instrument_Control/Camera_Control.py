@@ -7,7 +7,8 @@ This script is to control the ULTRASIP Hamamatsu camera
 
 #Import Libraries 
 import logging
-from hamamatsu.dcam import dcam, Stream
+from hamamatsu.dcam import dcam, Stream, copy_frame
+import matplotlib.pyplot as plt
 
 logging.basicConfig(level=logging.INFO)
 
@@ -25,5 +26,7 @@ with dcam:
                 camera.start()
                 for i, frame_buffer in enumerate(stream):
                     frame = copy_frame(frame_buffer)
-                    logging.info(f"acquired frame #%d/%d: %s", i+1, nb_frames, frame)
+                    logging.info(f"acquired frame #%d/%d: %s", i+1, nb_frames, frame)                
                 logging.info("finished acquisition")
+
+plt.imshow(frame)

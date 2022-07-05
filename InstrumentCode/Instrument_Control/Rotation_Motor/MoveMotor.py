@@ -11,13 +11,14 @@ find at https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=12829
 
 import elliptec
 
-controller = elliptec.Controller('COM3')
+controller = elliptec.Controller('COM4')
 ro = elliptec.Rotator(controller)
 
 # Home the rotator before usage
 ro.home()
 
 # Loop over a list of angles and acquire for each
-for angle in [0, 45, 90, 135]:
+#for angle in [0, 45, 90, 135]:
+for angle in [0]:
   ro.set_angle(angle)
   # ... acquire or perform other tasks
