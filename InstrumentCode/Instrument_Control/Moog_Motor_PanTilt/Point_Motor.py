@@ -21,7 +21,7 @@ moog.open()
 print("Moog is open?  " + str(moog.is_open))
 time.sleep(3)
 
-moog.write(b'\0x31')
+moog.write(b'\31')
 
 
 moog.close()
