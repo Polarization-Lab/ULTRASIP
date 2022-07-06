@@ -6,7 +6,7 @@ import datetime as dt
 
 
 # Path to the YAML file you want to use for the aerosol and surface definition
-fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_BiomassBurning.yml'
+fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Aug16_2019_RetrievalFiles/Aug16_settings.yml'
 #fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_1lambda_airmspi_inversion.yml'
 
 #fwdModelYAMLpath = '/home/cdeleon/ULTRASIP/Code/GRASP/SettingFiles/settings_Dust_model1.yml'
