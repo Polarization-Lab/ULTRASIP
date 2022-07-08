@@ -4,7 +4,7 @@ Created on Wed Jun 29 11:02:29 2022
 @author: C. M. DeLeon 
 
 This code is to define the ULTRASIP Thorlabs rotation motor as a device and 
-establish a library of commands. Adapted from https://github.com/roesel/elliptec
+establish a library of commands. Using code from https://github.com/roesel/elliptec
 Note: must have Thorlabs Elliptec downloaded to the computer, 
 find at https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=12829
 """

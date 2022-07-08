@@ -18,12 +18,16 @@ moog.port = 'COM2'
 print(moog)
 time.sleep(3)
 moog.open()
+
 print("Moog is open?  " + str(moog.is_open))
+print("Moog is writable?  " + str(moog.writable()))
 time.sleep(3)
 
-moog.write(b'\31')
+cmd = bytes('02003104000000003503','utf-16')
+moog.read(hex2dec(31H))
 
+time.sleep(3)
 
-moog.close()
+#moog.close()
 
 print('done')
