@@ -28,22 +28,22 @@ retrieval:
             #     standard_deviation_synthetic: 0.0
              noise[1]:
                   standard_deviation_synthetic: 0.05
-                  bias_measurements_synthetic: 0.05
-                  bias_equation: 0.05
+                  #bias_measurements_synthetic: 0.05
+                  #bias_equation: 0.05
                   error_type:  relative
                   standard_deviation:  0.03
                   measurement_type[1]:
                       type: I
                       index_of_wavelength_involved: [ 1, 2, 3, 4 ]
-             noise[2]:
-                  standard_deviation_synthetic: 0.01
-                  bias_measurements_synthetic: 0.01
-                  bias_equation: 0.01
-                  error_type:  absolute
-                  standard_deviation:  0.01
-                  measurement_type[1]:
-                       type: aod
-                       index_of_wavelength_involved: [ 1, 2, 3, 4 ]
+             # noise[2]:
+             #      standard_deviation_synthetic: 0.01
+             #      #bias_measurements_synthetic: 0.01
+             #      #bias_equation: 0.01
+             #      error_type:  absolute
+             #      standard_deviation:  0.01
+             #      measurement_type[1]:
+             #           type: aod
+             #           index_of_wavelength_involved: [ 1, 2, 3, 4 ]
 
     forward_model:
         phase_matrix:
