@@ -108,14 +108,14 @@ retrieval:
                     index_of_wavelength_involved: [0]
                     max:   [10.0, 10.0]
                     min:   [0.02, 0.02]
-                    value: [0.1514,0.4298] #add 0.03um#OG 0.1514
+                    value: [0.1514] #add 0.03um#OG 0.1514
             retrieved: true
             # mode[2]:
             #     initial_guess:
             #         index_of_wavelength_involved: [0]
             #         max:   [10.0, 10.0]
             #         min:   [0.02, 0.02]
-            #         value: [3.6842,0.7898]
+            #         value: [3.6842]
             # retrieved: true
             type: size_distribution_lognormal
         characteristic[3]:
@@ -140,14 +140,14 @@ retrieval:
                     index_of_wavelength_involved: [0]
                     max:   [0.4,0.4]
                     min:   [1e-10,1e-10]
-                    value: [0.001,0.001]
+                    value: [0.001]
             retrieved: true
             # mode[2]:
             #     initial_guess:
             #         index_of_wavelength_involved: [0]
             #         max:   [0.4,0.4]
             #         min:   [1e-10,1e-10]
-            #         value: [0.001,0.001]
+            #         value: [0.001]
             # retrieved: true
             type: imaginary_part_of_refractive_index_spectral_dependent
         characteristic[5]:
