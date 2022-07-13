@@ -52,7 +52,7 @@ retrieval:
             number_of_elements: 4
             radius:
                 mode[1]: {max: 15.0, min: 0.05}
-                #mode[2]: {max: 15.0, min: 0.05} # <- UNCOMMENT THIS FOR 2ND AEROSOL MODE
+                mode[2]: {max: 15.0, min: 0.05} # <- UNCOMMENT THIS FOR 2ND AEROSOL MODE
         radiative_transfer:
             absolute_error_rt_calculations: 1.0e-06
             aerosol_profile_vertical_type: gaussian
