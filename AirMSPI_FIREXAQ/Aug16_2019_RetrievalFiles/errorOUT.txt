@@ -1,0 +1,90 @@
+Config file read successfully
+The tile is divided in segments with 1 rows, 1 cols and 1 times. 1 inversions will be performed (sequential version)
+Retrieval #0 (1/1): 100.00%: 1 pixels will be processed
+Retrieval #0 (1/1): Segment error. It is set as empty segment (0 pixels) and it is ignored. Retrieval code keep processing the rest of segments
+Retrieval #0 (1/1): 100.00%: finished
+in set_RIN_retr_par_number:
+    KNSING  = 11 - number of parameters driving forward model for each pixel
+    KNSINGF = 11 - number of retrieved parameters for each pixel
+in set_RIN_RT_OSH_flags_surf:
+    isurf_land(1), isurf_land(2), isurf_water:
+    20101   20201   20301
+in set_print_RIN_FRETR_spectral:
+    LIST OF FUNCTIONAL RETRIEVAL OPTIONS:
+      1 - retr_method_fullset
+      2 - retr_method_subset
+      1 - retr_function_const
+      2 - retr_function_lns_linear
+    Assignment of FUNCTIONAL RETRIEVAL OPTIONS:
+    idim1 = 1  idim2 = 1  method = 1  function = 0  total_num_pars = 0
+      iwl involved:
+      0
+      IWW_SINGL:   
+      0
+    idim1 = 2  idim2 = 1  method = 1  function = 0  total_num_pars = 0
+      iwl involved:
+      0   0
+      IWW_SINGL:   
+      0   0
+    idim1 = 3  idim2 = 1  method = 2  function = 1  total_num_pars = 4
+      iwl involved:
+      1
+      IWW_SINGL:   
+      0
+    idim1 = 4  idim2 = 1  method = 2  function = 1  total_num_pars = 4
+      iwl involved:
+      1
+      IWW_SINGL:   
+      0
+    idim1 = 5  idim2 = 1  method = 2  function = 1  total_num_pars = 4
+      iwl involved:
+      1
+      IWW_SINGL:   
+      0
+    idim1 = 6  idim2 = 1  method = 1  function = 0  total_num_pars = 0
+      iwl involved:
+      0
+      IWW_SINGL:   
+      0
+    idim1 = 7  idim2 = 1  method = 1  function = 0  total_num_pars = 0
+      iwl involved:
+      0
+      IWW_SINGL:   
+      0
+    idim1 = 8  idim2 = 1  method = 1  function = 0  total_num_pars = 0
+      iwl involved:
+      0
+      IWW_SINGL:   
+      0
+    idim1 = 9  idim2 = 1  method = 2  function = 1  total_num_pars = 4
+      iwl involved:
+      1
+      IWW_SINGL:   
+      0
+    idim1 = 10  idim2 = 1  method = 2  function = 1  total_num_pars = 4
+      iwl involved:
+      1
+      IWW_SINGL:   
+      0
+
+in inversion:
+    npixels = 1
+    nsd = 1
+    lm_min =  0.0000E+00
+    ccor_min =  0.0000E+00
+    ccor_max =  1.0000E+02
+    eps_err = 0.00000
+    nlvls_geom = 100
+    aerosol profile   type = 1  (0 - exponential, 1 - gaussian)
+    molecular profile type = 0  (0 - exponential, 1 - stdatm)
+    Measurements of downward looking instruments are inverted.
+    wavelengths(um):
+   0.35500   0.38000   0.47000   0.55500
+in assign_noise_index:
+    pixel # 1   MNOISE:   1   1   1   1
+
+ 172.76758    1:   0.16965E+00      111.62296 %      pixel # 1      Residual using INITIAL GUESS
+ 126.48718    1:   0.10673E+00       84.15307 %      pixel # 1      Residual after iteration # 1
+  97.69674    1:   0.58915E-01       70.03706 %      pixel # 1      Residual after iteration # 2
+  97.69674    1:   0.93890E+00      177.18767 %      pixel # 1      Residual after iteration # 3
+RETRIEVAL ERROR: During the retrieval process 1 segments (1 pixels) were ignored because retrieval code returned an error
