@@ -73,7 +73,7 @@ retrieval:
                 # order_of_scattering: single_scattering
 
     debug:
-        additional_information: false
+        additional_information: true
         verbose: true
 
     products:
@@ -210,38 +210,38 @@ retrieval:
             #         min:                             [200.0  ]
             #         max:                            [2000.0 ]
             #         index_of_wavelength_involved:   [0    ]  
-        # characteristic[9]:
-        #     mode[1]:
-        #         initial_guess:
-        #             index_of_wavelength_involved: [0]
-        #             max:   [1.0]
-        #             min:   [0.000001]
-        #             value: [0.1]
-        #         single_pixel:
-        #             smoothness_constraints: {difference_order: 1, lagrange_multiplier: 0}
-        #     # mode[2]:
-        #     #     initial_guess:
-        #     #         index_of_wavelength_involved: [0]
-        #     #         max:   [1.0]
-        #     #         min:   [0.01]
-        #     #         value: [0.99]
-        #     # mode[3]:
-        #     #     initial_guess:
-        #     #         index_of_wavelength_involved: [0]
-        #     #         max:   [0.3]
-        #     #         min:   [0.000001]
-        #     #         value: [0.001]
-        #     retrieved: true
-        #     type: surface_land_brdf_ross_li
-        # characteristic[10]:
-        #     mode[1]:
-        #         initial_guess:
-        #             index_of_wavelength_involved: [0]
-        #             max: [8.0]
-        #             min: [1.0e-10]
-        #             value: [2.0e-10]
-        #     retrieved: true
-        #     type: surface_land_polarized_maignan_breon
+        characteristic[9]:
+            mode[1]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [1.0]
+                    min:   [0.000001]
+                    value: [0.1]
+                single_pixel:
+                    smoothness_constraints: {difference_order: 1, lagrange_multiplier: 0}
+            # mode[2]:
+            #     initial_guess:
+            #         index_of_wavelength_involved: [0]
+            #         max:   [1.0]
+            #         min:   [0.01]
+            #         value: [0.99]
+            # mode[3]:
+            #     initial_guess:
+            #         index_of_wavelength_involved: [0]
+            #         max:   [0.3]
+            #         min:   [0.000001]
+            #         value: [0.001]
+            retrieved: true
+            type: surface_land_brdf_ross_li
+        characteristic[10]:
+            mode[1]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max: [8.0]
+                    min: [1.0e-10]
+                    value: [2.0e-10]
+            retrieved: true
+            type: surface_land_polarized_maignan_breon
 
 settings:
     strict: true
