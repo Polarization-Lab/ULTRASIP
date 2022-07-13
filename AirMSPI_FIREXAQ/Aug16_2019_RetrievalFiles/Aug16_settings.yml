@@ -94,13 +94,13 @@ retrieval:
                     min:   [0.00000001]
                     value: [0.0468]
             retrieved: true
-            # mode[2]:
-            #     initial_guess:
-            #         index_of_wavelength_involved: [0]
-            #         max:   [5.00001]
-            #         min:   [0.00000001]
-            #         value: [0.0468] #frac_vol
-            # retrieved: true
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [5.00001]
+                    min:   [0.00000001]
+                    value: [0.0468] #frac_vol
+            retrieved: true
             type: aerosol_concentration
         characteristic[2]:
             mode[1]:
@@ -110,13 +110,13 @@ retrieval:
                     min:   [0.02, 0.02]
                     value: [0.1514,0.4298] #add 0.03um#OG 0.1514
             retrieved: true
-            # mode[2]:
-            #     initial_guess:
-            #         index_of_wavelength_involved: [0]
-            #         max:   [10.0, 10.0]
-            #         min:   [0.02, 0.02]
-            #         value: [3.6842, 0.7898]
-            # retrieved: true
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [10.0, 10.0]
+                    min:   [0.02, 0.02]
+                    value: [3.6842, 0.7898]
+            retrieved: true
             type: size_distribution_lognormal
         characteristic[3]:
             mode[1]:
@@ -126,13 +126,13 @@ retrieval:
                     min:   [1.33]
                     value: [1.50]
             retrieved: true
-            # mode[2]:
-            #     initial_guess:
-            #         index_of_wavelength_involved: [0]
-            #         max:   [1.65]
-            #         min:   [1.33]
-            #         value: [1.50]
-            # retrieved: true
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [1.65]
+                    min:   [1.33]
+                    value: [1.50]
+            retrieved: true
             type: real_part_of_refractive_index_spectral_dependent
         characteristic[4]:
             mode[1]:
@@ -142,13 +142,13 @@ retrieval:
                     min:   [1e-10,1e-10]
                     value: [0.001]
             retrieved: true
-            # mode[2]:
-            #     initial_guess:
-            #         index_of_wavelength_involved: [0]
-            #         max:   [0.4,0.4]
-            #         min:   [1e-10,1e-10]
-            #         value: [0.001]
-            # retrieved: true
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [0.4,0.4]
+                    min:   [1e-10,1e-10]
+                    value: [0.001]
+            retrieved: true
             type: imaginary_part_of_refractive_index_spectral_dependent
         characteristic[5]:
             type: surface_water_cox_munk_iso
