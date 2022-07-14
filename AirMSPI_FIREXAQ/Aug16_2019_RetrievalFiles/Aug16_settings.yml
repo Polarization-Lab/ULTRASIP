@@ -200,9 +200,9 @@ retrieval:
             retrieved: true
             mode[1]:
                 initial_guess:                      #1
-                    value:                          [500.0,500.0,500.0,500.0 ]
-                    min:                             [200.0,200.0,200.0,200.0  ]
-                    max:                            [2000.0,2000.0,2000.0,2000.0 ]
+                    value:                          [500.0]
+                    min:                             [200.0 ]
+                    max:                            [2000.0 ]
                     index_of_wavelength_involved:   [1,2,3,4      ]
             # mode[2]:
             #     initial_guess:                      #1
