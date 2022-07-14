@@ -106,9 +106,9 @@ retrieval:
             mode[1]:
                 initial_guess:
                     index_of_wavelength_involved: [1,2,3,4]
-                    max:   [10.0, 10.0,10.0, 10.0]
-                    min:   [0.02, 0.02,0.02, 0.02]
-                    value: [0.1514,0.4298,0.1514,0.4298,0.1514,0.4298,0.1514,0.4298] #add 0.03um#OG 0.1514
+                    max:   [10.0, 10.0]
+                    min:   [0.02, 0.02]
+                    value: [0.1514,0.4298] #add 0.03um#OG 0.1514
             retrieved: true
             # mode[2]:
             #     initial_guess:
