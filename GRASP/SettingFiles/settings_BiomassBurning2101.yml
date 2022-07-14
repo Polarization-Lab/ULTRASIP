@@ -1,6 +1,6 @@
-input: {driver: sdata, file: bench.sdat}
+input: {driver: sdata, file: /home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Aug16_2019_RetrievalFiles/Aug16_sdata.sdat}
 output:
-    segment: {function: classic, stream: bench_FWD_IQU_rslts.txt}
+    segment: {function: classic, stream: /home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Aug16_2019_RetrievalFiles/Aug16_rslts_v2.txt}
 retrieval:
     general: {path_to_internal_files: /usr/local/share/grasp/kernels/}
     mode: forward
