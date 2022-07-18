@@ -23,8 +23,8 @@ print("Moog is open?  " + str(moog.is_open))
 print("Moog is writable?  " + str(moog.writable()))
 time.sleep(3)
 
-cmd = bytes('02003104000000003503','utf-16')
-moog.read(hex2dec(31H))
+#cmd = bytes('02003104000000003503','utf-16')
+moog.write(b'\x00x6')
 
 time.sleep(3)
 
