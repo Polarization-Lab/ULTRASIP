@@ -54,7 +54,7 @@ retrieval:
                 # order_of_scattering: single_scattering
 
     debug:
-        additional_information: false
+        additional_information: true
         verbose: true
 
     products:
