@@ -118,14 +118,14 @@ retrieval:
         characteristic[4]:
             mode[1]:
                 initial_guess:
-                    index_of_wavelength_involved: [1,2]
+                    index_of_wavelength_involved: [1]
                     max:   [0.4,0.4]
                     min:   [1e-10,1e-10]
                     value: [0.001,0.001]
             retrieved: true
             mode[2]:
                 initial_guess:
-                    index_of_wavelength_involved: [1,2]
+                    index_of_wavelength_involved: [1]
                     max:   [0.4,0.4]
                     min:   [1e-10,1e-10]
                     value: [0.001,0.001]
