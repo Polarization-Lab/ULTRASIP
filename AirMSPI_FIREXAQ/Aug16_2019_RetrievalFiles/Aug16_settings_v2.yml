@@ -10,7 +10,7 @@ retrieval:
         convergence:
             minimization_convention: logarithm
             maximum_iterations_for_stopping: 35
-            #maximum_iterations_of_Levenberg-Marquardt: 35 
+            maximum_iterations_of_Levenberg-Marquardt: 35
             threshold_for_stopping: 1.0e-3
             threshold_for_stopping_Q_iterations: 1e-12
             scale_for_finite_difference: 1.0e-5  
