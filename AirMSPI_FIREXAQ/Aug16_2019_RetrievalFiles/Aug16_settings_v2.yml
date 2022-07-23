@@ -176,15 +176,15 @@ retrieval:
             retrieved: true
             mode[1]:
                 initial_guess:                      #1
-                    value:                          [1000.0 ]
+                    value:                          [11000.0 ]
                     min:                            [500.0]
-                    max:                            [5000.0]
+                    max:                            [15000.0]
                     index_of_wavelength_involved:   [0      ]
             mode[2]:
                 initial_guess:                      #1
-                    value:                          [1000.0 ]
+                    value:                          [11000.0 ]
                     min:                            [500.0]
-                    max:                            [5000.0]
+                    max:                            [15000.0]
                     index_of_wavelength_involved:   [0      ]
         characteristic[8]:
             type: vertical_profile_parameter_standard_deviation
