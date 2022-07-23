@@ -11,7 +11,7 @@ find at https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=12829
 
 import elliptec
 
-controller = elliptec.Controller('COM4')
+controller = elliptec.Controller('COM9')
 ro = elliptec.Rotator(controller)
 
 # Home the rotator before usage
