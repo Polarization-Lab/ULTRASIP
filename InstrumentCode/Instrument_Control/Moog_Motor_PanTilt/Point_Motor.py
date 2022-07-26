@@ -15,19 +15,21 @@ import time
 moog = serial.Serial()
 moog.baudrate = 9600
 moog.port = 'COM2'
-print(moog)
+
 time.sleep(3)
 moog.open()
+print(moog)
 
 print("Moog is open?  " + str(moog.is_open))
 print("Moog is writable?  " + str(moog.writable()))
 time.sleep(3)
 
-#cmd = bytes('02003104000000003503','utf-16')
-moog.write(b'\x00x6')
+#from protocol analyzer: 02 00 31 04 00 00 00 00 35 03
+
+moog.write(b'0in31')
 
 time.sleep(3)
 
-#moog.close()
+moog.close()
 
 print('done')
