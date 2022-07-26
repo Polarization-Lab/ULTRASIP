@@ -1,6 +1,6 @@
 input: {driver: sdata, file: Aug16_sdata_NW1.sdat}
 output:
-    segment: {function: classic, stream: Aug16_rslts_v2.txt}
+    segment: {function: classic, stream: Aug16_rslts_NW1.txt}
 retrieval:
     general: {path_to_internal_files: /Users/wrespino/Synced/Local_Code_MacBook/grasp_open/src/retrieval/internal_files}
     mode: inversion #forward
