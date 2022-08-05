@@ -1,10 +1,10 @@
-# AirMSPI_L1B2_Prescott_2_SDATA_26.py
+# AirMSPI_L1B2_Prescott_2_SDATA_27.py
 #
 # This is a Python 3.9.13 code to read AirMSPI L1B2 data and
 # output the results to GRASP SDATA format.
 #
-# Creation Date: 2022-08-03
-# Last Modified: 2022-08-03
+# Creation Date: 2022-08-05
+# Last Modified: 2022-08-05
 #
 # by Michael J. Garay
 # (Michael.J.Garay@jpl.nasa.gov)
@@ -28,8 +28,8 @@ def main():  # Main code
 
 # Set the paths
 # NOTE: basepath is the location of the AirMSPI HDF data files
-#  datapath is where the output should be stored
- 
+#       datapath is where the output should be stored
+
     basepath = "C:/Users/ULTRASIP_1/Documents/Prescott_Data"
     datapath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Aug16_2019_RetrievalFiles"
     
@@ -73,6 +73,7 @@ def main():  # Main code
     vza_median = np.zeros((num_step,num_int))  # View zenith angle
     raz_median = np.zeros((num_step,num_int))  # Relative azimuth angle
     
+    i_in_polar_median = np.zeros((num_step,num_pol))  # I in polarized bands
     q_median = np.zeros((num_step,num_pol))  # Q
     u_median = np.zeros((num_step,num_pol))  # U
     ipol_median = np.zeros((num_step,num_pol))  # Ipol
@@ -81,6 +82,8 @@ def main():  # Main code
     sza_median = np.zeros(num_step)  # Solar zenith angle (one per stare)
     
     center_wave = np.zeros(num_int)  # Center wavelengths
+    
+    center_pol = np.zeros(num_pol)  # Center wavelengths (polarized only)
     
     esd = 0.0  # Earth-Sun distance (only need one)
     
@@ -347,6 +350,10 @@ def main():  # Main code
             center_wave[6] = (center_raw[10]+center_raw[11]+center_raw[12])/3.0 # 865 nm
     
             center_wave[7] = center_raw[13]  # 935 nm
+            
+            center_pol[0] = center_wave[3]
+            center_pol[1] = center_wave[5]
+            center_pol[2] = center_wave[6]
             
 # Calculate the effective E0 values by appropriate averaging
 # NOTE: Essentially, for intensity only bands, the E0 is given in the
@@ -753,6 +760,10 @@ def main():  # Main code
         raz_median[loop,5] = raz_660
         raz_median[loop,6] = raz_865
         
+        i_in_polar_median[loop,0] = eqr_i_470
+        i_in_polar_median[loop,1] = eqr_i_660
+        i_in_polar_median[loop,2] = eqr_i_865
+        
         q_median[loop,0] = eqr_qg_470
         q_median[loop,1] = eqr_qg_660
         q_median[loop,2] = eqr_qg_865
@@ -792,13 +803,13 @@ def main():  # Main code
                 
     ax1.set_xlim(60,180)
     ax1.set_xticks(np.arange(60,190,30))
-    ax1.set_xlabel("Scattering Angle (Deg)")
+    ax1.set_xlabel("Scattering Angle (Deg)",fontsize=12)
     
-    ax1.set_ylim(0.0,0.9)
-    ax1.set_yticks(np.arange(0.0,1.0,0.10))
-    ax1.set_ylabel('Equivalent Reflectance')
+    ax1.set_ylim(0.0,0.6)
+    ax1.set_yticks(np.arange(0.0,0.61,0.20))
+    ax1.set_ylabel('Equivalent Reflectance',fontsize=12)
     
-    ax1.legend(loc=1)  # Upper right
+    ax1.legend(loc=1,ncol=2)  # Upper right
     
 # SECOND PLOT: Q and U VS. SCATTERING ANGLE
 # Plot the data
@@ -806,24 +817,24 @@ def main():  # Main code
 #       Also, the index for the scattering angle and the polarized data are different
         
     ax2.scatter(scat_median[:,3],q_median[:,0],marker='s',color="blue",s=20,label="Q-470nm")
-    ax2.scatter(scat_median[:,5],q_median[:,1],marker='s',color="red",s=20)
-    ax2.scatter(scat_median[:,6],q_median[:,2],marker='s',color="magenta",s=20)
+    ax2.scatter(scat_median[:,5],q_median[:,1],marker='s',color="red",s=20,label="Q-660nm")
+    ax2.scatter(scat_median[:,6],q_median[:,2],marker='s',color="magenta",s=20,label="Q-865nm")
     
     ax2.scatter(scat_median[:,3],u_median[:,0],marker='D',color="blue",s=20,label="U-470nm")
-    ax2.scatter(scat_median[:,5],u_median[:,1],marker='D',color="red",s=20)
-    ax2.scatter(scat_median[:,6],u_median[:,2],marker='D',color="magenta",s=20)
+    ax2.scatter(scat_median[:,5],u_median[:,1],marker='D',color="red",s=20,label="U-660nm")
+    ax2.scatter(scat_median[:,6],u_median[:,2],marker='D',color="magenta",s=20,label="U-865nm")
                   
     ax2.set_xlim(60,180)
     ax2.set_xticks(np.arange(60,190,30))
-    ax2.set_xlabel("Scattering Angle (Deg)")
+    ax2.set_xlabel("Scattering Angle (Deg)",fontsize=12)
     
-    ax2.set_ylim(-0.2,0.2)
-    ax2.set_yticks(np.arange(-0.2,0.25,0.05))
-    ax2.set_ylabel('Polarized Reflectance')
+    ax2.set_ylim(-0.1,0.1)
+    ax2.set_yticks(np.arange(-0.1,0.11,0.05))
+    ax2.set_ylabel('Polarized Reflectance',fontsize=12)
 
     ax2.plot([60,180],[0.0,0.0],color="black",linewidth=1)  # Line at zero
     
-    ax2.legend(loc=1)  # Upper right
+    ax2.legend(loc=1,ncol=2)  # Upper right
 
 # THIRD PLOT: Ipol VS. SCATTERING ANGLE
 # Plot the data
@@ -835,11 +846,12 @@ def main():  # Main code
     
     ax3.set_xlim(60,180)
     ax3.set_xticks(np.arange(60,190,30))
-    ax3.set_xlabel("Scattering Angle (Deg)")
+    ax3.set_xlabel("Scattering Angle (Deg)",fontsize=12)
     
-    ax3.set_ylim(0.0,0.2)
-    ax3.set_yticks(np.arange(0.0,0.25,0.05))
-    ax3.set_ylabel('Polarized Equivalent Reflectance')
+    ax3.set_ylim(0.0,0.1)
+    ax3.set_yticks(np.arange(0.0,0.11,0.02))
+    ax3.set_ylabel('Polarized Equivalent Reflectance',fontsize=12)
+    ax3.legend(loc=1,ncol=2)
     
 # FOURTH PLOT: DoLP VS. SCATTERING ANGLE
 # Plot the data
@@ -851,11 +863,13 @@ def main():  # Main code
     
     ax4.set_xlim(60,180)
     ax4.set_xticks(np.arange(60,190,30))
-    ax4.set_xlabel("Scattering Angle (Deg)")
+    ax4.set_xlabel("Scattering Angle (Deg)",fontsize=12)
     
-    ax4.set_ylim(0.0,0.2)
-    ax4.set_yticks(np.arange(0.0,0.25,0.05))
-    ax4.set_ylabel('DoLP')
+    ax4.set_ylim(0.0,0.1)
+    ax4.set_yticks(np.arange(0.0,0.11,0.02))
+    ax4.set_ylabel('DoLP [Decimal]',fontsize=12)
+    
+    ax4.legend(loc=1,ncol=2)
 
 # Tight layout
 
@@ -871,7 +885,7 @@ def main():  # Main code
         
 ### OUTPUT THE DATA IN GRASP .SDAT FORMAT
 
-# Generate the output file name
+# Generate the base output file name
 
     outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     outfile_base = outfile_base+this_target_str+"_"
@@ -884,39 +898,44 @@ def main():  # Main code
     hold = temp.split('.')
     vers = hold[0]
     
-# Generate output file names
+# Guide to output file names
 # NOTE: The options more or less correspond to GRASP retrieval.regime_of_measurement_fitting
 #       0 = .radiance (option 1)
 #       1-5 = .polarization (option as given)
-    
-    outfile0 = outfile_base+"I_v"+vers+".sdat"
-    outfile1 = outfile_base+"IQU_v"+vers+".sdat"
-    outfile2 = outfile_base+"Iqu_v"+vers+".sdat"
-    outfile3 = outfile_base+"IIpol_v"+vers+".sdat"
-    outfile4 = outfile_base+"IDoLP_v"+vers+".sdat"
-    outfile5 = outfile_base+"DoLP_v"+vers+".sdat"
+#    
+#    outfile0 = outfile_base+"I_v"+vers+".sdat"
+#    outfile1 = outfile_base+"IQU_v"+vers+".sdat"
+#    outfile2 = outfile_base+"Iqu_v"+vers+".sdat"
+#    outfile3 = outfile_base+"IIpol_v"+vers+".sdat"
+#    outfile4 = outfile_base+"IDoLP_v"+vers+".sdat"
+#    outfile5 = outfile_base+"DoLP_v"+vers+".sdat"
 
 # Change to the output directory
 
     os.chdir(datapath)        
 
-## FIRST OUTPUT FILE: INTENSITY ONLY
+### FIRST OUTPUT FILE: INTENSITY ONLY IN ALL BANDS EXCEPT 935nm (WATER VAPOR)
 
 # Get the number of valid intensity values
+# NOTE: We check a value in a data field, rather than relying on the index set
+#       as num_int at the start of the file
 
     hold = np.copy(i_median)
     hold[i_median > 0.] = 1
     temp = np.sum(hold,axis=1)
     num_intensity = int(temp[0])
+    num_intensity_str = str(num_intensity)
         
 # Generate an output file name
+
+    outfile = outfile_base+"I_"+num_intensity_str+"_v"+vers+".sdat"
         
     print()
-    print("Saving: "+outfile0)
+    print("Saving: "+outfile)
     
 # Open the output file
 
-    outputFile = open(outfile0, 'w')
+    outputFile = open(outfile, 'w')
         
 # Write the sdat header information
 
@@ -971,7 +990,8 @@ def main():  # Main code
         out_str = out_str+'{:12d}'.format(1)  # 1 measurement per wavelength
 
 # Loop over the measurement types per wavelength
-# NOTE:  41 = Normalized radiance (I = rad*pi/E0)
+# NOTE: Values can be found in the GRASP documentation in Table 4.5
+#       41 = Normalized radiance (I = rad*pi/E0) - GRASP calls normalized (reduced) radiance
 
     for loop in range(num_intensity):
         out_str = out_str+'{:12d}'.format(41)
@@ -1013,6 +1033,206 @@ def main():  # Main code
             out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
         
 ## ADDITIONAL PARAMETERS
+# NOTE: This is kludgy and GRASP seems to run without this being entirely correct
+
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 1)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 2)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 3)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 4)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 5)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 6)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 7)
+    out_str = out_str+'       0'  # Gas parameter (wave 1)
+    out_str = out_str+'       0'  # Gas parameter (wave 2)
+    out_str = out_str+'       0'  # Gas parameter (wave 3)
+    out_str = out_str+'       0'  # Gas parameter (wave 4)
+    out_str = out_str+'       0'  # Gas parameter (wave 5)
+    out_str = out_str+'       0'  # Gas parameter (wave 6)
+    out_str = out_str+'       0'  # Gas parameter (wave 7)
+    out_str = out_str+'       0'  # Covariance matrix (wave 1)
+    out_str = out_str+'       0'  # Covariance matrix (wave 2)
+    out_str = out_str+'       0'  # Covariance matrix (wave 3)
+    out_str = out_str+'       0'  # Covariance matrix (wave 4)
+    out_str = out_str+'       0'  # Covariance matrix (wave 5)
+    out_str = out_str+'       0'  # Covariance matrix (wave 6)
+    out_str = out_str+'       0'  # Covariance matrix (wave 7)
+    out_str = out_str+'       0'  # Vertical profile (wave 1)
+    out_str = out_str+'       0'  # Vertical profile (wave 2)
+    out_str = out_str+'       0'  # Vertical profile (wave 3)
+    out_str = out_str+'       0'  # Vertical profile (wave 4)
+    out_str = out_str+'       0'  # Vertical profile (wave 5)
+    out_str = out_str+'       0'  # Vertical profile (wave 6)
+    out_str = out_str+'       0'  # Vertical profile (wave 7)
+    out_str = out_str+'       0'  # (Dummy) (wave 1)
+    out_str = out_str+'       0'  # (Dummy) (wave 2)
+    out_str = out_str+'       0'  # (Dummy) (wave 3)
+    out_str = out_str+'       0'  # (Dummy) (wave 4)
+    out_str = out_str+'       0'  # (Dummy) (wave 5)
+    out_str = out_str+'       0'  # (Dummy) (wave 6)
+    out_str = out_str+'       0'  # (Dummy) (wave 7)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
+                   
+# Endline
+       
+    out_str = out_str+'\n'
+
+# Write out the line
+     
+    outputFile.write(out_str)
+
+# Close the output file
+
+    outputFile.close()
+    
+### SECOND OUTPUT FILE: I, Q, U IN POLARIZED BANDS ONLY
+
+# Get the number of valid polarization values
+# NOTE: We check a value in a data field, rather than relying on the index set
+#       as num_pol at the start of the file
+
+    hold = np.copy(q_median)
+    hold[q_median != 0.] = 1
+    temp = np.sum(hold,axis=1)
+    num_polar = int(temp[0])
+    num_polar_str = str(num_polar)
+
+# Generate an output file name
+
+    outfile = outfile_base+"IQU_"+num_polar_str+"_v"+vers+".sdat"
+        
+    print()
+    print("Saving: "+outfile)
+    
+# Open the output file
+
+    outputFile = open(outfile, 'w')
+        
+# Write the sdat header information
+
+    out_str = 'SDATA version 2.0\n'
+    outputFile.write(out_str)
+    out_str = '  1   1   1  : NX NY NT\n'
+    outputFile.write(out_str)
+    out_str = '\n'
+    outputFile.write(out_str)
+
+# Parse the date string into the correct format
+
+    sdat_date = this_date_str[0:4]+'-'+this_date_str[4:6]+'-'+this_date_str[6:8]
+    print(sdat_date)
+        
+# Parse the time string into the correct format
+
+    sdat_time = this_time_str[0:2]+':'+this_time_str[2:4]+':'+this_time_str[4:7]
+    print(sdat_time)
+        
+# Write out the data header line
+
+    out_str = '  1   '+sdat_date+'T'+sdat_time
+    out_str = out_str+'       70000.00   0   1   : NPIXELS  TIMESTAMP  HEIGHT_OBS(m)  NSURF  IFGAS    1\n'
+    outputFile.write(out_str)
+    
+# Generate content for sdat (single line)
+
+    out_str = '           1'  # x-coordinate (ix)
+    out_str = out_str+'           1'  # y-coordinate (iy)
+    out_str = out_str+'           1'  # Cloud Flag (0=cloud, 1=clear)
+    out_str = out_str+'           1'  # Pixel column in grid (icol)
+    out_str = out_str+'           1'  # Pixel line in grid (row)
+
+    out_str = out_str+'{:19.8f}'.format(lon_median)  # Longitude
+    out_str = out_str+'{:18.8f}'.format(lat_median)  # Latitude
+    out_str = out_str+'{:17.8f}'.format(elev_median) # Elevation
+
+    out_str = out_str+'      100.000000'  # Percent of land
+    out_str = out_str+'{:16d}'.format(num_polar)  # Number of wavelengths (nwl)
+
+## SET UP THE WAVELENGTH AND MEASUREMENT INFORMATION
+    
+# Loop through wavelengths
+
+    for loop in range(num_polar):
+        out_str = out_str+'{:17.9f}'.format(center_pol[loop]/1000.)  # Wavelengths in microns
+   
+# Loop over the number of types of measurements per wavelength
+
+    for loop in range(num_polar):
+        out_str = out_str+'{:12d}'.format(3)  # 3 measurements per wavelength
+
+# Loop over the measurement types per wavelength
+# NOTE: Values can be found in the GRASP documentation in Table 4.5
+#       41 = Normalized radiance (I = rad*pi/E0) - GRASP calls normalized (reduced) radiance
+#       42 = Normalized Q (Q = Q*pi/E0) - GRASP calls polarized (reduced) radiance
+#       43 = Normalized U (U = U*pi/E0) - GRASP calls polarized (reduced) radiance
+
+    for loop in range(num_polar):
+        out_str = out_str+'{:12d}'.format(41)
+        out_str = out_str+'{:12d}'.format(42)
+        out_str = out_str+'{:12d}'.format(43)
+
+    num_type = 3  # Number of types of measurements
+        
+# Loop over the number of measurements per type per wavelength
+# Note: This is the number of stares in the step-and-stare sequence
+
+    for outer in range(num_polar):
+        for inner in range(num_type):
+            out_str = out_str+'{:12d}'.format(num_step)
+
+## ANGLE DEFINITIONS
+
+# Solar zenith angle per wavelength
+# NOTE: This is per wavelength rather than per measurement (probably because of 
+#       AERONET), so we take the average solar zenith angle, although this
+#       varies from measurement to measurement from AirMSPI
+
+    sza_mean = np.mean(sza_median)
+
+    for loop in range(num_polar):
+        out_str = out_str+'{:16.8f}'.format(sza_mean)
+        
+# View zenith angle per measurement per type per wavelength
+# NOTE: For AirMSPI the angles do no vary by measurement type so the 
+#       middle loop provides for a repeat for all measurement types
+
+    for outer in range(num_polar):  # Loop over wavelengths
+        for middle in range(num_type):  # Loop over types of measurement
+            for inner in range(num_step):  # Loop over measurements
+                out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+            
+# Relative azimuth angle per measurement per wavelength
+# NOTE: For AirMSPI the angles do no vary by measurement type so the 
+#       middle loop provides for a repeat for all measurement types
+
+    for outer in range(num_polar):  # Loop over wavelengths
+        for middle in range(num_type):  # Loop over types of measurement
+            for inner in range(num_step):  # Loop over measurements
+                out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+            
+## MEASUREMENTS
+
+    for outer in range(num_polar):  # Loop over wavelengths
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(i_in_polar_median[inner,outer])  # I
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(q_median[inner,outer])  # Q
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(u_median[inner,outer])  # U
+        
+## ADDITIONAL PARAMETERS
 
     out_str = out_str+'       0.00000000'  # Ground parameter (wave 1)
     out_str = out_str+'       0.00000000'  # Ground parameter (wave 2)
@@ -1032,7 +1252,7 @@ def main():  # Main code
     out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
     out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
     out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
-    out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
     out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
     out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
                    

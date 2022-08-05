@@ -26,9 +26,9 @@ def main():  # Main code
 # Set the paths
 
     #basepath = '/Users/mgaray/Desktop/Radiative_Transfer/RT_CODES/grasp-master/APOLO/2019_11_08/'
-    basepath = 'C:/Users/Clarissa/Documents/GitHub/ULTRASIP/'
+    basepath = 'C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Aug16_2019_RetrievalFiles'
     #figpath = '/Users/mgaray/Desktop/CODING/PYTHON/PY36/NOV19/APOLO/FIGS/'
-    figpath = 'C:/Users/Clarissa/Documents/GitHub/ULTRASIP/Code/GRASP/Plots'
+    figpath = 'C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Figures'
 # Set the base output file name
 
     #out_base = '_AirMSPI_test_20b_14.png'
@@ -39,7 +39,7 @@ def main():  # Main code
 
 # Get the text file listing
 
-    file_list = glob.glob('AirMSPI_test_20b.txt')
+    file_list = glob.glob('AirMSPI*GRASP*.txt')
     #file_list = glob.glob('bench_FWD_IQU_rslts.txt')
     
     num_files = len(file_list)
@@ -314,9 +314,9 @@ def main():  # Main code
                     scat_temp = np.float(words[4])
                     meas_temp = np.float(words[5])
                     fit_temp = np.float(words[6])
-                    band3_scat_raw.append(scat_temp)
-                    band3_meas_raw.append(meas_temp)
-                    band3_fit_raw.append(fit_temp)
+                    # band3_scat_raw.append(scat_temp)
+                    # band3_meas_raw.append(meas_temp)
+                    # band3_fit_raw.append(fit_temp)
 
 # Increment the counter
             
