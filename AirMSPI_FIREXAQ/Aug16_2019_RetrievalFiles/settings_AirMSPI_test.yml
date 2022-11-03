@@ -17,7 +17,7 @@
 
 input:
     driver: sdata
-    file:  sdata_IQU_all
+    file:  sdata_IQU_all.sdat
     segment:
         x: 1
         y: 1
