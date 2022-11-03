@@ -31,8 +31,8 @@ def main():  # Main code
 # NOTE: basepath is the location of the AirMSPI HDF data files
 #       figpath is where the output should be stored
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Prescott_Data"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Prescott_Data/Fig_V4"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Aug16_2019_RetrievalFiles/Prescott_Data"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Figures"
     
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -273,6 +273,7 @@ def main():  # Main code
         print(timeoffile_hhmmss)
         outfile = "Prescott_{}".format(loop)
         outfile = outfile+"_"+str(timeoffile_hhmmss)+"_"+str(step_ind)+"v04.png"
+        plt.axis('off')
         plt.title("Time: " + str(timeoffile_hhmmss)+" Angle: "+str(angleoffile))
         plt.savefig(outfile,dpi=120)
     

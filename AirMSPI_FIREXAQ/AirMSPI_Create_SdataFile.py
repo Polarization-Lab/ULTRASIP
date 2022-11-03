@@ -1,4 +1,4 @@
-# AirMSPI_L1B2_Prescott_2_SDATA_27.py
+`# AirMSPI_L1B2_Prescott_2_SDATA_27.py
 #
 # This is a Python 3.9.13 code to read AirMSPI L1B2 data and
 # output the results to GRASP SDATA format.
@@ -38,12 +38,12 @@ def main():  # Main code
 
     num_step = 5
     mid_step = int(num_step/2)  # Calculate the middle of the sequence
-    
+
 # Set the index of the group of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
     step_ind = 1
-    
+        
 # Set the number of wavelengths for intensity and polarization separately
 
     num_int = 8
@@ -200,7 +200,7 @@ def main():  # Main code
         print("355nm")
         dset = f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/']
         I_355 = dset[:]
-        dset = f['/HDFEOS/GRIDS/355nm_band/Data Fields/Scattering_angle/']
+        dset = f['/HDFEOS/GRIDS/355nm_band/Data Fields/Scattering_angle/'] #degrees or radians note
         scat_355 = dset[:]
         dset = f['/HDFEOS/GRIDS/355nm_band/Data Fields/View_azimuth/']
         vaz_355 = dset[:]
@@ -374,7 +374,7 @@ def main():  # Main code
             
 # Get the navigation information if this is the center acquisition
 
-        if(loop == mid_step):
+        if(loop == mid_step): #latitude and longitude chosen from nadir of step and stare
             
             print("GETTING NAVIGATION")
                 
@@ -459,7 +459,7 @@ def main():  # Main code
         
 # Test for valid data    
 # NOTE: The test is done for all the wavelengths that are read, so if the wavelengths
-#       are changed, then the test needs to change    
+#       are changed, then the test needs to change  - note about missing data  
         
         good = ((img_i_355 > 0.0) & (img_i_380 > 0.0) & (img_i_445 > 0.0) &
             (img_i_470 > 0.0) & (img_i_555 > 0.0) & (img_i_660 > 0.0) &
