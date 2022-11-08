@@ -66,7 +66,7 @@ retrieval:
                     index_of_wavelength_involved: [ 1, 2, 3, 4, 5, 6, 7]
                 measurement_type[2]:
                     type: U
-                   index_of_wavelength_involved: [ 1, 2, 3, 4, 5, 6, 7]
+                    index_of_wavelength_involved: [ 1, 2, 3, 4, 5, 6, 7]
                     
     forward_model:
         phase_matrix:
