@@ -17,7 +17,7 @@
 
 input:
     driver: sdata
-    file:  AirMSPI_20190816_224518Z_AZ-Prescott_ALL_I_7_IQU_3_vworking.sdat
+    file: AirMSPI_20190816_224518Z_AZ-Prescott_IQU_3_vworking.sdat
     segment:
         x: 1
         y: 1
@@ -25,7 +25,7 @@ input:
 output:
     segment:
         function: classic # classic, classic_plot, csv, none
-        stream: "AirMSPI_20190816_224518Z_AZ-Prescott_ALL_GRASP_v01.txt" # screen, "filename"
+        stream: "AirMSPI_20190816_224518Z_AZ-Prescott_IQU_GRASPwNEG_v01.txt" # screen, "filename"
     
 retrieval:     
     general:
