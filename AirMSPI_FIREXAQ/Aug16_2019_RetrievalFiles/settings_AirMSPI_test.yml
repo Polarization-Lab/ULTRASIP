@@ -17,7 +17,7 @@
 
 input:
     driver: sdata
-    file: AirMSPI_20190816_224518Z_AZ-Prescott_IQU_3_vworking.sdat
+    file: AirMSPI_20190816_224518Z_AZ-Prescott_wNEGIQU_3_vworking
     segment:
         x: 1
         y: 1
