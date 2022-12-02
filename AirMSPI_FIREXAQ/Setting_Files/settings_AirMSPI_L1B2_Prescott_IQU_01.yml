@@ -1,4 +1,4 @@
-# settings_AirMSPI_L1B2_Prescott_IQU_02.yml
+# settings_AirMSPI_L1B2_Prescott_IQU_01.yml
 #
 # AirMSPI over Prescott smoke
 # IQU for AirMSPI polarized bands only
@@ -17,7 +17,7 @@
 
 input:
     driver: sdata
-    file:  AirMSPI_20190816_224518Z_AZ-Prescott_wNEGIQU_3_vworking.sdat
+    file:  "./SDATA_Files/AirMSPI_20190816_224518Z_AZ-Prescott_wNEGIQU_3_vworking.sdat"
     segment:
         x: 1
         y: 1
@@ -25,7 +25,7 @@ input:
 output:
     segment:
         function: classic # classic, classic_plot, csv, none
-        stream: "AirMSPI_20190816_224518Z_AZ-Prescott_WNEG_IQU_3_GRASP_v01.txt" # screen, "filename"
+        stream: "AirMSPI_20190816_224518Z_Prescott_WNEG_IQU_3_GRASP_v02.txt" # screen, "filename"
     
 retrieval:     
     general:
