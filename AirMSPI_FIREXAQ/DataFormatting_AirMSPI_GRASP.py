@@ -60,12 +60,12 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-  #  datapath = "C:/Users/ULTRASIP_1/Documents/Prescott_Data"
-  #  outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Aug16_2019_RetrievalFiles"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott_Data"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Setting_Files"
 
 #Home Computer 
-    datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
-    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/SDATA_Files"
+   # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
+   # outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/SDATA_Files"
 
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
@@ -648,17 +648,17 @@ def main():  # Main code
         
 # Convert to GRASP coordinates
         
-        #qg_470 = qs_470*np.cos(2.0*alpha_470)+us_470*np.sin(2.0*alpha_470)
-        #qg_660 = qs_660*np.cos(2.0*alpha_660)+us_660*np.sin(2.0*alpha_660)
-        #qg_865 = qs_865*np.cos(2.0*alpha_865)+us_865*np.sin(2.0*alpha_865)
+        qg_470 = qs_470*np.cos(2.0*alpha_470)+us_470*np.sin(2.0*alpha_470)
+        qg_660 = qs_660*np.cos(2.0*alpha_660)+us_660*np.sin(2.0*alpha_660)
+        qg_865 = qs_865*np.cos(2.0*alpha_865)+us_865*np.sin(2.0*alpha_865)
         
-        qg_470 = qs_470*np.cos(2.0*alpha_470)-us_470*np.sin(2.0*alpha_470)
-        qg_660 = qs_660*np.cos(2.0*alpha_660)-us_660*np.sin(2.0*alpha_660)
-        qg_865 = qs_865*np.cos(2.0*alpha_865)-us_865*np.sin(2.0*alpha_865)
+        #qg_470 = qs_470*np.cos(2.0*alpha_470)-us_470*np.sin(2.0*alpha_470)
+        #qg_660 = qs_660*np.cos(2.0*alpha_660)-us_660*np.sin(2.0*alpha_660)
+        #qg_865 = qs_865*np.cos(2.0*alpha_865)-us_865*np.sin(2.0*alpha_865)
 
-        ug_470 = qs_470*np.sin(2.0*alpha_470)+us_470*np.cos(2.0*alpha_470)
-        ug_660 = qs_660*np.sin(2.0*alpha_660)+us_660*np.cos(2.0*alpha_660)
-        ug_865 = qs_865*np.sin(2.0*alpha_865)+us_865*np.cos(2.0*alpha_865)
+        ug_470 = -qs_470*np.sin(2.0*alpha_470)+us_470*np.cos(2.0*alpha_470)
+        ug_660 = -qs_660*np.sin(2.0*alpha_660)+us_660*np.cos(2.0*alpha_660)
+        ug_865 = -qs_865*np.sin(2.0*alpha_865)+us_865*np.cos(2.0*alpha_865)
 
 # Calculate the relative azimuth angle in the GRASP convention
 # NOTE: This bit of code seems kludgy and comes from older AirMSPI code
@@ -831,7 +831,7 @@ def main():  # Main code
     num_intensity_str = str(num_intensity)
         
 # Generate an output file name
-    outfile = outfile_base+"I_wNEG"+num_intensity_str+"_v"+vers+".sdat"
+    outfile = outfile_base+"I_wNEGon2"+num_intensity_str+"_v"+vers+".sdat"
         
     print()
     print("Saving: "+outfile)
@@ -999,7 +999,7 @@ def main():  # Main code
 
 # Generate an output file name
 
-    outfile = outfile_base+"wNEGIQU_"+num_polar_str+"_v"+vers+".sdat"
+    outfile = outfile_base+"on2IQU_"+num_polar_str+"_v"+vers+".sdat"
         
     print()
     print("Saving: "+outfile)
@@ -1164,7 +1164,7 @@ def main():  # Main code
         
 # Generate an output file name
 
-    outfile = outfile_base+"ALLwNEG_I_"+num_intensity_str+"_IQU_"+num_polar_str+"_v"+vers+".sdat"
+    outfile = outfile_base+"ALLNEGon2_I_"+num_intensity_str+"_IQU_"+num_polar_str+"_v"+vers+".sdat"
         
     print()
     print("Saving: "+outfile)

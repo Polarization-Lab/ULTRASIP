@@ -10,12 +10,12 @@
 
 input:
     driver: sdata
-    file:  AirMSPI_20190821_234804Z_AZ-Prescott_wNEGIQU_3_vGRASP.sdat
+    file:  AirMSPI_20190816_224518Z_AZ-Prescott_on2IQU_3_vGRASP.sdat
   
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: "AirMSPI_20190821_224518Z_234804Z_Prescott_wNEGIQU_3_GRASP_.txt" # screen, "filename"
+        stream: "AirMSPI_20190821_224518Z_234804Z_Prescott_wNEGon2IQU_3_GRASP_.txt" # screen, "filename"
     
 retrieval:     
     general:
