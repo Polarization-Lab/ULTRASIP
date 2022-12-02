@@ -30,9 +30,11 @@ def main():  # Main code
 # NOTE: basepath is the location of the AirMSPI HDF data files
 #       datapath is where the output should be stored
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/Prescott_Data"
-    datapath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Aug16_2019_RetrievalFiles"
-    
+   # basepath = "C:/Users/ULTRASIP_1/Documents/Prescott_Data"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Aug16_2019_RetrievalFiles"
+#Home Computer 
+    basepath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
+    datapath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Aug16_2019_RetrievalFiles"    
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
@@ -206,7 +208,8 @@ def main():  # Main code
         vaz_355 = dset[:]
         dset = f['/HDFEOS/GRIDS/355nm_band/Data Fields/View_zenith/']
         vza_355 = dset[:]
-        
+        print(type(I_355))
+
 # Set the datasets and read (380 nm)
 # Intensity only
 
