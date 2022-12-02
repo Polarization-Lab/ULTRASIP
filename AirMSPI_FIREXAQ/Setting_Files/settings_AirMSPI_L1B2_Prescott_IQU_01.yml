@@ -17,7 +17,7 @@
 
 input:
     driver: sdata
-    file:  "./SDATA_Files/AirMSPI_20190816_224518Z_AZ-Prescott_wNEGIQU_3_vworking.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/SDATA_Files/AirMSPI_20190816_224518Z_AZ-Prescott_wNEGIQU_3_vworking.sdat"
     segment:
         x: 1
         y: 1
