@@ -6,7 +6,7 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_051222/AirMSPI_20190816_224518Z_AZ-Prescott_ALL.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_120522/AirMSPI_20190816_224518Z_AZ-Prescott_ALL.sdat"
   
 output:
     segment:
