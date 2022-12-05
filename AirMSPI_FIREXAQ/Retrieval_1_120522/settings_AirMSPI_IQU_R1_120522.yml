@@ -15,7 +15,7 @@ output:
     
 retrieval:     
     general:
-        path_to_internal_files: "../../src/retrieval/internal_files/" 
+        path_to_internal_files: "/home/cdeleon/grasp/src/retrieval/internal_files/" 
 
     mode: inversion
     
