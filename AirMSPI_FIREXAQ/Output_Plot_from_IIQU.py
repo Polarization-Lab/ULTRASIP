@@ -1,14 +1,8 @@
-# GRASP_Prescott_output_IQU_vis_08.py
-#
-# This is a Python 3.9.13 code to read the output of the GRASP retrieval code
-# for AirMSPI observations over Prescott, AZ (IQU)
-# and plot the results.
-#
-# Creation Date: 2022-08-09
-# Last Modified: 2022-08-09
-#
-# by Michael J. Garay
-# (Michael.J.Garay@jpl.nasa.gov)
+"""
+Code to plot output with I and Ipol,Q,U combined and retrieved surface
+parameters.
+"""
+
 
 # Import packages
 
@@ -271,7 +265,7 @@ def main():  # Main code
             i_obs[2,0] = float(words[5])
             i_mod[2,0] = float(words[6])
             
-        if(data_count==200):  # Fitting results, I, wvl 1
+        if(data_count==201):  # Fitting results, I, wvl 1
             words = line.split()
             print(words)
             vza[3,0] = float(words[2])
@@ -279,234 +273,437 @@ def main():  # Main code
             i_obs[3,0] = float(words[5])
             i_mod[3,0] = float(words[6])
             
-        if(data_count==201):  # Fitting results
+        if(data_count==200):  # Fitting results
             words = line.split()
             print(words)
             vza[4,0] = float(words[2])
             scat[4,0]=float(words[4])
             i_obs[4,0] = float(words[5])
             i_mod[4,0] = float(words[6])
+
+        if(data_count==206):  #Fitting results, wvl 2
+            words = line.split()
+            print(words)
+            vza[0,1] = float(words[2])
+            scat[0,1]=float(words[4])
+            i_obs[0,1] = float(words[5])
+            i_mod[0,1] = float(words[6])
             
-        # if(data_count==146):  # Fitting results
-        #     words = line.split()
-        #     vza[0,1] = float(words[2])
-        #     scat[0,1]=float(words[4])
-        #     i_obs[0,1] = float(words[5])
-        #     i_mod[0,1] = float(words[6])
+        if(data_count==207):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[1,1] = float(words[2])
+            scat[1,1]=float(words[4])
+            i_obs[1,1] = float(words[5])
+            i_mod[1,1] = float(words[6])
             
-        # if(data_count==147):  # Fitting results
-        #     words = line.split()
-        #     vza[1,1] = float(words[2])
-        #     scat[1,1]=float(words[4])
-        #     i_obs[1,1] = float(words[5])
-        #     i_mod[1,1] = float(words[6])
+        if(data_count==208):  # Fitting results I, wvl 2
+            words = line.split()
+            print(words)
+            vza[2,1] = float(words[2])
+            scat[2,1]=float(words[4])
+            i_obs[2,1] = float(words[5])
+            i_mod[2,1] = float(words[6])
             
-        # if(data_count==148):  # Fitting results
-        #     words = line.split()
-        #     vza[2,1] = float(words[2])
-        #     scat[2,1]=float(words[4])
-        #     i_obs[2,1] = float(words[5])
-        #     i_mod[2,1] = float(words[6])
+        if(data_count==210):  # Fitting results, I, wvl 2
+            words = line.split()
+            print(words)
+            vza[3,1] = float(words[2])
+            scat[3,1]=float(words[4])
+            i_obs[3,1] = float(words[5])
+            i_mod[3,1] = float(words[6])
             
-        # if(data_count==149):  # Fitting results
-        #     words = line.split()
-        #     vza[3,1] = float(words[2])
-        #     scat[3,1]=float(words[4])
-        #     i_obs[3,1] = float(words[5])
-        #     i_mod[3,1] = float(words[6])
+        if(data_count==209):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[4,1] = float(words[2])
+            scat[4,1]=float(words[4])
+            i_obs[4,1] = float(words[5])
+            i_mod[4,1] = float(words[6])
             
-        # if(data_count==150):  # Fitting results
-        #     words = line.split()
-        #     vza[4,1] = float(words[2])
-        #     scat[4,1]=float(words[4])
-        #     i_obs[4,1] = float(words[5])
-        #     i_mod[4,1] = float(words[6])
+        if(data_count==215):  #Fitting results, wvl 3
+            words = line.split()
+            print(words)
+            vza[0,2] = float(words[2])
+            scat[0,2]=float(words[4])
+            i_obs[0,2] = float(words[5])
+            i_mod[0,2] = float(words[6])
             
-        # if(data_count==167):  # Fitting results
-        #     words = line.split()
-        #     vza[0,2] = float(words[2])
-        #     scat[0,2]=float(words[4])
-        #     i_obs[0,2] = float(words[5])
-        #     i_mod[0,2] = float(words[6])
+        if(data_count==216):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[1,2] = float(words[2])
+            scat[1,2]=float(words[4])
+            i_obs[1,2] = float(words[5])
+            i_mod[1,2] = float(words[6])
             
-        # if(data_count==168):  # Fitting results
-        #     words = line.split()
-        #     vza[1,2] = float(words[2])
-        #     scat[1,2]=float(words[4])
-        #     i_obs[1,2] = float(words[5])
-        #     i_mod[1,2] = float(words[6])
+        if(data_count==217):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[2,2] = float(words[2])
+            scat[2,2]=float(words[4])
+            i_obs[2,2] = float(words[5])
+            i_mod[2,2] = float(words[6])
             
-        # if(data_count==169):  # Fitting results
-        #     words = line.split()
-        #     vza[2,2] = float(words[2])
-        #     scat[2,2]=float(words[4])
-        #     i_obs[2,2] = float(words[5])
-        #     i_mod[2,2] = float(words[6])
+        if(data_count==219):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[3,2] = float(words[2])
+            scat[3,2]=float(words[4])
+            i_obs[3,2] = float(words[5])
+            i_mod[3,2] = float(words[6])
             
-        # if(data_count==170):  # Fitting results
-        #     words = line.split()
-        #     vza[3,2] = float(words[2])
-        #     scat[3,2]=float(words[4])
-        #     i_obs[3,2] = float(words[5])
-        #     i_mod[3,2] = float(words[6])
+        if(data_count==218):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[4,2] = float(words[2])
+            scat[4,2]=float(words[4])
+            i_obs[4,2] = float(words[5])
+            i_mod[4,2] = float(words[6])
             
-        # if(data_count==171):  # Fitting results
-        #     words = line.split()
-        #     vza[4,2] = float(words[2])
-        #     scat[4,2]=float(words[4])
-        #     i_obs[4,2] = float(words[5])
-        #     i_mod[4,2] = float(words[6])
+        if(data_count==224):  #Fitting results, wvl 4 (POL)
+            words = line.split()
+            print(words)
+            vza[0,3] = float(words[2])
+            scat[0,3]=float(words[4])
+            i_obs[0,3] = float(words[5])
+            i_mod[0,3] = float(words[6])
             
-        # if(data_count==131):  # Q
-        #     words = line.split()
-        #     q_obs[0,0] = float(words[5])
-        #     q_mod[0,0] = float(words[6])
+        if(data_count==225):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[1,3] = float(words[2])
+            scat[1,3]=float(words[4])
+            i_obs[1,3] = float(words[5])
+            i_mod[1,3] = float(words[6])
             
-        # if(data_count==132):  # Q
-        #     words = line.split()
-        #     q_obs[1,0] = float(words[5])
-        #     q_mod[1,0] = float(words[6])
+        if(data_count==226):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[2,3] = float(words[2])
+            scat[2,3]=float(words[4])
+            i_obs[2,3] = float(words[5])
+            i_mod[2,3] = float(words[6])
             
-        # if(data_count==133):  # Q
-        #     words = line.split()
-        #     q_obs[2,0] = float(words[5])
-        #     q_mod[2,0] = float(words[6])
+        if(data_count==228):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[3,3] = float(words[2])
+            scat[3,3]=float(words[4])
+            i_obs[3,3] = float(words[5])
+            i_mod[3,3] = float(words[6])
             
-        # if(data_count==134):  # Q
-        #     words = line.split()
-        #     q_obs[3,0] = float(words[5])
-        #     q_mod[3,0] = float(words[6])
+        if(data_count==227):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[4,3] = float(words[2])
+            scat[4,3]=float(words[4])
+            i_obs[4,3] = float(words[5])
+            i_mod[4,3] = float(words[6])
+
+        if(data_count==230):  # Q
+            words = line.split()
+            print(words)
+            q_obs[0,0] = float(words[5])
+            q_mod[0,0] = float(words[6])
             
-        # if(data_count==135):  # Q
-        #     words = line.split()
-        #     q_obs[4,0] = float(words[5])
-        #     q_mod[4,0] = float(words[6])
+        if(data_count==231):  # Q
+            words = line.split()
+            print(words)
+            q_obs[1,0] = float(words[5])
+            q_mod[1,0] = float(words[6])
+        
+        if(data_count==232):  # Q
+            words = line.split()
+            print(words)
+            q_obs[2,0] = float(words[5])
+            q_mod[2,0] = float(words[6])
+
+        if(data_count==234):  # Q
+            words = line.split()
+            print(words)
+            q_obs[3,0] = float(words[5])
+            q_mod[3,0] = float(words[6])
+
+        if(data_count==233):  # Q
+            words = line.split()
+            print(words)
+            q_obs[4,0] = float(words[5])
+            q_mod[4,0] = float(words[6])
             
-        # if(data_count==152):  # Q
-        #     words = line.split()
-        #     q_obs[0,1] = float(words[5])
-        #     q_mod[0,1] = float(words[6])
             
-        # if(data_count==153):  # Q
-        #     words = line.split()
-        #     q_obs[1,1] = float(words[5])
-        #     q_mod[1,1] = float(words[6])
+        if(data_count==236):  # U
+            words = line.split()
+            print(words)
+            u_obs[0,0] = float(words[5])
+            u_mod[0,0] = float(words[6])
             
-        # if(data_count==154):  # Q
-        #     words = line.split()
-        #     q_obs[2,1] = float(words[5])
-        #     q_mod[2,1] = float(words[6])
+        if(data_count==237):  # U
+            words = line.split()
+            print(words)
+            u_obs[1,0] = float(words[5])
+            u_mod[1,0] = float(words[6])
+        
+        if(data_count==238):  # U
+            words = line.split()
+            print(words)
+            u_obs[2,0] = float(words[5])
+            u_mod[2,0] = float(words[6])
+
+        if(data_count==240):  # U
+            words = line.split()
+            print(words)
+            u_obs[3,0] = float(words[5])
+            u_mod[3,0] = float(words[6])
+
+        if(data_count==239):  # U
+            words = line.split()
+            print(words)
+            u_obs[4,0] = float(words[5])
+            u_mod[4,0] = float(words[6])
             
-        # if(data_count==155):  # Q
-        #     words = line.split()
-        #     q_obs[3,1] = float(words[5])
-        #     q_mod[3,1] = float(words[6])
+        if(data_count==245):  #Fitting results, wvl 5
+            words = line.split()
+            print(words)
+            vza[0,4] = float(words[2])
+            scat[0,4]=float(words[4])
+            i_obs[0,4] = float(words[5])
+            i_mod[0,4] = float(words[6])
             
-        # if(data_count==156):  # Q
-        #     words = line.split()
-        #     q_obs[4,1] = float(words[5])
-        #     q_mod[4,1] = float(words[6])
+        if(data_count==246):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[1,4] = float(words[2])
+            scat[1,4]=float(words[4])
+            i_obs[1,4] = float(words[5])
+            i_mod[1,4] = float(words[6])
             
-        # if(data_count==173):  # Q
-        #     words = line.split()
-        #     q_obs[0,2] = float(words[5])
-        #     q_mod[0,2] = float(words[6])
+        if(data_count==247):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[2,4] = float(words[2])
+            scat[2,4]=float(words[4])
+            i_obs[2,4] = float(words[5])
+            i_mod[2,4] = float(words[6])
             
-        # if(data_count==174):  # Q
-        #     words = line.split()
-        #     q_obs[1,2] = float(words[5])
-        #     q_mod[1,2] = float(words[6])
+        if(data_count==249):  # Fitting results,
+            words = line.split()
+            print(words)
+            vza[3,4] = float(words[2])
+            scat[3,4]=float(words[4])
+            i_obs[3,4] = float(words[5])
+            i_mod[3,4] = float(words[6])
             
-        # if(data_count==175):  # Q
-        #     words = line.split()
-        #     q_obs[2,2] = float(words[5])
-        #     q_mod[2,2] = float(words[6])
+        if(data_count==248):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[4,4] = float(words[2])
+            scat[4,4]=float(words[4])
+            i_obs[4,4] = float(words[5])
+            i_mod[4,4] = float(words[6])
             
-        # if(data_count==176):  # Q
-        #     words = line.split()
-        #     q_obs[3,2] = float(words[5])
-        #     q_mod[3,2] = float(words[6])
+        if(data_count==254):  #Fitting results, wvl 6 (POL)
+            words = line.split()
+            print(words)
+            vza[0,5] = float(words[2])
+            scat[0,5]=float(words[4])
+            i_obs[0,5] = float(words[5])
+            i_mod[0,5] = float(words[6])
             
-        # if(data_count==177):  # Q
-        #     words = line.split()
-        #     q_obs[4,2] = float(words[5])
-        #     q_mod[4,2] = float(words[6])
+        if(data_count==255):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[1,5] = float(words[2])
+            scat[1,5]=float(words[4])
+            i_obs[1,5] = float(words[5])
+            i_mod[1,5] = float(words[6])
             
-        # if(data_count==137):  # U
-        #     words = line.split()
-        #     u_obs[0,0] = float(words[5])
-        #     u_mod[0,0] = float(words[6])
+        if(data_count==256):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[2,5] = float(words[2])
+            scat[2,5]=float(words[4])
+            i_obs[2,5] = float(words[5])
+            i_mod[2,5] = float(words[6])
             
-        # if(data_count==138):  # U
-        #     words = line.split()
-        #     u_obs[1,0] = float(words[5])
-        #     u_mod[1,0] = float(words[6])
+        if(data_count==258):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[3,5] = float(words[2])
+            scat[3,5]=float(words[4])
+            i_obs[3,5] = float(words[5])
+            i_mod[3,5] = float(words[6])
             
-        # if(data_count==139):  # U
-        #     words = line.split()
-        #     u_obs[2,0] = float(words[5])
-        #     u_mod[2,0] = float(words[6])
+        if(data_count==257):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[4,5] = float(words[2])
+            scat[4,5]=float(words[4])
+            i_obs[4,5] = float(words[5])
+            i_mod[4,5] = float(words[6])
+
+        if(data_count==260):  # Q
+            words = line.split()
+            print(words)
+            q_obs[0,1] = float(words[5])
+            q_mod[0,1] = float(words[6])
             
-        # if(data_count==140):  # U
-        #     words = line.split()
-        #     u_obs[3,0] = float(words[5])
-        #     u_mod[3,0] = float(words[6])
+        if(data_count==261):  # Q
+            words = line.split()
+            print(words)
+            q_obs[1,1] = float(words[5])
+            q_mod[1,1] = float(words[6])
+        
+        if(data_count==262):  # Q
+            words = line.split()
+            print(words)
+            q_obs[2,1] = float(words[5])
+            q_mod[2,1] = float(words[6])
+
+        if(data_count==264):  # Q
+            words = line.split()
+            print(words)
+            q_obs[3,1] = float(words[5])
+            q_mod[3,1] = float(words[6])
+
+        if(data_count==263):  # Q
+            words = line.split()
+            print(words)
+            q_obs[4,1] = float(words[5])
+            q_mod[4,1] = float(words[6])
             
-        # if(data_count==141):  # U
-        #     words = line.split()
-        #     u_obs[4,0] = float(words[5])
-        #     u_mod[4,0] = float(words[6])
             
-        # if(data_count==158):  # U
-        #     words = line.split()
-        #     u_obs[0,1] = float(words[5])
-        #     u_mod[0,1] = float(words[6])
+        if(data_count==266):  # U
+            words = line.split()
+            print(words)
+            u_obs[0,1] = float(words[5])
+            u_mod[0,1] = float(words[6])
             
-        # if(data_count==159):  # U
-        #     words = line.split()
-        #     u_obs[1,1] = float(words[5])
-        #     u_mod[1,1] = float(words[6])
+        if(data_count==267):  # U
+            words = line.split()
+            print(words)
+            u_obs[1,1] = float(words[5])
+            u_mod[1,1] = float(words[6])
+        
+        if(data_count==268):  # U
+            words = line.split()
+            print(words)
+            u_obs[2,1] = float(words[5])
+            u_mod[2,1] = float(words[6])
+
+        if(data_count==270):  # U
+            words = line.split()
+            print(words)
+            u_obs[3,1] = float(words[5])
+            u_mod[3,1] = float(words[6])
+
+        if(data_count==269):  # U
+            words = line.split()
+            print(words)
+            u_obs[4,1] = float(words[5])
+            u_mod[4,1] = float(words[6])
             
-        # if(data_count==160):  # U
-        #     words = line.split()
-        #     u_obs[2,1] = float(words[5])
-        #     u_mod[2,1] = float(words[6])
+        if(data_count==275):  #Fitting results, wvl 7 (POL)
+            words = line.split()
+            print(words)
+            vza[0,6] = float(words[2])
+            scat[0,6]=float(words[4])
+            i_obs[0,6] = float(words[5])
+            i_mod[0,6] = float(words[6])
             
-        # if(data_count==161):  # U
-        #     words = line.split()
-        #     u_obs[3,1] = float(words[5])
-        #     u_mod[3,1] = float(words[6])
+        if(data_count==276):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[1,6] = float(words[2])
+            scat[1,6]=float(words[4])
+            i_obs[1,6] = float(words[5])
+            i_mod[1,6] = float(words[6])
             
-        # if(data_count==162):  # U
-        #     words = line.split()
-        #     u_obs[4,1] = float(words[5])
-        #     u_mod[4,1] = float(words[6])
+        if(data_count==277):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[2,6] = float(words[2])
+            scat[2,6]=float(words[4])
+            i_obs[2,6] = float(words[5])
+            i_mod[2,6] = float(words[6])
             
-        # if(data_count==179):  # U
-        #     words = line.split()
-        #     u_obs[0,2] = float(words[5])
-        #     u_mod[0,2] = float(words[6])
+        if(data_count==279):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[3,6] = float(words[2])
+            scat[3,6]=float(words[4])
+            i_obs[3,6] = float(words[5])
+            i_mod[3,6] = float(words[6])
             
-        # if(data_count==180):  # U
-        #     words = line.split()
-        #     u_obs[1,2] = float(words[5])
-        #     u_mod[1,2] = float(words[6])
+        if(data_count==278):  # Fitting results
+            words = line.split()
+            print(words)
+            vza[4,6] = float(words[2])
+            scat[4,6]=float(words[4])
+            i_obs[4,6] = float(words[5])
+            i_mod[4,6] = float(words[6])
+
+        if(data_count==281):  # Q
+            words = line.split()
+            print(words)
+            q_obs[0,2] = float(words[5])
+            q_mod[0,2] = float(words[6])
             
-        # if(data_count==181):  # U
-        #     words = line.split()
-        #     u_obs[2,2] = float(words[5])
-        #     u_mod[2,2] = float(words[6])
+        if(data_count==282):  # Q
+            words = line.split()
+            print(words)
+            q_obs[1,2] = float(words[5])
+            q_mod[1,2] = float(words[6])
+        
+        if(data_count==283):  # Q
+            words = line.split()
+            print(words)
+            q_obs[2,2] = float(words[5])
+            q_mod[2,2] = float(words[6])
+
+        if(data_count==285):  # Q
+            words = line.split()
+            print(words)
+            q_obs[3,2] = float(words[5])
+            q_mod[3,2] = float(words[6])
+
+        if(data_count==284):  # Q
+            words = line.split()
+            print(words)
+            q_obs[4,2] = float(words[5])
+            q_mod[4,2] = float(words[6])
             
-        # if(data_count==182):  # U
-        #     words = line.split()
-        #     u_obs[3,2] = float(words[5])
-        #     u_mod[3,2] = float(words[6])
             
-        # if(data_count==183):  # U
-        #     words = line.split()
-        #     u_obs[4,2] = float(words[5])
-        #     u_mod[4,2] = float(words[6])
+        if(data_count==287):  # U
+            words = line.split()
+            print(words)
+            u_obs[0,2] = float(words[5])
+            u_mod[0,2] = float(words[6])
             
+        if(data_count==288):  # U
+            words = line.split()
+            print(words)
+            u_obs[1,2] = float(words[5])
+            u_mod[1,2] = float(words[6])
+        
+        if(data_count==289):  # U
+            words = line.split()
+            print(words)
+            u_obs[2,2] = float(words[5])
+            u_mod[2,2] = float(words[6])
+
+        if(data_count==291):  # U
+            words = line.split()
+            print(words)
+            u_obs[3,2] = float(words[5])
+            u_mod[3,2] = float(words[6])
+
+        if(data_count==290):  # U
+            words = line.split()
+            print(words)
+            u_obs[4,2] = float(words[5])
+            u_mod[4,2] = float(words[6])
+
         data_count = data_count+1
 
 # Close the input file
@@ -530,14 +727,16 @@ def main():  # Main code
         
 # Polarized Bands - I
 
-    ax1.plot(scat[:,0],i_obs[:,0],marker='o',color="blue",label="470nm")
-    ax1.plot(scat[:,1],i_obs[:,1],marker='o',color="red",label="660nm")
-    ax1.plot(scat[:,2],i_obs[:,2],marker='o',color="magenta",label="865nm")
+    ax1.plot(scat[:,3],i_obs[:,3],marker='o',color="blue",label="470nm")
+    ax1.plot(scat[:,5],i_obs[:,5],marker='o',color="red",label="660nm")
+    ax1.plot(scat[:,6],i_obs[:,6],marker='o',color="orange",label="865nm")
     
-    ax1.plot(scat[:,0],i_mod[:,0],marker='D',color="blue",fillstyle='none',linestyle='dashed')
-    ax1.plot(scat[:,1],i_mod[:,1],marker='D',color="red",fillstyle='none',linestyle='dashed')
-    ax1.plot(scat[:,2],i_mod[:,2],marker='D',color="magenta",fillstyle='none',linestyle='dashed')
- 
+    ax1.plot(scat[:,3],i_mod[:,3],marker='D',color="blue",fillstyle='none',linestyle='dashed')
+    ax1.plot(scat[:,5],i_mod[:,5],marker='D',color="red",fillstyle='none',linestyle='dashed')
+    ax1.plot(scat[:,6],i_mod[:,6],marker='D',color="orange",fillstyle='none',linestyle='dashed')
+    print(i_mod[:,3])
+    print(i_obs[:,3])
+    print(scat[:,6])
     ax1.set_xlim(60,180)
     ax1.set_xticks(np.arange(60,190,30))
     ax1.set_xlabel("Scattering Angle (Deg)")
@@ -550,13 +749,13 @@ def main():  # Main code
     
 # Polarized Bands - Q
 
-    ax2.plot(scat[:,0],q_obs[:,0],marker='o',color="blue",label="470nm")
-    ax2.plot(scat[:,1],q_obs[:,1],marker='o',color="red",label="660nm")
-    ax2.plot(scat[:,2],q_obs[:,2],marker='o',color="magenta",label="865nm")
+    ax2.plot(scat[:,3],q_obs[:,0],marker='o',color="blue",label="470nm")
+    ax2.plot(scat[:,5],q_obs[:,1],marker='o',color="red",label="660nm")
+    ax2.plot(scat[:,6],q_obs[:,2],marker='o',color="orange",label="865nm")
     
-    ax2.plot(scat[:,0],q_mod[:,0],marker='D',color="blue",fillstyle='none',linestyle='dashed')
-    ax2.plot(scat[:,1],q_mod[:,1],marker='D',color="red",fillstyle='none',linestyle='dashed')
-    ax2.plot(scat[:,2],q_mod[:,2],marker='D',color="magenta",fillstyle='none',linestyle='dashed')
+    ax2.plot(scat[:,3],q_mod[:,0],marker='D',color="blue",fillstyle='none',linestyle='dashed')
+    ax2.plot(scat[:,5],q_mod[:,1],marker='D',color="red",fillstyle='none',linestyle='dashed')
+    ax2.plot(scat[:,6],q_mod[:,2],marker='D',color="orange",fillstyle='none',linestyle='dashed')
  
     ax2.set_xlim(60,180)
     ax2.set_xticks(np.arange(60,190,30))
@@ -570,13 +769,13 @@ def main():  # Main code
 
 # Polarized Bands - U
 
-    ax3.plot(scat[:,0],u_obs[:,0],marker='o',color="blue",label="470nm")
-    ax3.plot(scat[:,1],u_obs[:,1],marker='o',color="red",label="660nm")
-    ax3.plot(scat[:,2],u_obs[:,2],marker='o',color="magenta",label="865nm")
+    ax3.plot(scat[:,3],u_obs[:,0],marker='o',color="blue", label="470nm")
+    ax3.plot(scat[:,5],u_obs[:,1],marker='o',color="red", label = "660nm")
+    ax3.plot(scat[:,6],u_obs[:,2],marker='o',color="orange",label = "865nm")
     
-    ax3.plot(scat[:,0],u_mod[:,0],marker='D',color="blue",fillstyle='none',linestyle='dashed')
-    ax3.plot(scat[:,1],u_mod[:,1],marker='D',color="red",fillstyle='none',linestyle='dashed')
-    ax3.plot(scat[:,2],u_mod[:,2],marker='D',color="magenta",fillstyle='none',linestyle='dashed')
+    ax3.plot(scat[:,3],u_mod[:,0],marker='D',color="blue",fillstyle='none',linestyle='dashed')
+    ax3.plot(scat[:,5],u_mod[:,1],marker='D',color="red",fillstyle='none',linestyle='dashed')
+    ax3.plot(scat[:,6],u_mod[:,2],marker='D',color="orange",fillstyle='none',linestyle='dashed')
  
     ax3.set_xlim(60,180)
     ax3.set_xticks(np.arange(60,190,30))
@@ -591,23 +790,23 @@ def main():  # Main code
 # Text information
 # NOTE: I'm going to use the scattering angle coordinates to locate the text
     
-    out_text = "ADDITIONAL INFORMATION"
-    ax4.text(80,0.30,out_text,fontweight='bold')
+    out_text = "Retrieved Microphysical Properties"
+    ax4.text(20,0.30,out_text,fontweight='bold')
     
     out_text = '     AOD (470 nm): {:6.3f}'.format(aod[0]) 
-    ax4.text(80,0.25,out_text)
+    ax4.text(20,0.25,out_text)
     
     out_text = '      SSA (470 nm): {:6.3f}'.format(ssa[0]) 
-    ax4.text(80,0.22,out_text)
+    ax4.text(20,0.22,out_text)
     
     out_text = 'Percent Spherical: {:6.2f}'.format(per_sphere) 
-    ax4.text(80,0.19,out_text)
+    ax4.text(20,0.19,out_text)
     
     out_text = '      N_r (470) nm): {:7.4f}'.format(nr[0]) 
-    ax4.text(80,0.16,out_text)
+    ax4.text(20,0.16,out_text)
     
     out_text = '       N_i (470 nm): {:7.4f}'.format(ni[0]) 
-    ax4.text(80,0.13,out_text)
+    ax4.text(20,0.13,out_text)
     
     ax4.set_xlim(60,180)
     ax4.set_xticks(np.arange(60,190,30))
@@ -659,13 +858,13 @@ def main():  # Main code
     
 # Polarized Bands - I
 
-    ax1.plot(vza_plot[:,0],i_obs[:,0],marker='o',color="blue",label="470nm")
-    ax1.plot(vza_plot[:,1],i_obs[:,1],marker='o',color="red",label="660nm")
-    ax1.plot(vza_plot[:,2],i_obs[:,2],marker='o',color="magenta",label="865nm")
+    ax1.plot(vza_plot[:,3],i_obs[:,3],marker='o',color="blue",label="470nm")
+    ax1.plot(vza_plot[:,5],i_obs[:,5],marker='o',color="red",label="660nm")
+    ax1.plot(vza_plot[:,6],i_obs[:,6],marker='o',color="orange",label="865nm")
     
-    ax1.plot(vza_plot[:,0],i_mod[:,0],marker='D',color="blue",fillstyle='none',linestyle='dashed')
-    ax1.plot(vza_plot[:,1],i_mod[:,1],marker='D',color="red",fillstyle='none',linestyle='dashed')
-    ax1.plot(vza_plot[:,2],i_mod[:,2],marker='D',color="magenta",fillstyle='none',linestyle='dashed')
+    ax1.plot(vza_plot[:,3],i_mod[:,3],marker='D',color="blue",fillstyle='none',linestyle='dashed')
+    ax1.plot(vza_plot[:,5],i_mod[:,5],marker='D',color="red",fillstyle='none',linestyle='dashed')
+    ax1.plot(vza_plot[:,6],i_mod[:,6],marker='D',color="orange",fillstyle='none',linestyle='dashed')
  
     ax1.set_xlim(-80,80)
     ax1.set_xticks(np.arange(-80,90,20))
@@ -679,13 +878,13 @@ def main():  # Main code
     
 # Polarized Bands - Q
 
-    ax2.plot(vza_plot[:,0],q_obs[:,0],marker='o',color="blue",label="470nm")
-    ax2.plot(vza_plot[:,1],q_obs[:,1],marker='o',color="red",label="660nm")
-    ax2.plot(vza_plot[:,2],q_obs[:,2],marker='o',color="magenta",label="865nm")
+    ax2.plot(vza_plot[:,3],q_obs[:,0],marker='o',color="blue",label="470nm")
+    ax2.plot(vza_plot[:,5],q_obs[:,1],marker='o',color="red",label="660nm")
+    ax2.plot(vza_plot[:,6],q_obs[:,2],marker='o',color="orange",label="865nm")
     
-    ax2.plot(vza_plot[:,0],q_mod[:,0],marker='D',color="blue",fillstyle='none',linestyle='dashed')
-    ax2.plot(vza_plot[:,1],q_mod[:,1],marker='D',color="red",fillstyle='none',linestyle='dashed')
-    ax2.plot(vza_plot[:,2],q_mod[:,2],marker='D',color="magenta",fillstyle='none',linestyle='dashed')
+    ax2.plot(vza_plot[:,3],q_mod[:,0],marker='D',color="blue",fillstyle='none',linestyle='dashed')
+    ax2.plot(vza_plot[:,5],q_mod[:,1],marker='D',color="red",fillstyle='none',linestyle='dashed')
+    ax2.plot(vza_plot[:,6],q_mod[:,2],marker='D',color="orange",fillstyle='none',linestyle='dashed')
  
     ax2.set_xlim(-80,80)
     ax2.set_xticks(np.arange(-80,90,20))
@@ -699,13 +898,13 @@ def main():  # Main code
     
 # Polarized Bands - U
 
-    ax3.plot(vza_plot[:,0],u_obs[:,0],marker='o',color="blue",label="470nm")
-    ax3.plot(vza_plot[:,1],u_obs[:,1],marker='o',color="red",label="660nm")
-    ax3.plot(vza_plot[:,2],u_obs[:,2],marker='o',color="magenta",label="865nm")
+    ax3.plot(vza_plot[:,3],u_obs[:,0],marker='o',color="blue",label="470nm")
+    ax3.plot(vza_plot[:,5],u_obs[:,1],marker='o',color="red",label="660nm")
+    ax3.plot(vza_plot[:,6],u_obs[:,2],marker='o',color="orange",label="865nm")
     
-    ax3.plot(vza_plot[:,0],u_mod[:,0],marker='D',color="blue",fillstyle='none',linestyle='dashed')
-    ax3.plot(vza_plot[:,1],u_mod[:,1],marker='D',color="red",fillstyle='none',linestyle='dashed')
-    ax3.plot(vza_plot[:,2],u_mod[:,2],marker='D',color="magenta",fillstyle='none',linestyle='dashed')
+    ax3.plot(vza_plot[:,3],u_mod[:,0],marker='D',color="blue",fillstyle='none',linestyle='dashed')
+    ax3.plot(vza_plot[:,5],u_mod[:,1],marker='D',color="red",fillstyle='none',linestyle='dashed')
+    ax3.plot(vza_plot[:,6],u_mod[:,2],marker='D',color="orange",fillstyle='none',linestyle='dashed')
  
     ax3.set_xlim(-80,80)
     ax3.set_xticks(np.arange(-80,90,20))
@@ -781,9 +980,9 @@ def main():  # Main code
 
 # Polarized Bands - I
 
-    ax1.scatter(i_obs[:,0],i_mod[:,0],marker='o',color="blue",label="470nm")
-    ax1.scatter(i_obs[:,1],i_mod[:,1],marker='o',color="red",label="660nm")
-    ax1.scatter(i_obs[:,2],i_mod[:,2],marker='o',color="magenta",label="865nm")
+    ax1.scatter(i_obs[:,3],i_mod[:,3],marker='o',color="blue",label="470nm")
+    ax1.scatter(i_obs[:,5],i_mod[:,5],marker='o',color="red",label="660nm")
+    ax1.scatter(i_obs[:,6],i_mod[:,6],marker='o',color="orange",label="865nm")
  
     ax1.set_xlim(0.0,0.4)
     ax1.set_xticks(np.arange(0.0,0.5,0.10))
@@ -801,7 +1000,7 @@ def main():  # Main code
 
     ax2.scatter(q_obs[:,0],q_mod[:,0],marker='o',color="blue",label="470nm")
     ax2.scatter(q_obs[:,1],q_mod[:,1],marker='o',color="red",label="660nm")
-    ax2.scatter(q_obs[:,2],q_mod[:,2],marker='o',color="magenta",label="865nm")
+    ax2.scatter(q_obs[:,2],q_mod[:,2],marker='o',color="orange",label="865nm")
  
     ax2.set_xlim(-0.5,0.5)
     ax2.set_xticks(np.arange(-0.5,0.75,0.25))
@@ -819,7 +1018,7 @@ def main():  # Main code
 
     ax3.scatter(u_obs[:,0],u_mod[:,0],marker='o',color="blue",label="470nm")
     ax3.scatter(u_obs[:,1],u_mod[:,1],marker='o',color="red",label="660nm")
-    ax3.scatter(u_obs[:,2],u_mod[:,2],marker='o',color="magenta",label="865nm")
+    ax3.scatter(u_obs[:,2],u_mod[:,2],marker='o',color="orange",label="865nm")
  
     ax3.set_xlim(-0.5,0.5)
     ax3.set_xticks(np.arange(-0.5,0.75,0.25))
@@ -901,9 +1100,9 @@ def main():  # Main code
         
 # Polarized Bands - I
 
-    ax1.scatter(scat[:,0],delta_i[:,0],marker='o',color="blue",label="470nm")
-    ax1.scatter(scat[:,1],delta_i[:,1],marker='o',color="red",label="660nm")
-    ax1.scatter(scat[:,2],delta_i[:,2],marker='o',color="magenta",label="865nm")
+    ax1.scatter(scat[:,3],delta_i[:,0],marker='o',color="blue",label="470nm")
+    ax1.scatter(scat[:,5],delta_i[:,1],marker='o',color="red",label="660nm")
+    ax1.scatter(scat[:,6],delta_i[:,2],marker='o',color="orange",label="865nm")
     
     ax1.set_xlim(60,180)
     ax1.set_xticks(np.arange(60,190,30))
@@ -919,9 +1118,9 @@ def main():  # Main code
     
 # Polarized Bands - Q
 
-    ax2.scatter(scat[:,0],delta_q[:,0],marker='o',color="blue",label="470nm")
-    ax2.scatter(scat[:,1],delta_q[:,1],marker='o',color="red",label="660nm")
-    ax2.scatter(scat[:,2],delta_q[:,2],marker='o',color="magenta",label="865nm")
+    ax2.scatter(scat[:,3],delta_q[:,0],marker='o',color="blue",label="470nm")
+    ax2.scatter(scat[:,5],delta_q[:,1],marker='o',color="red",label="660nm")
+    ax2.scatter(scat[:,6],delta_q[:,2],marker='o',color="orange",label="865nm")
     
     ax2.set_xlim(60,180)
     ax2.set_xticks(np.arange(60,190,30))
@@ -937,9 +1136,9 @@ def main():  # Main code
     
 # Polarized Bands - U
 
-    ax3.scatter(scat[:,0],delta_u[:,0],marker='o',color="blue",label="470nm")
-    ax3.scatter(scat[:,1],delta_u[:,1],marker='o',color="red",label="660nm")
-    ax3.scatter(scat[:,2],delta_u[:,2],marker='o',color="magenta",label="865nm")
+    ax3.scatter(scat[:,3],delta_u[:,0],marker='o',color="blue",label="470nm")
+    ax3.scatter(scat[:,5],delta_u[:,1],marker='o',color="red",label="660nm")
+    ax3.scatter(scat[:,6],delta_u[:,2],marker='o',color="orange",label="865nm")
     
     ax3.set_xlim(60,180)
     ax3.set_xticks(np.arange(60,190,30))
@@ -965,7 +1164,7 @@ def main():  # Main code
     out_text = '      SSA (470 nm): {:6.3f}'.format(ssa[0]) 
     ax4.text(80,0.22,out_text)
     
-    out_text = 'Percent Spherical: {:6.2f}'.format(per_sphere) 
+    out_text = '      Percent Spherical: {:6.2f}'.format(per_sphere) 
     ax4.text(80,0.19,out_text)
     
     out_text = '      N_r (470) nm): {:7.4f}'.format(nr[0]) 
@@ -973,6 +1172,36 @@ def main():  # Main code
     
     out_text = '       N_i (470 nm): {:7.4f}'.format(ni[0]) 
     ax4.text(80,0.13,out_text)
+    
+    out_text = "Avg Residuals"
+    ax4.text(20,0.30,out_text,fontweight='bold')
+    
+    out_text = 'I (470 nm): {:6.3f} %'.format(100*np.mean(delta_i[:,0])) 
+    ax4.text(20,0.25,out_text)
+    
+    out_text = 'Q/I (470 nm): {:6.3f} %'.format(100*np.mean(delta_q[:,0]))
+    ax4.text(20,0.22,out_text)
+    
+    out_text = 'U/I (470 nm): {:6.2f} %'.format(100*np.mean(delta_u[:,0]))
+    ax4.text(20,0.19,out_text)
+    
+    out_text = 'I (660 nm): {:6.3f} %'.format(100*np.mean(delta_i[:,1])) 
+    ax4.text(20,0.16,out_text)
+    
+    out_text = 'Q/I (660 nm): {:6.3f} %'.format(100*np.mean(delta_q[:,1]))
+    ax4.text(20,0.13,out_text)
+    
+    out_text = 'U/I (660 nm): {:6.2f} %'.format(100*np.mean(delta_u[:,1]))
+    ax4.text(20,0.10,out_text)
+    
+    out_text = 'I (865 nm): {:6.3f} %'.format(100*np.mean(delta_i[:,2])) 
+    ax4.text(20,0.07,out_text)
+    
+    out_text = 'Q/I (865 nm): {:6.3f} %'.format(100*np.mean(delta_q[:,2]))
+    ax4.text(20,0.04,out_text)
+    
+    out_text = 'U/I (865 nm): {:6.2f} %'.format(100*np.mean(delta_u[:,2]))
+    ax4.text(20,0.01,out_text)
     
     ax4.set_xlim(60,180)
     ax4.set_xticks(np.arange(60,190,30))
@@ -1015,9 +1244,9 @@ def main():  # Main code
 
 # Polarized Bands - I
 
-    ax1.scatter(vza_plot[:,0],delta_i[:,0],marker='o',color="blue",label="470nm")
-    ax1.scatter(vza_plot[:,1],delta_i[:,1],marker='o',color="red",label="660nm")
-    ax1.scatter(vza_plot[:,2],delta_i[:,2],marker='o',color="magenta",label="865nm")
+    ax1.scatter(vza_plot[:,3],delta_i[:,0],marker='o',color="blue",label="470nm")
+    ax1.scatter(vza_plot[:,5],delta_i[:,1],marker='o',color="red",label="660nm")
+    ax1.scatter(vza_plot[:,6],delta_i[:,2],marker='o',color="orange",label="865nm")
     
     ax1.set_xlim(-80,80)
     ax1.set_xticks(np.arange(-80,90,20))
@@ -1033,9 +1262,9 @@ def main():  # Main code
     
 # Polarized Bands - Q
 
-    ax2.scatter(vza_plot[:,0],delta_q[:,0],marker='o',color="blue",label="470nm")
-    ax2.scatter(vza_plot[:,1],delta_q[:,1],marker='o',color="red",label="660nm")
-    ax2.scatter(vza_plot[:,2],delta_q[:,2],marker='o',color="magenta",label="865nm")
+    ax2.scatter(vza_plot[:,3],delta_q[:,0],marker='o',color="blue",label="470nm")
+    ax2.scatter(vza_plot[:,5],delta_q[:,1],marker='o',color="red",label="660nm")
+    ax2.scatter(vza_plot[:,6],delta_q[:,2],marker='o',color="orange",label="865nm")
     
     ax2.set_xlim(-80,80)
     ax2.set_xticks(np.arange(-80,90,20))
@@ -1051,9 +1280,9 @@ def main():  # Main code
     
 # Polarized Bands - U
 
-    ax3.scatter(vza_plot[:,0],delta_u[:,0],marker='o',color="blue",label="470nm")
-    ax3.scatter(vza_plot[:,1],delta_u[:,1],marker='o',color="red",label="660nm")
-    ax3.scatter(vza_plot[:,2],delta_u[:,2],marker='o',color="magenta",label="865nm")
+    ax3.scatter(vza_plot[:,3],delta_u[:,0],marker='o',color="blue",label="470nm")
+    ax3.scatter(vza_plot[:,5],delta_u[:,1],marker='o',color="red",label="660nm")
+    ax3.scatter(vza_plot[:,6],delta_u[:,2],marker='o',color="orange",label="865nm")
     
     ax3.set_xlim(-80,80)
     ax3.set_xticks(np.arange(-80,90,20))
@@ -1120,7 +1349,7 @@ def main():  # Main code
     
     plt.close()
  
-# Tell user completion was successful
+#Tell user completion was successful
 
     print("\nSuccessful Completion\n")
 
@@ -1129,3 +1358,4 @@ def main():  # Main code
 
 if __name__ == '__main__':
     main()  
+

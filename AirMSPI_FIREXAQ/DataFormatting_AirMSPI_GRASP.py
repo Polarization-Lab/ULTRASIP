@@ -61,7 +61,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott_Data"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_120522"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_120622"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -276,8 +276,8 @@ def main():  # Main code
         DOLP_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/DOLP/'][:]
         IPOL_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/IPOL/'][:]
         scat_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/Scattering_angle/'][:]
-        saz_470 = f['/HDFEOS/GRIDS/555nm_band/Data Fields/Sun_azimuth/'][:]
-        sza_470 = f['/HDFEOS/GRIDS/555nm_band/Data Fields/Sun_zenith/'][:]
+        saz_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/Sun_azimuth/'][:]
+        sza_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/Sun_zenith/'][:]
         Qs_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/Q_scatter/'][:]
         Us_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/U_scatter/'][:]
         vaz_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/View_azimuth/'][:]
@@ -326,14 +326,14 @@ def main():  # Main code
         vaz_865 = f['/HDFEOS/GRIDS/865nm_band/Data Fields/View_azimuth/'][:]
         vza_865 = f['/HDFEOS/GRIDS/865nm_band/Data Fields/View_zenith/'][:]
 
-# # Set the datasets and read (9355 nm)
-# # Radiometric Channel
+# Set the datasets and read (9355 nm)
+# Radiometric Channel
 
-#         print("935nm")
-#         I_935 = f['/HDFEOS/GRIDS/935nm_band/Data Fields/I/']      
-#         scat_935 = f['/HDFEOS/GRIDS/935nm_band/Data Fields/Scattering_angle/'] 
-#         vaz_935 = f['/HDFEOS/GRIDS/935nm_band/Data Fields/View_azimuth/']
-#         vza_935 = f['/HDFEOS/GRIDS/935nm_band/Data Fields/View_zenith/']
+        print("935nm")
+        I_935 = f['/HDFEOS/GRIDS/935nm_band/Data Fields/I/']      
+        scat_935 = f['/HDFEOS/GRIDS/935nm_band/Data Fields/Scattering_angle/'] 
+        vaz_935 = f['/HDFEOS/GRIDS/935nm_band/Data Fields/View_azimuth/']
+        vza_935 = f['/HDFEOS/GRIDS/935nm_band/Data Fields/View_zenith/']
               
 # Get the Earth-Sun distance from the file attributes from the first file
         if(esd == 0.0):

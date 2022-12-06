@@ -41,7 +41,7 @@ def main():
 # NOTE: outpath is the location of the GRASP output files
 #       figpath is where the image output should be stored
 #Work computer
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Setting_Files"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_120522"
     figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Figures"
 
 #Home computer
@@ -51,7 +51,7 @@ def main():
     os.chdir(outpath)
 
 # Find all output files with the specified file name 
-    file_list = glob.glob('*GRASP*.txt')  
+    file_list = glob.glob('*.txt')  
     num_files = len(file_list)   
     print("FOUND FILES:",num_files)
 
@@ -63,7 +63,7 @@ def main():
 #num_int = total number of radiometric channels
 #num_pol = total number of polarimetric channels
 
-    num_int = 8 
+    num_int = 7 
     num_pol = 3
     
 # Create arrays to store data

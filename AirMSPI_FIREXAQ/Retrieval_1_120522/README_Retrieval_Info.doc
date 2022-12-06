@@ -1,0 +1,25 @@
+This folder holds the input, output, and retrieval figures for a GRASP retrieval performed on FIREX-AQ AirMSPI Data. 
+
+Starting from the raw data (2 sequences): 
+AirMSPI_ER2_GRP_TERRAIN_20190816_222439Z_AZ-Prescott_646F_F01_V006.hdf
+AirMSPI_ER2_GRP_TERRAIN_20190816_222615Z_AZ-Prescott_467F_F01_V006.hdf
+AirMSPI_ER2_GRP_TERRAIN_20190816_222752Z_AZ-Prescott_00N_F01_V006.hdf
+AirMSPI_ER2_GRP_TERRAIN_20190816_222928Z_AZ-Prescott_467A_F01_V006.hdf
+AirMSPI_ER2_GRP_TERRAIN_20190816_223105Z_AZ-Prescott_646A_F01_V006.hdf
+
+AirMSPI_ER2_GRP_TERRAIN_20190816_224206Z_AZ-Prescott_646F_F01_V006.hdf
+AirMSPI_ER2_GRP_TERRAIN_20190816_224342Z_AZ-Prescott_467F_F01_V006.hdf
+AirMSPI_ER2_GRP_TERRAIN_20190816_224518Z_AZ-Prescott_000N_F01_V006.hdf
+AirMSPI_ER2_GRP_TERRAIN_20190816_224655Z_AZ-Prescott_467A_F01_V006.hdf
+AirMSPI_ER2_GRP_TERRAIN_20190816_224831Z_AZ-Prescott_646A_F01_V006.hdf
+
+
+These files were formatted into three different sdata files:
+
+1. Just radiometric data channels denoted with an (I)
+2. Just polarimetric data channels denoted with a (IQU)
+3. All the data channels denoted with (ALL) 
+
+Then with the given settings file the output from GRASP is also denoted I, IQU, or ALL depending on the input sdata file. 
+
+The output figures similarly denoted, with 1-5 corresponding to the plots as listed in the python code.
