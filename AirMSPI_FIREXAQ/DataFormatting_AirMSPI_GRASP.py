@@ -950,10 +950,23 @@ def main():  # Main code
         for inner in range(5): 
             out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
 
+    for outer in range(6):
+        for inner in range(5): 
+            out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+    for inner in range(5):
+        out_str = out_str+'{:16.8f}'.format(vza_median[inner,6])
+
 # Relative azimuth angle per measurement per wavelength
     for outer in range(6):
         for inner in range(5): 
             out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+
+    for outer in range(6):
+         for inner in range(5): 
+             out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+    for inner in range(5):
+        out_str = out_str+'{:16.8f}'.format(raz_median[inner,6])
+
 
 #Measurements
     for outer in [0,1,2]:  # Loop over wavelengths
