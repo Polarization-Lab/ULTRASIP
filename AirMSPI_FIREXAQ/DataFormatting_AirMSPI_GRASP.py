@@ -744,7 +744,7 @@ def main():  # Main code
         i_median[loop,4] = eqr_i_555
         i_median[loop,5] = eqr_i_660
         i_median[loop,6] = eqr_i_865
-        
+                
         scat_median[loop,0] = scat_355
         scat_median[loop,1] = scat_380
         scat_median[loop,2] = scat_445
@@ -760,6 +760,9 @@ def main():  # Main code
         vza_median[loop,4] = vza_555
         vza_median[loop,5] = vza_660
         vza_median[loop,6] = vza_865
+        
+        print(vza_median[:,:])
+
         
         raz_median[loop,0] = raz_355
         raz_median[loop,1] = raz_380
@@ -817,7 +820,236 @@ def main():  # Main code
     temp = words[len(words)-1]  # Choose the last element
     hold = temp.split('.')
     vers = hold[0]
-           
+
+### THIRD OUTPUT FILE: I IN SPECTRAL BANDS AND  I, Q, U IN POLARIZED BANDS
+    num_intensity = 7
+    num_polar = 3
+        
+# Generate an output file name
+
+    outfile = outfile_base+"ALL"+".sdat"
+        
+    print()
+    print("Saving: "+outfile)
+    
+# Open the output file
+
+    outputFile = open(outfile, 'w')
+        
+# Write the sdat header information
+
+    out_str = 'SDATA version 2.0\n'
+    outputFile.write(out_str)
+    out_str = '  1   1   1  : NX NY NT\n'
+    outputFile.write(out_str)
+    out_str = '\n'
+    outputFile.write(out_str)
+
+# Parse the date string into the correct format
+
+    sdat_date = this_date_str[0:4]+'-'+this_date_str[4:6]+'-'+this_date_str[6:8]
+    print(sdat_date)
+        
+# Parse the time string into the correct format
+
+    sdat_time = this_time_str[0:2]+':'+this_time_str[2:4]+':'+this_time_str[4:7]
+    print(sdat_time)
+        
+# Write out the data header line
+
+    out_str = '  1   '+sdat_date+'T'+sdat_time
+    out_str = out_str+'       70000.00   0   1   : NPIXELS  TIMESTAMP  HEIGHT_OBS(m)  NSURF  IFGAS    1\n'
+    outputFile.write(out_str)
+    
+# Generate content for sdat (single line)
+
+    out_str = '           1'  # x-coordinate (ix)
+    out_str = out_str+'           1'  # y-coordinate (iy)
+    out_str = out_str+'           1'  # Cloud Flag (0=cloud, 1=clear)
+    out_str = out_str+'           1'  # Pixel column in grid (icol)
+    out_str = out_str+'           1'  # Pixel line in grid (row)
+
+    out_str = out_str+'{:19.8f}'.format(lon_median)  # Longitude
+    out_str = out_str+'{:18.8f}'.format(lat_median)  # Latitude
+    out_str = out_str+'{:17.8f}'.format(elev_median) # Elevation
+
+    out_str = out_str+'      100.000000'  # Percent of land
+    out_str = out_str+'{:16d}'.format(num_intensity)  # Number of wavelengths (nwl)
+    
+  ## SET UP THE WAVELENGTH AND MEASUREMENT INFORMATION
+        
+# Loop through wavelengths
+
+    for loop in range(num_intensity):
+        out_str = out_str+'{:17.9f}'.format(center_wave[loop]/1000.)  # Wavelengths in microns
+       
+    # Loop over the number of types of measurements per wavelength
+
+# for loop in range(num_intensity):
+    out_str = out_str+'{:12d}'.format(1)
+    out_str = out_str+'{:12d}'.format(1) # 1 measurement per wavelength
+    out_str = out_str+'{:12d}'.format(1)
+    out_str = out_str+'{:12d}'.format(3)
+    out_str = out_str+'{:12d}'.format(1)
+    out_str = out_str+'{:12d}'.format(3)
+    out_str = out_str+'{:12d}'.format(3)
+
+# Loop over the measurement types per wavelength
+# NOTE: Values can be found in the GRASP documentation in Table 4.5
+#       41 = Normalized radiance (I = rad*pi/E0) - GRASP calls normalized (reduced) radiance
+
+    #for loop in range(num_intensity):
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(42)
+    out_str = out_str+'{:12d}'.format(43)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(42)
+    out_str = out_str+'{:12d}'.format(43)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(42)
+    out_str = out_str+'{:12d}'.format(43)
+
+
+        
+# Loop over the number of measurements per wavelength
+# Note: This is the number of stares in the step-and-stare sequence
+
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+
+## ANGLE DEFINITIONS
+
+# Solar zenith angle per wavelength
+# NOTE: This is per wavelength rather than per measurement (probably because of 
+#       AERONET), so we take the average solar zenith angle, although this
+#       varies from measurement to measurement from AirMSPI
+
+    sza_mean = np.mean(sza_median)
+
+    for loop in range(num_intensity):
+        out_str = out_str+'{:16.8f}'.format(sza_mean)
+    
+# View zenith angle per measurement per wavelength
+    for outer in range(num_intensity):  # Loop over wavelengths
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+            
+# Relative azimuth angle per measurement per wavelength
+    for outer in range(num_intensity):  # Loop over wavelengths
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+            
+#Measurements
+    for outer in [0,1,2]:  # Loop over wavelengths
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
+    
+    for outer in [3]:  # Loop over wavelengths
+        for middle in range(3):  # Loop over types of measurement
+            for inner in range(num_step):  # Loop over measurements
+                out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+
+    for outer in [4]:  # Loop over wavelengths
+        for middle in range(1):  # Loop over types of measurement
+            for inner in range(num_step):  # Loop over measurements
+                out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+
+    for outer in [5,6]:  # Loop over wavelengths
+        for middle in range(3):  # Loop over types of measurement
+            for inner in range(num_step):  # Loop over measurements
+                out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+                
+## ADDITIONAL PARAMETERS
+# NOTE: This is kludgy and GRASP seems to run without this being entirely correct
+
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 1)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 2)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 3)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 4)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 5)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 6)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 7)
+    out_str = out_str+'       0'  # Gas parameter (wave 1)
+    out_str = out_str+'       0'  # Gas parameter (wave 2)
+    out_str = out_str+'       0'  # Gas parameter (wave 3)
+    out_str = out_str+'       0'  # Gas parameter (wave 4)
+    out_str = out_str+'       0'  # Gas parameter (wave 5)
+    out_str = out_str+'       0'  # Gas parameter (wave 6)
+    out_str = out_str+'       0'  # Gas parameter (wave 7)
+    out_str = out_str+'       0'  # Covariance matrix (wave 1)
+    out_str = out_str+'       0'  # Covariance matrix (wave 2)
+    out_str = out_str+'       0'  # Covariance matrix (wave 3)
+    out_str = out_str+'       0'  # Covariance matrix (wave 4)
+    out_str = out_str+'       0'  # Covariance matrix (wave 5)
+    out_str = out_str+'       0'  # Covariance matrix (wave 6)
+    out_str = out_str+'       0'  # Covariance matrix (wave 7)
+    out_str = out_str+'       0'  # Vertical profile (wave 1)
+    out_str = out_str+'       0'  # Vertical profile (wave 2)
+    out_str = out_str+'       0'  # Vertical profile (wave 3)
+    out_str = out_str+'       0'  # Vertical profile (wave 4)
+    out_str = out_str+'       0'  # Vertical profile (wave 5)
+    out_str = out_str+'       0'  # Vertical profile (wave 6)
+    out_str = out_str+'       0'  # Vertical profile (wave 7)
+    out_str = out_str+'       0'  # (Dummy) (wave 1)
+    out_str = out_str+'       0'  # (Dummy) (wave 2)
+    out_str = out_str+'       0'  # (Dummy) (wave 3)
+    out_str = out_str+'       0'  # (Dummy) (wave 4)
+    out_str = out_str+'       0'  # (Dummy) (wave 5)
+    out_str = out_str+'       0'  # (Dummy) (wave 6)
+    out_str = out_str+'       0'  # (Dummy) (wave 7)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
+                   
+# Endline
+       
+    out_str = out_str+'\n'
+
+# Write out the line
+     
+    outputFile.write(out_str)
+
+# Close the output file
+
+    outputFile.close()
+
+        
+# Print the time
+
+    all_end_time = time.time()
+    print("Total elapsed time was %g seconds" % (all_end_time - all_start_time))
+
+# Tell user completion was successful
+
+    print("\nSuccessful Completion\n")
+    
+"""
 #-----------------------------------------------------------------------#
 ### FIRST OUTPUT FILE: INTENSITY ONLY IN ALL BANDS EXCEPT 935nm (WATER VAPOR)
 # Get the number of valid intensity values
@@ -1157,8 +1389,8 @@ def main():  # Main code
     outputFile.close()
     
 #-----------------------------------------------------------------------#
-
-    
+"""
+"""    
 ### THIRD OUTPUT FILE: I IN SPECTRAL BANDS AND  I, Q, U IN POLARIZED BANDS
     num_all = num_intensity + num_polar
         
@@ -1441,7 +1673,6 @@ def main():  # Main code
     print("\nSuccessful Completion\n")
 
 
-
 #_______________________Section 4: Visualizations to Check Results____________________#
 # Set the plot area (using the concise format)
 
@@ -1538,7 +1769,7 @@ def main():  # Main code
     
 # Close the plot        
     plt.close()
-    
+""" 
 ### END MAIN FUNCTION
 if __name__ == '__main__':
     main() 
