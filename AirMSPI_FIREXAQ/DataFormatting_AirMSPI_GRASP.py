@@ -946,66 +946,52 @@ def main():  # Main code
         out_str = out_str+'{:16.8f}'.format(sza_mean)
     
 # View zenith angle per measurement per wavelength
-    for outer in [0,1,2]:  # Loop over wavelengths
-       for inner in range(num_step):  # Loop over measurements
-           out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
-   
-    for outer in [3]:  # Loop over wavelengths
-       for middle in range(3):  # Loop over types of measurement
-           for inner in range(num_step):  # Loop over measurements
-               out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+    for outer in range(6):
+        for inner in range(5): 
+            out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
 
-    for outer in [4]:  # Loop over wavelengths
-       for middle in range(1):  # Loop over types of measurement
-           for inner in range(num_step):  # Loop over measurements
-               out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
-
-    for outer in [5,6]:  # Loop over wavelengths
-       for middle in range(3):  # Loop over types of measurement
-           for inner in range(num_step):  # Loop over measurements
-               out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
-            
 # Relative azimuth angle per measurement per wavelength
-    for outer in [0,1,2]:  # Loop over wavelengths
-       for inner in range(num_step):  # Loop over measurements
-           out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
-   
-    for outer in [3]:  # Loop over wavelengths
-       for middle in range(3):  # Loop over types of measurement
-           for inner in range(num_step):  # Loop over measurements
-               out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+    for outer in range(6):
+        for inner in range(5): 
+            out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
 
-    for outer in [4]:  # Loop over wavelengths
-       for middle in range(1):  # Loop over types of measurement
-           for inner in range(num_step):  # Loop over measurements
-               out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
-
-    for outer in [5,6]:  # Loop over wavelengths
-       for middle in range(3):  # Loop over types of measurement
-           for inner in range(num_step):  # Loop over measurements
-               out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
-
-            
 #Measurements
     for outer in [0,1,2]:  # Loop over wavelengths
         for inner in range(num_step):  # Loop over measurements
             out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
     
     for outer in [3]:  # Loop over wavelengths
-        for middle in range(3):  # Loop over types of measurement
-            for inner in range(num_step):  # Loop over measurements
-                out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
+       for inner in range(num_step):  # Loop over measurements
+           out_str = out_str+'{:16.8f}'.format(i_median[inner,0])  # I
+       # for inner in range(num_step):  # Loop over measurements
+       #     out_str = out_str+'{:16.8f}'.format(i_in_polar_median[inner,0])  # Ipol
+       for inner in range(num_step):  # Loop over measurements
+           out_str = out_str+'{:16.8f}'.format(q_median[inner,0])  # Q
+       for inner in range(num_step):  # Loop over measurements
+           out_str = out_str+'{:16.8f}'.format(u_median[inner,0])  # U
 
     for outer in [4]:  # Loop over wavelengths
-        for middle in range(1):  # Loop over types of measurement
-            for inner in range(num_step):  # Loop over measurements
+       for inner in range(num_step):  # Loop over measurements
                 out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
 
-    for outer in [5,6]:  # Loop over wavelengths
-        for middle in range(3):  # Loop over types of measurement
-            for inner in range(num_step):  # Loop over measurements
-                out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
-                
+    for outer in [5]:  # Loop over wavelengths
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])  # I
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(q_median[inner,1])  # Q
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(u_median[inner,1])  # U
+
+
+    for outer in [6]:  # Loop over wavelengths
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])  # I
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(q_median[inner,2])  # Q
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(u_median[inner,2])  # U
+            
+            
 ## ADDITIONAL PARAMETERS
 # NOTE: This is kludgy and GRASP seems to run without this being entirely correct
 
