@@ -942,18 +942,49 @@ def main():  # Main code
 
     sza_mean = np.mean(sza_median)
 
-    for loop in range(num_all):
+    for loop in range(num_intensity):
         out_str = out_str+'{:16.8f}'.format(sza_mean)
     
 # View zenith angle per measurement per wavelength
-    for outer in [0,1,2,3,4,5,6]:  # Loop over wavelengths
-        for inner in range(num_step):  # Loop over measurements
-            out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+    for outer in [0,1,2]:  # Loop over wavelengths
+       for inner in range(num_step):  # Loop over measurements
+           out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+   
+    for outer in [3]:  # Loop over wavelengths
+       for middle in range(3):  # Loop over types of measurement
+           for inner in range(num_step):  # Loop over measurements
+               out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+
+    for outer in [4]:  # Loop over wavelengths
+       for middle in range(1):  # Loop over types of measurement
+           for inner in range(num_step):  # Loop over measurements
+               out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+
+    for outer in [5,6]:  # Loop over wavelengths
+       for middle in range(3):  # Loop over types of measurement
+           for inner in range(num_step):  # Loop over measurements
+               out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
             
 # Relative azimuth angle per measurement per wavelength
-    for outer in [0,1,2,3,4,5,6]:  # Loop over wavelengths
-        for inner in range(num_step):  # Loop over measurements
-            out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+    for outer in [0,1,2]:  # Loop over wavelengths
+       for inner in range(num_step):  # Loop over measurements
+           out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+   
+    for outer in [3]:  # Loop over wavelengths
+       for middle in range(3):  # Loop over types of measurement
+           for inner in range(num_step):  # Loop over measurements
+               out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+
+    for outer in [4]:  # Loop over wavelengths
+       for middle in range(1):  # Loop over types of measurement
+           for inner in range(num_step):  # Loop over measurements
+               out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+
+    for outer in [5,6]:  # Loop over wavelengths
+       for middle in range(3):  # Loop over types of measurement
+           for inner in range(num_step):  # Loop over measurements
+               out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+
             
 #Measurements
     for outer in [0,1,2]:  # Loop over wavelengths
@@ -963,17 +994,17 @@ def main():  # Main code
     for outer in [3]:  # Loop over wavelengths
         for middle in range(3):  # Loop over types of measurement
             for inner in range(num_step):  # Loop over measurements
-                out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+                out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
 
     for outer in [4]:  # Loop over wavelengths
         for middle in range(1):  # Loop over types of measurement
             for inner in range(num_step):  # Loop over measurements
-                out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+                out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
 
     for outer in [5,6]:  # Loop over wavelengths
         for middle in range(3):  # Loop over types of measurement
             for inner in range(num_step):  # Loop over measurements
-                out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+                out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
                 
 ## ADDITIONAL PARAMETERS
 # NOTE: This is kludgy and GRASP seems to run without this being entirely correct
