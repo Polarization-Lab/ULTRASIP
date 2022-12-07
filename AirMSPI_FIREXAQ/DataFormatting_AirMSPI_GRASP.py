@@ -824,6 +824,7 @@ def main():  # Main code
 ### THIRD OUTPUT FILE: I IN SPECTRAL BANDS AND  I, Q, U IN POLARIZED BANDS
     num_intensity = 7
     num_polar = 3
+    num_all = num_intensity+num_polar
         
 # Generate an output file name
 
@@ -941,16 +942,16 @@ def main():  # Main code
 
     sza_mean = np.mean(sza_median)
 
-    for loop in range(num_intensity):
+    for loop in range(num_all):
         out_str = out_str+'{:16.8f}'.format(sza_mean)
     
 # View zenith angle per measurement per wavelength
-    for outer in range(num_intensity):  # Loop over wavelengths
+    for outer in [0,1,2,3,4,5,6]:  # Loop over wavelengths
         for inner in range(num_step):  # Loop over measurements
             out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
             
 # Relative azimuth angle per measurement per wavelength
-    for outer in range(num_intensity):  # Loop over wavelengths
+    for outer in [0,1,2,3,4,5,6]:  # Loop over wavelengths
         for inner in range(num_step):  # Loop over measurements
             out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
             
