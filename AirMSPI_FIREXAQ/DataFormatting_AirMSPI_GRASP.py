@@ -975,7 +975,7 @@ def main():  # Main code
     
     for outer in [3]:  # Loop over wavelengths
        for inner in range(num_step):  # Loop over measurements
-           out_str = out_str+'{:16.8f}'.format(i_median[inner,0])  # I
+           out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])  # I
        # for inner in range(num_step):  # Loop over measurements
        #     out_str = out_str+'{:16.8f}'.format(i_in_polar_median[inner,0])  # Ipol
        for inner in range(num_step):  # Loop over measurements

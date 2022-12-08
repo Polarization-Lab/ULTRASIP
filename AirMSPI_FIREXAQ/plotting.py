@@ -24,8 +24,8 @@ def main():  # Main code
 # NOTE: basepath is the location of the GRASP output files
 #       figpath is where the image output should be stored
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_120522"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_120522"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_120622"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_120622"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -689,32 +689,32 @@ def main():  # Main code
             
         if(data_count==288):  # U
             words = line.split()
-            print(words)
+            #print(words)
             u_obs[1,2] = float(words[5])
             u_mod[1,2] = float(words[6])
         
         if(data_count==289):  # U
             words = line.split()
-            print(words)
+            #print(words)
             u_obs[2,2] = float(words[5])
             u_mod[2,2] = float(words[6])
 
         if(data_count==291):  # U
             words = line.split()
-            print(words)
+            #print(words)
             u_obs[3,2] = float(words[5])
             u_mod[3,2] = float(words[6])
 
         if(data_count==290):  # U
             words = line.split()
-            print(words)
+            #print(words)
             u_obs[4,2] = float(words[5])
             u_mod[4,2] = float(words[6])
 
         data_count = data_count+1
 
 # Close the input file
-
+    print("DONE")
     inputFile.close()
 
 ### PLOT THE DATA
@@ -724,44 +724,340 @@ def main():  # Main code
     os.chdir(figpath)
 
 ## FIRST PLOT - INTENSITY VS. SCATTERING ANGLE
-# Upper Left - Intensity       Upper Right - Q
-# Lower Left - U               Lower Right - Retrieval Info
-
-# Set the plot area (using the concise format)
-
-    # fig, ((ax1,ax2),(ax3,ax4)) = plt.subplots(figsize=(9,6), 
-    #     nrows=2, ncols=2, dpi=120)
-
-    fig = plt.figure()
-    ax1 = fig.add_subplot(111)
-    
 # Polarized Bands - I
+    fig, ((ax1,ax4)) = plt.subplots(
+        nrows=1, ncols=2, dpi=120)
+    #fig = plt.figure()
+    #ax1 = fig.add_subplot(111)
+    
 
-    ax1.scatter(scat[:,3],i_obs[:,3],marker='+',color="blue",label="470nm")
+    ax1.scatter(scat[:,3],i_obs[:,3],marker='x',color="blue",label="470nm")
     ax1.scatter(scat[:,5],i_obs[:,5],marker='x',color="red",label="660nm")
-    ax1.scatter(scat[:,6],i_obs[:,6],marker='+',color="orange",label="865nm")
+    ax1.scatter(scat[:,6],i_obs[:,6],marker='x',color="orange",label="865nm")
 
     ax1.plot(scat[:,3],i_mod[:,3],color="blue")
     ax1.plot(scat[:,5],i_mod[:,5],color="red")
     ax1.plot(scat[:,6],i_mod[:,6],color="orange")
-    print(i_mod[:,3])
-    print(i_obs[:,3])
+    #print(i_mod[:,3])
+    #print(i_obs[:,3])
     # print(scat[:,6])
     ax1.set_xlim(60,180)
     ax1.set_xticks(np.arange(60,190,30))
     ax1.set_xlabel("Scattering Angle (Deg)")
 
-    ax1.set_ylim(0.0,0.3)
-    ax1.set_yticks(np.arange(0.0,0.4,0.05))
+    ax1.set_ylim(-0.1,0.4)
+    ax1.set_yticks(np.arange(-0.1,0.5,0.1))
     ax1.set_ylabel('Equivalent Reflectance')
-
     ax1.legend(loc=1)  # Upper right
+
+# Residuals Text
+# Note: We calculate delta obs as model minus observation
+    delta_i470 = np.amax((i_mod[:,3] - i_obs[:,3])*100)
+    delta_i660 = np.amax((i_mod[:,5] - i_obs[:,5])*100)
+    delta_i865 = np.amax((i_mod[:,6] - i_obs[:,6])*100)
+
+# NOTE: I'm going to use the scattering angle coordinates to locate the text
+    #fig = plt.figure()
+    #ax4 = fig.add_subplot(111)
     
+    out_text = "     Max Residual"
+    ax4.text(20,0.30,out_text,fontweight='bold')
+    
+    out_text = '     470nm: {:6.3f}%'.format(delta_i470) 
+    ax4.text(20,0.25,out_text)
+    
+    out_text = '     660nm: {:6.3f}%'.format(delta_i660) 
+    ax4.text(20,0.22,out_text)
+    
+    out_text = '     865nm: {:6.2f}%'.format(delta_i865) 
+    ax4.text(20,0.19,out_text)
+    
+    ax4.set_xlim(60,180)
+    ax4.set_xticks(np.arange(60,190,30))
+    
+    ax4.set_ylim(0.0,0.4)
+    ax4.set_yticks(np.arange(0.0,0.5,0.10))
+    
+    ax4.axis('off')
+    
+    plt.tight_layout()  
+    
+# Generate the output file name
+    
+    hold = inputName.split(".")
+    out_base = hold[0]
+    outfile = out_base+'_VIS_v'+'_01.png'
+    print("Saving: "+outfile)
+    plt.savefig(outfile,dpi=300) 
+
 # Show the plot
     
     plt.show() 
     
     plt.close()
+
+# Polarized Bands - Q/I
+    fig, ((ax1,ax4)) = plt.subplots(
+        nrows=1, ncols=2, dpi=120)
+    
+    ax1.scatter(scat[:,3],q_obs[:,0],marker='x',color="blue",label="470nm")
+    ax1.scatter(scat[:,5],q_obs[:,1],marker='x',color="red",label="660nm")
+    ax1.scatter(scat[:,6],q_obs[:,2],marker='x',color="orange",label="865nm")
+    
+    ax1.plot(scat[:,3],q_mod[:,0],color="blue")
+    ax1.plot(scat[:,5],q_mod[:,1],color="red")
+    ax1.plot(scat[:,6],q_mod[:,2],color="orange")
+ 
+    ax1.set_xlim(60,180)
+    ax1.set_xticks(np.arange(60,190,30))
+    ax1.set_xlabel("Scattering Angle (Deg)")
+    
+    ax1.set_ylim(-0.4,0.3)
+    ax1.set_yticks(np.arange(-0.4,0.6,0.2))
+    ax1.set_ylabel('q (Q/I)')
+    ax1.legend(loc=1)  # Upper right   
+
+# Residuals Text
+# Note: We calculate delta obs as model minus observation
+
+    delta_q470 = np.amax((q_mod[:,0] - q_obs[:,0])*100)
+    delta_q660 = np.amax((q_mod[:,1] - q_obs[:,1])*100)
+    delta_q865 = np.amax((q_mod[:,2] - q_obs[:,2])*100)
+
+# NOTE: I'm going to use the scattering angle coordinates to locate the text
+    #fig = plt.figure()
+    #ax4 = fig.add_subplot(111)
+    
+    out_text = "     Max Residual"
+    ax4.text(20,0.30,out_text,fontweight='bold')
+    
+    out_text = '     470nm: {:6.3f}%'.format(delta_q470) 
+    ax4.text(20,0.25,out_text)
+    
+    out_text = '     660nm: {:6.3f}%'.format(delta_q660) 
+    ax4.text(20,0.22,out_text)
+    
+    out_text = '     865nm: {:6.2f}%'.format(delta_q865) 
+    ax4.text(20,0.19,out_text)
+    
+    ax4.set_xlim(60,180)
+    ax4.set_xticks(np.arange(60,190,30))
+    
+    ax4.set_ylim(0.0,0.4)
+    ax4.set_yticks(np.arange(0.0,0.5,0.10))
+    
+    ax4.axis('off')
+    
+    plt.tight_layout()  
+
+# Generate the output file name
+    
+    hold = inputName.split(".")
+    out_base = hold[0]
+    outfile = out_base+'_VIS_v'+'_02.png'
+    print("Saving: "+outfile)
+    plt.savefig(outfile,dpi=300) 
+# Show the plot
+    
+    plt.show() 
+    
+    plt.close()
+
+# Polarized Bands - U/I
+    fig, ((ax1,ax4)) = plt.subplots(
+        nrows=1, ncols=2, dpi=120)
+    
+    ax1.scatter(scat[:,3],u_obs[:,0],marker='x',color="blue",label="470nm")
+    ax1.scatter(scat[:,5],u_obs[:,1],marker='x',color="red",label="660nm")
+    ax1.scatter(scat[:,6],u_obs[:,2],marker='x',color="orange",label="865nm")
+    
+    ax1.plot(scat[:,3],u_mod[:,0],color="blue")
+    ax1.plot(scat[:,5],u_mod[:,1],color="red")
+    ax1.plot(scat[:,6],u_mod[:,2],color="orange")
+ 
+    ax1.set_xlim(60,180)
+    ax1.set_xticks(np.arange(60,190,30))
+    ax1.set_xlabel("Scattering Angle (Deg)")
+    
+    ax1.set_ylim(-0.1,0.4)
+    ax1.set_yticks(np.arange(-0.1,0.5,0.1))
+    ax1.set_ylabel('u (U/I)')
+    ax1.legend(loc=1)  # Upper right
+
+# Residuals Text
+# Note: We calculate delta obs as model minus observation
+
+    delta_u470 = np.amax((u_mod[:,0] - u_obs[:,0])*100)
+    delta_u660 = np.amax((u_mod[:,1] - u_obs[:,1])*100)
+    delta_u865 = np.amax((u_mod[:,2] - u_obs[:,2])*100)
+
+# NOTE: I'm going to use the scattering angle coordinates to locate the text
+    #fig = plt.figure()
+    #ax4 = fig.add_subplot(111)
+    
+    out_text = "     Max Residual"
+    ax4.text(20,0.30,out_text,fontweight='bold')
+    
+    out_text = '     470nm: {:6.3f}%'.format(delta_u470) 
+    ax4.text(20,0.25,out_text)
+    
+    out_text = '     660nm: {:6.3f}%'.format(delta_u660) 
+    ax4.text(20,0.22,out_text)
+    
+    out_text = '     865nm: {:6.2f}%'.format(delta_u865) 
+    ax4.text(20,0.19,out_text)
+    
+    ax4.set_xlim(60,180)
+    ax4.set_xticks(np.arange(60,190,30))
+    
+    ax4.set_ylim(0.0,0.4)
+    ax4.set_yticks(np.arange(0.0,0.5,0.10))
+    
+    ax4.axis('off')
+    
+    plt.tight_layout()
+    
+# Show the plot
+# Generate the output file name
+    
+    hold = inputName.split(".")
+    out_base = hold[0]
+    outfile = out_base+'_VIS_v'+'_03.png'
+    print("Saving: "+outfile)
+    plt.savefig(outfile,dpi=300) 
+    
+    plt.show() 
+    
+    plt.close()
+    
+# Text information
+# NOTE: I'm going to use the scattering angle coordinates to locate the text
+    fig = plt.figure()
+    ax4 = fig.add_subplot(111)
+    
+    out_text = "Retrieved Properties"
+    ax4.text(20,0.27,out_text,fontweight='bold')
+    
+    out_text = '     AOD (470 nm): {:6.3f}'.format(aod[0]) 
+    ax4.text(20,0.25,out_text)
+    
+    out_text = '     SSA (470 nm): {:6.3f}'.format(ssa[0]) 
+    ax4.text(20,0.22,out_text)
+    
+    out_text = '     % Spherical: {:6.2f}'.format(per_sphere) 
+    ax4.text(20,0.19,out_text)
+    
+    out_text = '      N_r (470) nm): {:7.3f}'.format(nr[0]) 
+    ax4.text(20,0.16,out_text)
+    
+    out_text = '       N_i (470 nm): {:7.4f}'.format(ni[0]) 
+    ax4.text(20,0.13,out_text)
+    
+    ax4.set_xlim(60,180)
+    ax4.set_xticks(np.arange(60,190,30))
+    
+    ax4.set_ylim(0.0,0.4)
+    ax4.set_yticks(np.arange(0.0,0.5,0.10))
+    
+    ax4.axis('off')
+    
+    plt.tight_layout()    
+    
+# Generate the output file name
+    
+    hold = inputName.split(".")
+    out_base = hold[0]
+    outfile = out_base+'_VIS_v'+'_04.png'
+    print("Saving: "+outfile)
+    plt.savefig(outfile,dpi=300) 
+
+# Show the plot
+    
+    plt.show() 
+    
+    plt.close()
+
+# Radiometric Bands - I
+    fig, ((ax1,ax4)) = plt.subplots(
+        nrows=1, ncols=2, dpi=120)
+    #fig = plt.figure()
+    #ax1 = fig.add_subplot(111)
+    
+
+    ax1.scatter(scat[:,0],i_obs[:,0],marker='x',color="blue",label="355nm")
+    ax1.scatter(scat[:,1],i_obs[:,1],marker='x',color="red",label="380nm")
+    ax1.scatter(scat[:,2],i_obs[:,2],marker='x',color="orange",label="445nm")  
+    ax1.scatter(scat[:,4],i_obs[:,4],marker='x',color="purple",label="555nm")
+    
+
+    ax1.plot(scat[:,0],i_mod[:,0],color="blue")
+    ax1.plot(scat[:,1],i_mod[:,1],color="red")
+    ax1.plot(scat[:,2],i_mod[:,2],color="orange")
+    ax1.plot(scat[:,4],i_mod[:,4],color="purple")
+
+    #print(i_mod[:,3])
+    #print(i_obs[:,3])
+    # print(scat[:,6])
+    ax1.set_xlim(60,180)
+    ax1.set_xticks(np.arange(60,190,30))
+    ax1.set_xlabel("Scattering Angle (Deg)")
+
+    ax1.set_ylim(-0.1,0.4)
+    ax1.set_yticks(np.arange(-0.1,0.5,0.1))
+    ax1.set_ylabel('Equivalent Reflectance')
+    ax1.legend(loc=1)  # Upper right
+
+# Residuals Text
+# Note: We calculate delta obs as model minus observation
+    delta_i355 = np.amax((i_mod[:,0] - i_obs[:,0])*100)
+    delta_i380 = np.amax((i_mod[:,1] - i_obs[:,1])*100)
+    delta_i445 = np.amax((i_mod[:,2] - i_obs[:,2])*100)
+    delta_i555 = np.amax((i_mod[:,4] - i_obs[:,4])*100)
+
+
+# NOTE: I'm going to use the scattering angle coordinates to locate the text
+    #fig = plt.figure()
+    #ax4 = fig.add_subplot(111)
+    
+    out_text = "     Max Residual"
+    ax4.text(20,0.30,out_text,fontweight='bold')
+    
+    out_text = '     355nm: {:6.3f}%'.format(delta_i355) 
+    ax4.text(20,0.25,out_text)
+
+    out_text = '     380nm: {:6.3f}%'.format(delta_i380) 
+    ax4.text(20,0.22,out_text)
+    
+    out_text = '     445nm: {:6.3f}%'.format(delta_i445) 
+    ax4.text(20,0.19,out_text)
+    
+    out_text = '     555nm: {:6.2f}%'.format(delta_i555) 
+    ax4.text(20,0.16,out_text)
+    
+    ax4.set_xlim(60,180)
+    ax4.set_xticks(np.arange(60,190,30))
+    
+    ax4.set_ylim(0.0,0.4)
+    ax4.set_yticks(np.arange(0.0,0.5,0.10))
+    
+    ax4.axis('off')
+    
+    plt.tight_layout()     
+
+# Generate the output file name
+    
+    hold = inputName.split(".")
+    out_base = hold[0]
+    outfile = out_base+'_VIS_v'+'_05.png'
+    print("Saving: "+outfile)
+    plt.savefig(outfile,dpi=300) 
+
+# Show the plot
+    
+    plt.show() 
+    
+    plt.close()
+
  
 #Tell user completion was successful
 
