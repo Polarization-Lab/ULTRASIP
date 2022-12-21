@@ -60,8 +60,8 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott_Data"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_120622"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_121922"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -80,7 +80,7 @@ def main():  # Main code
 # Set the index of the sequence of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
-    step_ind = 1
+    step_ind = 0
     
 #_______________Region of Interest___________________#
 # Crop images to same area to correct for parallax and set a region of interest

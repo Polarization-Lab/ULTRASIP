@@ -59,6 +59,10 @@ def main():  # Main code
     nr = np.zeros(num_int)  # Real part of the refractive index
     ni = np.zeros(num_int)  # Imaginary part of the refractive index
 
+    aae = np.zeros(1)
+    
+    sd = np.zeros(45)
+    radius = np.zeros(45)
 # Change directory to the basepath
 
     os.chdir(basepath)
@@ -95,11 +99,16 @@ def main():  # Main code
 # Read the data file
 
     for line in inputFile:
-    
+             
         if(data_count==96):  # Sphericity
             words = line.split()
             print(words)
             per_sphere = float(words[1])
+            
+        if(data_count==100):  # Sphericity
+            words = line.split()
+            print(words)
+            aae = float(words[0])
             
         if(data_count==102):  # AOD
             words = line.split()
@@ -745,8 +754,8 @@ def main():  # Main code
     ax1.set_xticks(np.arange(60,190,30))
     ax1.set_xlabel("Scattering Angle (Deg)")
 
-    ax1.set_ylim(-0.1,0.4)
-    ax1.set_yticks(np.arange(-0.1,0.5,0.1))
+    ax1.set_ylim(0.0,0.5)
+    ax1.set_yticks(np.arange(0.0,0.6,0.1))
     ax1.set_ylabel('Equivalent Reflectance')
     ax1.legend(loc=1)  # Upper right
 
@@ -934,24 +943,29 @@ def main():  # Main code
 # NOTE: I'm going to use the scattering angle coordinates to locate the text
     fig = plt.figure()
     ax4 = fig.add_subplot(111)
+    #fig, ((ax1,ax4)) = plt.subplots(
+      #  nrows=1, ncols=2, dpi=120)
     
     out_text = "Retrieved Properties"
     ax4.text(20,0.27,out_text,fontweight='bold')
     
-    out_text = '     AOD (470 nm): {:6.3f}'.format(aod[0]) 
+    out_text = 'AOD (470 nm): {:6.3f}'.format(aod[0]) 
     ax4.text(20,0.25,out_text)
     
-    out_text = '     SSA (470 nm): {:6.3f}'.format(ssa[0]) 
+    out_text = 'SSA (470 nm): {:6.3f}'.format(ssa[0]) 
     ax4.text(20,0.22,out_text)
     
-    out_text = '     % Spherical: {:6.2f}'.format(per_sphere) 
+    out_text = '% Spherical: {:6.2f}'.format(per_sphere) 
     ax4.text(20,0.19,out_text)
     
-    out_text = '      N_r (470) nm): {:7.3f}'.format(nr[0]) 
+    out_text = 'N_r (470) nm): {:7.3f}'.format(nr[0]) 
     ax4.text(20,0.16,out_text)
     
-    out_text = '       N_i (470 nm): {:7.4f}'.format(ni[0]) 
+    out_text = 'N_i (470 nm): {:7.4f}'.format(ni[0]) 
     ax4.text(20,0.13,out_text)
+    
+    out_text = 'AAE (355/370 nm): {:7.4f}'.format(aae) 
+    ax4.text(20,0.10,out_text)
     
     ax4.set_xlim(60,180)
     ax4.set_xticks(np.arange(60,190,30))
@@ -1002,8 +1016,8 @@ def main():  # Main code
     ax1.set_xticks(np.arange(60,190,30))
     ax1.set_xlabel("Scattering Angle (Deg)")
 
-    ax1.set_ylim(-0.1,0.4)
-    ax1.set_yticks(np.arange(-0.1,0.5,0.1))
+    ax1.set_ylim(0.0,0.5)
+    ax1.set_yticks(np.arange(0.0,0.6,0.1))
     ax1.set_ylabel('Equivalent Reflectance')
     ax1.legend(loc=1)  # Upper right
 
@@ -1058,7 +1072,41 @@ def main():  # Main code
     
     plt.close()
 
- 
+    # fig, ((ax1)) = plt.subplots(
+    #     nrows=1, ncols=1, dpi=120)
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+
+    ax1.plot(wave[:],ssa[:],color="blue")
+
+    #print(i_mod[:,3])
+    #print(i_obs[:,3])
+    # print(scat[:,6])
+    # ax1.set_xlim(60,180)
+    # ax1.set_xticks(np.arange(60,190,30))
+    ax1.set_xlabel("Wavelength [um]")
+
+    # ax1.set_ylim(-0.1,0.4)
+    # ax1.set_yticks(np.arange(-0.1,0.5,0.1))
+    ax1.set_ylabel('SSA')
+    # ax1.legend(loc=1)  # Upper right
+
+
+# Generate the output file name
+    
+    hold = inputName.split(".")
+    out_base = hold[0]
+    outfile = out_base+'_VIS_v'+'_SSA.png'
+    print("Saving: "+outfile)
+    plt.savefig(outfile,dpi=300) 
+
+# Show the plot
+    
+    plt.show() 
+    
+    plt.close()
+
+
 #Tell user completion was successful
 
     print("\nSuccessful Completion\n")
