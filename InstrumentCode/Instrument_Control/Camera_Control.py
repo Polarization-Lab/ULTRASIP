@@ -2,13 +2,16 @@
 """
 @author: C.M.DeLeon
 This script is to control the ULTRASIP Hamamatsu camera
+from example: https://pypi.org/project/hamamatsu/ 
+
+NOTE: Must download API specific to your frame grabber 
+from: https://dcam-api.com/downloads/
 """
 #Last edit: 06.28.2022
 
 #Import Libraries 
 import logging
 from hamamatsu.dcam import dcam, Stream, copy_frame
-import matplotlib.pyplot as plt
 
 logging.basicConfig(level=logging.INFO)
 
@@ -26,7 +29,5 @@ with dcam:
                 camera.start()
                 for i, frame_buffer in enumerate(stream):
                     frame = copy_frame(frame_buffer)
-                    logging.info(f"acquired frame #%d/%d: %s", i+1, nb_frames, frame)                
+                    logging.info(f"acquired frame #%d/%d: %s", i+1, nb_frames, frame)
                 logging.info("finished acquisition")
-
-plt.imshow(frame)

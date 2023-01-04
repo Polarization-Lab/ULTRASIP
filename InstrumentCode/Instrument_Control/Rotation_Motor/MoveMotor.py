@@ -10,15 +10,27 @@ find at https://www.thorlabs.com/newgrouppage9.cfm?objectgroup_id=12829
 """
 
 import elliptec
+import time
 
-controller = elliptec.Controller('COM9')
+controller = elliptec.Controller('COM4')
 ro = elliptec.Rotator(controller)
 
 # Home the rotator before usage
 ro.home()
 
+#set an offset
+#offset = 0
+
+offset = -0.025
+
 # Loop over a list of angles and acquire for each
-#for angle in [0, 45, 90, 135]:
-for angle in [0]:
-  ro.set_angle(angle)
+for angle in [0, 45, 90, 135,0]:
+#for angle in [0]:
+  ro.set_angle(angle+offset)
+  angleout = ro.get_angle()
+  print(angleout)
+  time.sleep(3)
+
   # ... acquire or perform other tasks
+  
+ro.close()
