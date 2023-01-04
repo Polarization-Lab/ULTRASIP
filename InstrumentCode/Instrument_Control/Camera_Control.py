@@ -12,7 +12,7 @@ from: https://dcam-api.com/downloads/
 #Import Libraries 
 import logging
 from hamamatsu.dcam import dcam, Stream, copy_frame
-
+import matplotlib.pyplot as plt
 logging.basicConfig(level=logging.INFO)
 
 with dcam:
@@ -22,8 +22,8 @@ with dcam:
         print(camera['image_width'].value, camera['image_height'].value)
 
         # Simple acquisition example
-        nb_frames = 10
-        camera["exposure_time"] = 0.1
+        nb_frames = 5
+        camera["exposure_time"] = 5
         with Stream(camera, nb_frames) as stream:
                 logging.info("start acquisition")
                 camera.start()
@@ -31,3 +31,6 @@ with dcam:
                     frame = copy_frame(frame_buffer)
                     logging.info(f"acquired frame #%d/%d: %s", i+1, nb_frames, frame)
                 logging.info("finished acquisition")
+                
+plt.imshow(frame)
+plt.colorbar()
