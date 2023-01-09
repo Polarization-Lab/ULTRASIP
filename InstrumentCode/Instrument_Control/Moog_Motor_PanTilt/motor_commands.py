@@ -97,7 +97,7 @@ def rcv_response(serial_port) -> list:
 def send_request(serial_port, buffer: list, get_rsp=True) -> list:
     # Format bytes as hex strings for printing
     as_hex = [hex(x) for x in buffer]
-    print('Sending bytes {}'.format(as_hex))
+    #print('Sending bytes {}'.format(as_hex))
 
     as_bytes = bytes(buffer)  # build bytes object from list of numbers (buffer)
     serial_port.write(as_bytes)
@@ -107,7 +107,7 @@ def send_request(serial_port, buffer: list, get_rsp=True) -> list:
 
     rsp = rcv_response(serial_port)
     as_hex = [hex(x) for x in rsp]
-    print('Received bytes {}'.format(as_hex))
+    #print('Received bytes {}'.format(as_hex))
 
     return rsp
 
@@ -131,6 +131,7 @@ def get_status_jog(serial_port,
         return
 
     response = remove_escapes(response_raw)
+    print([x for x in response_raw]) 
 
     return_code = response.pop(0)  # Pop ACK/NACK off front
     response.pop()  # Pop ETX from back
@@ -141,14 +142,15 @@ def get_status_jog(serial_port,
 
     # Check LRC is valid
     lrc_matches = calc_checksum(rsp_cmd, rsp_data) == rsp_lrc
-
+    
     # print(('RCV | GET STATUS/JOG | '
-    #        'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
-    #        'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
+    #         'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
+    #         'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
     #                                                       id=hex(rsp_identity),
     #                                                       cmd=hex(rsp_cmd),
     #                                                       lrc_match='YES' if lrc_matches else 'NO',
     #                                                       data=[hex(x) for x in rsp_data]))
+                                                      
 
 def init_autobaud(serial_port):
     print('Initializing Autobaud')

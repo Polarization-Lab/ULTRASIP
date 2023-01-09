@@ -23,7 +23,7 @@ with dcam:
 
         # Simple acquisition example
         nb_frames = 5
-        camera["exposure_time"] = 5
+        camera["exposure_time"] = 1e-6
         with Stream(camera, nb_frames) as stream:
                 logging.info("start acquisition")
                 camera.start()
