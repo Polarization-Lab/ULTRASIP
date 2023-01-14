@@ -162,58 +162,109 @@ sza = np.radians(np.median(box_sza[good]))
         
 #------------------------------------------Geometry-------------------------
 #%%
+
+
+print(qm_470,qs_470,um_470,us_470,saz,sza,vaz_470,vza_470)
+
 zenith = np.array([0, 0, 1]);
 north = np.array([0, 1, 0]);
-view = np.array([np.cos(vaz_470)*np.sin(vza_470), -np.sin(vaz_470)*np.sin(vza_470),-np.cos(vza_470)]);
-sun = np.array([np.cos(saz)*np.sin(sza),-np.sin(saz)*np.sin(sza),-np.cos(sza)]);
 
-#print(view)
+illumination = np.array([np.cos(saz)*np.sin(sza),-np.sin(saz)*np.sin(sza),-np.cos(sza)]);
 
-normal_grasp =  np.cross(zenith,north)/magnitude(np.cross(zenith,north))
-vertical_grasp = np.cross(normal_grasp, view)/magnitude(np.cross(normal_grasp, view))
-horizontal_grasp = np.cross(vertical_grasp, view)/magnitude(np.cross(vertical_grasp, view))
+k = np.array([np.cos(vaz_470)*np.sin(vza_470), -np.sin(vaz_470)*np.sin(vza_470),-np.cos(vza_470)]);
+
+
+n_o =  np.cross(zenith,north)/magnitude(np.cross(zenith,north))
+v_o = np.cross(n_o, k)/magnitude(np.cross(n_o, k))
+h_o = np.cross(v_o, k)/magnitude(np.cross(v_o, k))
 
 #AirMSPI Meridian Plane to GRASP
-normal_airmer =  np.cross(zenith,view)/magnitude(np.cross(zenith,view))
-vertical_airmer = np.cross(normal_airmer, view)/magnitude(np.cross(normal_airmer, view))
-horizontal_airmer = np.cross(vertical_airmer, view)/magnitude(np.cross(vertical_airmer, view))
+n_i_m =  np.cross(zenith,k)/magnitude(np.cross(zenith,k))
+v_i_m = np.cross(k,n_i_m)/magnitude(np.cross(k,n_i_m))
+h_i_m = np.cross(v_i_m, k)/magnitude(np.cross(v_i_m, k))
 
-input_matrixmer = np.array([horizontal_airmer,vertical_airmer,view])
-output_matrixmer = np.array([horizontal_grasp,vertical_grasp,view])
+input_matrixm = np.array([h_i_m,v_i_m])
+output_matrixm = np.array([h_o,v_o])
 
-rot_matrixmer = output_matrixmer.dot(input_matrixmer.transpose())
-#print(rot_matrixmer)
+#rot_matrixm = output_matrixm.transpose().dot(input_matrixm)
 
-delta_alphamer = np.arctan2(rot_matrixmer[0,1],rot_matrixmer[0,0])
-#print(delta_alphamer)
+rot_matrixm = output_matrixm.dot(input_matrixm.transpose())
 
-rotmat1 = np.array([[np.cos(2*delta_alphamer), np.sin(2*delta_alphamer)],[-np.sin(2*delta_alphamer), np.cos(2*delta_alphamer)]])
+delta_alpham = np.arctan2(rot_matrixm[0,1],rot_matrixm[0,0])
+
+
+rotmat1 = np.array([[np.cos(2*delta_alpham), np.sin(2*delta_alpham)],[-np.sin(2*delta_alpham), np.cos(2*delta_alpham)]])
 polm = np.array([[qm_470],[um_470]])
 
-poloutm = rotmat1.dot(polm)/magnitude(rotmat1.dot(polm))
+poloutm = rotmat1.dot(polm)
 print(poloutm)
 
 
 #AirMSPI Scatter Plane to GRASP
-normal_airscat =  np.cross(sun,view)/magnitude(np.cross(sun,view))
-vertical_airscat = np.cross(normal_airscat, view)/magnitude(np.cross(normal_airscat, view))
-horizontal_airscat = np.cross(vertical_airscat, view)/magnitude(np.cross(vertical_airscat, view))
+n_i_s =  np.cross(illumination,k)/magnitude(np.cross(illumination,k))
+v_i_s = np.cross(k,n_i_s)/magnitude(np.cross(k,n_i_s))
+h_i_s = np.cross(v_i_s, k)/magnitude(np.cross(v_i_s, k))
 
-input_matrixscat = np.array([horizontal_airscat,vertical_airscat,view])
-output_matrixscat = np.array([horizontal_grasp,vertical_grasp,view])
+input_matrixs= np.array([h_i_s,v_i_s])
+output_matrixs = np.array([h_o,v_o])
 
-rot_matrixscat = output_matrixscat.dot(input_matrixscat.transpose())
-#print(rot_matrixscat)
+#rot_matrixs = output_matrixs.transpose().dot(input_matrixs)
 
-delta_alphascat = np.arctan2(rot_matrixscat[0,1],rot_matrixscat[0,0])
-#print(delta_alphascat)
+rot_matrixs = output_matrixs.dot(input_matrixs.transpose())
+
+delta_alphascat = np.arctan2(rot_matrixs[0,1],rot_matrixs[0,0])
 
 rotmat = np.array([[np.cos(2*delta_alphascat), np.sin(2*delta_alphascat)],[-np.sin(2*delta_alphascat), np.cos(2*delta_alphascat)]])
 pols = np.array([[qs_470],[us_470]])
 
-polouts = rotmat.dot(pols)/magnitude(rotmat.dot(pols))
+polouts = rotmat.dot(pols)
 print(polouts)
 
 
+#%%
+zenith = np.array([0, 0, 1]);
+north = np.array([0, 1, 0]);
+
+illumination = np.array([np.cos(saz)*np.sin(sza),-np.sin(saz)*np.sin(sza),-np.cos(sza)]);
+
+k = np.array([np.cos(vaz_470)*np.sin(vza_470), -np.sin(vaz_470)*np.sin(vza_470),-np.cos(vza_470)]);
 
 
+v_o =  np.cross(zenith,north)/magnitude(np.cross(zenith,north))
+h_o = np.cross(k,v_o)/magnitude(np.cross(k,v_o))
+
+#AirMSPI Meridian Plane to GRASP
+v_i_m =  np.cross(zenith,k)/magnitude(np.cross(zenith,k))
+h_i_m = np.cross(k,v_i_m)/magnitude(np.cross(k,v_i_m))
+
+input_matrixm = np.array([h_i_m,v_i_m])
+output_matrixm = np.array([h_o,v_o])
+
+rot_matrixm = output_matrixm.transpose().dot(input_matrixm)
+
+#rot_matrixm = output_matrixm.dot(input_matrixm.transpose())
+delta_alpham = np.arctan2(rot_matrixm[0,1],rot_matrixm[0,0])
+
+rotmat1 = np.array([[np.cos(2*delta_alpham), np.sin(2*delta_alpham)],[-np.sin(2*delta_alpham), np.cos(2*delta_alpham)]])
+polm = np.array([[qm_470],[um_470]])
+
+poloutm = rotmat1.dot(polm)
+print(poloutm)
+
+#AirMSPI Scatter Plane to GRASP
+v_i_s =  np.cross(illumination,k)/magnitude(np.cross(illumination,k))
+h_i_s = np.cross(k,v_i_s)/magnitude(np.cross(k,v_i_s))
+
+input_matrixs = np.array([h_i_s,v_i_s])
+output_matrixs = np.array([h_o,v_o])
+
+rot_matrixs = output_matrixs.transpose().dot(input_matrixs)
+
+#rot_matrixs = output_matrixs.dot(input_matrixs.transpose())
+delta_alphas = np.arctan2(rot_matrixs[0,1],rot_matrixs[0,0])
+
+rotmat = np.array([[np.cos(2*delta_alphas), np.sin(2*delta_alphas)],[-np.sin(2*delta_alphas), np.cos(2*delta_alphas)]])
+pols = np.array([[qs_470],[us_470]])
+
+polouts = rotmat.dot(pols)
+print(polouts)
