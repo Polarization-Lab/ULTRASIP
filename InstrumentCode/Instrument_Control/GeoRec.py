@@ -15,7 +15,7 @@ def magnitude(vector):
     return math.sqrt(sum(pow(element, 2) for element in vector))
 
 #%% Data Loading 
-datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/AirMSPI_ER2_GRP_TERRAIN_20190817_001208Z_AZ-Prescott_467F_F01_V006.hdf"
+datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/AirMSPI_ER2_GRP_TERRAIN_20190817_001521Z_AZ-Prescott_467A_F01_V006.hdf"
 
 #_______________Region of Interest___________________#
 # Crop images to same area to correct for parallax and set a region of interest
@@ -81,6 +81,8 @@ f = h5py.File(inputName,'r')
 print("470nm")
 I_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/I/'][:]
 DOLP_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/DOLP/'][:]
+AOLPm_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/AOLP_scatter/'][:]
+AOLPs_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/AOLP_meridian/'][:]
 IPOL_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/IPOL/'][:]
 scat_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/Scattering_angle/'][:]
 saz_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/Sun_azimuth/'][:]
@@ -167,104 +169,73 @@ sza = np.radians(np.median(box_sza[good]))
 print(qm_470,qs_470,um_470,us_470,saz,sza,vaz_470,vza_470)
 
 zenith = np.array([0, 0, 1]);
-north = np.array([0, 1, 0]);
+north = np.array([1, 0, 0]);
 
 illumination = np.array([np.cos(saz)*np.sin(sza),-np.sin(saz)*np.sin(sza),-np.cos(sza)]);
 
 k = np.array([np.cos(vaz_470)*np.sin(vza_470), -np.sin(vaz_470)*np.sin(vza_470),-np.cos(vza_470)]);
 
 
-n_o =  np.cross(zenith,north)/magnitude(np.cross(zenith,north))
-v_o = np.cross(n_o, k)/magnitude(np.cross(n_o, k))
-h_o = np.cross(v_o, k)/magnitude(np.cross(v_o, k))
+#GRASP Plane
+n_o =  np.cross(zenith,north)/np.linalg.norm(np.cross(zenith,north))
+h_o = np.cross(k, n_o)/np.linalg.norm(np.cross(k,n_o))
+v_o = np.cross(k,h_o)/np.linalg.norm(np.cross(k,h_o))
 
-#AirMSPI Meridian Plane to GRASP
-n_i_m =  np.cross(zenith,k)/magnitude(np.cross(zenith,k))
-v_i_m = np.cross(k,n_i_m)/magnitude(np.cross(k,n_i_m))
-h_i_m = np.cross(v_i_m, k)/magnitude(np.cross(v_i_m, k))
+#AirMSPI Meridian Plane 
+n_i_m =  np.cross(zenith,k)/np.linalg.norm(np.cross(zenith,k))
+h_i_m = np.cross(k,n_i_m)/np.linalg.norm(np.cross(k,n_i_m))
+v_i_m = np.cross(k,h_i_m)/np.linalg.norm(np.cross(k,h_i_m))
 
-input_matrixm = np.array([h_i_m,v_i_m])
-output_matrixm = np.array([h_o,v_o])
+Oin_m = np.array([h_i_m,v_i_m,k])
+Oout = np.array([h_o,v_o,k])
 
-#rot_matrixm = output_matrixm.transpose().dot(input_matrixm)
 
-rot_matrixm = output_matrixm.dot(input_matrixm.transpose())
+Rm = Oout.T@Oin_m
 
-delta_alpham = np.arctan2(rot_matrixm[0,1],rot_matrixm[0,0])
+um = np.array([Rm[2,1]-Rm[1,2],Rm[0,2]-Rm[2,0],Rm[1,0]-Rm[0,1]])
+delm = np.arcsin(np.linalg.norm(um)/2)
 
+delta_alpham = delm #np.arccos((np.trace(Rm)-1)/2)
 
 rotmat1 = np.array([[np.cos(2*delta_alpham), np.sin(2*delta_alpham)],[-np.sin(2*delta_alpham), np.cos(2*delta_alpham)]])
 polm = np.array([[qm_470],[um_470]])
+AolPm = 0.5*np.arctan(polm[1,0]/polm[0,0])
+DolPm = (polm[0,0]**2 + polm[1,0]**2)**(1/2)
 
-poloutm = rotmat1.dot(polm)
+poloutm = rotmat1@(polm)
+AolPmout = 0.5*np.arctan(poloutm[1,0]/poloutm[0,0])
+DolPmout = (poloutm[0,0]**2 + poloutm[1,0]**2)**(1/2)
+
+poloutmnorm = poloutm/DolPmout
 print(poloutm)
 
-
 #AirMSPI Scatter Plane to GRASP
-n_i_s =  np.cross(illumination,k)/magnitude(np.cross(illumination,k))
-v_i_s = np.cross(k,n_i_s)/magnitude(np.cross(k,n_i_s))
-h_i_s = np.cross(v_i_s, k)/magnitude(np.cross(v_i_s, k))
 
-input_matrixs= np.array([h_i_s,v_i_s])
-output_matrixs = np.array([h_o,v_o])
+n_i_s =  np.cross(illumination,k)/np.linalg.norm(np.cross(illumination,k))
+h_i_s = np.cross(k,n_i_s)/np.linalg.norm(np.cross(k,n_i_s))
+v_i_s = np.cross(k,h_i_s)/np.linalg.norm(np.cross(k,h_i_s))
 
-#rot_matrixs = output_matrixs.transpose().dot(input_matrixs)
+Oin = np.array([h_i_s,v_i_s,k])
 
-rot_matrixs = output_matrixs.dot(input_matrixs.transpose())
 
-delta_alphascat = np.arctan2(rot_matrixs[0,1],rot_matrixs[0,0])
+R = Oout.T@Oin
+
+delta_alphascat = np.arccos((np.trace(R)-1)/2)
 
 rotmat = np.array([[np.cos(2*delta_alphascat), np.sin(2*delta_alphascat)],[-np.sin(2*delta_alphascat), np.cos(2*delta_alphascat)]])
 pols = np.array([[qs_470],[us_470]])
 
-polouts = rotmat.dot(pols)
+AolPs = 0.5*np.arctan(pols[1,0]/pols[0,0])
+DolPs = (pols[0,0]**2 + pols[1,0]**2)**(1/2)
+
+us = np.array([R[2,1]-R[1,2],R[0,2]-R[2,0],R[1,0]-R[0,1]])
+dels = np.arcsin(np.linalg.norm(us)/2)
+
+polouts = rotmat@(pols)
+AolPsout = 0.5*np.arctan(polouts[1,0]/polouts[0,0])
+DolPsout = (polouts[0,0]**2 + polouts[1,0]**2)**(1/2)
+poloutsnorm = polouts/DolPsout
+
+
 print(polouts)
 
-
-#%%
-zenith = np.array([0, 0, 1]);
-north = np.array([0, 1, 0]);
-
-illumination = np.array([np.cos(saz)*np.sin(sza),-np.sin(saz)*np.sin(sza),-np.cos(sza)]);
-
-k = np.array([np.cos(vaz_470)*np.sin(vza_470), -np.sin(vaz_470)*np.sin(vza_470),-np.cos(vza_470)]);
-
-
-v_o =  np.cross(zenith,north)/magnitude(np.cross(zenith,north))
-h_o = np.cross(k,v_o)/magnitude(np.cross(k,v_o))
-
-#AirMSPI Meridian Plane to GRASP
-v_i_m =  np.cross(zenith,k)/magnitude(np.cross(zenith,k))
-h_i_m = np.cross(k,v_i_m)/magnitude(np.cross(k,v_i_m))
-
-input_matrixm = np.array([h_i_m,v_i_m])
-output_matrixm = np.array([h_o,v_o])
-
-rot_matrixm = output_matrixm.transpose().dot(input_matrixm)
-
-#rot_matrixm = output_matrixm.dot(input_matrixm.transpose())
-delta_alpham = np.arctan2(rot_matrixm[0,1],rot_matrixm[0,0])
-
-rotmat1 = np.array([[np.cos(2*delta_alpham), np.sin(2*delta_alpham)],[-np.sin(2*delta_alpham), np.cos(2*delta_alpham)]])
-polm = np.array([[qm_470],[um_470]])
-
-poloutm = rotmat1.dot(polm)
-print(poloutm)
-
-#AirMSPI Scatter Plane to GRASP
-v_i_s =  np.cross(illumination,k)/magnitude(np.cross(illumination,k))
-h_i_s = np.cross(k,v_i_s)/magnitude(np.cross(k,v_i_s))
-
-input_matrixs = np.array([h_i_s,v_i_s])
-output_matrixs = np.array([h_o,v_o])
-
-rot_matrixs = output_matrixs.transpose().dot(input_matrixs)
-
-#rot_matrixs = output_matrixs.dot(input_matrixs.transpose())
-delta_alphas = np.arctan2(rot_matrixs[0,1],rot_matrixs[0,0])
-
-rotmat = np.array([[np.cos(2*delta_alphas), np.sin(2*delta_alphas)],[-np.sin(2*delta_alphas), np.cos(2*delta_alphas)]])
-pols = np.array([[qs_470],[us_470]])
-
-polouts = rotmat.dot(pols)
-print(polouts)
