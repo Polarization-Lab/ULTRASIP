@@ -14,8 +14,14 @@ import time
 def magnitude(vector):
     return math.sqrt(sum(pow(element, 2) for element in vector))
 
+np.set_printoptions(precision=4)
 #%% Data Loading 
-datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/AirMSPI_ER2_GRP_TERRAIN_20190817_001521Z_AZ-Prescott_467A_F01_V006.hdf"
+#datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/AirMSPI_ER2_GRP_TERRAIN_20190817_001208Z_AZ-Prescott_467F_F01_V006.hdf"
+#datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/AirMSPI_ER2_GRP_TERRAIN_20190817_001032Z_AZ-Prescott_646F_F01_V006.hdf"
+#datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/AirMSPI_ER2_GRP_TERRAIN_20190817_001344Z_AZ-Prescott_000N_F01_V006.hdf"
+#datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/AirMSPI_ER2_GRP_TERRAIN_20190817_001521Z_AZ-Prescott_467A_F01_V006.hdf"
+datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/AirMSPI_ER2_GRP_TERRAIN_20190817_001657Z_AZ-Prescott_646A_F01_V006.hdf"
+
 
 #_______________Region of Interest___________________#
 # Crop images to same area to correct for parallax and set a region of interest
@@ -164,27 +170,33 @@ sza = np.radians(np.median(box_sza[good]))
         
 #------------------------------------------Geometry-------------------------
 #%%
+#Sun azimuth angle (saz) sun zenith angle (sza)
+phi_i = saz
+theta_i = sza
+#theta_i = sza
 
+#View azimuth angle (vaz) view zenith angle (vza)
+phi_r = vaz_470
+theta_r = vza_470
 
-print(qm_470,qs_470,um_470,us_470,saz,sza,vaz_470,vza_470)
-
+#Vector Definitions  
+#r̂i = [cos Φi sin θi, - sin Φi sin θi, - cos θi] 
+#r̂r = [cos Φr sin θr, - sin Φr sin θr, - cos θr].
 zenith = np.array([0, 0, 1]);
 north = np.array([1, 0, 0]);
-
-illumination = np.array([np.cos(saz)*np.sin(sza),-np.sin(saz)*np.sin(sza),-np.cos(sza)]);
-
-k = np.array([np.cos(vaz_470)*np.sin(vza_470), -np.sin(vaz_470)*np.sin(vza_470),-np.cos(vza_470)]);
-
+illumination =  -np.array([np.cos(phi_i)*np.sin(theta_i),-np.sin(phi_i)*np.sin(theta_i),-np.cos(theta_i)]);
+k = -np.array([np.cos(phi_r)*np.sin(theta_r), -np.sin(phi_r)*np.sin(theta_r),-np.cos(theta_r)]);
 
 #GRASP Plane
-n_o =  np.cross(zenith,north)/np.linalg.norm(np.cross(zenith,north))
-h_o = np.cross(k, n_o)/np.linalg.norm(np.cross(k,n_o))
-v_o = np.cross(k,h_o)/np.linalg.norm(np.cross(k,h_o))
+n_o =  np.cross(north,zenith)/np.linalg.norm(np.cross(north,zenith))
+#n_o =  np.cross(zenith,north)/np.linalg.norm(np.cross(zenith,north))
+v_o = np.cross(k, n_o)/np.linalg.norm(np.cross(k,n_o))
+h_o = np.cross(k,v_o)/np.linalg.norm(np.cross(k,v_o))
 
 #AirMSPI Meridian Plane 
 n_i_m =  np.cross(zenith,k)/np.linalg.norm(np.cross(zenith,k))
-h_i_m = np.cross(k,n_i_m)/np.linalg.norm(np.cross(k,n_i_m))
-v_i_m = np.cross(k,h_i_m)/np.linalg.norm(np.cross(k,h_i_m))
+v_i_m = np.cross(k,n_i_m)/np.linalg.norm(np.cross(k,n_i_m))
+h_i_m = np.cross(k,v_i_m)/np.linalg.norm(np.cross(k,v_i_m))
 
 Oin_m = np.array([h_i_m,v_i_m,k])
 Oout = np.array([h_o,v_o,k])
@@ -192,10 +204,7 @@ Oout = np.array([h_o,v_o,k])
 
 Rm = Oout.T@Oin_m
 
-um = np.array([Rm[2,1]-Rm[1,2],Rm[0,2]-Rm[2,0],Rm[1,0]-Rm[0,1]])
-delm = np.arcsin(np.linalg.norm(um)/2)
-
-delta_alpham = delm #np.arccos((np.trace(Rm)-1)/2)
+delta_alpham = np.arccos((np.trace(Rm)-1)/2)
 
 rotmat1 = np.array([[np.cos(2*delta_alpham), np.sin(2*delta_alpham)],[-np.sin(2*delta_alpham), np.cos(2*delta_alpham)]])
 polm = np.array([[qm_470],[um_470]])
@@ -212,8 +221,8 @@ print(poloutm)
 #AirMSPI Scatter Plane to GRASP
 
 n_i_s =  np.cross(illumination,k)/np.linalg.norm(np.cross(illumination,k))
-h_i_s = np.cross(k,n_i_s)/np.linalg.norm(np.cross(k,n_i_s))
-v_i_s = np.cross(k,h_i_s)/np.linalg.norm(np.cross(k,h_i_s))
+v_i_s = np.cross(k,n_i_s)/np.linalg.norm(np.cross(k,n_i_s))
+h_i_s = np.cross(k,v_i_s)/np.linalg.norm(np.cross(k,v_i_s))
 
 Oin = np.array([h_i_s,v_i_s,k])
 
@@ -228,9 +237,6 @@ pols = np.array([[qs_470],[us_470]])
 AolPs = 0.5*np.arctan(pols[1,0]/pols[0,0])
 DolPs = (pols[0,0]**2 + pols[1,0]**2)**(1/2)
 
-us = np.array([R[2,1]-R[1,2],R[0,2]-R[2,0],R[1,0]-R[0,1]])
-dels = np.arcsin(np.linalg.norm(us)/2)
-
 polouts = rotmat@(pols)
 AolPsout = 0.5*np.arctan(polouts[1,0]/polouts[0,0])
 DolPsout = (polouts[0,0]**2 + polouts[1,0]**2)**(1/2)
@@ -238,4 +244,3 @@ poloutsnorm = polouts/DolPsout
 
 
 print(polouts)
-

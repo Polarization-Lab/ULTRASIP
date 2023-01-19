@@ -6,6 +6,8 @@ Geometry reconciliation  test code
 import numpy as np
 import math
 
+np.set_printoptions(precision=4)
+
 #Angles and Q and U from AirMSPI File 
 qm_470 = 0.015961975;
 um_470 = 0.0007153307;
@@ -15,7 +17,7 @@ us_470 = 0.0035453732;
 
 #Sun azimuth angle (saz) sun zenith angle (sza)
 phi_i = saz = 1.566315;
-theta_i = sza = 1.1397834;
+theta_i = sza = - 1.1397834;
 
 #View azimuth angle (vaz) view zenith angle (vza)
 phi_r = vaz = 3.829499;
@@ -30,7 +32,7 @@ illumination =  np.array([np.cos(phi_i)*np.sin(theta_i),-np.sin(phi_i)*np.sin(th
 k = np.array([np.cos(phi_r)*np.sin(theta_r), -np.sin(phi_r)*np.sin(theta_r),-np.cos(theta_r)]);
 
 #GRASP Plane
-n_o =  np.cross(zenith,north)/np.linalg.norm(np.cross(zenith,north))
+n_o =  np.cross(north,zenith)/np.linalg.norm(np.cross(north,zenith))
 h_o = np.cross(k, n_o)/np.linalg.norm(np.cross(k,n_o))
 v_o = np.cross(k,h_o)/np.linalg.norm(np.cross(k,h_o))
 
@@ -45,12 +47,9 @@ Oout = np.array([h_o,v_o,k])
 
 Rm = Oout.T@Oin_m
 
-um = np.array([Rm[2,1]-Rm[1,2],Rm[0,2]-Rm[2,0],Rm[1,0]-Rm[0,1]])
-delm = np.arcsin(np.linalg.norm(um)/2)
+delta_alpham = np.arccos((np.trace(Rm)-1)/2)
 
-delta_alpham = delm #np.arccos((np.trace(Rm)-1)/2)
-
-rotmat1 = np.array([[np.cos(delta_alpham), np.sin(delta_alpham)],[-np.sin(delta_alpham), np.cos(delta_alpham)]])
+rotmat1 = np.array([[np.cos(2*delta_alpham), np.sin(2*delta_alpham)],[-np.sin(2*delta_alpham), np.cos(2*delta_alpham)]])
 polm = np.array([[qm_470],[um_470]])
 AolPm = 0.5*np.arctan(polm[1,0]/polm[0,0])
 DolPm = (polm[0,0]**2 + polm[1,0]**2)**(1/2)
@@ -75,14 +74,11 @@ R = Oout.T@Oin
 
 delta_alphascat = np.arccos((np.trace(R)-1)/2)
 
-rotmat = np.array([[np.cos(delta_alphascat), np.sin(delta_alphascat)],[-np.sin(delta_alphascat), np.cos(delta_alphascat)]])
+rotmat = np.array([[np.cos(2*delta_alphascat), np.sin(2*delta_alphascat)],[-np.sin(2*delta_alphascat), np.cos(2*delta_alphascat)]])
 pols = np.array([[qs_470],[us_470]])
 
 AolPs = 0.5*np.arctan(pols[1,0]/pols[0,0])
 DolPs = (pols[0,0]**2 + pols[1,0]**2)**(1/2)
-
-us = np.array([R[2,1]-R[1,2],R[0,2]-R[2,0],R[1,0]-R[0,1]])
-dels = np.arcsin(np.linalg.norm(us)/2)
 
 polouts = rotmat@(pols)
 AolPsout = 0.5*np.arctan(polouts[1,0]/polouts[0,0])
