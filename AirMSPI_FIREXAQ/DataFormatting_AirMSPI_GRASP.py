@@ -618,10 +618,9 @@ def main():  # Main code
 ### GRASP REQUIRES DATA IN THE MERIDIAN PLANE, BUT THE DEFINITION IS SLIGHTLY
 ### DIFFERENT THAN THE ONE USED BY AirMSPI, SO CALCULATE THE APPROPRIATE 
 ### MERIDIAN PLANE HERE
-        sza = -sza;
         zenith= np.array([0, 0, 1]);
         nor= np.array([1, 0, 0]);
-        i = np.array([np.cos(saz)*np.sin(sza), -np.sin(saz)*np.sin(sza), -np.cos(sza)]); #illumination vec
+        i = np.array([np.cos(saz)*np.sin(-sza), -np.sin(saz)*np.sin(-sza), -np.cos(-sza)]); #illumination vec,flip sign of sza
     
         k = np.array([np.cos(vaz_470)*np.sin(vza_470), -np.sin(vaz_470)*np.sin(vza_470), -np.cos(vza_470)]);
         #k_660 = np.array([cosd(vaz_660)*sind(vza_660), -sind(vaz_660)*sind(vza_660), -cosd(vza_660)]);
