@@ -620,9 +620,9 @@ def main():  # Main code
 ### MERIDIAN PLANE HERE
         zenith= np.array([0, 0, 1]);
         nor= np.array([1, 0, 0]);
-        i = np.array([np.cos(saz)*np.sin(-sza), -np.sin(saz)*np.sin(-sza), -np.cos(-sza)]); #illumination vec,flip sign of sza
+        i = np.array([np.cos(np.radians(saz))*np.sin(np.radians(-sza)), np.sin(np.radians(saz))*np.sin(np.radians(sza)), -np.cos(np.radians(-sza))]); #illumination vec,flip sign of sza
     
-        k = np.array([np.cos(vaz_470)*np.sin(vza_470), -np.sin(vaz_470)*np.sin(vza_470), -np.cos(vza_470)]);
+        k = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.sin(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.cos(np.radians(vza_470))]);
         #k_660 = np.array([cosd(vaz_660)*sind(vza_660), -sind(vaz_660)*sind(vza_660), -cosd(vza_660)]);
         #k_865 = np.array([cosd(vaz_865)*sind(vza_865), -sind(vaz_865)*sind(vza_865), -cosd(vza_865)]);
 
@@ -636,15 +636,14 @@ def main():  # Main code
         air_sS=np.cross(k,air_ms)/np.linalg.norm(np.cross(k,air_ms));
         air_pS=np.cross(k,air_sS)/np.linalg.norm(np.cross(k,air_sS));
 
-        alphas = np.arctan(np.dot(grasp_p,air_sS)/np.dot(grasp_p,air_pS));
+        alphas = np.arctan2(np.dot(grasp_p,air_sS),np.dot(grasp_p,air_pS));
+        #alphas = np.radians(alphas)
 
         rotmatrix = np.array([[np.cos(2*alphas),np.sin(2*alphas)],[-np.sin(2*alphas),np.cos(2*alphas)]]);
     
         qg_470, ug_470 = np.dot(rotmatrix,np.array([[qs_470], [us_470]]))
         qg_660, ug_660 = np.dot(rotmatrix,np.array([[qs_660], [us_660]]))
         qg_865, ug_865 = np.dot(rotmatrix,np.array([[qs_865], [us_865]]))
-
-        print(qs_470,us_470,sza,saz,vza_470,vaz_470,qg_470,ug_470)
 
 #     mu0 = np.cos(np.radians(sza))
 #         nu0 = np.sin(np.radians(sza))
@@ -788,7 +787,7 @@ def main():  # Main code
         vza_median[loop,5] = vza_660
         vza_median[loop,6] = vza_865
         
-        print(vza_median[:,:])
+        #print(vza_median[:,:])
 
         
         raz_median[loop,0] = raz_355

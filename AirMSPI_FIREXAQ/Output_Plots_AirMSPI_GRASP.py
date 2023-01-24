@@ -41,8 +41,8 @@ def main():
 # NOTE: outpath is the location of the GRASP output files
 #       figpath is where the image output should be stored
 #Work computer
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_121922"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Figures"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_012423"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_012423"
 
 #Home computer
 

@@ -17,8 +17,8 @@ def main():  # Main code
 # NOTE: basepath is the location of the GRASP output files
 #       figpath is where the image output should be stored
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_121922"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_121922"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_012423"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_012423"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)

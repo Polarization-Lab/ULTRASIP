@@ -11,7 +11,7 @@ input:
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["RetrievalALL_1_Dec_05_22.txt", screen] # screen, "filename"
+        stream: ["RetrievalALL_1_Jan_24_23.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
