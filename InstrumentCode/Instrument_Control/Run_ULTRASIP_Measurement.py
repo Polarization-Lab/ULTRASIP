@@ -27,8 +27,8 @@ moog.port = 'COM2'
 moog.open()
 
 # Pan and tilt of moog
-pan = 100
-tilt = 50
+pan = 9999
+tilt = 9999
 
 # Polarizer rotation connect and angles
 controller = elliptec.Controller('COM4')
@@ -36,8 +36,8 @@ ro = elliptec.Rotator(controller)
 angles = [0, 45, 90, 135]
 
 # Image Acquisition
-nb_frames = 5
-exposure = 1e-9
+nb_frames = 10
+exposure = 1e-6
 
 # Position Moog
 mc.init_autobaud(moog)

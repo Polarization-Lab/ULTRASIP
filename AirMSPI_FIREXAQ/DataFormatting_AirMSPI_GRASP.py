@@ -60,8 +60,8 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_121922"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_012423"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -618,47 +618,75 @@ def main():  # Main code
 ### GRASP REQUIRES DATA IN THE MERIDIAN PLANE, BUT THE DEFINITION IS SLIGHTLY
 ### DIFFERENT THAN THE ONE USED BY AirMSPI, SO CALCULATE THE APPROPRIATE 
 ### MERIDIAN PLANE HERE
+        sza = -sza;
+        zenith= np.array([0, 0, 1]);
+        nor= np.array([1, 0, 0]);
+        i = np.array([np.cos(saz)*np.sin(sza), -np.sin(saz)*np.sin(sza), -np.cos(sza)]); #illumination vec
+    
+        k = np.array([np.cos(vaz_470)*np.sin(vza_470), -np.sin(vaz_470)*np.sin(vza_470), -np.cos(vza_470)]);
+        #k_660 = np.array([cosd(vaz_660)*sind(vza_660), -sind(vaz_660)*sind(vza_660), -cosd(vza_660)]);
+        #k_865 = np.array([cosd(vaz_865)*sind(vza_865), -sind(vaz_865)*sind(vza_865), -cosd(vza_865)]);
 
-        mu0 = np.cos(np.radians(sza))
-        nu0 = np.sin(np.radians(sza))
+        #Define GRASP Plane   
+        grasp_n=np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
+        grasp_s=np.cross(k,grasp_n)/np.linalg.norm(np.cross(k,grasp_n)); #intersection of transverse & reference
+        grasp_p=np.cross(k,grasp_s)/np.linalg.norm(np.cross(k,grasp_s));
+    
+        #Define airmspi Scattering Plane
+        air_ms=np.cross(i,k)/np.linalg.norm(np.cross(i,k));
+        air_sS=np.cross(k,air_ms)/np.linalg.norm(np.cross(k,air_ms));
+        air_pS=np.cross(k,air_sS)/np.linalg.norm(np.cross(k,air_sS));
 
-        mu_470 = np.cos(np.radians(vza_470))
-        mu_660 = np.cos(np.radians(vza_660))
-        mu_865 = np.cos(np.radians(vza_865))
-        
-        nu_470 = np.sin(np.radians(vza_470))
-        nu_660 = np.sin(np.radians(vza_660))
-        nu_865 = np.sin(np.radians(vza_865))
-        
-        delta_phi_470 = vaz_470 - saz
-        delta_phi_660 = vaz_660 - saz
-        delta_phi_865 = vaz_865 - saz
-        
-        x1_470 = nu0*np.sin(np.radians(delta_phi_470))
-        x1_660 = nu0*np.sin(np.radians(delta_phi_660))
-        x1_865 = nu0*np.sin(np.radians(delta_phi_865))
-        
-        x2_470 = nu_470*mu0+mu_470*nu0*np.cos(np.radians(delta_phi_470))
-        x2_660 = nu_660*mu0+mu_660*nu0*np.cos(np.radians(delta_phi_660))
-        x2_865 = nu_865*mu0+mu_865*nu0*np.cos(np.radians(delta_phi_865))
-        
-        alpha_470 = np.arctan2(x1_470,x2_470) #  Returns value in radians
-        alpha_660 = np.arctan2(x1_660,x2_660) #  Returns value in radians
-        alpha_865 = np.arctan2(x1_865,x2_865) #  Returns value in radians
-        
-# Convert to GRASP coordinates
-        
-        #qg_470 = qs_470*np.cos(2.0*alpha_470)+us_470*np.sin(2.0*alpha_470)
-        #qg_660 = qs_660*np.cos(2.0*alpha_660)+us_660*np.sin(2.0*alpha_660)
-        #qg_865 = qs_865*np.cos(2.0*alpha_865)+us_865*np.sin(2.0*alpha_865)
-        
-        qg_470 = qs_470*np.cos(2.0*alpha_470)-us_470*np.sin(2.0*alpha_470)
-        qg_660 = qs_660*np.cos(2.0*alpha_660)-us_660*np.sin(2.0*alpha_660)
-        qg_865 = qs_865*np.cos(2.0*alpha_865)-us_865*np.sin(2.0*alpha_865)
+        alphas = np.arctan(np.dot(grasp_p,air_sS)/np.dot(grasp_p,air_pS));
 
-        ug_470 = qs_470*np.sin(2.0*alpha_470)+us_470*np.cos(2.0*alpha_470)
-        ug_660 = qs_660*np.sin(2.0*alpha_660)+us_660*np.cos(2.0*alpha_660)
-        ug_865 = qs_865*np.sin(2.0*alpha_865)+us_865*np.cos(2.0*alpha_865)
+        rotmatrix = np.array([[np.cos(2*alphas),np.sin(2*alphas)],[-np.sin(2*alphas),np.cos(2*alphas)]]);
+    
+        qg_470, ug_470 = np.dot(rotmatrix,np.array([[qs_470], [us_470]]))
+        qg_660, ug_660 = np.dot(rotmatrix,np.array([[qs_660], [us_660]]))
+        qg_865, ug_865 = np.dot(rotmatrix,np.array([[qs_865], [us_865]]))
+
+        print(qs_470,us_470,sza,saz,vza_470,vaz_470,qg_470,ug_470)
+
+#     mu0 = np.cos(np.radians(sza))
+#         nu0 = np.sin(np.radians(sza))
+
+#         mu_470 = np.cos(np.radians(vza_470))
+#         mu_660 = np.cos(np.radians(vza_660))
+#         mu_865 = np.cos(np.radians(vza_865))
+        
+#         nu_470 = np.sin(np.radians(vza_470))
+#         nu_660 = np.sin(np.radians(vza_660))
+#         nu_865 = np.sin(np.radians(vza_865))
+        
+#         delta_phi_470 = vaz_470 - saz
+#         delta_phi_660 = vaz_660 - saz
+#         delta_phi_865 = vaz_865 - saz
+        
+#         x1_470 = nu0*np.sin(np.radians(delta_phi_470))
+#         x1_660 = nu0*np.sin(np.radians(delta_phi_660))
+#         x1_865 = nu0*np.sin(np.radians(delta_phi_865))
+        
+#         x2_470 = nu_470*mu0+mu_470*nu0*np.cos(np.radians(delta_phi_470))
+#         x2_660 = nu_660*mu0+mu_660*nu0*np.cos(np.radians(delta_phi_660))
+#         x2_865 = nu_865*mu0+mu_865*nu0*np.cos(np.radians(delta_phi_865))
+        
+#         alpha_470 = np.arctan2(x1_470,x2_470) #  Returns value in radians
+#         alpha_660 = np.arctan2(x1_660,x2_660) #  Returns value in radians
+#         alpha_865 = np.arctan2(x1_865,x2_865) #  Returns value in radians
+        
+# # Convert to GRASP coordinates
+        
+#         #qg_470 = qs_470*np.cos(2.0*alpha_470)+us_470*np.sin(2.0*alpha_470)
+#         #qg_660 = qs_660*np.cos(2.0*alpha_660)+us_660*np.sin(2.0*alpha_660)
+#         #qg_865 = qs_865*np.cos(2.0*alpha_865)+us_865*np.sin(2.0*alpha_865)
+        
+#         qg_470 = qs_470*np.cos(2.0*alpha_470)-us_470*np.sin(2.0*alpha_470)
+#         qg_660 = qs_660*np.cos(2.0*alpha_660)-us_660*np.sin(2.0*alpha_660)
+#         qg_865 = qs_865*np.cos(2.0*alpha_865)-us_865*np.sin(2.0*alpha_865)
+
+#         ug_470 = qs_470*np.sin(2.0*alpha_470)+us_470*np.cos(2.0*alpha_470)
+#         ug_660 = qs_660*np.sin(2.0*alpha_660)+us_660*np.cos(2.0*alpha_660)
+#         ug_865 = qs_865*np.sin(2.0*alpha_865)+us_865*np.cos(2.0*alpha_865)
 
 # Calculate the relative azimuth angle in the GRASP convention
 # NOTE: This bit of code seems kludgy and comes from older AirMSPI code

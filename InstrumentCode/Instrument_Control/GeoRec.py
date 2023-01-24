@@ -172,7 +172,7 @@ sza = np.radians(np.median(box_sza[good]))
 #%%
 #Sun azimuth angle (saz) sun zenith angle (sza)
 phi_i = saz
-theta_i = sza
+theta_i = -sza
 #theta_i = sza
 
 #View azimuth angle (vaz) view zenith angle (vza)
@@ -185,7 +185,7 @@ theta_r = vza_470
 zenith = np.array([0, 0, 1]);
 north = np.array([1, 0, 0]);
 illumination =  -np.array([np.cos(phi_i)*np.sin(theta_i),-np.sin(phi_i)*np.sin(theta_i),-np.cos(theta_i)]);
-k = -np.array([np.cos(phi_r)*np.sin(theta_r), -np.sin(phi_r)*np.sin(theta_r),-np.cos(theta_r)]);
+k =-np.array([np.cos(phi_r)*np.sin(theta_r), -np.sin(phi_r)*np.sin(theta_r),-np.cos(theta_r)]);
 
 #GRASP Plane
 n_o =  np.cross(north,zenith)/np.linalg.norm(np.cross(north,zenith))
