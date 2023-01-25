@@ -61,7 +61,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_012423"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_012523"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -645,46 +645,7 @@ def main():  # Main code
         qg_660, ug_660 = np.dot(rotmatrix,np.array([[qs_660], [us_660]]))
         qg_865, ug_865 = np.dot(rotmatrix,np.array([[qs_865], [us_865]]))
 
-#     mu0 = np.cos(np.radians(sza))
-#         nu0 = np.sin(np.radians(sza))
 
-#         mu_470 = np.cos(np.radians(vza_470))
-#         mu_660 = np.cos(np.radians(vza_660))
-#         mu_865 = np.cos(np.radians(vza_865))
-        
-#         nu_470 = np.sin(np.radians(vza_470))
-#         nu_660 = np.sin(np.radians(vza_660))
-#         nu_865 = np.sin(np.radians(vza_865))
-        
-#         delta_phi_470 = vaz_470 - saz
-#         delta_phi_660 = vaz_660 - saz
-#         delta_phi_865 = vaz_865 - saz
-        
-#         x1_470 = nu0*np.sin(np.radians(delta_phi_470))
-#         x1_660 = nu0*np.sin(np.radians(delta_phi_660))
-#         x1_865 = nu0*np.sin(np.radians(delta_phi_865))
-        
-#         x2_470 = nu_470*mu0+mu_470*nu0*np.cos(np.radians(delta_phi_470))
-#         x2_660 = nu_660*mu0+mu_660*nu0*np.cos(np.radians(delta_phi_660))
-#         x2_865 = nu_865*mu0+mu_865*nu0*np.cos(np.radians(delta_phi_865))
-        
-#         alpha_470 = np.arctan2(x1_470,x2_470) #  Returns value in radians
-#         alpha_660 = np.arctan2(x1_660,x2_660) #  Returns value in radians
-#         alpha_865 = np.arctan2(x1_865,x2_865) #  Returns value in radians
-        
-# # Convert to GRASP coordinates
-        
-#         #qg_470 = qs_470*np.cos(2.0*alpha_470)+us_470*np.sin(2.0*alpha_470)
-#         #qg_660 = qs_660*np.cos(2.0*alpha_660)+us_660*np.sin(2.0*alpha_660)
-#         #qg_865 = qs_865*np.cos(2.0*alpha_865)+us_865*np.sin(2.0*alpha_865)
-        
-#         qg_470 = qs_470*np.cos(2.0*alpha_470)-us_470*np.sin(2.0*alpha_470)
-#         qg_660 = qs_660*np.cos(2.0*alpha_660)-us_660*np.sin(2.0*alpha_660)
-#         qg_865 = qs_865*np.cos(2.0*alpha_865)-us_865*np.sin(2.0*alpha_865)
-
-#         ug_470 = qs_470*np.sin(2.0*alpha_470)+us_470*np.cos(2.0*alpha_470)
-#         ug_660 = qs_660*np.sin(2.0*alpha_660)+us_660*np.cos(2.0*alpha_660)
-#         ug_865 = qs_865*np.sin(2.0*alpha_865)+us_865*np.cos(2.0*alpha_865)
 
 # Calculate the relative azimuth angle in the GRASP convention
 # NOTE: This bit of code seems kludgy and comes from older AirMSPI code
@@ -1096,7 +1057,68 @@ def main():  # Main code
 
     outputFile.close()
 
+### SECOND OUTPUT FILE: measurement info for polarimetric data
+
+# Get the number of valid polarization values
+# NOTE: We check a value in a data field, rather than relying on the index set
+#       as num_pol at the start of the file
+
+    hold = np.copy(q_median);
+    hold[q_median != 0.] = 1;
+    temp = np.sum(hold,axis=1);
+    num_polar = int(temp[0]);
+    num_polar_str = str(num_polar);
+    num_type = 3;
+    
+    out_str = 'Notes: same k-vector using 470nm channel angles\n'
+
+# Generate an output file name
+
+    outfile = outfile_base+"POLData"+".txt"
         
+    print()
+    print("Saving: "+outfile)
+    
+# Open the output file
+
+    outputFile = open(outfile, 'w')
+
+# Loop over the measurement types per wavelength
+
+    for outer in range(num_polar):  # Loop over wavelengths
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'Ipol:'+str(inner)+','+str(outer)+'{:16.8f}\n'.format(i_in_polar_median[inner,outer])  # I
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'Q:'+str(inner)+','+str(outer)+'{:16.8f}\n'.format(q_median[inner,outer])  # Q
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'U:'+str(inner)+','+str(outer)+'{:16.8f}\n'.format(u_median[inner,outer])  # U
+## ANGLE DEFINITIONS
+
+
+    for outer in range(num_polar):  # Loop over wavelengths
+        #for middle in range(num_type):  # Loop over types of measurement
+            out_str = out_str+'vza_470:'+str(inner)+','+str(outer)+'{:16.8f}\n'.format(vza_470)
+            out_str = out_str+'vza_660:'+str(inner)+','+str(outer)+'{:16.8f}\n'.format(vza_660)
+            out_str = out_str+'vza_865:'+str(inner)+','+str(outer)+'{:16.8f}\n'.format(vza_865)
+            out_str = out_str+'vaz_470:'+str(inner)+','+str(outer)+'{:16.8f}\n'.format(vaz_470)
+            out_str = out_str+'vaz_660:'+str(inner)+','+str(outer)+'{:16.8f}\n'.format(vaz_660)
+            out_str = out_str+'vaz_865:'+str(inner)+','+str(outer)+'{:16.8f}\n'.format(vaz_865)
+           # for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'sza:'+'{:16.8f}\n'.format(sza)
+            #for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'saz:'+'{:16.8f}\n'.format(saz)
+
+# Endline
+       
+    out_str = out_str+'\n'
+
+# Write out the line
+     
+    outputFile.write(out_str)
+
+# Close the output file
+
+    outputFile.close()
 # Print the time
 
     all_end_time = time.time()

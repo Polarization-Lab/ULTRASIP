@@ -36,7 +36,7 @@ ro = elliptec.Rotator(controller)
 angles = [0, 45, 90, 135]
 
 # Image Acquisition
-nb_frames = 10
+nb_frames = 1
 exposure = 1e-6
 
 # Position Moog
@@ -56,7 +56,7 @@ ro.home()
 # set an offset
 #offset = 0
 offset = -0.025
-
+tic = time.perf_counter()
 # Loop over a list of angles and acquire for each
 for angle in angles:
     ro.set_angle(angle+offset)
@@ -67,11 +67,16 @@ for angle in angles:
     
     plt.figure()
     plt.imshow(image)
+    plt.colorbar()
+    plt.axes = 'off'
+    plt.title(str(angleout)+'deg of polarizer')
     time.sleep(3)
 
+toc = time.perf_counter()
 
+print(tic-toc)
 # Home and close everything
-mc.mv_to_home(moog, 0000, 0000)
+#mc.mv_to_home(moog, 0000, 0000)
 moog.close()
 ro.home()
 ro.close()
