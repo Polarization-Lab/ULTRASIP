@@ -41,8 +41,9 @@ def main():
 # NOTE: outpath is the location of the GRASP output files
 #       figpath is where the image output should be stored
 #Work computer
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_012423"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_012423"
+
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_012523"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_012523"
 
 #Home computer
 
@@ -51,7 +52,7 @@ def main():
     os.chdir(outpath)
 
 # Find all output files with the specified file name 
-    file_list = glob.glob('*.txt')  
+    file_list = glob.glob('Retrieval*.txt')  
     num_files = len(file_list)   
     print("FOUND FILES:",num_files)
 

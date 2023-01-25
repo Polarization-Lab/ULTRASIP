@@ -61,7 +61,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_012523"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_012523"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -622,28 +622,53 @@ def main():  # Main code
         nor= np.array([1, 0, 0]);
         i = np.array([np.cos(np.radians(saz))*np.sin(np.radians(-sza)), np.sin(np.radians(saz))*np.sin(np.radians(sza)), -np.cos(np.radians(-sza))]); #illumination vec,flip sign of sza
     
-        k = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.sin(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.cos(np.radians(vza_470))]);
-        #k_660 = np.array([cosd(vaz_660)*sind(vza_660), -sind(vaz_660)*sind(vza_660), -cosd(vza_660)]);
-        #k_865 = np.array([cosd(vaz_865)*sind(vza_865), -sind(vaz_865)*sind(vza_865), -cosd(vza_865)]);
+        k_470 = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.sin(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.cos(np.radians(vza_470))]);
+        k_660 = np.array([np.cos(np.radians(vaz_660))*np.sin(np.radians(vza_660)), -np.sin(np.radians(vaz_660))*np.sin(np.radians(vza_660)), -np.cos(np.radians(vza_660))]);
+        k_865 = np.array([np.cos(np.radians(vaz_865))*np.sin(np.radians(vza_865)), -np.sin(np.radians(vaz_865))*np.sin(np.radians(vza_865)), -np.cos(np.radians(vza_865))]);
+
 
         #Define GRASP Plane   
         grasp_n=np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-        grasp_s=np.cross(k,grasp_n)/np.linalg.norm(np.cross(k,grasp_n)); #intersection of transverse & reference
-        grasp_p=np.cross(k,grasp_s)/np.linalg.norm(np.cross(k,grasp_s));
+        
+        grasp_s4=np.cross(k_470,grasp_n)/np.linalg.norm(np.cross(k_470,grasp_n)); #intersection of transverse & reference
+        grasp_p4=np.cross(k_470,grasp_s4)/np.linalg.norm(np.cross(k_470,grasp_s4));
     
         #Define airmspi Scattering Plane
-        air_ms=np.cross(i,k)/np.linalg.norm(np.cross(i,k));
-        air_sS=np.cross(k,air_ms)/np.linalg.norm(np.cross(k,air_ms));
-        air_pS=np.cross(k,air_sS)/np.linalg.norm(np.cross(k,air_sS));
+        air_ms4=np.cross(i,k_470)/np.linalg.norm(np.cross(i,k_470));
+        air_sS4=np.cross(k_470,air_ms4)/np.linalg.norm(np.cross(k_470,air_ms4));
+        air_pS4=np.cross(k_470,air_sS4)/np.linalg.norm(np.cross(k_470,air_sS4));
 
-        alphas = np.arctan2(np.dot(grasp_p,air_sS),np.dot(grasp_p,air_pS));
-        #alphas = np.radians(alphas)
-
-        rotmatrix = np.array([[np.cos(2*alphas),np.sin(2*alphas)],[-np.sin(2*alphas),np.cos(2*alphas)]]);
+        alphas4 = np.arctan2(np.dot(grasp_p4,air_sS4),np.dot(grasp_p4,air_pS4));
+        
+        rotmatrix4 = np.array([[np.cos(2*alphas4),np.sin(2*alphas4)],[-np.sin(2*alphas4),np.cos(2*alphas4)]]);
+#------------------------------------------------------------------------------------------------
+        grasp_s6=np.cross(k_660,grasp_n)/np.linalg.norm(np.cross(k_660,grasp_n)); #intersection of transverse & reference
+        grasp_p6=np.cross(k_660,grasp_s6)/np.linalg.norm(np.cross(k_660,grasp_s6));
     
-        qg_470, ug_470 = np.dot(rotmatrix,np.array([[qs_470], [us_470]]))
-        qg_660, ug_660 = np.dot(rotmatrix,np.array([[qs_660], [us_660]]))
-        qg_865, ug_865 = np.dot(rotmatrix,np.array([[qs_865], [us_865]]))
+        #Define airmspi Scattering Plane
+        air_ms6=np.cross(i,k_660)/np.linalg.norm(np.cross(i,k_660));
+        air_sS6=np.cross(k_660,air_ms6)/np.linalg.norm(np.cross(k_660,air_ms6));
+        air_pS6=np.cross(k_660,air_sS6)/np.linalg.norm(np.cross(k_660,air_sS6));
+
+        alphas6 = np.arctan2(np.dot(grasp_p6,air_sS6),np.dot(grasp_p6,air_pS6));
+
+        rotmatrix6 = np.array([[np.cos(2*alphas6),np.sin(2*alphas6)],[-np.sin(2*alphas6),np.cos(2*alphas6)]]);
+#----------------------------------------------------------------------------------------------------------
+        grasp_s8=np.cross(k_865,grasp_n)/np.linalg.norm(np.cross(k_865,grasp_n)); #intersection of transverse & reference
+        grasp_p8=np.cross(k_865,grasp_s8)/np.linalg.norm(np.cross(k_865,grasp_s8));
+
+        #Define airmspi Scattering Plane
+        air_ms8=np.cross(i,k_865)/np.linalg.norm(np.cross(i,k_865));
+        air_sS8=np.cross(k_865,air_ms8)/np.linalg.norm(np.cross(k_865,air_ms8));
+        air_pS8=np.cross(k_865,air_sS8)/np.linalg.norm(np.cross(k_865,air_sS8));
+
+        alphas8 = np.arctan2(np.dot(grasp_p8,air_sS8),np.dot(grasp_p8,air_pS8));
+
+        rotmatrix8 = np.array([[np.cos(2*alphas8),np.sin(2*alphas8)],[-np.sin(2*alphas8),np.cos(2*alphas8)]]);
+        
+        qg_470, ug_470 = np.dot(rotmatrix4,np.array([[qs_470], [us_470]]))
+        qg_660, ug_660 = np.dot(rotmatrix6,np.array([[qs_660], [us_660]]))
+        qg_865, ug_865 = np.dot(rotmatrix8,np.array([[qs_865], [us_865]]))
 
 
 
@@ -1070,7 +1095,7 @@ def main():  # Main code
     num_polar_str = str(num_polar);
     num_type = 3;
     
-    out_str = 'Notes: same k-vector using 470nm channel angles\n'
+    out_str = 'Notes: individual k-vectors\n'
 
 # Generate an output file name
 

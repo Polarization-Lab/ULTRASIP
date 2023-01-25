@@ -24,8 +24,9 @@ def main():  # Main code
 # NOTE: basepath is the location of the GRASP output files
 #       figpath is where the image output should be stored
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_012423"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_012423"
+
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_012523"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_012523/Plots"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -69,7 +70,7 @@ def main():  # Main code
 
 # Get the text file listing
 
-    file_list = glob.glob('*.txt')
+    file_list = glob.glob('Retrieval*.txt')
     
     num_files = len(file_list)
     
@@ -281,7 +282,7 @@ def main():  # Main code
             i_obs[2,0] = float(words[5])
             i_mod[2,0] = float(words[6])
             
-        if(data_count==201):  # Fitting results, I, wvl 1
+        if(data_count==200):  # Fitting results, I, wvl 1
             words = line.split()
             print(words)
             vza[3,0] = float(words[2])
@@ -289,7 +290,7 @@ def main():  # Main code
             i_obs[3,0] = float(words[5])
             i_mod[3,0] = float(words[6])
             
-        if(data_count==200):  # Fitting results
+        if(data_count==201):  # Fitting results
             words = line.split()
             print(words)
             vza[4,0] = float(words[2])
@@ -321,7 +322,7 @@ def main():  # Main code
             i_obs[2,1] = float(words[5])
             i_mod[2,1] = float(words[6])
             
-        if(data_count==210):  # Fitting results, I, wvl 2
+        if(data_count==209):  # Fitting results, I, wvl 2
             words = line.split()
             print(words)
             vza[3,1] = float(words[2])
@@ -329,7 +330,7 @@ def main():  # Main code
             i_obs[3,1] = float(words[5])
             i_mod[3,1] = float(words[6])
             
-        if(data_count==209):  # Fitting results
+        if(data_count==210):  # Fitting results
             words = line.split()
             print(words)
             vza[4,1] = float(words[2])
@@ -361,7 +362,7 @@ def main():  # Main code
             i_obs[2,2] = float(words[5])
             i_mod[2,2] = float(words[6])
             
-        if(data_count==219):  # Fitting results
+        if(data_count==218):  # Fitting results
             words = line.split()
             print(words)
             vza[3,2] = float(words[2])
@@ -369,7 +370,7 @@ def main():  # Main code
             i_obs[3,2] = float(words[5])
             i_mod[3,2] = float(words[6])
             
-        if(data_count==218):  # Fitting results
+        if(data_count==219):  # Fitting results
             words = line.split()
             print(words)
             vza[4,2] = float(words[2])
@@ -401,7 +402,7 @@ def main():  # Main code
             i_obs[2,3] = float(words[5])
             i_mod[2,3] = float(words[6])
             
-        if(data_count==228):  # Fitting results
+        if(data_count==227):  # Fitting results
             words = line.split()
             print(words)
             vza[3,3] = float(words[2])
@@ -409,7 +410,7 @@ def main():  # Main code
             i_obs[3,3] = float(words[5])
             i_mod[3,3] = float(words[6])
             
-        if(data_count==227):  # Fitting results
+        if(data_count==228):  # Fitting results
             words = line.split()
             print(words)
             vza[4,3] = float(words[2])
@@ -435,13 +436,13 @@ def main():  # Main code
             q_obs[2,0] = float(words[5])
             q_mod[2,0] = float(words[6])
 
-        if(data_count==234):  # Q
+        if(data_count==233):  # Q
             words = line.split()
             print(words)
             q_obs[3,0] = float(words[5])
             q_mod[3,0] = float(words[6])
 
-        if(data_count==233):  # Q
+        if(data_count==234):  # Q
             words = line.split()
             print(words)
             q_obs[4,0] = float(words[5])
@@ -466,13 +467,13 @@ def main():  # Main code
             u_obs[2,0] = float(words[5])
             u_mod[2,0] = float(words[6])
 
-        if(data_count==240):  # U
+        if(data_count==239):  # U
             words = line.split()
             print(words)
             u_obs[3,0] = float(words[5])
             u_mod[3,0] = float(words[6])
 
-        if(data_count==239):  # U
+        if(data_count==240):  # U
             words = line.split()
             print(words)
             u_obs[4,0] = float(words[5])
@@ -502,7 +503,7 @@ def main():  # Main code
             i_obs[2,4] = float(words[5])
             i_mod[2,4] = float(words[6])
             
-        if(data_count==249):  # Fitting results,
+        if(data_count==248):  # Fitting results,
             words = line.split()
             print(words)
             vza[3,4] = float(words[2])
@@ -510,7 +511,7 @@ def main():  # Main code
             i_obs[3,4] = float(words[5])
             i_mod[3,4] = float(words[6])
             
-        if(data_count==248):  # Fitting results
+        if(data_count==249):  # Fitting results
             words = line.split()
             print(words)
             vza[4,4] = float(words[2])
@@ -542,7 +543,7 @@ def main():  # Main code
             i_obs[2,5] = float(words[5])
             i_mod[2,5] = float(words[6])
             
-        if(data_count==258):  # Fitting results
+        if(data_count==257):  # Fitting results
             words = line.split()
             print(words)
             vza[3,5] = float(words[2])
@@ -550,7 +551,7 @@ def main():  # Main code
             i_obs[3,5] = float(words[5])
             i_mod[3,5] = float(words[6])
             
-        if(data_count==257):  # Fitting results
+        if(data_count==258):  # Fitting results
             words = line.split()
             print(words)
             vza[4,5] = float(words[2])
@@ -576,13 +577,13 @@ def main():  # Main code
             q_obs[2,1] = float(words[5])
             q_mod[2,1] = float(words[6])
 
-        if(data_count==264):  # Q
+        if(data_count==263):  # Q
             words = line.split()
             print(words)
             q_obs[3,1] = float(words[5])
             q_mod[3,1] = float(words[6])
 
-        if(data_count==263):  # Q
+        if(data_count==264):  # Q
             words = line.split()
             print(words)
             q_obs[4,1] = float(words[5])
@@ -607,13 +608,13 @@ def main():  # Main code
             u_obs[2,1] = float(words[5])
             u_mod[2,1] = float(words[6])
 
-        if(data_count==270):  # U
+        if(data_count==269):  # U
             words = line.split()
             print(words)
             u_obs[3,1] = float(words[5])
             u_mod[3,1] = float(words[6])
 
-        if(data_count==269):  # U
+        if(data_count==270):  # U
             words = line.split()
             print(words)
             u_obs[4,1] = float(words[5])
@@ -643,7 +644,7 @@ def main():  # Main code
             i_obs[2,6] = float(words[5])
             i_mod[2,6] = float(words[6])
             
-        if(data_count==279):  # Fitting results
+        if(data_count==278):  # Fitting results
             words = line.split()
             print(words)
             vza[3,6] = float(words[2])
@@ -651,7 +652,7 @@ def main():  # Main code
             i_obs[3,6] = float(words[5])
             i_mod[3,6] = float(words[6])
             
-        if(data_count==278):  # Fitting results
+        if(data_count==279):  # Fitting results
             words = line.split()
             print(words)
             vza[4,6] = float(words[2])
@@ -677,13 +678,13 @@ def main():  # Main code
             q_obs[2,2] = float(words[5])
             q_mod[2,2] = float(words[6])
 
-        if(data_count==285):  # Q
+        if(data_count==284):  # Q
             words = line.split()
             print(words)
             q_obs[3,2] = float(words[5])
             q_mod[3,2] = float(words[6])
 
-        if(data_count==284):  # Q
+        if(data_count==285):  # Q
             words = line.split()
             print(words)
             q_obs[4,2] = float(words[5])
@@ -708,13 +709,13 @@ def main():  # Main code
             u_obs[2,2] = float(words[5])
             u_mod[2,2] = float(words[6])
 
-        if(data_count==291):  # U
+        if(data_count==290):  # U
             words = line.split()
             #print(words)
             u_obs[3,2] = float(words[5])
             u_mod[3,2] = float(words[6])
 
-        if(data_count==290):  # U
+        if(data_count==291):  # U
             words = line.split()
             #print(words)
             u_obs[4,2] = float(words[5])
@@ -757,7 +758,7 @@ def main():  # Main code
     ax1.set_ylim(0.0,0.5)
     ax1.set_yticks(np.arange(0.0,0.6,0.1))
     ax1.set_ylabel('Equivalent Reflectance')
-    ax1.legend(loc=1)  # Upper right
+    ax1.legend(loc='best')  # Upper right
 
 # Residuals Text
 # Note: We calculate delta obs as model minus observation
@@ -824,7 +825,7 @@ def main():  # Main code
     ax1.set_ylim(-0.4,0.3)
     ax1.set_yticks(np.arange(-0.4,0.6,0.2))
     ax1.set_ylabel('q (Q/I)')
-    ax1.legend(loc=1)  # Upper right   
+    ax1.legend(loc='best')  # Upper right   
 
 # Residuals Text
 # Note: We calculate delta obs as model minus observation
@@ -891,7 +892,7 @@ def main():  # Main code
     ax1.set_ylim(-0.1,0.4)
     ax1.set_yticks(np.arange(-0.1,0.5,0.1))
     ax1.set_ylabel('u (U/I)')
-    ax1.legend(loc=1)  # Upper right
+    ax1.legend(loc='best')  # Upper right
 
 # Residuals Text
 # Note: We calculate delta obs as model minus observation
@@ -1019,7 +1020,7 @@ def main():  # Main code
     ax1.set_ylim(0.0,0.5)
     ax1.set_yticks(np.arange(0.0,0.6,0.1))
     ax1.set_ylabel('Equivalent Reflectance')
-    ax1.legend(loc=1)  # Upper right
+    ax1.legend(loc='best')  # Upper right
 
 # Residuals Text
 # Note: We calculate delta obs as model minus observation
