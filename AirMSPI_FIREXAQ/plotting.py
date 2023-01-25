@@ -25,8 +25,8 @@ def main():  # Main code
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_012523"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_012523/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_012523"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_012523/Plots"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -825,7 +825,7 @@ def main():  # Main code
     ax1.set_ylim(-0.4,0.3)
     ax1.set_yticks(np.arange(-0.4,0.6,0.2))
     ax1.set_ylabel('q (Q/I)')
-    ax1.legend(loc='best')  # Upper right   
+    ax1.legend(loc='lower right')  # Upper right   
 
 # Residuals Text
 # Note: We calculate delta obs as model minus observation
