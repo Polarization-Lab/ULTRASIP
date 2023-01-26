@@ -68,7 +68,7 @@ for g in range(1):  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_012423"
+   # outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_012423"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -652,5 +652,26 @@ for g in range(1):  # Main code
         qg_660, ug_660 = np.dot(rotmatrix,np.array([[qs_660], [us_660]]))
         qg_865, ug_865 = np.dot(rotmatrix,np.array([[qs_865], [us_865]]))
 
-        print(alphas,qs_660,us_660,sza,saz,vza_470,vaz_470,qg_660,ug_660)
+### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 
+### EQUIVALENT REFLECTANCES = PI*L/E0
+
+        eqr_i_355 = np.pi*i_355*esd**2/E0_355
+        eqr_i_380 = np.pi*i_380*esd**2/E0_380
+        eqr_i_445 = np.pi*i_445*esd**2/E0_445
+        eqr_i_470 = np.pi*i_470*esd**2/E0_470
+        eqr_i_555 = np.pi*i_555*esd**2/E0_555
+        eqr_i_660 = np.pi*i_660*esd**2/E0_660
+        eqr_i_865 = np.pi*i_865*esd**2/E0_865
+        
+        eqr_qg_470 = np.pi*qg_470*esd**2/E0_470
+        eqr_qg_660 = np.pi*qg_660*esd**2/E0_660
+        eqr_qg_865 = np.pi*qg_865*esd**2/E0_865
+        
+        eqr_ug_470 = np.pi*ug_470*esd**2/E0_470
+        eqr_ug_660 = np.pi*ug_660*esd**2/E0_660
+        eqr_ug_865 = np.pi*ug_865*esd**2/E0_865
+        
+        eqr_ipol_470 = np.pi*ipol_470*esd**2/E0_470
+        eqr_ipol_660 = np.pi*ipol_660*esd**2/E0_660
+        eqr_ipol_865 = np.pi*ipol_865*esd**2/E0_865
         
