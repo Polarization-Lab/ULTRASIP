@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 """
 Created on Tue Jan  3 11:26:41 2023
 
@@ -34,127 +34,6 @@ CMD_ALIGN_ENT_COORD = 0x83
 # ... etc. you probably don't need to write one for every command,
 # but it's good form to make constants for the ones you plan to use.
 # makes it more readable for future you and anyone else reading it
-
-# Status bit offsets
-PAN_CWSL = 7   # Clockwise soft limit reached
-PAN_CCWSL = 6  # Counter-clockwise soft limit reached
-PAN_CWHL = 5   # Clockwise hard limit reached
-PAN_CCWHL = 4  # Counter-clockwise hard limit reached
-PAN_TO = 3     # Timeout
-PAN_DE = 2     # Direction error
-PAN_OL = 1     # Current overload
-PAN_PRF = 0    # Resolver fault
-
-TILT_USL = 7  # Up soft limit reached
-TILT_DSL = 6  # Down soft limit reached
-TILT_UHL = 5  # Up hard limit reached
-TILT_DHL = 4  # Down hard limit reached
-TILT_TO = 3   # Timeout
-TILT_DE = 2   # Direction error
-TILT_OL = 1   # Current overload
-TILT_TRF = 0  # Resolver fault
-
-GEN_ENC = 7   # Encoder installed
-GEN_EXEC = 6  # Executing remote initiated command
-GEN_DES = 5   # Destination coords
-GEN_OSLR = 4  # Override return
-GEN_CWM = 3   # Moving clockwise
-GEN_CCWM = 2  # Moving counter-clockwise
-GEN_UPM = 1   # Moving up
-GEN_DWNM = 0  # Moving down
-
-def int_to_bytes(val):
-    conv = list(val.to_bytes(2, byteorder='little', signed=True))
-    return conv[0], conv[1]
-
-def bytes_to_int(lsb, msb):
-    return int.from_bytes(bytes([lsb, msb]), byteorder='little', signed=True)
-
-
-class PanStatus:
-    def __init__(self, status_val):
-        self.cw_soft_lim = (status_val >> PAN_CWSL) & 1
-        self.ccw_soft_lim = (status_val >> PAN_CCWSL) & 1
-        self.cw_hard_lim = (status_val >> PAN_CWHL) & 1
-        self.ccw_hard_lim = (status_val >> PAN_CCWHL) & 1
-        self.timeout = (status_val >> PAN_TO) & 1
-        self.direction_err = (status_val >> PAN_DE) & 1
-        self.current_overload = (status_val >> PAN_OL) & 1
-        self.resolver_fault = (status_val >> PAN_PRF) & 1
-
-    def __str__(self):
-        return 'PanStatus:{}'.format(vars(self))
-
-class TiltStatus:
-    def __init__(self, status_val):
-        self.up_soft_lim = (status_val >> TILT_USL) & 1
-        self.down_soft_lim = (status_val >> TILT_DSL) & 1
-        self.up_hard_lim = (status_val >> TILT_UHL) & 1
-        self.down_hard_lim = (status_val >> TILT_DHL) & 1
-        self.timeout = (status_val >> TILT_TO) & 1
-        self.direction_err = (status_val >> TILT_DE) & 1
-        self.current_overload = (status_val >> TILT_OL) & 1
-        self.resolver_fault = (status_val >> TILT_TRF) & 1
-
-    def __str__(self):
-        return 'TiltStatus:{}'.format(vars(self))
-
-
-class GenStatus:
-    def __init__(self, status_val):
-        self.encoder_installed = (status_val >> GEN_ENC) & 1
-        self.executing = (status_val >> GEN_EXEC) & 1
-        self.dest_coords = (status_val >> GEN_DES) & 1
-        self.override_return = (status_val >> GEN_OSLR) & 1
-        self.moving_cw = (status_val >> GEN_CWM) & 1
-        self.moving_ccw = (status_val >> GEN_CCWM) & 1
-        self.moving_up = (status_val >> GEN_UPM) & 1
-        self.moving_down = (status_val >> GEN_DWNM) & 1
-
-    def __str__(self):
-        return 'GenStatus:{}'.format(vars(self))
-
-
-class BasicResponse:
-    def __init__(self, data: list):
-        self.pan_coord = bytes_to_int(data.pop(0), data.pop(0)) / 10  # PAN = -3600 to +3600 = -360.0 deg to +360.0 deg
-        self.tilt_coord =  bytes_to_int(data.pop(0), data.pop(0)) / 10  # TILT = -1800 to +1800 = -180.0 deg to +180.0 deg
-
-        self.pan_status = PanStatus(data.pop(0))
-        self.tilt_status = TiltStatus(data.pop(0))
-        self.gen_status = GenStatus(data.pop(0))
-
-        self.zoom_cord = data.pop(0)
-        self.focus_coord = data.pop(0)
-
-        if data:
-            self.cam_count = data.pop(0)
-            self.cam_data = data  # Camera data is anything left
-
-    def __str__(self):
-        cam_data = 0 #'Cam:[count: {count}, data: {data}]'.format(count=self.cam_count, data=self.cam_data) if self.cam_data else ''
-        # return ('[Response]\n'
-        #         'Pan coord:  {pan_coord} deg\n'
-        #         'Tilt coord: {tilt_coord} deg\n'
-        #         '{pan_status}\n'
-        #         '{tilt_status}\n'
-        #         '{gen_status}\n'
-        #         'Zoom coord:  {zoom_coord}\n'
-        #         'Focus coord: {focus_coord}\n'
-        #         '{cam_data}').format(pan_coord=self.pan_coord,
-        #                              tilt_coord=self.tilt_coord,
-        #                              pan_status=self.pan_status,
-        #                              tilt_status=self.tilt_status,
-        #                              gen_status=self.gen_status,
-        #                              zoom_coord=self.zoom_cord,
-        #                              focus_coord=self.focus_coord,
-        #                              cam_data=cam_data)
-        return ('[Response]\n'
-                'Pan coord:  {pan_coord} deg\n'
-                'Tilt coord: {tilt_coord} deg\n'
-                ).format(pan_coord=self.pan_coord,
-                                     tilt_coord=self.tilt_coord)
-
 
 # Calculate the LRC
 def calc_checksum(cmd, data: list):
@@ -271,9 +150,7 @@ def get_status_jog(serial_port,
                                                           cmd=hex(rsp_cmd),
                                                           lrc_match='YES' if lrc_matches else 'NO',
                                                           data=[hex(x) for x in rsp_data]))
-
-    formatted_resp = BasicResponse(rsp_data)
-    print(rsp_data)
+                                                      
 
 def init_autobaud(serial_port):
     print('Initializing Autobaud')
@@ -286,6 +163,11 @@ def init_autobaud(serial_port):
     
     # Flush the input so we don't have to parse all that
     serial_port.flushInput()
+
+def int_to_bytes(num: int):
+    msb = (num >> 8)
+    lsb = num & 0xFF
+    return lsb, msb
 
 def mv_to_coord(serial_port,pan,tilt, get_response=True):
     pan_lsb, pan_msb = int_to_bytes(pan)
@@ -309,16 +191,13 @@ def mv_to_coord(serial_port,pan,tilt, get_response=True):
     # Check LRC is valid
     lrc_matches = calc_checksum(rsp_cmd, rsp_data) == rsp_lrc
 
-    print(('RCV | MV TO Coord | '
-           'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
-           'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
-                                                          id=hex(rsp_identity),
-                                                          cmd=hex(rsp_cmd),
-                                                          lrc_match='YES' if lrc_matches else 'NO',
-                                                          data=[hex(x) for x in rsp_data]))
-
-    formatted_resp = BasicResponse(rsp_data)
-    print(formatted_resp)
+    # print(('RCV | MV TO Coord | '
+    #        'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
+    #        'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
+    #                                                       id=hex(rsp_identity),
+    #                                                       cmd=hex(rsp_cmd),
+    #                                                       lrc_match='YES' if lrc_matches else 'NO',
+    #                                                       data=[hex(x) for x in rsp_data]))
 
 def mv_to_abszero(serial_port,get_response=True):
 
@@ -341,16 +220,13 @@ def mv_to_abszero(serial_port,get_response=True):
     # Check LRC is valid
     lrc_matches = calc_checksum(rsp_cmd, rsp_data) == rsp_lrc
 
-    print(('RCV | MV TO ABS | '
-           'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
-           'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
-                                                          id=hex(rsp_identity),
-                                                          cmd=hex(rsp_cmd),
-                                                          lrc_match='YES' if lrc_matches else 'NO',
-                                                          data=[hex(x) for x in rsp_data]))
-
-    formatted_resp = BasicResponse(rsp_data)
-    print(rsp_data)
+    # print(('RCV | MV TO ABS | '
+    #        'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
+    #        'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
+    #                                                       id=hex(rsp_identity),
+    #                                                       cmd=hex(rsp_cmd),
+    #                                                       lrc_match='YES' if lrc_matches else 'NO',
+    #                                                       data=[hex(x) for x in rsp_data]))
 
 def mv_to_home(serial_port,pan,tilt, get_response=True):
     
@@ -375,13 +251,10 @@ def mv_to_home(serial_port,pan,tilt, get_response=True):
     # Check LRC is valid
     lrc_matches = calc_checksum(rsp_cmd, rsp_data) == rsp_lrc
 
-    print(('RCV | MV TO Coord | '
-           'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
-           'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
-                                                          id=hex(rsp_identity),
-                                                          cmd=hex(rsp_cmd),
-                                                          lrc_match='YES' if lrc_matches else 'NO',
-                                                          data=[hex(x) for x in rsp_data]))
-
-    formatted_resp = BasicResponse(rsp_data)
-    print(formatted_resp)
+    # print(('RCV | MV TO Coord | '
+    #        'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
+    #        'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
+    #                                                       id=hex(rsp_identity),
+    #                                                       cmd=hex(rsp_cmd),
+    #                                                       lrc_match='YES' if lrc_matches else 'NO',
+    #                                                       data=[hex(x) for x in rsp_data]))
