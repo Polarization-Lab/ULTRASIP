@@ -233,3 +233,33 @@ def read_data(datapath,num_step,sequence_num,num_int,num_pol):
         f.close()
     
     return esd,evel_coord,lat_coord,long_coord,i[:],view_zen[:],view_az[:],E0_values[:],ipol[:],qm[:],um[:],dolp[:]
+
+if __name__ == 'read_data':
+    
+
+        print('hello')
+    #Work Computer
+        datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+        outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_021623"
+
+    #Home Computer 
+       # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
+       # outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/SDATA_Files"
+
+    # Load in the set of measurement sequences
+    # Set the length of one measurement sequence of step-and-stare observations
+    # NOTE: This will typically be an odd number (9,7,5,...)
+
+        num_step = 5
+        
+        
+    # Set the index of the sequence of step-and-stare files
+    # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
+
+        step_ind = 0
+        
+        
+        num_int = 8 
+        num_pol = 3
+        
+        esd,evel_coord,lat_coord,long_coord,i,view_zen,view_az,E0_values,ipol,qm,um,dolp = read_data(datapath,num_step,step_ind,num_int,num_pol) 

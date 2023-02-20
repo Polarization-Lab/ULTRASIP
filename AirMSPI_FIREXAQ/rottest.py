@@ -176,7 +176,7 @@ def main():  # Main code
     for loop in range(num_files):
     
 # Select appropriate file
-
+        print(loop)
         this_file = raw_list[loop]
 
 # Parse the filename to get information
@@ -731,9 +731,146 @@ def main():  # Main code
         rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
         qg_865, ug_865 = rotmatrix8@stokesin8
         
-        return qg_865, ug_865, qm_865,um_865,h_o8,v_o8,h_i8,v_i8,k_8
+# Calculate the relative azimuth angle in the GRASP convention
+# NOTE: This bit of code seems kludgy and comes from older AirMSPI code
+
+        raz_355 = saz - vaz_355
+        if(raz_355 < 0.0):
+            raz_355 = 360.+raz_355
+        if(raz_355 > 180.0):
+            raz_355 = 360.-raz_355
+        raz_355 = raz_355+180.
+        
+        raz_380 = saz - vaz_380
+        if(raz_380 < 0.0):
+            raz_380 = 360.+raz_380
+        if(raz_380 > 180.0):
+            raz_380 = 360.-raz_380
+        raz_380 = raz_380+180.
+        
+        raz_445 = saz - vaz_445
+        if(raz_445 < 0.0):
+            raz_445 = 360.+raz_445
+        if(raz_445 > 180.0):
+            raz_445 = 360.-raz_445
+        raz_445 = raz_445+180.
+        
+        raz_470 = saz - vaz_470
+        if(raz_470 < 0.0):
+            raz_470 = 360.+raz_470
+        if(raz_470 > 180.0):
+            raz_470 = 360.-raz_470
+        raz_470 = raz_470+180.
+        
+        raz_555 = saz - vaz_555
+        if(raz_555 < 0.0):
+            raz_555 = 360.+raz_555
+        if(raz_555 > 180.0):
+            raz_555 = 360.-raz_555
+        raz_555 = raz_555+180.
+        
+        raz_660 = saz - vaz_660
+        if(raz_660 < 0.0):
+            raz_660 = 360.+raz_660
+        if(raz_660 > 180.0):
+            raz_660 = 360.-raz_660
+        raz_660 = raz_660+180.
+        
+        raz_865 = saz - vaz_865
+        if(raz_865 < 0.0):
+            raz_865 = 360.+raz_865
+        if(raz_865 > 180.0):
+            raz_865 = 360.-raz_865
+        raz_865 = raz_865+180.
+        
+### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 
+### EQUIVALENT REFLECTANCES = PI*L/E0
+
+        eqr_i_355 = np.pi*i_355*esd**2/E0_355;
+        eqr_i_380 = np.pi*i_380*esd**2/E0_380;
+        eqr_i_445 = np.pi*i_445*esd**2/E0_445;
+        eqr_i_470 = np.pi*i_470*esd**2/E0_470;
+        eqr_i_555 = np.pi*i_555*esd**2/E0_555;
+        eqr_i_660 = np.pi*i_660*esd**2/E0_660;
+        eqr_i_865 = np.pi*i_865*esd**2/E0_865;
+        
+        eqr_qg_470 = np.pi*qg_470*esd**2/E0_470;
+        eqr_qg_660 = np.pi*qg_660*esd**2/E0_660;
+        eqr_qg_865 = np.pi*qg_865*esd**2/E0_865;
+        
+        eqr_ug_470 = np.pi*ug_470*esd**2/E0_470;
+        eqr_ug_660 = np.pi*ug_660*esd**2/E0_660;
+        eqr_ug_865 = np.pi*ug_865*esd**2/E0_865;
+        
+        eqr_ipol_470 = np.pi*ipol_470*esd**2/E0_470;
+        eqr_ipol_660 = np.pi*ipol_660*esd**2/E0_660;
+        eqr_ipol_865 = np.pi*ipol_865*esd**2/E0_865;
+
+#____________________________STORE THE DATA____________________________#
+
+        i_median[loop,0] = eqr_i_355
+        i_median[loop,1] = eqr_i_380
+        i_median[loop,2] = eqr_i_445
+        i_median[loop,3] = eqr_i_470
+        i_median[loop,4] = eqr_i_555
+        i_median[loop,5] = eqr_i_660
+        i_median[loop,6] = eqr_i_865
+                
+        scat_median[loop,0] = scat_355
+        scat_median[loop,1] = scat_380
+        scat_median[loop,2] = scat_445
+        scat_median[loop,3] = scat_470
+        scat_median[loop,4] = scat_555
+        scat_median[loop,5] = scat_660
+        scat_median[loop,6] = scat_865
+        
+        vza_median[loop,0] = vza_355
+        vza_median[loop,1] = vza_380
+        vza_median[loop,2] = vza_445
+        vza_median[loop,3] = vza_470
+        vza_median[loop,4] = vza_555
+        vza_median[loop,5] = vza_660
+        vza_median[loop,6] = vza_865
+        
+        #print(vza_median[:,:])
+
+        
+        raz_median[loop,0] = raz_355
+        raz_median[loop,1] = raz_380
+        raz_median[loop,2] = raz_445
+        raz_median[loop,3] = raz_470
+        raz_median[loop,4] = raz_555
+        raz_median[loop,5] = raz_660
+        raz_median[loop,6] = raz_865
+        
+        i_in_polar_median[loop,0] = eqr_i_470
+        i_in_polar_median[loop,1] = eqr_i_660
+        i_in_polar_median[loop,2] = eqr_i_865
+        
+        q_median[loop,0] = eqr_qg_470
+        q_median[loop,1] = eqr_qg_660
+        q_median[loop,2] = eqr_qg_865
+        
+        u_median[loop,0] = eqr_ug_470
+        u_median[loop,1] = eqr_ug_660
+        u_median[loop,2] = eqr_ug_865
+        
+        ipol_median[loop,0] = eqr_ipol_470
+        ipol_median[loop,1] = eqr_ipol_660
+        ipol_median[loop,2] = eqr_ipol_865
+        
+        dolp_median[loop,0] = dolp_470
+        dolp_median[loop,1] = dolp_660
+        dolp_median[loop,2] = dolp_865
+        
+        sza_median[loop] = sza
+        print(u_median)
+        
+        return qg_660, ug_660,eqr_qg_660,eqr_ug_660, q_median, u_median
+    #qg_470, ug_470,eqr_qg_470,eqr_ug_470
+    #qg_865, ug_865,eqr_qg_865,eqr_ug_865
 
 ### END MAIN FUNCTION
 if __name__ == '__main__':
-     qg,ug,qm,um,h_o,v_o,h_i,v_i,k = main() 
+     qg, ug, qnorm, unorm,qarray,uarray = main() 
 
