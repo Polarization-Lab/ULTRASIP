@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_022123"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_022123"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -698,10 +698,10 @@ def main():  # Main code
         
         #470 nm 
         Oout4 = np.array([h_o4,v_o4]);
-        Oin4 = np.array([h_i4,v_i4]);#Meridian
-        #Oin4 = np.array([h_i4s,v_i4s]); #Scattering
-        stokesin4 = np.array([[qm_470], [um_470]]) #Meridian
-        #stokesin = np.array([[qs_470], [us_470]]) #Scattering
+        #Oin4 = np.array([h_i4,v_i4]);#Meridian
+        Oin4 = np.array([h_i4s,v_i4s]); #Scattering
+        #stokesin4 = np.array([[qm_470], [um_470]]) #Meridian
+        stokesin4 = np.array([[qs_470], [us_470]]) #Scattering
 
         R_nalpha4 = Oout4@Oin4.T;
         alpha4 = np.arctan2(R_nalpha4[0,1],R_nalpha4[0,0]);  
@@ -710,10 +710,10 @@ def main():  # Main code
         
         #660 nm 
         Oout6 = np.array([h_o6,v_o6]);
-        Oin6 = np.array([h_i6,v_i6]);#Meridian
-        #Oin6 = np.array([h_i6s,v_i6s]); #Scattering
-        stokesin6 = np.array([[qm_660], [um_660]]) #Meridian
-        #stokesin6 = np.array([[qs_660], [us_660]]) #Scattering
+        #Oin6 = np.array([h_i6,v_i6]);#Meridian
+        Oin6 = np.array([h_i6s,v_i6s]); #Scattering
+        #stokesin6 = np.array([[qm_660], [um_660]]) #Meridian
+        stokesin6 = np.array([[qs_660], [us_660]]) #Scattering
 
         R_nalpha6 = Oout6@Oin6.T;
         alpha6 = np.arctan2(R_nalpha6[0,1],R_nalpha6[0,0]);  
@@ -722,10 +722,10 @@ def main():  # Main code
 
         #865 nm 
         Oout8 = np.array([h_o8,v_o8]);
-        Oin8 = np.array([h_i8,v_i8]);#Meridian
-        #Oin8 = np.array([h_i8s,v_i8s]); #Scattering
-        stokesin8 = np.array([[qm_865], [um_865]]) #Meridian
-        #stokesin8 = np.array([[qs_865], [us_865]]) #Scattering
+        #Oin8 = np.array([h_i8,v_i8]);#Meridian
+        Oin8 = np.array([h_i8s,v_i8s]); #Scattering
+        #stokesin8 = np.array([[qm_865], [um_865]]) #Meridian
+        stokesin8 = np.array([[qs_865], [us_865]]) #Scattering
 
         R_nalpha8 = Oout8@Oin8.T;
         alpha8 = np.arctan2(R_nalpha8[0,1],R_nalpha8[0,0]);  
