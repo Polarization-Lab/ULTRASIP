@@ -50,6 +50,8 @@ k_4 = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.sin
 
 #Define GRASP Plane (output coordinate system) for each wavelength channel
 n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
+#n_o = np.cross(zenith,nor)/np.linalg.norm(np.cross(zenith,nor));
+
         
 #GRASP 470 nm 
 v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
@@ -72,7 +74,7 @@ v_i4 = np.cross(k_4,h_i4)/np.linalg.norm(np.cross(k_4,h_i4));
         
 
 #470 nm 
-Oout4 = np.array([h_o4,v_o4]); #GRASP
+Oout4 = np.array([v_o4,h_o4]); #GRASP
 Oin4 = np.array([h_i4,v_i4]);#Meridian
 Oin4s = np.array([h_i4s,v_i4s]); #Scattering
 stokesin4 = np.array([[qm_470], [um_470]]) #Meridian
