@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/3_022123"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/4_022123"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -649,16 +649,16 @@ def main():  # Main code
         n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
         
         #GRASP 470 nm 
-        v_o4 = np.cross(-k_4,n_o)/np.linalg.norm(np.cross(-k_4,n_o)) #intersection of transverse & reference
-        h_o4 = np.cross(-k_4,v_o4)/np.linalg.norm(np.cross(-k_4,v_o4))
+        v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
+        h_o4 = np.cross(k_4,v_o4)/np.linalg.norm(np.cross(k_4,v_o4))
         
         #GRASP 660 nm 
-        v_o6 = np.cross(-k_6,n_o)/np.linalg.norm(np.cross(-k_6,n_o)) #intersection of transverse & reference
-        h_o6 = np.cross(-k_6,v_o6)/np.linalg.norm(np.cross(-k_6,v_o6))
+        v_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
+        h_o6 = np.cross(k_6,v_o6)/np.linalg.norm(np.cross(k_6,v_o6))
         
         #GRASP 865 nm 
-        v_o8 = np.cross(-k_8,n_o)/np.linalg.norm(np.cross(-k_8,n_o)) #intersection of transverse & reference
-        h_o8 = np.cross(-k_8,v_o8)/np.linalg.norm(np.cross(-k_8,v_o8))
+        v_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
+        h_o8 = np.cross(k_8,v_o8)/np.linalg.norm(np.cross(k_8,v_o8))
         
         #Define AirMSPI Scattering Plane (input coordinate system) for each wavelength channel
         n_i4s = np.cross(i,k_4)/np.linalg.norm(np.cross(i,k_4));
@@ -852,21 +852,21 @@ def main():  # Main code
         i_in_polar_median[loop,1] = eqr_i_660
         i_in_polar_median[loop,2] = eqr_i_865
         
-        q_median[loop,0] = qg_470
+        q_median[loop,0] = eqr_qg_470
         q_median[loop,1] = eqr_qg_660
         q_median[loop,2] = eqr_qg_865
         
-        u_median[loop,0] = ug_470
+        u_median[loop,0] = eqr_ug_470
         u_median[loop,1] = eqr_ug_660
         u_median[loop,2] = eqr_ug_865
         
-        qd_median[loop,0] = qm_470
-        qd_median[loop,1] = qm_660
-        qd_median[loop,2] = qm_865
+        # qd_median[loop,0] = qm_470
+        # qd_median[loop,1] = qm_660
+        # qd_median[loop,2] = qm_865
         
-        ud_median[loop,0] = um_470
-        ud_median[loop,1] = um_660
-        ud_median[loop,2] = um_865
+        # ud_median[loop,0] = um_470
+        # ud_median[loop,1] = um_660
+        # ud_median[loop,2] = um_865
         
         ipol_median[loop,0] = eqr_ipol_470
         ipol_median[loop,1] = eqr_ipol_660
@@ -879,10 +879,10 @@ def main():  # Main code
         sza_median[loop] = sza
         
         #print(qm_470)
-        #print(um_470)
-        print(qd_median[:,0],ud_median[:,0])
-        print(q_median[:,0])
-        print(u_median[:,0])
+        # #print(um_470)
+        # print(qd_median[:,0],ud_median[:,0])
+        # print(q_median[:,0])
+        # print(u_median[:,0])
 
 
 # #__________________Section 3: Output Data in GRASP SDATA Format__________________#
@@ -919,7 +919,7 @@ def main():  # Main code
         
 # Generate an output file name
 
-    outfile = outfile_base+"ALL_RotfromMeridian_ChromaticK"+".sdat"
+    outfile = outfile_base+"ALL_RotfromScat_ChromaticposK"+".sdat"
         
     print()
     print("Saving: "+outfile)
