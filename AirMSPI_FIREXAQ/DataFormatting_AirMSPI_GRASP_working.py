@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_021623"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_022123"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -886,280 +886,280 @@ def main():  # Main code
 
 
 # #__________________Section 3: Output Data in GRASP SDATA Format__________________#
-# # Guide to output file names
-# # NOTE: The options more or less correspond to GRASP retrieval.regime_of_measurement_fitting
-# #       0 = .radiance (option 1)
-# #       1-5 = .polarization (option as given)
-# #    
-# #    outfile0 = outfile_base+"I_v"+vers+".sdat"
-# #    outfile1 = outfile_base+"IQU_v"+vers+".sdat"
-# #    outfile2 = outfile_base+"Iqu_v"+vers+".sdat"
-# #    outfile3 = outfile_base+"IIpol_v"+vers+".sdat"
-# #    outfile4 = outfile_base+"IDoLP_v"+vers+".sdat"
-# #    outfile5 = outfile_base+"DoLP_v"+vers+".sdat"
+# Guide to output file names
+# NOTE: The options more or less correspond to GRASP retrieval.regime_of_measurement_fitting
+#       0 = .radiance (option 1)
+#       1-5 = .polarization (option as given)
+#    
+#    outfile0 = outfile_base+"I_v"+vers+".sdat"
+#    outfile1 = outfile_base+"IQU_v"+vers+".sdat"
+#    outfile2 = outfile_base+"Iqu_v"+vers+".sdat"
+#    outfile3 = outfile_base+"IIpol_v"+vers+".sdat"
+#    outfile4 = outfile_base+"IDoLP_v"+vers+".sdat"
+#    outfile5 = outfile_base+"DoLP_v"+vers+".sdat"
 
-# # Change to the output directory
-#     os.chdir(outpath) 
+# Change to the output directory
+    os.chdir(outpath) 
     
-# # Generate the base output file name
-#     outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
-#     outfile_base = outfile_base+this_target_str+"_"
+# Generate the base output file name
+    outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
+    outfile_base = outfile_base+this_target_str+"_"
 
-# # Get the software version number to help track issues
-#     hold = os.path.basename(__file__)
-#     words = hold.split('_')
-#     temp = words[len(words)-1]  # Choose the last element
-#     hold = temp.split('.')
-#     vers = hold[0]
+# Get the software version number to help track issues
+    hold = os.path.basename(__file__)
+    words = hold.split('_')
+    temp = words[len(words)-1]  # Choose the last element
+    hold = temp.split('.')
+    vers = hold[0]
 
-# ### THIRD OUTPUT FILE: I IN SPECTRAL BANDS AND  I, Q, U IN POLARIZED BANDS
-#     num_intensity = 7
-#     num_polar = 3
-#     num_all = num_intensity+num_polar
+### THIRD OUTPUT FILE: I IN SPECTRAL BANDS AND  I, Q, U IN POLARIZED BANDS
+    num_intensity = 7
+    num_polar = 3
+    num_all = num_intensity+num_polar
         
-# # Generate an output file name
+# Generate an output file name
 
-#     outfile = outfile_base+"ALL_RotfromMeridian_ChromaticK"+".sdat"
+    outfile = outfile_base+"ALL_RotfromMeridian_ChromaticK"+".sdat"
         
-#     print()
-#     print("Saving: "+outfile)
+    print()
+    print("Saving: "+outfile)
     
-# # Open the output file
+# Open the output file
 
-#     outputFile = open(outfile, 'w')
+    outputFile = open(outfile, 'w')
         
-# # Write the sdat header information
+# Write the sdat header information
 
-#     out_str = 'SDATA version 2.0\n'
-#     outputFile.write(out_str)
-#     out_str = '  1   1   1  : NX NY NT\n'
-#     outputFile.write(out_str)
-#     out_str = '\n'
-#     outputFile.write(out_str)
+    out_str = 'SDATA version 2.0\n'
+    outputFile.write(out_str)
+    out_str = '  1   1   1  : NX NY NT\n'
+    outputFile.write(out_str)
+    out_str = '\n'
+    outputFile.write(out_str)
 
-# # Parse the date string into the correct format
+# Parse the date string into the correct format
 
-#     sdat_date = this_date_str[0:4]+'-'+this_date_str[4:6]+'-'+this_date_str[6:8]
-#     print(sdat_date)
+    sdat_date = this_date_str[0:4]+'-'+this_date_str[4:6]+'-'+this_date_str[6:8]
+    print(sdat_date)
         
-# # Parse the time string into the correct format
+# Parse the time string into the correct format
 
-#     sdat_time = this_time_str[0:2]+':'+this_time_str[2:4]+':'+this_time_str[4:7]
-#     print(sdat_time)
+    sdat_time = this_time_str[0:2]+':'+this_time_str[2:4]+':'+this_time_str[4:7]
+    print(sdat_time)
         
-# # Write out the data header line
+# Write out the data header line
 
-#     out_str = '  1   '+sdat_date+'T'+sdat_time
-#     out_str = out_str+'       70000.00   0   1   : NPIXELS  TIMESTAMP  HEIGHT_OBS(m)  NSURF  IFGAS    1\n'
-#     outputFile.write(out_str)
+    out_str = '  1   '+sdat_date+'T'+sdat_time
+    out_str = out_str+'       70000.00   0   1   : NPIXELS  TIMESTAMP  HEIGHT_OBS(m)  NSURF  IFGAS    1\n'
+    outputFile.write(out_str)
     
-# # Generate content for sdat (single line)
+# Generate content for sdat (single line)
 
-#     out_str = '           1'  # x-coordinate (ix)
-#     out_str = out_str+'           1'  # y-coordinate (iy)
-#     out_str = out_str+'           1'  # Cloud Flag (0=cloud, 1=clear)
-#     out_str = out_str+'           1'  # Pixel column in grid (icol)
-#     out_str = out_str+'           1'  # Pixel line in grid (row)
+    out_str = '           1'  # x-coordinate (ix)
+    out_str = out_str+'           1'  # y-coordinate (iy)
+    out_str = out_str+'           1'  # Cloud Flag (0=cloud, 1=clear)
+    out_str = out_str+'           1'  # Pixel column in grid (icol)
+    out_str = out_str+'           1'  # Pixel line in grid (row)
 
-#     out_str = out_str+'{:19.8f}'.format(lon_median)  # Longitude
-#     out_str = out_str+'{:18.8f}'.format(lat_median)  # Latitude
-#     out_str = out_str+'{:17.8f}'.format(elev_median) # Elevation
+    out_str = out_str+'{:19.8f}'.format(lon_median)  # Longitude
+    out_str = out_str+'{:18.8f}'.format(lat_median)  # Latitude
+    out_str = out_str+'{:17.8f}'.format(elev_median) # Elevation
 
-#     out_str = out_str+'      100.000000'  # Percent of land
-#     out_str = out_str+'{:16d}'.format(num_intensity)  # Number of wavelengths (nwl)
+    out_str = out_str+'      100.000000'  # Percent of land
+    out_str = out_str+'{:16d}'.format(num_intensity)  # Number of wavelengths (nwl)
     
-#   ## SET UP THE WAVELENGTH AND MEASUREMENT INFORMATION
+  ## SET UP THE WAVELENGTH AND MEASUREMENT INFORMATION
         
-# # Loop through wavelengths
+# Loop through wavelengths
 
-#     for loop in range(num_intensity):
-#         out_str = out_str+'{:17.9f}'.format(center_wave[loop]/1000.)  # Wavelengths in microns
+    for loop in range(num_intensity):
+        out_str = out_str+'{:17.9f}'.format(center_wave[loop]/1000.)  # Wavelengths in microns
        
-#     # Loop over the number of types of measurements per wavelength
+    # Loop over the number of types of measurements per wavelength
 
-# # for loop in range(num_intensity):
-#     out_str = out_str+'{:12d}'.format(1)
-#     out_str = out_str+'{:12d}'.format(1) # 1 measurement per wavelength
-#     out_str = out_str+'{:12d}'.format(1)
-#     out_str = out_str+'{:12d}'.format(3)
-#     out_str = out_str+'{:12d}'.format(1)
-#     out_str = out_str+'{:12d}'.format(3)
-#     out_str = out_str+'{:12d}'.format(3)
+# for loop in range(num_intensity):
+    out_str = out_str+'{:12d}'.format(1)
+    out_str = out_str+'{:12d}'.format(1) # 1 measurement per wavelength
+    out_str = out_str+'{:12d}'.format(1)
+    out_str = out_str+'{:12d}'.format(3)
+    out_str = out_str+'{:12d}'.format(1)
+    out_str = out_str+'{:12d}'.format(3)
+    out_str = out_str+'{:12d}'.format(3)
 
-# # Loop over the measurement types per wavelength
-# # NOTE: Values can be found in the GRASP documentation in Table 4.5
-# #       41 = Normalized radiance (I = rad*pi/E0) - GRASP calls normalized (reduced) radiance
+# Loop over the measurement types per wavelength
+# NOTE: Values can be found in the GRASP documentation in Table 4.5
+#       41 = Normalized radiance (I = rad*pi/E0) - GRASP calls normalized (reduced) radiance
 
-#     #for loop in range(num_intensity):
-#     out_str = out_str+'{:12d}'.format(41)
-#     out_str = out_str+'{:12d}'.format(41)
-#     out_str = out_str+'{:12d}'.format(41)
-#     out_str = out_str+'{:12d}'.format(41)
-#     out_str = out_str+'{:12d}'.format(42)
-#     out_str = out_str+'{:12d}'.format(43)
-#     out_str = out_str+'{:12d}'.format(41)
-#     out_str = out_str+'{:12d}'.format(41)
-#     out_str = out_str+'{:12d}'.format(42)
-#     out_str = out_str+'{:12d}'.format(43)
-#     out_str = out_str+'{:12d}'.format(41)
-#     out_str = out_str+'{:12d}'.format(42)
-#     out_str = out_str+'{:12d}'.format(43)
+    #for loop in range(num_intensity):
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(42)
+    out_str = out_str+'{:12d}'.format(43)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(42)
+    out_str = out_str+'{:12d}'.format(43)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(42)
+    out_str = out_str+'{:12d}'.format(43)
 
 
         
-# # Loop over the number of measurements per wavelength
-# # Note: This is the number of stares in the step-and-stare sequence
+# Loop over the number of measurements per wavelength
+# Note: This is the number of stares in the step-and-stare sequence
 
-#     out_str = out_str+'{:12d}'.format(num_step)
-#     out_str = out_str+'{:12d}'.format(num_step)
-#     out_str = out_str+'{:12d}'.format(num_step)
-#     out_str = out_str+'{:12d}'.format(num_step)
-#     out_str = out_str+'{:12d}'.format(num_step)
-#     out_str = out_str+'{:12d}'.format(num_step)
-#     out_str = out_str+'{:12d}'.format(num_step)
-#     out_str = out_str+'{:12d}'.format(num_step)
-#     out_str = out_str+'{:12d}'.format(num_step)
-#     out_str = out_str+'{:12d}'.format(num_step)
-#     out_str = out_str+'{:12d}'.format(num_step)
-#     out_str = out_str+'{:12d}'.format(num_step)
-#     out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
+    out_str = out_str+'{:12d}'.format(num_step)
 
-# ## ANGLE DEFINITIONS
+## ANGLE DEFINITIONS
 
-# # Solar zenith angle per wavelength
-# # NOTE: This is per wavelength rather than per measurement (probably because of 
-# #       AERONET), so we take the average solar zenith angle, although this
-# #       varies from measurement to measurement from AirMSPI
+# Solar zenith angle per wavelength
+# NOTE: This is per wavelength rather than per measurement (probably because of 
+#       AERONET), so we take the average solar zenith angle, although this
+#       varies from measurement to measurement from AirMSPI
 
-#     sza_mean = np.mean(sza_median)
+    sza_mean = np.mean(sza_median)
 
-#     for loop in range(num_intensity):
-#         out_str = out_str+'{:16.8f}'.format(sza_mean)
+    for loop in range(num_intensity):
+        out_str = out_str+'{:16.8f}'.format(sza_mean)
     
-# # View zenith angle per measurement per wavelength
-#     for outer in range(6):
-#         for inner in range(5): 
-#             out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+# View zenith angle per measurement per wavelength
+    for outer in range(6):
+        for inner in range(5): 
+            out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
 
-#     for outer in range(6):
-#         for inner in range(5): 
-#             out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
-#     for inner in range(5):
-#         out_str = out_str+'{:16.8f}'.format(vza_median[inner,6])
+    for outer in range(6):
+        for inner in range(5): 
+            out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+    for inner in range(5):
+        out_str = out_str+'{:16.8f}'.format(vza_median[inner,6])
 
-# # Relative azimuth angle per measurement per wavelength
-#     for outer in range(6):
-#         for inner in range(5): 
-#             out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+# Relative azimuth angle per measurement per wavelength
+    for outer in range(6):
+        for inner in range(5): 
+            out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
 
-#     for outer in range(6):
-#          for inner in range(5): 
-#              out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
-#     for inner in range(5):
-#         out_str = out_str+'{:16.8f}'.format(raz_median[inner,6])
+    for outer in range(6):
+          for inner in range(5): 
+              out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+    for inner in range(5):
+        out_str = out_str+'{:16.8f}'.format(raz_median[inner,6])
 
 
-# #Measurements
-#     for outer in [0,1,2]:  # Loop over wavelengths
-#         for inner in range(num_step):  # Loop over measurements
-#             out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
+#Measurements
+    for outer in [0,1,2]:  # Loop over wavelengths
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
     
-#     for outer in [3]:  # Loop over wavelengths
-#        for inner in range(num_step):  # Loop over measurements
-#            out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])  # I
-#        # for inner in range(num_step):  # Loop over measurements
-#        #     out_str = out_str+'{:16.8f}'.format(i_in_polar_median[inner,0])  # Ipol
-#        for inner in range(num_step):  # Loop over measurements
-#            out_str = out_str+'{:16.8f}'.format(q_median[inner,0])  # Q
-#        for inner in range(num_step):  # Loop over measurements
-#            out_str = out_str+'{:16.8f}'.format(u_median[inner,0])  # U
+    for outer in [3]:  # Loop over wavelengths
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])  # I
+        # for inner in range(num_step):  # Loop over measurements
+        #     out_str = out_str+'{:16.8f}'.format(i_in_polar_median[inner,0])  # Ipol
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(q_median[inner,0])  # Q
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(u_median[inner,0])  # U
 
-#     for outer in [4]:  # Loop over wavelengths
-#        for inner in range(num_step):  # Loop over measurements
-#                 out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
+    for outer in [4]:  # Loop over wavelengths
+        for inner in range(num_step):  # Loop over measurements
+                out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
 
-#     for outer in [5]:  # Loop over wavelengths
-#         for inner in range(num_step):  # Loop over measurements
-#             out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])  # I
-#         for inner in range(num_step):  # Loop over measurements
-#             out_str = out_str+'{:16.8f}'.format(q_median[inner,1])  # Q
-#         for inner in range(num_step):  # Loop over measurements
-#             out_str = out_str+'{:16.8f}'.format(u_median[inner,1])  # U
+    for outer in [5]:  # Loop over wavelengths
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])  # I
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(q_median[inner,1])  # Q
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(u_median[inner,1])  # U
 
 
-#     for outer in [6]:  # Loop over wavelengths
-#         for inner in range(num_step):  # Loop over measurements
-#             out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])  # I
-#         for inner in range(num_step):  # Loop over measurements
-#             out_str = out_str+'{:16.8f}'.format(q_median[inner,2])  # Q
-#         for inner in range(num_step):  # Loop over measurements
-#             out_str = out_str+'{:16.8f}'.format(u_median[inner,2])  # U
+    for outer in [6]:  # Loop over wavelengths
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])  # I
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(q_median[inner,2])  # Q
+        for inner in range(num_step):  # Loop over measurements
+            out_str = out_str+'{:16.8f}'.format(u_median[inner,2])  # U
             
             
-# ## ADDITIONAL PARAMETERS
-# # NOTE: This is kludgy and GRASP seems to run without this being entirely correct
+## ADDITIONAL PARAMETERS
+# NOTE: This is kludgy and GRASP seems to run without this being entirely correct
 
-#     out_str = out_str+'       0.00000000'  # Ground parameter (wave 1)
-#     out_str = out_str+'       0.00000000'  # Ground parameter (wave 2)
-#     out_str = out_str+'       0.00000000'  # Ground parameter (wave 3)
-#     out_str = out_str+'       0.00000000'  # Ground parameter (wave 4)
-#     out_str = out_str+'       0.00000000'  # Ground parameter (wave 5)
-#     out_str = out_str+'       0.00000000'  # Ground parameter (wave 6)
-#     out_str = out_str+'       0.00000000'  # Ground parameter (wave 7)
-#     out_str = out_str+'       0'  # Gas parameter (wave 1)
-#     out_str = out_str+'       0'  # Gas parameter (wave 2)
-#     out_str = out_str+'       0'  # Gas parameter (wave 3)
-#     out_str = out_str+'       0'  # Gas parameter (wave 4)
-#     out_str = out_str+'       0'  # Gas parameter (wave 5)
-#     out_str = out_str+'       0'  # Gas parameter (wave 6)
-#     out_str = out_str+'       0'  # Gas parameter (wave 7)
-#     out_str = out_str+'       0'  # Covariance matrix (wave 1)
-#     out_str = out_str+'       0'  # Covariance matrix (wave 2)
-#     out_str = out_str+'       0'  # Covariance matrix (wave 3)
-#     out_str = out_str+'       0'  # Covariance matrix (wave 4)
-#     out_str = out_str+'       0'  # Covariance matrix (wave 5)
-#     out_str = out_str+'       0'  # Covariance matrix (wave 6)
-#     out_str = out_str+'       0'  # Covariance matrix (wave 7)
-#     out_str = out_str+'       0'  # Vertical profile (wave 1)
-#     out_str = out_str+'       0'  # Vertical profile (wave 2)
-#     out_str = out_str+'       0'  # Vertical profile (wave 3)
-#     out_str = out_str+'       0'  # Vertical profile (wave 4)
-#     out_str = out_str+'       0'  # Vertical profile (wave 5)
-#     out_str = out_str+'       0'  # Vertical profile (wave 6)
-#     out_str = out_str+'       0'  # Vertical profile (wave 7)
-#     out_str = out_str+'       0'  # (Dummy) (wave 1)
-#     out_str = out_str+'       0'  # (Dummy) (wave 2)
-#     out_str = out_str+'       0'  # (Dummy) (wave 3)
-#     out_str = out_str+'       0'  # (Dummy) (wave 4)
-#     out_str = out_str+'       0'  # (Dummy) (wave 5)
-#     out_str = out_str+'       0'  # (Dummy) (wave 6)
-#     out_str = out_str+'       0'  # (Dummy) (wave 7)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
-#     out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 1)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 2)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 3)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 4)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 5)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 6)
+    out_str = out_str+'       0.00000000'  # Ground parameter (wave 7)
+    out_str = out_str+'       0'  # Gas parameter (wave 1)
+    out_str = out_str+'       0'  # Gas parameter (wave 2)
+    out_str = out_str+'       0'  # Gas parameter (wave 3)
+    out_str = out_str+'       0'  # Gas parameter (wave 4)
+    out_str = out_str+'       0'  # Gas parameter (wave 5)
+    out_str = out_str+'       0'  # Gas parameter (wave 6)
+    out_str = out_str+'       0'  # Gas parameter (wave 7)
+    out_str = out_str+'       0'  # Covariance matrix (wave 1)
+    out_str = out_str+'       0'  # Covariance matrix (wave 2)
+    out_str = out_str+'       0'  # Covariance matrix (wave 3)
+    out_str = out_str+'       0'  # Covariance matrix (wave 4)
+    out_str = out_str+'       0'  # Covariance matrix (wave 5)
+    out_str = out_str+'       0'  # Covariance matrix (wave 6)
+    out_str = out_str+'       0'  # Covariance matrix (wave 7)
+    out_str = out_str+'       0'  # Vertical profile (wave 1)
+    out_str = out_str+'       0'  # Vertical profile (wave 2)
+    out_str = out_str+'       0'  # Vertical profile (wave 3)
+    out_str = out_str+'       0'  # Vertical profile (wave 4)
+    out_str = out_str+'       0'  # Vertical profile (wave 5)
+    out_str = out_str+'       0'  # Vertical profile (wave 6)
+    out_str = out_str+'       0'  # Vertical profile (wave 7)
+    out_str = out_str+'       0'  # (Dummy) (wave 1)
+    out_str = out_str+'       0'  # (Dummy) (wave 2)
+    out_str = out_str+'       0'  # (Dummy) (wave 3)
+    out_str = out_str+'       0'  # (Dummy) (wave 4)
+    out_str = out_str+'       0'  # (Dummy) (wave 5)
+    out_str = out_str+'       0'  # (Dummy) (wave 6)
+    out_str = out_str+'       0'  # (Dummy) (wave 7)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
+    out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
                    
-# # Endline
+# Endline
        
-#     out_str = out_str+'\n'
+    out_str = out_str+'\n'
 
-# # Write out the line
+# Write out the line
      
-#     outputFile.write(out_str)
+    outputFile.write(out_str)
 
-# # Close the output file
+# Close the output file
 
-#     outputFile.close()        
+    outputFile.close()        
         
 ### END MAIN FUNCTION
 if __name__ == '__main__':
