@@ -52,8 +52,8 @@ k_4 = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.sin
 n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
         
 #GRASP 470 nm 
-h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)); #intersection of transverse & reference
-v_o4 = np.cross(k_4,h_o4)/np.linalg.norm(np.cross(k_4,h_o4));
+v_o4 = np.cross(-k_4,n_o)/np.linalg.norm(np.cross(-k_4,n_o)) #intersection of transverse & reference
+h_o4 = np.cross(-k_4,v_o4)/np.linalg.norm(np.cross(-k_4,v_o4))
         
 #Define AirMSPI Scattering Plane (input coordinate system) for each wavelength channel
 n_i4s = np.cross(i,k_4)/np.linalg.norm(np.cross(i,k_4));
