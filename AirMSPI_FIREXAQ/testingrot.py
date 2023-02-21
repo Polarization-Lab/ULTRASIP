@@ -85,7 +85,7 @@ stokesin4s = np.array([[qs_470], [us_470]]) #Scattering
 
 R_nalpha4s = Oout4@(Oin4s.T);
 alpha4s = np.arctan2(R_nalpha4s[0,1],R_nalpha4s[0,0]);  
-rotmatrix4s = np.array([[np.cos(2*alpha4s),-np.sin(2*alpha4s)],[np.sin(2*alpha4s),np.cos(2*alpha4s)]]); 
+rotmatrix4s = np.array([[np.cos(2*alpha4s),np.sin(2*alpha4s)],[-np.sin(2*alpha4s),np.cos(2*alpha4s)]]); 
 qgs_470, ugs_470 = rotmatrix4s@stokesin4s
 
 # print('alpha m', alpha4)
