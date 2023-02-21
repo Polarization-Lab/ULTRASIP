@@ -56,6 +56,9 @@ n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
 #GRASP 470 nm 
 v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
 h_o4 = np.cross(k_4,v_o4)/np.linalg.norm(np.cross(k_4,v_o4))
+
+h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
+v_o4 = np.cross(k_4,h_o4)/np.linalg.norm(np.cross(k_4,h_o4))
         
 #Define AirMSPI Scattering Plane (input coordinate system) for each wavelength channel
 n_i4s = np.cross(i,k_4)/np.linalg.norm(np.cross(i,k_4));
@@ -74,7 +77,7 @@ v_i4 = np.cross(k_4,h_i4)/np.linalg.norm(np.cross(k_4,h_i4));
         
 
 #470 nm 
-Oout4 = np.array([v_o4,h_o4]); #GRASP
+Oout4 = np.array([h_o4,v_o4]); #GRASP
 Oin4 = np.array([h_i4,v_i4]);#Meridian
 Oin4s = np.array([h_i4s,v_i4s]); #Scattering
 stokesin4 = np.array([[qm_470], [um_470]]) #Meridian
@@ -87,7 +90,7 @@ stokesin4s = np.array([[qs_470], [us_470]]) #Scattering
 
 R_nalpha4s = Oout4@(Oin4s.T);
 alpha4s = np.arctan2(R_nalpha4s[0,1],R_nalpha4s[0,0]);  
-rotmatrix4s = np.array([[np.cos(2*alpha4s),np.sin(2*alpha4s)],[-np.sin(2*alpha4s),np.cos(2*alpha4s)]]); 
+rotmatrix4s = np.array([[np.cos(2*alpha4s),-np.sin(2*alpha4s)],[np.sin(2*alpha4s),np.cos(2*alpha4s)]]); 
 qgs_470, ugs_470 = rotmatrix4s@stokesin4s
 
 # print('alpha m', alpha4)
