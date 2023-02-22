@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/3_022223"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/4_022223"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -716,7 +716,7 @@ def main():  # Main code
         R_nalpha4 = Oout4@Oin4.T;
         alpha4 = np.arctan2(R_nalpha4[0,1],R_nalpha4[0,0]);  
         rotmatrix4 = np.array([[np.cos(2*alpha4),np.sin(2*alpha4)],[-np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-        qg_470, ug_470 = -rotmatrix4@stokesin4
+        qg_470, ug_470 = stokesin4
         
         #660 nm 
         #Oout6 = np.array([h_o6,v_o6]);
@@ -729,7 +729,7 @@ def main():  # Main code
         R_nalpha6 = Oout6@Oin6.T;
         alpha6 = np.arctan2(R_nalpha6[0,1],R_nalpha6[0,0]);  
         rotmatrix6 = np.array([[np.cos(2*alpha6),np.sin(2*alpha6)],[-np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        qg_660, ug_660 = -rotmatrix6@stokesin6
+        qg_660, ug_660 = stokesin6
 
         #865 nm 
         #Oout8 = np.array([h_o8,v_o8]);
@@ -742,7 +742,7 @@ def main():  # Main code
         R_nalpha8 = Oout8@Oin8.T;
         alpha8 = np.arctan2(R_nalpha8[0,1],R_nalpha8[0,0]);  
         rotmatrix8 = np.array([[np.cos(2*alpha8),np.sin(2*alpha8)],[-np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        qg_865, ug_865 = -rotmatrix8@stokesin8
+        qg_865, ug_865 = stokesin8
         
         #print(stokesin4)
         
@@ -931,7 +931,7 @@ def main():  # Main code
         
 # Generate an output file name
 
-    outfile = outfile_base+"ALL_RotfromScat_ChromaticKnegQUgvh"+".sdat"
+    outfile = outfile_base+"ALL_RotfromScat_ChromaticKunrot"+".sdat"
         
     print()
     print("Saving: "+outfile)
