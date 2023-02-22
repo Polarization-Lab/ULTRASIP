@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_022223"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/3_022223"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -650,21 +650,21 @@ def main():  # Main code
         
         #GRASP 470 nm 
         v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
-        h_o4 = np.cross(k_4,v_o4)/np.linalg.norm(np.cross(k_4,v_o4))
+        h_o4 = np.cross(v_o4,k_4)/np.linalg.norm(np.cross(v_o4,k_4))
         
         # h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
         # v_o4 = np.cross(k_4,h_o4)/np.linalg.norm(np.cross(k_4,h_o4))
         
         #GRASP 660 nm 
         v_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
-        h_o6 = np.cross(k_6,v_o6)/np.linalg.norm(np.cross(k_6,v_o6))
+        h_o6 = np.cross(v_o6,k_6)/np.linalg.norm(np.cross(v_o6,k_6))
         
         # h_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
         # v_o6 = np.cross(k_6,h_o6)/np.linalg.norm(np.cross(k_6,h_o6))
         
         #GRASP 865 nm 
         v_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
-        h_o8 = np.cross(k_8,v_o8)/np.linalg.norm(np.cross(k_8,v_o8))
+        h_o8 = np.cross(v_o8,k_8)/np.linalg.norm(np.cross(v_o8,k_8))
         
         # h_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
         # v_o8 = np.cross(k_8,h_o8)/np.linalg.norm(np.cross(k_8,h_o8))
@@ -707,7 +707,7 @@ def main():  # Main code
         
         #470 nm 
         #Oout4 = np.array([h_o4,v_o4]);
-        Oout4 = np.array([v_o4,h_o4]);
+        Oout4 = np.array([h_o4,v_o4])
         #Oin4 = np.array([h_i4,v_i4]);#Meridian
         Oin4 = np.array([h_i4s,v_i4s]); #Scattering
         #stokesin4 = np.array([[qm_470], [um_470]]) #Meridian
@@ -720,7 +720,7 @@ def main():  # Main code
         
         #660 nm 
         #Oout6 = np.array([h_o6,v_o6]);
-        Oout6 = np.array([v_o6,h_o6]);
+        Oout6 = np.array([h_o6,v_o6])
         #Oin6 = np.array([h_i6,v_i6]);#Meridian
         Oin6 = np.array([h_i6s,v_i6s]); #Scattering
         #stokesin6 = np.array([[qm_660], [um_660]]) #Meridian
@@ -733,7 +733,7 @@ def main():  # Main code
 
         #865 nm 
         #Oout8 = np.array([h_o8,v_o8]);
-        Oout8 = np.array([v_o8,h_o8]);
+        Oout8 = np.array([h_o8,v_o8])
         #Oin8 = np.array([h_i8,v_i8]);#Meridian
         Oin8 = np.array([h_i8s,v_i8s]); #Scattering
         #stokesin8 = np.array([[qm_865], [um_865]]) #Meridian
@@ -931,7 +931,7 @@ def main():  # Main code
         
 # Generate an output file name
 
-    outfile = outfile_base+"ALL_RotfromScat_ChromaticKnegQU"+".sdat"
+    outfile = outfile_base+"ALL_RotfromScat_ChromaticKnegQUgvh"+".sdat"
         
     print()
     print("Saving: "+outfile)
