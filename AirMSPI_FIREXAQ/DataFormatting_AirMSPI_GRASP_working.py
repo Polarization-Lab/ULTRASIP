@@ -58,8 +58,8 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/4_022223"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_Data/"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_022323"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -69,7 +69,7 @@ def main():  # Main code
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 5
+    num_step = 9
     
 # Calculate the middle of the sequence
 
@@ -84,20 +84,44 @@ def main():  # Main code
 # Crop images to same area to correct for parallax and set a region of interest
 # (ROI) to extract the data from
 
-# Set bounds for the image (USER INPUT)
+# # Set bounds for the image (USER INPUT)
 
-    min_x = 1900
-    max_x = 2200
-    min_y = 1900
-    max_y = 2200
+#     min_x = 1900
+#     max_x = 2200
+#     min_y = 1900
+#     max_y = 2200
     
-# Set bounds for ROI (USER INPUT)
+# # Set bounds for ROI (USER INPUT)
+# # Note: These coordinates are RELATIVE to the overall bounding box
+
+#     box_x1 = 120
+#     box_x2 = 125
+#     box_y1 = 105
+#     box_y2 = 110
+
+# Set some bounds for the image (USER INPUT)
+
+    # min_x = 1900
+    # max_x = 2200
+    # min_y = 1900
+    # max_y = 2200
+    
+    min_x = 1200
+    max_x = 1900
+    min_y = 1200
+    max_y = 1900
+# Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
 
-    box_x1 = 120
-    box_x2 = 125
-    box_y1 = 105
-    box_y2 = 110
+    # box_x1 = 120
+    # box_x2 = 125
+    # box_y1 = 105
+    # box_y2 = 110
+
+    box_x1 = 305
+    box_x2 = 310
+    box_y1 = 305
+    box_y2 = 310
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
@@ -716,7 +740,7 @@ def main():  # Main code
         R_nalpha4 = Oout4@Oin4.T;
         alpha4 = np.arctan2(R_nalpha4[0,1],R_nalpha4[0,0]);  
         rotmatrix4 = np.array([[np.cos(2*alpha4),np.sin(2*alpha4)],[-np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-        qg_470, ug_470 = stokesin4
+        qg_470, ug_470 = rotmatrix4@stokesin4
         
         #660 nm 
         #Oout6 = np.array([h_o6,v_o6]);
@@ -729,7 +753,7 @@ def main():  # Main code
         R_nalpha6 = Oout6@Oin6.T;
         alpha6 = np.arctan2(R_nalpha6[0,1],R_nalpha6[0,0]);  
         rotmatrix6 = np.array([[np.cos(2*alpha6),np.sin(2*alpha6)],[-np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        qg_660, ug_660 = stokesin6
+        qg_660, ug_660 = rotmatrix6@stokesin6
 
         #865 nm 
         #Oout8 = np.array([h_o8,v_o8]);
@@ -742,7 +766,7 @@ def main():  # Main code
         R_nalpha8 = Oout8@Oin8.T;
         alpha8 = np.arctan2(R_nalpha8[0,1],R_nalpha8[0,0]);  
         rotmatrix8 = np.array([[np.cos(2*alpha8),np.sin(2*alpha8)],[-np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        qg_865, ug_865 = stokesin8
+        qg_865, ug_865 = rotmatrix8@stokesin8
         
         #print(stokesin4)
         
@@ -931,7 +955,7 @@ def main():  # Main code
         
 # Generate an output file name
 
-    outfile = outfile_base+"ALL_RotfromScat_ChromaticKunrot"+".sdat"
+    outfile = outfile_base+"ALL_RotfromScat_ChromaticK"+".sdat"
         
     print()
     print("Saving: "+outfile)

@@ -31,14 +31,14 @@ def main():  # Main code
 # NOTE: basepath is the location of the AirMSPI HDF data files
 #       figpath is where the output should be stored
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrieval_1_121922"
+    basepath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_Data/"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_022323"
 
     
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 5
+    num_step = 9
     
 # Set the index of the group of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
@@ -47,27 +47,27 @@ def main():  # Main code
     
 # Set some bounds for the image (USER INPUT)
 
-    min_x = 1900
-    max_x = 2200
-    min_y = 1900
-    max_y = 2200
+    # min_x = 1900
+    # max_x = 2200
+    # min_y = 1900
+    # max_y = 2200
     
-    # min_x = 2900
-    # max_x = 3200
-    # min_y = 2900
-    # max_y = 3200
+    min_x = 1200
+    max_x = 1900
+    min_y = 1200
+    max_y = 1900
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
 
-    box_x1 = 120
-    box_x2 = 125
-    box_y1 = 105
-    box_y2 = 110
+    # box_x1 = 120
+    # box_x2 = 125
+    # box_y1 = 105
+    # box_y2 = 110
 
-    # box_x1 = 300
-    # box_x2 = 325
-    # box_y1 = 305
-    # box_y2 = 310
+    box_x1 = 305
+    box_x2 = 310
+    box_y1 = 305
+    box_y2 = 310
 
 ### Read the AirMSPI data
 
@@ -281,7 +281,7 @@ def main():  # Main code
 
 # Generate the output filename
         print(timeoffile_hhmmss)
-        outfile = "Prescott_{}".format(loop)
+        outfile = "Bakersfield_{}".format(loop)
         outfile = outfile+"_"+str(timeoffile_hhmmss)+"_"+str(step_ind)+"v04.png"
         plt.axis('off')
         plt.title("Time: " + str(timeoffile_hhmmss)+" Angle: "+str(angleoffile))
