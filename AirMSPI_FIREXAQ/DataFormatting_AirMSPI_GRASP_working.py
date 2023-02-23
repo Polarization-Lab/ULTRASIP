@@ -69,7 +69,7 @@ def main():  # Main code
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 9
+    num_step = 7
     
 # Calculate the middle of the sequence
 
