@@ -38,7 +38,7 @@ def main():  # Main code
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 9
+    num_step = 7
     
 # Set the index of the group of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
@@ -64,10 +64,10 @@ def main():  # Main code
     # box_y1 = 105
     # box_y2 = 110
 
-    box_x1 = 305
-    box_x2 = 310
-    box_y1 = 305
-    box_y2 = 310
+    box_x1 = 485
+    box_x2 = 490
+    box_y1 = 485
+    box_y2 = 490
 
 ### Read the AirMSPI data
 

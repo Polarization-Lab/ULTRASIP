@@ -118,10 +118,11 @@ def main():  # Main code
     # box_y1 = 105
     # box_y2 = 110
 
-    box_x1 = 305
-    box_x2 = 310
-    box_y1 = 305
-    box_y2 = 310
+
+    box_x1 = 485
+    box_x2 = 490
+    box_y1 = 485
+    box_y2 = 490
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
@@ -1074,24 +1075,24 @@ def main():  # Main code
     
 # View zenith angle per measurement per wavelength
     for outer in range(6):
-        for inner in range(5): 
+        for inner in range(num_step): 
             out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
 
     for outer in range(6):
-        for inner in range(5): 
+        for inner in range(num_step): 
             out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
-    for inner in range(5):
+    for inner in range(num_step):
         out_str = out_str+'{:16.8f}'.format(vza_median[inner,6])
 
 # Relative azimuth angle per measurement per wavelength
     for outer in range(6):
-        for inner in range(5): 
+        for inner in range(num_step): 
             out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
 
     for outer in range(6):
-          for inner in range(5): 
+          for inner in range(num_step): 
               out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
-    for inner in range(5):
+    for inner in range(num_step):
         out_str = out_str+'{:16.8f}'.format(raz_median[inner,6])
 
 
