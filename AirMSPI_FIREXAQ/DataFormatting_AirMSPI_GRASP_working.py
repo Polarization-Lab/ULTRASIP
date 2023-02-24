@@ -1074,11 +1074,11 @@ def main():  # Main code
 
     sza_mean = np.mean(sza_median)
 
-    for loop in range(7):
+    for loop in range(num_intensity):
         out_str = out_str+'{:16.8f}'.format(sza_mean)
     
 # View zenith angle per measurement per wavelength
-    for outer in range(6):
+    for outer in range(num_intensity):
         for inner in range(num_step): 
             out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
 
@@ -1090,7 +1090,7 @@ def main():  # Main code
     #     out_str = out_str+'{:16.8f}'.format(vza_median[inner,6])
 
 # Relative azimuth angle per measurement per wavelength
-    for outer in range(6):
+    for outer in range(num_intensity):
         for inner in range(num_step): 
             out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
 
