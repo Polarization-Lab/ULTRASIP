@@ -1074,7 +1074,7 @@ def main():  # Main code
 
     sza_mean = np.mean(sza_median)
 
-    for loop in range(6):
+    for loop in range(7):
         out_str = out_str+'{:16.8f}'.format(sza_mean)
     
 # View zenith angle per measurement per wavelength
