@@ -874,7 +874,11 @@ def main():  # Main code
         vza_median[loop,5] = vza_660
         vza_median[loop,6] = vza_865
         
-        #print(vza_median[:,:])
+        print(vza_median[:,0])
+        print(vza_median[:,1])
+        print(vza_median[:,2])
+        print(vza_median[:,3])
+        print(vza_median[:,4])
 
         
         raz_median[loop,0] = raz_355
@@ -1070,7 +1074,7 @@ def main():  # Main code
 
     sza_mean = np.mean(sza_median)
 
-    for loop in range(num_intensity):
+    for loop in range(6):
         out_str = out_str+'{:16.8f}'.format(sza_mean)
     
 # View zenith angle per measurement per wavelength
@@ -1078,22 +1082,23 @@ def main():  # Main code
         for inner in range(num_step): 
             out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
 
-    for outer in range(6):
-        for inner in range(num_step): 
-            out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
-    for inner in range(num_step):
-        out_str = out_str+'{:16.8f}'.format(vza_median[inner,6])
+    # for outer in range(6):
+    #     for inner in range(num_step): 
+    #         #print(inner,outer)
+    #         out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+    # for inner in range(num_step):
+    #     out_str = out_str+'{:16.8f}'.format(vza_median[inner,6])
 
 # Relative azimuth angle per measurement per wavelength
     for outer in range(6):
         for inner in range(num_step): 
             out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
 
-    for outer in range(6):
-          for inner in range(num_step): 
-              out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
-    for inner in range(num_step):
-        out_str = out_str+'{:16.8f}'.format(raz_median[inner,6])
+    # for outer in range(6):
+    #       for inner in range(num_step): 
+    #           out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+    # for inner in range(num_step):
+    #     out_str = out_str+'{:16.8f}'.format(raz_median[inner,6])
 
 
 #Measurements
