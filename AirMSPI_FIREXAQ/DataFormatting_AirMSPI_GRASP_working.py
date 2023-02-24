@@ -1078,27 +1078,16 @@ def main():  # Main code
         out_str = out_str+'{:16.8f}'.format(sza_mean)
     
 # View zenith angle per measurement per wavelength
-    for outer in range(num_intensity):
+    for outer in range(13):
         for inner in range(num_step): 
-            out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+            out_str = out_str+'{:16.8f}'.format(vza_median[inner,2])
 
-    # for outer in range(6):
-    #     for inner in range(num_step): 
-    #         #print(inner,outer)
-    #         out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
-    # for inner in range(num_step):
-    #     out_str = out_str+'{:16.8f}'.format(vza_median[inner,6])
 
 # Relative azimuth angle per measurement per wavelength
-    for outer in range(num_intensity):
+    for outer in range(13):
         for inner in range(num_step): 
-            out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
+            out_str = out_str+'{:16.8f}'.format(raz_median[inner,2])
 
-    # for outer in range(6):
-    #       for inner in range(num_step): 
-    #           out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
-    # for inner in range(num_step):
-    #     out_str = out_str+'{:16.8f}'.format(raz_median[inner,6])
 
 
 #Measurements
