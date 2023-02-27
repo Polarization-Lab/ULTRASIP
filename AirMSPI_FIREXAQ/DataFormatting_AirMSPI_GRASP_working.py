@@ -649,7 +649,8 @@ def main():  # Main code
         dolp_865 = np.median(box_dolp_865[good])
         
         saz = np.median(box_saz[good])
-        sza = 180-np.median(box_sza[good])
+        sza = np.median(box_sza[good])
+        print(saz,sza)
         
 # If this is the center acquisition, process the navigation information
 
@@ -874,11 +875,11 @@ def main():  # Main code
         vza_median[loop,5] = vza_660
         vza_median[loop,6] = vza_865
         
-        print(vza_median[:,0])
-        print(vza_median[:,1])
-        print(vza_median[:,2])
-        print(vza_median[:,3])
-        print(vza_median[:,4])
+        # print(vza_median[:,0])
+        # print(vza_median[:,1])
+        # print(vza_median[:,2])
+        # print(vza_median[:,3])
+        # print(vza_median[:,4])
 
         
         raz_median[loop,0] = raz_355
@@ -1080,7 +1081,7 @@ def main():  # Main code
 # View zenith angle per measurement per wavelength
     for outer in range(13):
         for inner in range(num_step): 
-            out_str = out_str+'{:16.8f}'.format(vza_median[inner,2])
+            out_str = out_str+'{:16.8f}'.format(90-vza_median[inner,2])
 
 
 # Relative azimuth angle per measurement per wavelength
