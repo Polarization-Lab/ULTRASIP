@@ -21,32 +21,32 @@ import time
 # vza_470=46.64313275387909;
 # vaz_470=219.41413034956926;
 # #Nadir % work if change sign i and k vector
-# qm_470 = 0.024076024;
-# um_470 = -0.009255913;
-# qs_470 = -0.025675273;
-# us_470 = 0.00094201486;
-# sza = 65.647255; #flipped sign from raw data
-# saz = 89.98054;
-# vza_470 = 4.174677;
-# vaz_470 = 172.39378;
+qm_470 = 0.024076024;
+um_470 = -0.009255913;
+qs_470 = -0.025675273;
+us_470 = 0.00094201486;
+sza = 180-65.647255; #flipped sign from raw data
+saz = 89.98054;
+vza_470 = 4.174677;
+vaz_470 = 172.39378;
 #46.7 Degrees oppostie direction of flight. 
-qm_470 = -0.003341124;
-um_470 = 0.029556079;
-qs_470 = -0.029637378;
-us_470 = 0.0017556292;
-sza = 65.96801; #flipped sign of raw  in expression
-saz = 90.20225;
-vza_470 = 41.958958;
-vaz_470 = 46.008686;
+# qm_470 = -0.003341124;
+# um_470 = 0.029556079;
+# qs_470 = -0.029637378;
+# us_470 = 0.0017556292;
+# sza = 180-65.96801; #flipped sign of raw  in expression
+# saz = 90.20225;
+# vza_470 = 41.958958;
+# vaz_470 = 46.008686;
 
 
 #________________________Geometry Reconciliation___________________________#
 
 zenith= np.array([0, 0, 1]);
 nor= np.array([1, 0, 0]);
-i = np.array([np.cos(np.radians(saz))*np.sin(np.radians(sza)), np.sin(np.radians(saz))*np.sin(np.radians(sza)), -np.cos(np.radians(sza))]); #illumination vec,flip sign of sza
+i = np.array([np.cos(np.radians(saz))*np.sin(np.radians(sza)), -np.sin(np.radians(saz))*np.sin(np.radians(sza)), -np.cos(np.radians(sza))]); #illumination vec,flip sign of sza
 
-k_4 = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), np.sin(np.radians(vaz_470))*np.sin(np.radians(vza_470)), np.cos(np.radians(vza_470))]);
+k_4 = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.sin(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.cos(np.radians(vza_470))]);
  
 #Define AirMSPI Scattering Plane (input coordinate system) for each wavelength channel
 n_i4s = np.cross(i,k_4)/np.linalg.norm(np.cross(i,k_4));

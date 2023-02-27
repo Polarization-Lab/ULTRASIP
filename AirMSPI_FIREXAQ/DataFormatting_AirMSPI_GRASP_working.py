@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_022323"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_022723"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -649,7 +649,7 @@ def main():  # Main code
         dolp_865 = np.median(box_dolp_865[good])
         
         saz = np.median(box_saz[good])
-        sza = np.median(box_sza[good])
+        sza = 180-np.median(box_sza[good])
         
 # If this is the center acquisition, process the navigation information
 
@@ -664,7 +664,7 @@ def main():  # Main code
 
         zenith= np.array([0, 0, 1]);
         nor= np.array([1, 0, 0]);
-        i = np.array([np.cos(np.radians(saz))*np.sin(np.radians(-sza)), np.sin(np.radians(saz))*np.sin(np.radians(sza)), -np.cos(np.radians(-sza))]); #illumination vec,flip sign of sza
+        i = np.array([np.cos(np.radians(saz))*np.sin(np.radians(sza)), -np.sin(np.radians(saz))*np.sin(np.radians(sza)), -np.cos(np.radians(sza))]); #illumination vec,flip sign of sza
 
         k_4 = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.sin(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.cos(np.radians(vza_470))]);
         k_6 = np.array([np.cos(np.radians(vaz_660))*np.sin(np.radians(vza_660)), -np.sin(np.radians(vaz_660))*np.sin(np.radians(vza_660)), -np.cos(np.radians(vza_660))]);
@@ -754,7 +754,7 @@ def main():  # Main code
         R_nalpha6 = Oout6@Oin6.T;
         alpha6 = np.arctan2(R_nalpha6[0,1],R_nalpha6[0,0]);  
         rotmatrix6 = np.array([[np.cos(2*alpha6),np.sin(2*alpha6)],[-np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        qg_660, ug_660 = -rotmatrix6@stokesin6
+        qg_660, ug_660 = rotmatrix6@stokesin6
 
         #865 nm 
         #Oout8 = np.array([h_o8,v_o8]);
@@ -767,7 +767,7 @@ def main():  # Main code
         R_nalpha8 = Oout8@Oin8.T;
         alpha8 = np.arctan2(R_nalpha8[0,1],R_nalpha8[0,0]);  
         rotmatrix8 = np.array([[np.cos(2*alpha8),np.sin(2*alpha8)],[-np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        qg_865, ug_865 = -rotmatrix8@stokesin8
+        qg_865, ug_865 = rotmatrix8@stokesin8
         
         #print(stokesin4)
         
