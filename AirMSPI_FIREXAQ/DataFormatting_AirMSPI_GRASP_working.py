@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/3_030523"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/4_030523"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -139,7 +139,7 @@ def main():  # Main code
 # ALL ANGLES IN RADIANS
     scat_median = np.zeros((num_step,num_int))  # Scattering angle
     vza_median = np.zeros((num_step,num_int))  # View zenith angle
-    raz_median = np.zeros((num_step,num_int))  # Relative azimuth angle
+    raz_median = np.zeros((num_step,13))  # Relative azimuth angle
     sza_median = np.zeros(num_step)  # Solar zenith angle (one per stare)
 
 #Measurement Arrays   
@@ -673,7 +673,6 @@ def main():  # Main code
         #865
         stokesin8 = np.array([[qm_865], [um_865]]) #Meridian
         stokesin8s = np.array([[qs_865], [us_865]]) #Scattering
-        print(saz,sza,vaz_470,vza_470,stokesin4,stokesin4s)
         
         #Vector Definitions
         zenith= np.array([0, 0, 1]);
@@ -764,15 +763,34 @@ def main():  # Main code
         alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
         rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
         qg_865, ug_865 = rotmatrix8@stokesin8s
-        
-        print(saz,sza,vaz_470,vza_470,stokesin4,stokesin4s,qg_470,ug_470)
-        
-
-        
+                       
 # Calculate the relative azimuth angle in the GRASP convention
-# NOTE: This bit of code seems kludgy and comes from older AirMSPI code
-        raz_470=np.arccos(-i@k_4.T);  #range 0 to 180
-        raz_470=np.degrees(raz_470)+180;         #inexplicable GRASP offset
+# NOTE:Need k-vector for radiometric channels
+        k_35 = np.array([np.cos(np.radians(vaz_355))*np.sin(np.radians(vza_355)), -np.sin(np.radians(vaz_355))*np.sin(np.radians(vza_355)), np.cos(np.radians(vza_355))]);
+        k_38 = np.array([np.cos(np.radians(vaz_380))*np.sin(np.radians(vza_380)), -np.sin(np.radians(vaz_380))*np.sin(np.radians(vza_380)), np.cos(np.radians(vza_380))]);
+        k_45 = np.array([np.cos(np.radians(vaz_445))*np.sin(np.radians(vza_445)), -np.sin(np.radians(vaz_445))*np.sin(np.radians(vza_445)), np.cos(np.radians(vza_445))]);
+        k_55 = np.array([np.cos(np.radians(vaz_555))*np.sin(np.radians(vza_555)), -np.sin(np.radians(vaz_555))*np.sin(np.radians(vza_555)), np.cos(np.radians(vza_555))]);
+       
+        raz_355=np.arccos(-i@k_35.T);        #range 0 to 180
+        raz_355=np.degrees(raz_355)+180;    #inexplicable GRASP offset
+         
+        raz_380=np.arccos(-i@k_38.T);        #range 0 to 180
+        raz_380=np.degrees(raz_380)+180;    #inexplicable GRASP offset
+          
+        raz_445=np.arccos(-i@k_45.T);        #range 0 to 180
+        raz_445=np.degrees(raz_445)+180;    #inexplicable GRASP offset
+        
+        raz_470=np.arccos(-i@k_4.T);        #range 0 to 180
+        raz_470=np.degrees(raz_470)+180;    #inexplicable GRASP offset
+        
+        raz_555=np.arccos(-i@k_55.T);        #range 0 to 180
+        raz_555=np.degrees(raz_555)+180;    #inexplicable GRASP offset
+        
+        raz_660=np.arccos(-i@k_6.T);        #range 0 to 180
+        raz_660=np.degrees(raz_660)+180;    #inexplicable GRASP offset
+        
+        raz_865=np.arccos(-i@k_8.T);        #range 0 to 180
+        raz_865=np.degrees(raz_865)+180;    #inexplicable GRASP offset
         
 ### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 
 ### EQUIVALENT REFLECTANCES = PI*L/E0
@@ -830,13 +848,19 @@ def main():  # Main code
         # print(vza_median[:,4])
 
         
-        raz_median[loop,0] = raz_470
-        raz_median[loop,1] = raz_470
-        raz_median[loop,2] = raz_470
+        raz_median[loop,0] = raz_355
+        raz_median[loop,1] = raz_380
+        raz_median[loop,2] = raz_445
         raz_median[loop,3] = raz_470
         raz_median[loop,4] = raz_470
         raz_median[loop,5] = raz_470
-        raz_median[loop,6] = raz_470
+        raz_median[loop,6] = raz_555
+        raz_median[loop,7] = raz_660
+        raz_median[loop,8] = raz_660
+        raz_median[loop,9] = raz_660
+        raz_median[loop,10] = raz_865
+        raz_median[loop,11] = raz_865
+        raz_median[loop,12] = raz_865
         
         i_in_polar_median[loop,0] = eqr_i_470
         i_in_polar_median[loop,1] = eqr_i_660
@@ -880,13 +904,7 @@ def main():  # Main code
 # NOTE: The options more or less correspond to GRASP retrieval.regime_of_measurement_fitting
 #       0 = .radiance (option 1)
 #       1-5 = .polarization (option as given)
-#    
-#    outfile0 = outfile_base+"I_v"+vers+".sdat"
-#    outfile1 = outfile_base+"IQU_v"+vers+".sdat"
-#    outfile2 = outfile_base+"Iqu_v"+vers+".sdat"
-#    outfile3 = outfile_base+"IIpol_v"+vers+".sdat"
-#    outfile4 = outfile_base+"IDoLP_v"+vers+".sdat"
-#    outfile5 = outfile_base+"DoLP_v"+vers+".sdat"
+
 
 # Change to the output directory
     os.chdir(outpath) 
@@ -1035,8 +1053,7 @@ def main():  # Main code
 # Relative azimuth angle per measurement per wavelength
     for outer in range(13):
         for inner in range(num_step): 
-            out_str = out_str+'{:16.8f}'.format(raz_median[inner,3])
-
+            out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
 
 
 #Measurements
