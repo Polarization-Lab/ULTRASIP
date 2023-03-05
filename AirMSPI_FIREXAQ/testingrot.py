@@ -38,6 +38,15 @@ vaz_470 = 172.39378;
 # saz = 90.20225;
 # vza_470 = 41.958958;
 # vaz_470 = 46.008686;
+#DATA FOR PAPER FROM FILE: AirMSPI_ER2_GRP_TERRAIN_20190817_001208Z_AZ-Prescott_467F_F01_V006.hdf
+saz = 89.48908;
+sza = 64.939064;
+vaz_470 = 220.95282;
+vza_470 = 64.98406;
+qm_470 = 0.02224747;
+um_470 = -0.01015127;
+qs_470 = -0.0243936;
+us_470 =  0.00118935;
 
 
 #________________________Geometry Reconciliation___________________________#
@@ -95,6 +104,10 @@ R_nalpha4 = Oout4@(Oin4s.T);
 alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
 rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
 qg_470rots, ug_470rots = rotmatrix4@stokesin4s
+
+#Relative Azimuth Calculation
+raz_470=np.arccos(-i@k_4.T);  #range 0 to 180
+raz_470=np.degrees(raz_470)+180;         #inexplicable GRASP offset
 
 
 

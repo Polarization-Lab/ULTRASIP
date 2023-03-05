@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_030523"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/3_030523"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -650,7 +650,7 @@ def main():  # Main code
         
         saz = np.median(box_saz[good])
         sza = np.median(box_sza[good])
-        print(saz,sza)
+        
         
 # If this is the center acquisition, process the navigation information
 
@@ -673,6 +673,7 @@ def main():  # Main code
         #865
         stokesin8 = np.array([[qm_865], [um_865]]) #Meridian
         stokesin8s = np.array([[qs_865], [us_865]]) #Scattering
+        print(saz,sza,vaz_470,vza_470,stokesin4,stokesin4s)
         
         #Vector Definitions
         zenith= np.array([0, 0, 1]);
@@ -764,59 +765,14 @@ def main():  # Main code
         rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
         qg_865, ug_865 = rotmatrix8@stokesin8s
         
+        print(saz,sza,vaz_470,vza_470,stokesin4,stokesin4s,qg_470,ug_470)
+        
 
         
 # Calculate the relative azimuth angle in the GRASP convention
 # NOTE: This bit of code seems kludgy and comes from older AirMSPI code
-
-        raz_355 = saz - vaz_355
-        if(raz_355 < 0.0):
-            raz_355 = 360.+raz_355
-        if(raz_355 > 180.0):
-            raz_355 = 360.-raz_355
-        raz_355 = raz_355+180.
-        
-        raz_380 = saz - vaz_380
-        if(raz_380 < 0.0):
-            raz_380 = 360.+raz_380
-        if(raz_380 > 180.0):
-            raz_380 = 360.-raz_380
-        raz_380 = raz_380+180. #per eqn blah
-        
-        raz_445 = saz - vaz_445
-        if(raz_445 < 0.0):
-            raz_445 = 360.+raz_445
-        if(raz_445 > 180.0):
-            raz_445 = 360.-raz_445
-        raz_445 = raz_445+180.
-        
-        raz_470 = saz - vaz_470
-        if(raz_470 < 0.0):
-            raz_470 = 360.+raz_470
-        if(raz_470 > 180.0):
-            raz_470 = 360.-raz_470
-        raz_470 = raz_470+180.
-        
-        raz_555 = saz - vaz_555
-        if(raz_555 < 0.0):
-            raz_555 = 360.+raz_555
-        if(raz_555 > 180.0):
-            raz_555 = 360.-raz_555
-        raz_555 = raz_555+180.
-        
-        raz_660 = saz - vaz_660
-        if(raz_660 < 0.0):
-            raz_660 = 360.+raz_660
-        if(raz_660 > 180.0):
-            raz_660 = 360.-raz_660
-        raz_660 = raz_660+180.
-        
-        raz_865 = saz - vaz_865
-        if(raz_865 < 0.0):
-            raz_865 = 360.+raz_865
-        if(raz_865 > 180.0):
-            raz_865 = 360.-raz_865
-        raz_865 = raz_865+180.
+        raz_470=np.arccos(-i@k_4.T);  #range 0 to 180
+        raz_470=np.degrees(raz_470)+180;         #inexplicable GRASP offset
         
 ### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 
 ### EQUIVALENT REFLECTANCES = PI*L/E0
@@ -874,13 +830,13 @@ def main():  # Main code
         # print(vza_median[:,4])
 
         
-        raz_median[loop,0] = raz_355
-        raz_median[loop,1] = raz_380
-        raz_median[loop,2] = raz_445
+        raz_median[loop,0] = raz_470
+        raz_median[loop,1] = raz_470
+        raz_median[loop,2] = raz_470
         raz_median[loop,3] = raz_470
-        raz_median[loop,4] = raz_555
-        raz_median[loop,5] = raz_660
-        raz_median[loop,6] = raz_865
+        raz_median[loop,4] = raz_470
+        raz_median[loop,5] = raz_470
+        raz_median[loop,6] = raz_470
         
         i_in_polar_median[loop,0] = eqr_i_470
         i_in_polar_median[loop,1] = eqr_i_660
@@ -1079,7 +1035,7 @@ def main():  # Main code
 # Relative azimuth angle per measurement per wavelength
     for outer in range(13):
         for inner in range(num_step): 
-            out_str = out_str+'{:16.8f}'.format(raz_median[inner,2])
+            out_str = out_str+'{:16.8f}'.format(raz_median[inner,3])
 
 
 
