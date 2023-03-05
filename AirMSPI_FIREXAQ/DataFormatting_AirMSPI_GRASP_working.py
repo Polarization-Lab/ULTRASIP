@@ -58,8 +58,8 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_022723"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_030523"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -69,7 +69,7 @@ def main():  # Main code
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 7
+    num_step = 5
     
 # Calculate the middle of the sequence
 
@@ -101,28 +101,28 @@ def main():  # Main code
 
 # Set some bounds for the image (USER INPUT)
 
-    # min_x = 1900
-    # max_x = 2200
-    # min_y = 1900
-    # max_y = 2200
+    min_x = 1900
+    max_x = 2200
+    min_y = 1900
+    max_y = 2200
     
-    min_x = 1200
-    max_x = 1900
-    min_y = 1200
-    max_y = 1900
+    # min_x = 1200
+    # max_x = 1900
+    # min_y = 1200
+    # max_y = 1900
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
 
-    # box_x1 = 120
-    # box_x2 = 125
-    # box_y1 = 105
-    # box_y2 = 110
+    box_x1 = 120
+    box_x2 = 125
+    box_y1 = 105
+    box_y2 = 110
 
 
-    box_x1 = 485
-    box_x2 = 490
-    box_y1 = 485
-    box_y2 = 490
+    # box_x1 = 485
+    # box_x2 = 490
+    # box_y1 = 485
+    # box_y2 = 490
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
@@ -665,11 +665,11 @@ def main():  # Main code
 
         zenith= np.array([0, 0, 1]);
         nor= np.array([1, 0, 0]);
-        i = np.array([np.cos(np.radians(saz))*np.sin(np.radians(sza)), -np.sin(np.radians(saz))*np.sin(np.radians(sza)), -np.cos(np.radians(sza))]); #illumination vec,flip sign of sza
+        i = np.array([np.cos(np.radians(saz))*np.sin(np.radians(sza)), -np.sin(np.radians(saz))*np.sin(np.radians(sza)), -np.cos(np.radians(sza))]); #illumination vec
 
-        k_4 = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.sin(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.cos(np.radians(vza_470))]);
-        k_6 = np.array([np.cos(np.radians(vaz_660))*np.sin(np.radians(vza_660)), -np.sin(np.radians(vaz_660))*np.sin(np.radians(vza_660)), -np.cos(np.radians(vza_660))]);
-        k_8 = np.array([np.cos(np.radians(vaz_865))*np.sin(np.radians(vza_865)), -np.sin(np.radians(vaz_865))*np.sin(np.radians(vza_865)), -np.cos(np.radians(vza_865))]);
+        k_4 = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.sin(np.radians(vaz_470))*np.sin(np.radians(vza_470)), np.cos(np.radians(vza_470))]);
+        k_6 = np.array([np.cos(np.radians(vaz_660))*np.sin(np.radians(vza_660)), -np.sin(np.radians(vaz_660))*np.sin(np.radians(vza_660)), np.cos(np.radians(vza_660))]);
+        k_8 = np.array([np.cos(np.radians(vaz_865))*np.sin(np.radians(vza_865)), -np.sin(np.radians(vaz_865))*np.sin(np.radians(vza_865)), np.cos(np.radians(vza_865))]);
 
         #Define GRASP Plane (output coordinate system) for each wavelength channel
         n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
@@ -736,13 +736,15 @@ def main():  # Main code
         Oout4 = np.array([h_o4,v_o4])
         #Oin4 = np.array([h_i4,v_i4]);#Meridian
         Oin4 = np.array([h_i4s,v_i4s]); #Scattering
-        #stokesin4 = np.array([[qm_470], [um_470]]) #Meridian
-        stokesin4 = np.array([[qs_470], [us_470]]) #Scattering
+        stokesin4 = np.array([[qm_470], [um_470]]) #Meridian
+        stokesin4s = np.array([[qs_470], [us_470]]) #Scattering
+        # print(stokesin4)
+        # print(stokesin4s)
 
         R_nalpha4 = Oout4@Oin4.T;
         alpha4 = np.arctan2(R_nalpha4[0,1],R_nalpha4[0,0]);  
         rotmatrix4 = np.array([[np.cos(2*alpha4),np.sin(2*alpha4)],[-np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-        qg_470, ug_470 = -rotmatrix4@stokesin4
+        qg_470, ug_470 = rotmatrix4@stokesin4
         
         #660 nm 
         #Oout6 = np.array([h_o6,v_o6]);
@@ -789,7 +791,7 @@ def main():  # Main code
             raz_380 = 360.+raz_380
         if(raz_380 > 180.0):
             raz_380 = 360.-raz_380
-        raz_380 = raz_380+180.
+        raz_380 = raz_380+180. #per eqn blah
         
         raz_445 = saz - vaz_445
         if(raz_445 < 0.0):
@@ -877,7 +879,7 @@ def main():  # Main code
         
         # print(vza_median[:,0])
         # print(vza_median[:,1])
-        # print(vza_median[:,2])
+        #print(180-vaz_median[:,2])
         # print(vza_median[:,3])
         # print(vza_median[:,4])
 
@@ -1081,7 +1083,7 @@ def main():  # Main code
 # View zenith angle per measurement per wavelength
     for outer in range(13):
         for inner in range(num_step): 
-            out_str = out_str+'{:16.8f}'.format(90-vza_median[inner,2])
+            out_str = out_str+'{:16.8f}'.format(vza_median[inner,2])
 
 
 # Relative azimuth angle per measurement per wavelength

@@ -117,8 +117,9 @@ class GenStatus:
 
 class BasicResponse:
     def __init__(self, data: list):
-        self.pan_coord = bytes_to_int(data.pop(0), data.pop(0)) / 10  # PAN = -3600 to +3600 = -360.0 deg to +360.0 deg
-        self.tilt_coord =  bytes_to_int(data.pop(0), data.pop(0)) / 10  # TILT = -1800 to +1800 = -180.0 deg to +180.0 deg
+        print(data)
+        self.pan_coord = bytes_to_int(data.pop(0), data.pop(0))   # PAN = -3600 to +3600 = -360.0 deg to +360.0 deg
+        self.tilt_coord =  bytes_to_int(data.pop(0), data.pop(0))  # TILT = -1800 to +1800 = -180.0 deg to +180.0 deg
 
         self.pan_status = PanStatus(data.pop(0))
         self.tilt_status = TiltStatus(data.pop(0))
@@ -133,27 +134,28 @@ class BasicResponse:
 
     def __str__(self):
         cam_data = 0 #'Cam:[count: {count}, data: {data}]'.format(count=self.cam_count, data=self.cam_data) if self.cam_data else ''
-        # return ('[Response]\n'
-        #         'Pan coord:  {pan_coord} deg\n'
-        #         'Tilt coord: {tilt_coord} deg\n'
-        #         '{pan_status}\n'
-        #         '{tilt_status}\n'
-        #         '{gen_status}\n'
-        #         'Zoom coord:  {zoom_coord}\n'
-        #         'Focus coord: {focus_coord}\n'
-        #         '{cam_data}').format(pan_coord=self.pan_coord,
-        #                              tilt_coord=self.tilt_coord,
-        #                              pan_status=self.pan_status,
-        #                              tilt_status=self.tilt_status,
-        #                              gen_status=self.gen_status,
-        #                              zoom_coord=self.zoom_cord,
-        #                              focus_coord=self.focus_coord,
-        #                              cam_data=cam_data)
         return ('[Response]\n'
                 'Pan coord:  {pan_coord} deg\n'
                 'Tilt coord: {tilt_coord} deg\n'
-                ).format(pan_coord=self.pan_coord,
-                                     tilt_coord=self.tilt_coord)
+                '{pan_status}\n'
+                '{tilt_status}\n'
+                '{gen_status}\n'
+                'Zoom coord:  {zoom_coord}\n'
+                'Focus coord: {focus_coord}\n'
+                '{cam_data}').format(pan_coord=self.pan_coord,
+                                      tilt_coord=self.tilt_coord,
+                                      pan_status=self.pan_status,
+                                      tilt_status=self.tilt_status,
+                                      gen_status=self.gen_status,
+                                      zoom_coord=self.zoom_cord,
+                                      focus_coord=self.focus_coord,
+                                      cam_data=cam_data)
+        # return ('[Response]\n'
+        #        'Pan coord:  {pan_coord} deg\n'
+        #        'Tilt coord: {tilt_coord} deg\n').format(pan_coord=self.pan_coord,
+        #                                      tilt_coord=self.tilt_coord)
+        
+
 
 
 # Calculate the LRC
@@ -290,7 +292,7 @@ def init_autobaud(serial_port):
 def mv_to_coord(serial_port,pan,tilt, get_response=True):
     pan_lsb, pan_msb = int_to_bytes(pan)
     tilt_lsb, tilt_msb = int_to_bytes(tilt)
-
+    
     buffer = build_req(CMD_MV_ENT_COORD, [pan_lsb, pan_msb, tilt_lsb, tilt_msb])
 
     response_raw = send_request(serial_port, buffer, get_rsp=get_response)

@@ -16,7 +16,7 @@ sys.path.append(
 sys.path.append(
     'C:/Users/ULTRASIP_1/Documents/ULTRASIP/InstrumentCode/Instrument_Control/Rotation_Motor')
 import Cam_Cmmand as cam
-import motor_commandsog as mc
+import motor_commands as mc
 import elliptec
 import h5py
 from datetime import datetime
@@ -29,14 +29,14 @@ moog.open()
 
 #Output path
 
-outpath = 'C:/Users/ULTRASIP_1/Documents/ULTRASIP/Measurements'
+outpath = 'C:/Users/ULTRASIP_1/Documents/ULTRASIP/Measurements/'
 
 #measurement name
-name = str(datetime.utcnow())
+name = 'test' #str(datetime.utcnow())
 
-# Pan and tilt of moog
-pan = 10
-tilt = 20
+# Pan and tilt of moog times 10
+pan = -1000
+tilt = 200
 
 # Polarizer rotation connect and angles
 controller = elliptec.Controller('COM4')
@@ -52,7 +52,7 @@ mc.init_autobaud(moog)
 mc.get_status_jog(moog)
 mc.mv_to_home(moog, 0000, 0000)
 
-mc.mv_to_coord(moog, pan, tilt)
+#mc.mv_to_coord(moog, pan, tilt)
 #mc.mv_to_coord(moog, 9999, tilt)
 
 time.sleep(4)
@@ -65,10 +65,12 @@ ro.home()
 offset = -0.025
 tic = time.perf_counter()
 
-# Loop over a list of angles and acquire for each
+#Loop over a list of angles and acquire for each
 for angle in angles:
     ro.set_angle(angle+offset)
     angleout = ro.get_angle()
+    toc = time.perf_counter()
+
     print(angleout)
 
     image = cam.takeimage(nb_frames, exposure)
@@ -88,9 +90,8 @@ for angle in angles:
 
     hf.close()
 
-toc = time.perf_counter()
 
-print(tic-toc)
+print(toc-tic)
 
 #Home and close everything
 mc.mv_to_home(moog, 0000, 0000)
