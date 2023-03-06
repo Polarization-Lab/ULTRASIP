@@ -25,13 +25,13 @@ def main():  # Main code
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_022323"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_022323/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/old/1_030523"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/old/1_030523/plots"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 7
+    num_step = 5
 
     
 # Set the number of wavelengths

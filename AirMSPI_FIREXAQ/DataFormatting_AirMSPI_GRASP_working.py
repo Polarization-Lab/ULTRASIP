@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0623/1"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0623/2"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -1104,7 +1104,7 @@ def main():  # Main code
 # View zenith angle per measurement per wavelength
     for outer in range(13):
         for inner in range(num_step): 
-            out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
+            out_str = out_str+'{:16.8f}'.format(180-vza_median[inner,outer])
 
 
 # Relative azimuth angle per measurement per wavelength

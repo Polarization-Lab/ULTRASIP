@@ -116,4 +116,5 @@ if(raz_470 > 180.0):
     raz_470 = 360.-raz_470
 raz_470 = raz_470+180.
 
+scatt_angle = np.arccos(i@k_4)
 
