@@ -955,7 +955,7 @@ def main():  # Main code
         dolp_median[loop,1] = dolp_660
         dolp_median[loop,2] = dolp_865
         
-        sza_median[loop] = 180-sza
+        sza_median[loop] = sza
         
         #print(qm_470)
         # #print(um_470)
