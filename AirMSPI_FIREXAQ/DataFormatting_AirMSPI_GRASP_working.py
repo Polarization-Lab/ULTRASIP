@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0623/2"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0623/3"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -726,19 +726,19 @@ def main():  # Main code
         n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
         v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
         h_o4 = np.cross(v_o4,k_4)/np.linalg.norm(np.cross(v_o4,k_4))
-        Oout4 = np.array([h_o4,v_o4]); #GRASP     
+        Oout4 = np.array([v_o4,h_o4]); #GRASP     
         
         #660nm
         n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
         v_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
         h_o6 = np.cross(v_o6,k_6)/np.linalg.norm(np.cross(v_o6,k_6))
-        Oout6 = np.array([h_o6,v_o6]); #GRASP 
+        Oout6 = np.array([v_o6,h_o6]); #GRASP 
 
         #865nm
         n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
         v_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
         h_o8 = np.cross(v_o8,k_8)/np.linalg.norm(np.cross(v_o8,k_8))
-        Oout8 = np.array([h_o8,v_o8]); #GRASP  
+        Oout8 = np.array([v_o8,h_o8]); #GRASP  
 
     
         # #Meridian AirMSPI to GRASP 
@@ -773,7 +773,7 @@ def main():  # Main code
         k_45 = np.array([np.cos(np.radians(vaz_445))*np.sin(np.radians(vza_445)), -np.sin(np.radians(vaz_445))*np.sin(np.radians(vza_445)), np.cos(np.radians(vza_445))]);
         k_55 = np.array([np.cos(np.radians(vaz_555))*np.sin(np.radians(vza_555)), -np.sin(np.radians(vaz_555))*np.sin(np.radians(vza_555)), np.cos(np.radians(vza_555))]);
        
-        raz_355=np.arccos(-i@k_35.T);        #range 0 to 180
+        #raz_355=np.arccos(-i@k_35.T);        #range 0 to 180
         # raz_355=np.degrees(raz_355)+180;    #inexplicable GRASP offset
          
         # raz_380=np.arccos(-i@k_38.T);        #range 0 to 180

@@ -4,12 +4,12 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0623/2/AirMSPI_20190817_001344Z_AZ-Prescott_ALL_RotfromScat_ChromaticK.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0623/3/AirMSPI_20190817_001344Z_AZ-Prescott_ALL_RotfromScat_ChromaticK.sdat"
   
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["RetrievalALL_2_Mar_06_23.txt", screen] # screen, "filename"
+        stream: ["RetrievalALL_3_Mar_06_23.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
