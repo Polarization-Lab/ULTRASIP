@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/5_030523"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0623/1"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -722,21 +722,23 @@ def main():  # Main code
         
 
         #GRASP Basis
+        #GRASP Basis
         n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-        #470nm
-        h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
-        v_o4 = np.cross(k_4,h_o4)/np.linalg.norm(np.cross(k_4,h_o4))
-        Oout4 = np.array([h_o4,v_o4]); #GRASP   
+        v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
+        h_o4 = np.cross(v_o4,k_4)/np.linalg.norm(np.cross(v_o4,k_4))
+        Oout4 = np.array([h_o4,v_o4]); #GRASP     
         
         #660nm
-        h_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
-        v_o6 = np.cross(k_6,h_o6)/np.linalg.norm(np.cross(k_6,h_o6))
+        n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
+        v_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
+        h_o6 = np.cross(v_o6,k_6)/np.linalg.norm(np.cross(v_o6,k_6))
         Oout6 = np.array([h_o6,v_o6]); #GRASP 
 
         #865nm
-        h_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
-        v_o8 = np.cross(k_8,h_o8)/np.linalg.norm(np.cross(k_8,h_o8))
-        Oout8 = np.array([h_o8,v_o8]); #GRASP 
+        n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
+        v_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
+        h_o8 = np.cross(v_o8,k_8)/np.linalg.norm(np.cross(v_o8,k_8))
+        Oout8 = np.array([h_o8,v_o8]); #GRASP  
 
     
         # #Meridian AirMSPI to GRASP 
@@ -772,25 +774,74 @@ def main():  # Main code
         k_55 = np.array([np.cos(np.radians(vaz_555))*np.sin(np.radians(vza_555)), -np.sin(np.radians(vaz_555))*np.sin(np.radians(vza_555)), np.cos(np.radians(vza_555))]);
        
         raz_355=np.arccos(-i@k_35.T);        #range 0 to 180
-        raz_355=np.degrees(raz_355)+180;    #inexplicable GRASP offset
+        # raz_355=np.degrees(raz_355)+180;    #inexplicable GRASP offset
          
-        raz_380=np.arccos(-i@k_38.T);        #range 0 to 180
-        raz_380=np.degrees(raz_380)+180;    #inexplicable GRASP offset
+        # raz_380=np.arccos(-i@k_38.T);        #range 0 to 180
+        # raz_380=np.degrees(raz_380)+180;    #inexplicable GRASP offset
           
-        raz_445=np.arccos(-i@k_45.T);        #range 0 to 180
-        raz_445=np.degrees(raz_445)+180;    #inexplicable GRASP offset
+        # raz_445=np.arccos(-i@k_45.T);        #range 0 to 180
+        # raz_445=np.degrees(raz_445)+180;    #inexplicable GRASP offset
         
-        raz_470=np.arccos(-i@k_4.T);        #range 0 to 180
-        raz_470=np.degrees(raz_470)+180;    #inexplicable GRASP offset
+        # raz_470=np.arccos(-i@k_4.T);        #range 0 to 180
+        # raz_470=np.degrees(raz_470)+180;    #inexplicable GRASP offset
         
-        raz_555=np.arccos(-i@k_55.T);        #range 0 to 180
-        raz_555=np.degrees(raz_555)+180;    #inexplicable GRASP offset
+        # raz_555=np.arccos(-i@k_55.T);        #range 0 to 180
+        # raz_555=np.degrees(raz_555)+180;    #inexplicable GRASP offset
         
-        raz_660=np.arccos(-i@k_6.T);        #range 0 to 180
-        raz_660=np.degrees(raz_660)+180;    #inexplicable GRASP offset
+        # raz_660=np.arccos(-i@k_6.T);        #range 0 to 180
+        # raz_660=np.degrees(raz_660)+180;    #inexplicable GRASP offset
         
-        raz_865=np.arccos(-i@k_8.T);        #range 0 to 180
-        raz_865=np.degrees(raz_865)+180;    #inexplicable GRASP offset
+        # raz_865=np.arccos(-i@k_8.T);        #range 0 to 180
+        # raz_865=np.degrees(raz_865)+180;    #inexplicable GRASP offset
+        
+        raz_355 = saz - vaz_355
+        if(raz_355 < 0.0):
+            raz_355 = 360.+raz_355
+        if(raz_355 > 180.0):
+            raz_355 = 360.-raz_355
+        raz_355 = raz_355+180.
+        
+        raz_380 = saz - vaz_380
+        if(raz_380 < 0.0):
+            raz_380 = 360.+raz_380
+        if(raz_380 > 180.0):
+            raz_380 = 360.-raz_380
+        raz_380 = raz_380+180.
+        
+        raz_445 = saz - vaz_445
+        if(raz_445 < 0.0):
+            raz_445 = 360.+raz_445
+        if(raz_445 > 180.0):
+            raz_445 = 360.-raz_445
+        raz_445 = raz_445+180.
+        
+        raz_470 = saz - vaz_470
+        if(raz_470 < 0.0):
+            raz_470 = 360.+raz_470
+        if(raz_470 > 180.0):
+            raz_470 = 360.-raz_470
+        raz_470 = raz_470+180.
+        
+        raz_555 = saz - vaz_555
+        if(raz_555 < 0.0):
+            raz_555 = 360.+raz_555
+        if(raz_555 > 180.0):
+            raz_555 = 360.-raz_555
+        raz_555 = raz_555+180.
+        
+        raz_660 = saz - vaz_660
+        if(raz_660 < 0.0):
+            raz_660 = 360.+raz_660
+        if(raz_660 > 180.0):
+            raz_660 = 360.-raz_660
+        raz_660 = raz_660+180.
+        
+        raz_865 = saz - vaz_865
+        if(raz_865 < 0.0):
+            raz_865 = 360.+raz_865
+        if(raz_865 > 180.0):
+            raz_865 = 360.-raz_865
+        raz_865 = raz_865+180.
         
 ### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 
 ### EQUIVALENT REFLECTANCES = PI*L/E0

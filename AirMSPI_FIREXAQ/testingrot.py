@@ -71,8 +71,8 @@ Oin4 = np.array([h_i4,v_i4]);#Meridian
 
 #GRASP Basis
 n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
-v_o4 = np.cross(k_4,h_o4)/np.linalg.norm(np.cross(k_4,h_o4))
+v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
+h_o4 = np.cross(v_o4,k_4)/np.linalg.norm(np.cross(v_o4,k_4))
 Oout4 = np.array([h_o4,v_o4]); #GRASP   
 
 #470 nm input
@@ -106,8 +106,14 @@ rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np
 qg_470rots, ug_470rots = rotmatrix4@stokesin4s
 
 #Relative Azimuth Calculation
-raz_470=np.arccos(-i@k_4.T);  #range 0 to 180
-raz_470=np.degrees(raz_470)+180;         #inexplicable GRASP offset
+raz_470m=np.arccos(-i@k_4.T);  #range 0 to 180
+raz_470m=np.degrees(raz_470m)+180;         #inexplicable GRASP offset
 
+raz_470 = saz - vaz_470
+if(raz_470 < 0.0):
+    raz_470 = 360.+raz_470
+if(raz_470 > 180.0):
+    raz_470 = 360.-raz_470
+raz_470 = raz_470+180.
 
 
