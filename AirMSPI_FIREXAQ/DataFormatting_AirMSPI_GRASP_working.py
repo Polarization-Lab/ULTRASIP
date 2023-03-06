@@ -138,7 +138,7 @@ def main():  # Main code
 # Angle Arrays
 # ALL ANGLES IN RADIANS
     scat_median = np.zeros((num_step,num_int))  # Scattering angle
-    vza_median = np.zeros((num_step,num_int))  # View zenith angle
+    vza_median = np.zeros((num_step,13))  # View zenith angle
     raz_median = np.zeros((num_step,13))  # Relative azimuth angle
     sza_median = np.zeros(num_step)  # Solar zenith angle (one per stare)
 
@@ -837,9 +837,15 @@ def main():  # Main code
         vza_median[loop,1] = vza_380
         vza_median[loop,2] = vza_445
         vza_median[loop,3] = vza_470
-        vza_median[loop,4] = vza_555
-        vza_median[loop,5] = vza_660
-        vza_median[loop,6] = vza_865
+        vza_median[loop,4] = vza_470
+        vza_median[loop,5] = vza_470
+        vza_median[loop,6] = vza_555
+        vza_median[loop,7] = vza_660
+        vza_median[loop,8] = vza_660
+        vza_median[loop,9] = vza_660
+        vza_median[loop,10] = vza_865
+        vza_median[loop,11] = vza_865
+        vza_median[loop,12] = vza_865
         
         # print(vza_median[:,0])
         # print(vza_median[:,1])
@@ -1045,7 +1051,7 @@ def main():  # Main code
         out_str = out_str+'{:16.8f}'.format(sza_mean)
     
 # View zenith angle per measurement per wavelength
-    for outer in range(6):
+    for outer in range(13):
         for inner in range(num_step): 
             out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
 
