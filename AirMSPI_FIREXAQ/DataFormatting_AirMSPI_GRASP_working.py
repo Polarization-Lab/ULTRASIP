@@ -58,8 +58,8 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0623/8"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_Data/"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0723/2_Bakersfield"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -69,7 +69,7 @@ def main():  # Main code
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 5
+    num_step = 7
     
 # Calculate the middle of the sequence
 
@@ -101,28 +101,28 @@ def main():  # Main code
 
 # Set some bounds for the image (USER INPUT)
 
-    min_x = 1900
-    max_x = 2200
-    min_y = 1900
-    max_y = 2200
+    # min_x = 1900
+    # max_x = 2200
+    # min_y = 1900
+    # max_y = 2200
     
-    # min_x = 1200
-    # max_x = 1900
-    # min_y = 1200
-    # max_y = 1900
+    min_x = 1200
+    max_x = 1900
+    min_y = 1200
+    max_y = 1900
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
 
-    box_x1 = 120
-    box_x2 = 125
-    box_y1 = 105
-    box_y2 = 110
+    # box_x1 = 120
+    # box_x2 = 125
+    # box_y1 = 105
+    # box_y2 = 110
 
 
-    # box_x1 = 485
-    # box_x2 = 490
-    # box_y1 = 485
-    # box_y2 = 490
+    box_x1 = 485
+    box_x2 = 490
+    box_y1 = 485
+    box_y2 = 490
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
@@ -134,12 +134,12 @@ def main():  # Main code
     
 # Create arrays to store data
 # NOTE: Pay attention to the number of wavelengths
-
+    num_meas = 13
 # Angle Arrays
 # ALL ANGLES IN RADIANS
     scat_median = np.zeros((num_step,num_int))  # Scattering angle
-    vza_median = np.zeros((num_step,13))  # View zenith angle
-    raz_median = np.zeros((num_step,13))  # Relative azimuth angle
+    vza_median = np.zeros((num_step,num_meas))  # View zenith angle
+    raz_median = np.zeros((num_step,num_meas))  # Relative azimuth angle
     sza_median = np.zeros(num_step)  # Solar zenith angle (one per stare)
 
 #Measurement Arrays   
@@ -724,28 +724,28 @@ def main():  # Main code
         #GRASP Basis
         #GRASP Basis
         n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-        # v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
-        # h_o4 = np.cross(v_o4,k_4)/np.linalg.norm(np.cross(v_o4,k_4))
-        h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
-        v_o4 = np.cross(h_o4,k_4)/np.linalg.norm(np.cross(h_o4,k_4))
+        v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
+        h_o4 = np.cross(v_o4,k_4)/np.linalg.norm(np.cross(v_o4,k_4))
+        # h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
+        # v_o4 = np.cross(h_o4,k_4)/np.linalg.norm(np.cross(h_o4,k_4))
         
         Oout4 = np.array([h_o4,v_o4]); #GRASP    
         print(k_4,np.cross(h_o4,v_o4),np.cross(h_i4,v_i4))
         
         #660nm
         n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-        # v_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
-        # h_o6 = np.cross(v_o6,k_6)/np.linalg.norm(np.cross(v_o6,k_6))
-        h_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
-        v_o6 = np.cross(h_o6,k_6)/np.linalg.norm(np.cross(h_o6,k_6))
+        v_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
+        h_o6 = np.cross(v_o6,k_6)/np.linalg.norm(np.cross(v_o6,k_6))
+        # h_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
+        # v_o6 = np.cross(h_o6,k_6)/np.linalg.norm(np.cross(h_o6,k_6))
         Oout6 = np.array([h_o6,v_o6]); #GRASP 
 
         #865nm
         n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-        # v_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
-        # h_o8 = np.cross(v_o8,k_8)/np.linalg.norm(np.cross(v_o8,k_8))
-        h_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
-        v_o8 = np.cross(h_o8,k_8)/np.linalg.norm(np.cross(h_o8,k_8))
+        v_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
+        h_o8 = np.cross(v_o8,k_8)/np.linalg.norm(np.cross(v_o8,k_8))
+        # h_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
+        # v_o8 = np.cross(h_o8,k_8)/np.linalg.norm(np.cross(h_o8,k_8))
         Oout8 = np.array([h_o8,v_o8]); #GRASP  
 
     
@@ -1110,13 +1110,13 @@ def main():  # Main code
         out_str = out_str+'{:16.8f}'.format(sza_mean)
     
 # View zenith angle per measurement per wavelength
-    for outer in range(13):
+    for outer in range(num_meas):
         for inner in range(num_step): 
             out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
 
 
 # Relative azimuth angle per measurement per wavelength
-    for outer in range(13):
+    for outer in range(num_meas):
         for inner in range(num_step): 
             out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
 

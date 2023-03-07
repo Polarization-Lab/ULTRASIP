@@ -61,19 +61,21 @@ k_4 = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.sin
 n_i4s = np.cross(i,k_4)/np.linalg.norm(np.cross(i,k_4));
 h_i4s=np.cross(k_4,n_i4s)/np.linalg.norm(np.cross(k_4,n_i4s)); #intersection of transverse & reference
 v_i4s = np.cross(k_4,h_i4s)/np.linalg.norm(np.cross(k_4,h_i4s));
-Oin4s = np.array([h_i4s,v_i4s]);
+Oin4s = np.array([h_i4s,v_i4s,k_4]);
         
 #Define AirMSPI Meridian Plane (input coordinate system) for each wavelength channel
 n_i4 = np.cross(zenith,k_4)/np.linalg.norm(np.cross(zenith,k_4));
 h_i4 = np.cross(k_4,n_i4)/np.linalg.norm(np.cross(k_4,n_i4)); #intersection of transverse & reference
 v_i4 = np.cross(k_4,h_i4)/np.linalg.norm(np.cross(k_4,h_i4));
-Oin4 = np.array([h_i4,v_i4]);#Meridian    
+Oin4 = np.array([h_i4,v_i4,k_4]);#Meridian    
 
 #GRASP Basis
 n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
-h_o4 = np.cross(v_o4,k_4)/np.linalg.norm(np.cross(v_o4,k_4))
-Oout4 = np.array([h_o4,v_o4]); #GRASP   
+# v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
+# h_o4 = np.cross(v_o4,k_4)/np.linalg.norm(np.cross(v_o4,k_4))
+h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
+v_o4 = np.cross(h_o4,k_4)/np.linalg.norm(np.cross(h_o4,k_4))
+Oout4 = np.array([h_o4,v_o4,k_4]); #GRASP   
 
 #470 nm input
 stokesin4 = np.array([[qm_470], [um_470]]) #Meridian
@@ -95,13 +97,15 @@ qs_470rot, us_470rot = rotmatrix4@stokesin4
 
 #Meridian AirMSPI to GRASP 
 R_nalpha4 = Oout4@(Oin4.T);
-alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
+alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]); 
+print(np.degrees(alpha4)) 
 rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
 qg_470rot, ug_470rot = rotmatrix4@stokesin4
 
 #Scat AirMSPI to GRASP
 R_nalpha4 = Oout4@(Oin4s.T);
 alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
+print(np.degrees(alpha4)) 
 rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
 qg_470rots, ug_470rots = rotmatrix4@stokesin4s
 
