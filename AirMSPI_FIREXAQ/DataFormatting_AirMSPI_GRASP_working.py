@@ -724,34 +724,21 @@ def main():  # Main code
         #GRASP Basis
         #GRASP Basis
         n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-        n_o = np.cross(zenith,nor)/np.linalg.norm(np.cross(zenith,nor));
-        # v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
-        # h_o4 = np.cross(v_o4,k_4)/np.linalg.norm(np.cross(v_o4,k_4))
-        # h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
-        # v_o4 = np.cross(h_o4,k_4)/np.linalg.norm(np.cross(h_o4,k_4))
+        
+        #470nm
         v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
         h_o4 = np.cross(k_4,v_o4)/np.linalg.norm(np.cross(k_4,v_o4))
         Oout4 = np.array([h_o4,v_o4]); #GRASP    
         print(k_4,np.cross(h_o4,v_o4),np.cross(h_i4,v_i4))
         
         #660nm
-        #n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-        # v_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
-        # h_o6 = np.cross(v_o6,k_6)/np.linalg.norm(np.cross(v_o6,k_6))
-        # h_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
-        # v_o6 = np.cross(h_o6,k_6)/np.linalg.norm(np.cross(h_o6,k_6))
         v_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
-        h_o6 = np.cross(v_o6,k_6)/np.linalg.norm(np.cross(v_o6,k_6))
+        h_o6 = np.cross(k_6,v_o6)/np.linalg.norm(np.cross(k_6,v_o6))
         Oout6 = np.array([h_o6,v_o6]); #GRASP 
 
         #865nm
-        #n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-        # v_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
-        # h_o8 = np.cross(v_o8,k_8)/np.linalg.norm(np.cross(v_o8,k_8))
-        # h_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
-        # v_o8 = np.cross(h_o8,k_8)/np.linalg.norm(np.cross(h_o8,k_8))
         v_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
-        h_o8 = np.cross(v_o8,k_8)/np.linalg.norm(np.cross(v_o8,k_8))
+        h_o8 = np.cross(k_8,v_o8)/np.linalg.norm(np.cross(k_8,v_o8))
         Oout8 = np.array([h_o8,v_o8]); #GRASP  
 
     
@@ -782,31 +769,6 @@ def main():  # Main code
                        
 # Calculate the relative azimuth angle in the GRASP convention
 # NOTE:Need k-vector for radiometric channels
-        k_35 = np.array([np.cos(np.radians(vaz_355))*np.sin(np.radians(vza_355)), -np.sin(np.radians(vaz_355))*np.sin(np.radians(vza_355)), np.cos(np.radians(vza_355))]);
-        k_38 = np.array([np.cos(np.radians(vaz_380))*np.sin(np.radians(vza_380)), -np.sin(np.radians(vaz_380))*np.sin(np.radians(vza_380)), np.cos(np.radians(vza_380))]);
-        k_45 = np.array([np.cos(np.radians(vaz_445))*np.sin(np.radians(vza_445)), -np.sin(np.radians(vaz_445))*np.sin(np.radians(vza_445)), np.cos(np.radians(vza_445))]);
-        k_55 = np.array([np.cos(np.radians(vaz_555))*np.sin(np.radians(vza_555)), -np.sin(np.radians(vaz_555))*np.sin(np.radians(vza_555)), np.cos(np.radians(vza_555))]);
-       
-        #raz_355=np.arccos(-i@k_35.T);        #range 0 to 180
-        # raz_355=np.degrees(raz_355)+180;    #inexplicable GRASP offset
-         
-        # raz_380=np.arccos(-i@k_38.T);        #range 0 to 180
-        # raz_380=np.degrees(raz_380)+180;    #inexplicable GRASP offset
-          
-        # raz_445=np.arccos(-i@k_45.T);        #range 0 to 180
-        # raz_445=np.degrees(raz_445)+180;    #inexplicable GRASP offset
-        
-        # raz_470=np.arccos(-i@k_4.T);        #range 0 to 180
-        # raz_470=np.degrees(raz_470)+180;    #inexplicable GRASP offset
-        
-        # raz_555=np.arccos(-i@k_55.T);        #range 0 to 180
-        # raz_555=np.degrees(raz_555)+180;    #inexplicable GRASP offset
-        
-        # raz_660=np.arccos(-i@k_6.T);        #range 0 to 180
-        # raz_660=np.degrees(raz_660)+180;    #inexplicable GRASP offset
-        
-        # raz_865=np.arccos(-i@k_8.T);        #range 0 to 180
-        # raz_865=np.degrees(raz_865)+180;    #inexplicable GRASP offset
         
         raz_355 = saz - vaz_355
         if(raz_355 < 0.0):
@@ -912,13 +874,6 @@ def main():  # Main code
         vza_median[loop,11] = vza_865
         vza_median[loop,12] = vza_865
         
-        # print(vza_median[:,0])
-        # print(vza_median[:,1])
-        #print(180-vaz_median[:,2])
-        # print(vza_median[:,3])
-        # print(vza_median[:,4])
-
-        
         raz_median[loop,0] = raz_355
         raz_median[loop,1] = raz_380
         raz_median[loop,2] = raz_445
@@ -944,15 +899,7 @@ def main():  # Main code
         u_median[loop,0] = eqr_ug_470
         u_median[loop,1] = eqr_ug_660
         u_median[loop,2] = eqr_ug_865
-        
-        # qd_median[loop,0] = qm_470
-        # qd_median[loop,1] = qm_660
-        # qd_median[loop,2] = qm_865
-        
-        # ud_median[loop,0] = um_470
-        # ud_median[loop,1] = um_660
-        # ud_median[loop,2] = um_865
-        
+          
         ipol_median[loop,0] = eqr_ipol_470
         ipol_median[loop,1] = eqr_ipol_660
         ipol_median[loop,2] = eqr_ipol_865
@@ -962,12 +909,6 @@ def main():  # Main code
         dolp_median[loop,2] = dolp_865
         
         sza_median[loop] = sza
-        
-        #print(qm_470)
-        # #print(um_470)
-        # print(qd_median[:,0],ud_median[:,0])
-        # print(q_median[:,0])
-        # print(u_median[:,0])
 
 
 # #__________________Section 3: Output Data in GRASP SDATA Format__________________#
