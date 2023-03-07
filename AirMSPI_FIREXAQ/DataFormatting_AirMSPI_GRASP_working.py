@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0723/3_Bakersfield"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0723/5_Bakersfield"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -731,28 +731,27 @@ def main():  # Main code
         # v_o4 = np.cross(h_o4,k_4)/np.linalg.norm(np.cross(h_o4,k_4))
         v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
         h_o4 = np.cross(k_4,v_o4)/np.linalg.norm(np.cross(k_4,v_o4))
-        
-        Oout4 = np.array([v_o4,h_o4]); #GRASP    
-        print(k_4,np.cross(v_o4,h_o4),np.cross(h_i4,v_i4))
+        Oout4 = np.array([h_o4,v_o4]); #GRASP    
+        print(k_4,np.cross(h_o4,v_o4),np.cross(h_i4,v_i4))
         
         #660nm
-        n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
+        #n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
         # v_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
         # h_o6 = np.cross(v_o6,k_6)/np.linalg.norm(np.cross(v_o6,k_6))
         # h_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
         # v_o6 = np.cross(h_o6,k_6)/np.linalg.norm(np.cross(h_o6,k_6))
         v_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
-        h_o6 = np.cross(k_6,v_o6)/np.linalg.norm(np.cross(k_6,v_o6))
+        h_o6 = np.cross(v_o6,k_6)/np.linalg.norm(np.cross(v_o6,k_6))
         Oout6 = np.array([h_o6,v_o6]); #GRASP 
 
         #865nm
-        n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
+        #n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
         # v_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
         # h_o8 = np.cross(v_o8,k_8)/np.linalg.norm(np.cross(v_o8,k_8))
         # h_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
         # v_o8 = np.cross(h_o8,k_8)/np.linalg.norm(np.cross(h_o8,k_8))
         v_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
-        h_o8 = np.cross(k_8,v_o8)/np.linalg.norm(np.cross(k_8,v_o8))
+        h_o8 = np.cross(v_o8,k_8)/np.linalg.norm(np.cross(v_o8,k_8))
         Oout8 = np.array([h_o8,v_o8]); #GRASP  
 
     
