@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/1_Bakersfield_unrot"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/2_Bakersfield"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -730,8 +730,8 @@ def main():  # Main code
         # h_o4 = np.cross(k_4,v_o4)/np.linalg.norm(np.cross(k_4,v_o4))
         h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
         v_o4 = np.cross(k_4,h_o4)/np.linalg.norm(np.cross(k_4,h_o4))
-        #Oout4 = np.array([h_o4,v_o4]); #GRASP 
-        Oout4 = np.array([v_o4,h_o4]); #GRASP 
+        Oout4 = np.array([h_o4,v_o4]); #GRASP 
+        #Oout4 = np.array([v_o4,h_o4]); #GRASP 
         print(k_4,np.cross(h_o4,v_o4),np.cross(h_i4,v_i4))
         
         #660nm
@@ -739,15 +739,15 @@ def main():  # Main code
         # h_o6 = np.cross(k_6,v_o6)/np.linalg.norm(np.cross(k_6,v_o6))
         h_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
         v_o6 = np.cross(k_6,h_o6)/np.linalg.norm(np.cross(k_6,h_o6))
-        #Oout6 = np.array([h_o6,v_o6]); #GRASP 
-        Oout6 = np.array([v_o6,h_o6]); #GRASP
+        Oout6 = np.array([h_o6,v_o6]); #GRASP 
+        #Oout6 = np.array([v_o6,h_o6]); #GRASP
         #865nm
         # v_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
         # h_o8 = np.cross(k_8,v_o8)/np.linalg.norm(np.cross(k_8,v_o8))
         h_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
         v_o8 = np.cross(k_8,h_o8)/np.linalg.norm(np.cross(k_8,h_o8))
-        #Oout8 = np.array([h_o8,v_o8]); #GRASP 
-        Oout8 = np.array([v_o8,h_o8]); #GRASP 
+        Oout8 = np.array([h_o8,v_o8]); #GRASP 
+        #Oout8 = np.array([v_o8,h_o8]); #GRASP 
 
     
         # #Meridian AirMSPI to GRASP 
@@ -761,20 +761,21 @@ def main():  # Main code
         R_nalpha4 = Oout4@(Oin4s.T);
         alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
         rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-        qg_470, ug_470 = stokesin4s #rotmatrix4@stokesin4s
+        qg_470, ug_470 = rotmatrix4@stokesin4s
         
         #660
         R_nalpha6 = Oout6@(Oin6s.T);
         alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
         rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        qg_660, ug_660 = stokesin6s #rotmatrix4@stokesin6s
+        qg_660, ug_660 = rotmatrix4@stokesin6s
         
         #865
         R_nalpha8 = Oout8@(Oin8s.T);
         alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
         rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        qg_865, ug_865 = stokesin8s #rotmatrix8@stokesin8s
-                       
+        qg_865, ug_865 = rotmatrix8@stokesin8s
+    
+        print(stokesin4s, qg_470,ug_470)
 # Calculate the relative azimuth angle in the GRASP convention
 # NOTE:Need k-vector for radiometric channels
         
