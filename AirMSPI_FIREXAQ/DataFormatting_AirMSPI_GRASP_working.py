@@ -59,7 +59,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/6_FIREX"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/7_FIREX"
 
 #Home Computer 
     # datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
@@ -846,9 +846,9 @@ def main():  # Main code
         eqr_qg_660 = np.pi*qg_660*esd**2/E0_660
         eqr_qg_865 = np.pi*qg_865*esd**2/E0_865
         
-        eqr_ug_470 = np.pi*ug_470*esd**2/E0_470
-        eqr_ug_660 = np.pi*ug_660*esd**2/E0_660
-        eqr_ug_865 = np.pi*ug_865*esd**2/E0_865
+        eqr_ug_470 = -np.pi*ug_470*esd**2/E0_470
+        eqr_ug_660 = -np.pi*ug_660*esd**2/E0_660
+        eqr_ug_865 = -np.pi*ug_865*esd**2/E0_865
         
         eqr_ipol_470 = np.pi*ipol_470*esd**2/E0_470
         eqr_ipol_660 = np.pi*ipol_660*esd**2/E0_660
