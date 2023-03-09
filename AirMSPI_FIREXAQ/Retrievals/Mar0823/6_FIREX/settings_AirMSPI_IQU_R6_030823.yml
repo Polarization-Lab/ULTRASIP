@@ -4,12 +4,12 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0723/1_Bakersfield/AirMSPI_20160707_193736Z_CA-Bakersfield_ALL_RotfromScat_ChromaticK.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/6_FIREX/AirMSPI_20190817_001344Z_AZ-Prescott_ALL_RotfromScat_ChromaticK.sdat"
   
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["RetrievalALL_1_Mar_08_23.txt", screen] # screen, "filename"
+        stream: ["RetrievalALL_6FIREX_Mar_08_23.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
@@ -66,7 +66,7 @@ retrieval:
             number_of_layers: 50
             aerosol_profile_vertical_type:    exponential
             molecular_profile_vertical_type: standard_atmosphere
-            reference_plane_for_polarization: meridian   
+            reference_plane_for_polarization: principal_plane #meridian   
             simulating_observation:
                 order_of_scattering: multiple_scattering
                 number_of_gaussian_quadratures_for_expansion_coefficients:  41 

@@ -58,12 +58,12 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    # datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_Data/"
-    # outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/2_Bakersfield"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/6_FIREX"
 
 #Home Computer 
-    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
-    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/5_FIREX"
+    # datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
+    # outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/5_FIREX"
 
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
@@ -106,7 +106,7 @@ def main():  # Main code
     min_y = 1900
     max_y = 2200
     
-    #Bakersfield
+    # #Bakersfield
     # min_x = 1200
     # max_x = 1900
     # min_y = 1200
@@ -119,7 +119,7 @@ def main():  # Main code
     box_y1 = 105
     box_y2 = 110
 
-    #Bakserfield
+    # #Bakserfield
     # box_x1 = 485
     # box_x2 = 490
     # box_y1 = 485
@@ -764,19 +764,19 @@ def main():  # Main code
         R_nalpha4 = Oout4@(Oin4s.T);
         alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
         rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-        qg_470, ug_470 = stokesin4s #rotmatrix4@stokesin4s
+        qg_470, ug_470 = -stokesin4s #rotmatrix4@stokesin4s
         
         #660
         R_nalpha6 = Oout6@(Oin6s.T);
         alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
         rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        qg_660, ug_660 = stokesin6s #rotmatrix6@stokesin6s
+        qg_660, ug_660 = -stokesin6 #rotmatrix6@stokesin6s
         
         #865
         R_nalpha8 = Oout8@(Oin8s.T);
         alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
         rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        qg_865, ug_865 = stokesin8s #rotmatrix8@stokesin8s
+        qg_865, ug_865 = -stokesin8 #rotmatrix8@stokesin8s
     
         print(stokesin4s, qg_470,ug_470)
 # Calculate the relative azimuth angle in the GRASP convention
