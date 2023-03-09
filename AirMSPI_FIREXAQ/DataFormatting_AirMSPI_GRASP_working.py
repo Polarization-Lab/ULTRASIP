@@ -58,18 +58,18 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/2_Bakersfield"
+    # datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_Data/"
+    # outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/2_Bakersfield"
 
 #Home Computer 
-   # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
-   # outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/SDATA_Files"
+    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
+    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/1_FIREX"
 
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 7
+    num_step = 5
     
 # Calculate the middle of the sequence
 
@@ -101,28 +101,29 @@ def main():  # Main code
 
 # Set some bounds for the image (USER INPUT)
 
-    # min_x = 1900
-    # max_x = 2200
-    # min_y = 1900
-    # max_y = 2200
+    min_x = 1900
+    max_x = 2200
+    min_y = 1900
+    max_y = 2200
     
-    min_x = 1200
-    max_x = 1900
-    min_y = 1200
-    max_y = 1900
+    #Bakersfield
+    # min_x = 1200
+    # max_x = 1900
+    # min_y = 1200
+    # max_y = 1900
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
 
-    # box_x1 = 120
-    # box_x2 = 125
-    # box_y1 = 105
-    # box_y2 = 110
+    box_x1 = 120
+    box_x2 = 125
+    box_y1 = 105
+    box_y2 = 110
 
-
-    box_x1 = 485
-    box_x2 = 490
-    box_y1 = 485
-    box_y2 = 490
+    #Bakserfield
+    # box_x1 = 485
+    # box_x2 = 490
+    # box_y1 = 485
+    # box_y2 = 490
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
@@ -726,28 +727,20 @@ def main():  # Main code
         n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
         
         #470nm
-        # v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
-        # h_o4 = np.cross(k_4,v_o4)/np.linalg.norm(np.cross(k_4,v_o4))
         h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
         v_o4 = np.cross(k_4,h_o4)/np.linalg.norm(np.cross(k_4,h_o4))
         Oout4 = np.array([h_o4,v_o4]); #GRASP 
-        #Oout4 = np.array([v_o4,h_o4]); #GRASP 
         print(k_4,np.cross(h_o4,v_o4),np.cross(h_i4,v_i4))
         
         #660nm
-        # v_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
-        # h_o6 = np.cross(k_6,v_o6)/np.linalg.norm(np.cross(k_6,v_o6))
         h_o6 = np.cross(k_6,n_o)/np.linalg.norm(np.cross(k_6,n_o)) #intersection of transverse & reference
         v_o6 = np.cross(k_6,h_o6)/np.linalg.norm(np.cross(k_6,h_o6))
         Oout6 = np.array([h_o6,v_o6]); #GRASP 
-        #Oout6 = np.array([v_o6,h_o6]); #GRASP
+        
         #865nm
-        # v_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
-        # h_o8 = np.cross(k_8,v_o8)/np.linalg.norm(np.cross(k_8,v_o8))
         h_o8 = np.cross(k_8,n_o)/np.linalg.norm(np.cross(k_8,n_o)) #intersection of transverse & reference
         v_o8 = np.cross(k_8,h_o8)/np.linalg.norm(np.cross(k_8,h_o8))
         Oout8 = np.array([h_o8,v_o8]); #GRASP 
-        #Oout8 = np.array([v_o8,h_o8]); #GRASP 
 
     
         # #Meridian AirMSPI to GRASP 
