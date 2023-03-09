@@ -58,8 +58,9 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/7_FIREX"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_Data/"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/2_Bakersfield"
 
 #Home Computer 
     # datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
@@ -69,7 +70,7 @@ def main():  # Main code
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 5
+    num_step = 7
     
 # Calculate the middle of the sequence
 
@@ -101,29 +102,29 @@ def main():  # Main code
 
 # Set some bounds for the image (USER INPUT)
 
-    min_x = 1900
-    max_x = 2200
-    min_y = 1900
-    max_y = 2200
+    # min_x = 1900
+    # max_x = 2200
+    # min_y = 1900
+    # max_y = 2200
     
-    # #Bakersfield
-    # min_x = 1200
-    # max_x = 1900
-    # min_y = 1200
-    # max_y = 1900
+    #Bakersfield
+    min_x = 1200
+    max_x = 1900
+    min_y = 1200
+    max_y = 1900
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
 
-    box_x1 = 120
-    box_x2 = 125
-    box_y1 = 105
-    box_y2 = 110
+    # box_x1 = 120
+    # box_x2 = 125
+    # box_y1 = 105
+    # box_y2 = 110
 
-    # #Bakserfield
-    # box_x1 = 485
-    # box_x2 = 490
-    # box_y1 = 485
-    # box_y2 = 490
+    #Bakserfield
+    box_x1 = 485
+    box_x2 = 490
+    box_y1 = 485
+    box_y2 = 490
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
@@ -846,9 +847,9 @@ def main():  # Main code
         eqr_qg_660 = np.pi*qg_660*esd**2/E0_660
         eqr_qg_865 = np.pi*qg_865*esd**2/E0_865
         
-        eqr_ug_470 = -np.pi*ug_470*esd**2/E0_470
-        eqr_ug_660 = -np.pi*ug_660*esd**2/E0_660
-        eqr_ug_865 = -np.pi*ug_865*esd**2/E0_865
+        eqr_ug_470 = np.pi*ug_470*esd**2/E0_470
+        eqr_ug_660 = np.pi*ug_660*esd**2/E0_660
+        eqr_ug_865 = np.pi*ug_865*esd**2/E0_865
         
         eqr_ipol_470 = np.pi*ipol_470*esd**2/E0_470
         eqr_ipol_660 = np.pi*ipol_660*esd**2/E0_660
