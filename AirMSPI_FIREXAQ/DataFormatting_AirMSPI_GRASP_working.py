@@ -770,13 +770,13 @@ def main():  # Main code
         R_nalpha6 = Oout6@(Oin6s.T);
         alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
         rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        qg_660, ug_660 = -stokesin6 #rotmatrix6@stokesin6s
+        qg_660, ug_660 = -stokesin6s #rotmatrix6@stokesin6s
         
         #865
         R_nalpha8 = Oout8@(Oin8s.T);
         alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
         rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        qg_865, ug_865 = -stokesin8 #rotmatrix8@stokesin8s
+        qg_865, ug_865 = -stokesin8s #rotmatrix8@stokesin8s
     
         print(stokesin4s, qg_470,ug_470)
 # Calculate the relative azimuth angle in the GRASP convention
