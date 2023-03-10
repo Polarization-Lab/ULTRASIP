@@ -822,10 +822,10 @@ def main():  # Main code
     ax1.set_xticks(np.arange(60,190,30))
     ax1.set_xlabel("Scattering Angle (Deg)")
     
-    ax1.set_ylim(-0.4,0.3)
-    ax1.set_yticks(np.arange(-0.4,0.6,0.2))
+    ax1.set_ylim(0,0.6)
+    ax1.set_yticks(np.arange(0,0.6,0.2))
     ax1.set_ylabel('q (Q/I)')
-    ax1.legend(loc='lower right')  # Upper right   
+    ax1.legend(loc='upper right')  # Upper right   
 
 # Residuals Text
 # Note: We calculate delta obs as model minus observation
@@ -889,8 +889,8 @@ def main():  # Main code
     ax1.set_xticks(np.arange(60,190,30))
     ax1.set_xlabel("Scattering Angle (Deg)")
     
-    ax1.set_ylim(-0.1,0.4)
-    ax1.set_yticks(np.arange(-0.1,0.5,0.1))
+    ax1.set_ylim(-0.2,0.1)
+    ax1.set_yticks(np.arange(-0.1,0.2,0.1))
     ax1.set_ylabel('u (U/I)')
     ax1.legend(loc='best')  # Upper right
 
@@ -1098,6 +1098,89 @@ def main():  # Main code
     hold = inputName.split(".")
     out_base = hold[0]
     outfile = out_base+'_VIS_v'+'_SSA.png'
+    print("Saving: "+outfile)
+    plt.savefig(outfile,dpi=300) 
+
+# Show the plot
+    
+    plt.show() 
+    
+    plt.close()
+
+## FIRST PLOT - INTENSITY VS. SCATTERING ANGLE
+# Polarized Bands - I and Radiometric Bands
+    fig, ((ax1,ax4)) = plt.subplots(
+        nrows=1, ncols=2, dpi=120)
+    #fig = plt.figure()
+    #ax1 = fig.add_subplot(111)
+    
+    ax1.scatter(scat[:,0],i_obs[:,0],marker='x',color="green",label="355nm")
+    ax1.scatter(scat[:,1],i_obs[:,1],marker='x',color="pink",label="380nm")
+    ax1.scatter(scat[:,2],i_obs[:,2],marker='x',color="brown",label="445nm")  
+    ax1.scatter(scat[:,4],i_obs[:,4],marker='x',color="purple",label="555nm")
+    
+
+    ax1.plot(scat[:,0],i_mod[:,0],color="green")
+    ax1.plot(scat[:,1],i_mod[:,1],color="pink")
+    ax1.plot(scat[:,2],i_mod[:,2],color="brown")
+    ax1.plot(scat[:,4],i_mod[:,4],color="purple")
+
+    ax1.scatter(scat[:,3],i_obs[:,3],marker='x',color="blue",label="470nm")
+    ax1.scatter(scat[:,5],i_obs[:,5],marker='x',color="red",label="660nm")
+    ax1.scatter(scat[:,6],i_obs[:,6],marker='x',color="orange",label="865nm")
+
+    ax1.plot(scat[:,3],i_mod[:,3],color="blue")
+    ax1.plot(scat[:,5],i_mod[:,5],color="red")
+    ax1.plot(scat[:,6],i_mod[:,6],color="orange")
+    #print(i_mod[:,3])
+    #print(i_obs[:,3])
+    # print(scat[:,6])
+    ax1.set_xlim(60,180)
+    ax1.set_xticks(np.arange(60,190,30))
+    ax1.set_xlabel("Scattering Angle (Deg)")
+
+    ax1.set_ylim(0.0,0.5)
+    ax1.set_yticks(np.arange(0.0,0.6,0.1))
+    ax1.set_ylabel('Equivalent Reflectance')
+    ax1.legend(loc='best')  # Upper right
+
+# Residuals Text
+# Note: We calculate delta obs as model minus observation
+    delta_i470 = np.amax((i_mod[:,3] - i_obs[:,3])*100)
+    delta_i660 = np.amax((i_mod[:,5] - i_obs[:,5])*100)
+    delta_i865 = np.amax((i_mod[:,6] - i_obs[:,6])*100)
+
+# NOTE: I'm going to use the scattering angle coordinates to locate the text
+    #fig = plt.figure()
+    #ax4 = fig.add_subplot(111)
+    
+    out_text = "     Max Residual"
+    ax4.text(20,0.30,out_text,fontweight='bold')
+    
+    out_text = '     470nm: {:6.3f}%'.format(delta_i470) 
+    ax4.text(20,0.25,out_text)
+    
+    out_text = '     660nm: {:6.3f}%'.format(delta_i660) 
+    ax4.text(20,0.22,out_text)
+    
+    out_text = '     865nm: {:6.2f}%'.format(delta_i865) 
+    ax4.text(20,0.19,out_text)
+    
+    ax4.set_xlim(60,180)
+    ax4.set_xticks(np.arange(60,190,30))
+    
+    ax4.set_ylim(0.0,0.4)
+    ax4.set_yticks(np.arange(0.0,0.5,0.10))
+    
+    ax4.axis('off')
+    
+    plt.tight_layout()  
+    
+# Generate the output file name
+    
+    hold = inputName.split(".")
+    out_base = hold[0]
+    outfile = out_base+'_VIS_v'+'_01.png'
     print("Saving: "+outfile)
     plt.savefig(outfile,dpi=300) 
 
