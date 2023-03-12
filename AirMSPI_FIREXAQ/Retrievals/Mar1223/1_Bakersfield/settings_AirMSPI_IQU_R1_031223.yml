@@ -9,7 +9,7 @@ input:
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["RetrievalALL_1Bakersfield_Mar_09_23.txt", screen] # screen, "filename"
+        stream: ["RetrievalALL_1Bakersfield_Mar_12_23.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
