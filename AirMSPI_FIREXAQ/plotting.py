@@ -27,6 +27,8 @@ def main():  # Main code
 
     basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX"
     figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX/Plots"
+    # basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/8_Bakersfield"
+    # figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/8_Bakersfield/Plots"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -735,10 +737,10 @@ def main():  # Main code
 
 ## FIRST PLOT - INTENSITY VS. SCATTERING ANGLE
 # Polarized Bands - I
-    fig, ((ax1,ax4)) = plt.subplots(
-        nrows=1, ncols=2, dpi=120)
-    #fig = plt.figure()
-    #ax1 = fig.add_subplot(111)
+    # fig, ((ax1,ax4)) = plt.subplots(
+    #     nrows=1, ncols=2, dpi=120)
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
     
 
     ax1.scatter(scat[:,3],i_obs[:,3],marker='x',color="blue",label="470nm")
@@ -760,35 +762,35 @@ def main():  # Main code
     ax1.set_ylabel('Equivalent Reflectance')
     ax1.legend(loc='best')  # Upper right
 
-# Residuals Text
-# Note: We calculate delta obs as model minus observation
-    delta_i470 = np.amax((i_mod[:,3] - i_obs[:,3])*100)
-    delta_i660 = np.amax((i_mod[:,5] - i_obs[:,5])*100)
-    delta_i865 = np.amax((i_mod[:,6] - i_obs[:,6])*100)
+# # Residuals Text
+# # Note: We calculate delta obs as model minus observation
+#     delta_i470 = np.amax((i_mod[:,3] - i_obs[:,3])*100)
+#     delta_i660 = np.amax((i_mod[:,5] - i_obs[:,5])*100)
+#     delta_i865 = np.amax((i_mod[:,6] - i_obs[:,6])*100)
 
-# NOTE: I'm going to use the scattering angle coordinates to locate the text
-    #fig = plt.figure()
-    #ax4 = fig.add_subplot(111)
+# # NOTE: I'm going to use the scattering angle coordinates to locate the text
+#     #fig = plt.figure()
+#     #ax4 = fig.add_subplot(111)
     
-    out_text = "     Max Residual"
-    ax4.text(20,0.30,out_text,fontweight='bold')
+#     out_text = "     Max Residual"
+#     ax4.text(20,0.30,out_text,fontweight='bold')
     
-    out_text = '     470nm: {:6.3f}%'.format(delta_i470) 
-    ax4.text(20,0.25,out_text)
+#     out_text = '     470nm: {:6.3f}%'.format(delta_i470) 
+#     ax4.text(20,0.25,out_text)
     
-    out_text = '     660nm: {:6.3f}%'.format(delta_i660) 
-    ax4.text(20,0.22,out_text)
+#     out_text = '     660nm: {:6.3f}%'.format(delta_i660) 
+#     ax4.text(20,0.22,out_text)
     
-    out_text = '     865nm: {:6.2f}%'.format(delta_i865) 
-    ax4.text(20,0.19,out_text)
+#     out_text = '     865nm: {:6.2f}%'.format(delta_i865) 
+#     ax4.text(20,0.19,out_text)
     
-    ax4.set_xlim(60,180)
-    ax4.set_xticks(np.arange(60,190,30))
+#     ax4.set_xlim(60,180)
+#     ax4.set_xticks(np.arange(60,190,30))
     
-    ax4.set_ylim(0.0,0.4)
-    ax4.set_yticks(np.arange(0.0,0.5,0.10))
+#     ax4.set_ylim(0.0,0.4)
+#     ax4.set_yticks(np.arange(0.0,0.5,0.10))
     
-    ax4.axis('off')
+#     ax4.axis('off')
     
     plt.tight_layout()  
     
@@ -807,8 +809,10 @@ def main():  # Main code
     plt.close()
 
 # Polarized Bands - Q/I
-    fig, ((ax1,ax4)) = plt.subplots(
-        nrows=1, ncols=2, dpi=120)
+    # fig, ((ax1,ax4)) = plt.subplots(
+    #     nrows=1, ncols=2, dpi=120)
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
     
     ax1.scatter(scat[:,3],q_obs[:,0],marker='x',color="blue",label="470nm")
     ax1.scatter(scat[:,5],q_obs[:,1],marker='x',color="red",label="660nm")
@@ -822,41 +826,41 @@ def main():  # Main code
     ax1.set_xticks(np.arange(60,190,30))
     ax1.set_xlabel("Scattering Angle (Deg)")
     
-    ax1.set_ylim(0,0.6)
-    ax1.set_yticks(np.arange(0,0.6,0.2))
+    ax1.set_ylim(0,0.8)
+    ax1.set_yticks(np.arange(0,0.8,0.2))
     ax1.set_ylabel('q (Q/I)')
     ax1.legend(loc='upper right')  # Upper right   
 
-# Residuals Text
-# Note: We calculate delta obs as model minus observation
+# # Residuals Text
+# # Note: We calculate delta obs as model minus observation
 
-    delta_q470 = np.amax((q_mod[:,0] - q_obs[:,0])*100)
-    delta_q660 = np.amax((q_mod[:,1] - q_obs[:,1])*100)
-    delta_q865 = np.amax((q_mod[:,2] - q_obs[:,2])*100)
+#     delta_q470 = np.amax((q_mod[:,0] - q_obs[:,0])*100)
+#     delta_q660 = np.amax((q_mod[:,1] - q_obs[:,1])*100)
+#     delta_q865 = np.amax((q_mod[:,2] - q_obs[:,2])*100)
 
-# NOTE: I'm going to use the scattering angle coordinates to locate the text
-    #fig = plt.figure()
-    #ax4 = fig.add_subplot(111)
+# # NOTE: I'm going to use the scattering angle coordinates to locate the text
+#     #fig = plt.figure()
+#     #ax4 = fig.add_subplot(111)
     
-    out_text = "     Max Residual"
-    ax4.text(20,0.30,out_text,fontweight='bold')
+#     out_text = "     Max Residual"
+#     ax4.text(20,0.30,out_text,fontweight='bold')
     
-    out_text = '     470nm: {:6.3f}%'.format(delta_q470) 
-    ax4.text(20,0.25,out_text)
+#     out_text = '     470nm: {:6.3f}%'.format(delta_q470) 
+#     ax4.text(20,0.25,out_text)
     
-    out_text = '     660nm: {:6.3f}%'.format(delta_q660) 
-    ax4.text(20,0.22,out_text)
+#     out_text = '     660nm: {:6.3f}%'.format(delta_q660) 
+#     ax4.text(20,0.22,out_text)
     
-    out_text = '     865nm: {:6.2f}%'.format(delta_q865) 
-    ax4.text(20,0.19,out_text)
+#     out_text = '     865nm: {:6.2f}%'.format(delta_q865) 
+#     ax4.text(20,0.19,out_text)
     
-    ax4.set_xlim(60,180)
-    ax4.set_xticks(np.arange(60,190,30))
+#     ax4.set_xlim(60,180)
+#     ax4.set_xticks(np.arange(60,190,30))
     
-    ax4.set_ylim(0.0,0.4)
-    ax4.set_yticks(np.arange(0.0,0.5,0.10))
+#     ax4.set_ylim(0.0,0.4)
+#     ax4.set_yticks(np.arange(0.0,0.5,0.10))
     
-    ax4.axis('off')
+#     ax4.axis('off')
     
     plt.tight_layout()  
 
@@ -874,8 +878,10 @@ def main():  # Main code
     plt.close()
 
 # Polarized Bands - U/I
-    fig, ((ax1,ax4)) = plt.subplots(
-        nrows=1, ncols=2, dpi=120)
+    # fig, ((ax1,ax4)) = plt.subplots(
+    #     nrows=1, ncols=2, dpi=120)
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
     
     ax1.scatter(scat[:,3],u_obs[:,0],marker='x',color="blue",label="470nm")
     ax1.scatter(scat[:,5],u_obs[:,1],marker='x',color="red",label="660nm")
@@ -892,38 +898,38 @@ def main():  # Main code
     ax1.set_ylim(-0.2,0.1)
     ax1.set_yticks(np.arange(-0.1,0.2,0.1))
     ax1.set_ylabel('u (U/I)')
-    ax1.legend(loc='best')  # Upper right
+    ax1.legend(loc='upper right')  # Upper right
 
-# Residuals Text
-# Note: We calculate delta obs as model minus observation
+# # Residuals Text
+# # Note: We calculate delta obs as model minus observation
 
-    delta_u470 = np.amax((u_mod[:,0] - u_obs[:,0])*100)
-    delta_u660 = np.amax((u_mod[:,1] - u_obs[:,1])*100)
-    delta_u865 = np.amax((u_mod[:,2] - u_obs[:,2])*100)
+#     delta_u470 = np.amax((u_mod[:,0] - u_obs[:,0])*100)
+#     delta_u660 = np.amax((u_mod[:,1] - u_obs[:,1])*100)
+#     delta_u865 = np.amax((u_mod[:,2] - u_obs[:,2])*100)
 
-# NOTE: I'm going to use the scattering angle coordinates to locate the text
-    #fig = plt.figure()
-    #ax4 = fig.add_subplot(111)
+# # NOTE: I'm going to use the scattering angle coordinates to locate the text
+#     #fig = plt.figure()
+#     #ax4 = fig.add_subplot(111)
     
-    out_text = "     Max Residual"
-    ax4.text(20,0.30,out_text,fontweight='bold')
+#     out_text = "     Max Residual"
+#     ax4.text(20,0.30,out_text,fontweight='bold')
     
-    out_text = '     470nm: {:6.3f}%'.format(delta_u470) 
-    ax4.text(20,0.25,out_text)
+#     out_text = '     470nm: {:6.3f}%'.format(delta_u470) 
+#     ax4.text(20,0.25,out_text)
     
-    out_text = '     660nm: {:6.3f}%'.format(delta_u660) 
-    ax4.text(20,0.22,out_text)
+#     out_text = '     660nm: {:6.3f}%'.format(delta_u660) 
+#     ax4.text(20,0.22,out_text)
     
-    out_text = '     865nm: {:6.2f}%'.format(delta_u865) 
-    ax4.text(20,0.19,out_text)
+#     out_text = '     865nm: {:6.2f}%'.format(delta_u865) 
+#     ax4.text(20,0.19,out_text)
     
-    ax4.set_xlim(60,180)
-    ax4.set_xticks(np.arange(60,190,30))
+#     ax4.set_xlim(60,180)
+#     ax4.set_xticks(np.arange(60,190,30))
     
-    ax4.set_ylim(0.0,0.4)
-    ax4.set_yticks(np.arange(0.0,0.5,0.10))
+#     ax4.set_ylim(0.0,0.4)
+#     ax4.set_yticks(np.arange(0.0,0.5,0.10))
     
-    ax4.axis('off')
+#     ax4.axis('off')
     
     plt.tight_layout()
     
@@ -993,10 +999,10 @@ def main():  # Main code
     plt.close()
 
 # Radiometric Bands - I
-    fig, ((ax1,ax4)) = plt.subplots(
-        nrows=1, ncols=2, dpi=120)
-    #fig = plt.figure()
-    #ax1 = fig.add_subplot(111)
+    # fig, ((ax1,ax4)) = plt.subplots(
+    #     nrows=1, ncols=2, dpi=120)
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
     
 
     ax1.scatter(scat[:,0],i_obs[:,0],marker='x',color="blue",label="355nm")
@@ -1020,42 +1026,42 @@ def main():  # Main code
     ax1.set_ylim(0.0,0.5)
     ax1.set_yticks(np.arange(0.0,0.6,0.1))
     ax1.set_ylabel('Equivalent Reflectance')
-    ax1.legend(loc='best')  # Upper right
+    ax1.legend(loc='upper right')  # Upper right #best
 
-# Residuals Text
-# Note: We calculate delta obs as model minus observation
-    delta_i355 = np.amax((i_mod[:,0] - i_obs[:,0])*100)
-    delta_i380 = np.amax((i_mod[:,1] - i_obs[:,1])*100)
-    delta_i445 = np.amax((i_mod[:,2] - i_obs[:,2])*100)
-    delta_i555 = np.amax((i_mod[:,4] - i_obs[:,4])*100)
+# # Residuals Text
+# # Note: We calculate delta obs as model minus observation
+#     delta_i355 = np.amax((i_mod[:,0] - i_obs[:,0])*100)
+#     delta_i380 = np.amax((i_mod[:,1] - i_obs[:,1])*100)
+#     delta_i445 = np.amax((i_mod[:,2] - i_obs[:,2])*100)
+#     delta_i555 = np.amax((i_mod[:,4] - i_obs[:,4])*100)
 
 
-# NOTE: I'm going to use the scattering angle coordinates to locate the text
-    #fig = plt.figure()
-    #ax4 = fig.add_subplot(111)
+# # NOTE: I'm going to use the scattering angle coordinates to locate the text
+#     #fig = plt.figure()
+#     #ax4 = fig.add_subplot(111)
     
-    out_text = "     Max Residual"
-    ax4.text(20,0.30,out_text,fontweight='bold')
+#     out_text = "     Max Residual"
+#     ax4.text(20,0.30,out_text,fontweight='bold')
     
-    out_text = '     355nm: {:6.3f}%'.format(delta_i355) 
-    ax4.text(20,0.25,out_text)
+#     out_text = '     355nm: {:6.3f}%'.format(delta_i355) 
+#     ax4.text(20,0.25,out_text)
 
-    out_text = '     380nm: {:6.3f}%'.format(delta_i380) 
-    ax4.text(20,0.22,out_text)
+#     out_text = '     380nm: {:6.3f}%'.format(delta_i380) 
+#     ax4.text(20,0.22,out_text)
     
-    out_text = '     445nm: {:6.3f}%'.format(delta_i445) 
-    ax4.text(20,0.19,out_text)
+#     out_text = '     445nm: {:6.3f}%'.format(delta_i445) 
+#     ax4.text(20,0.19,out_text)
     
-    out_text = '     555nm: {:6.2f}%'.format(delta_i555) 
-    ax4.text(20,0.16,out_text)
+#     out_text = '     555nm: {:6.2f}%'.format(delta_i555) 
+#     ax4.text(20,0.16,out_text)
     
-    ax4.set_xlim(60,180)
-    ax4.set_xticks(np.arange(60,190,30))
+#     ax4.set_xlim(60,180)
+#     ax4.set_xticks(np.arange(60,190,30))
     
-    ax4.set_ylim(0.0,0.4)
-    ax4.set_yticks(np.arange(0.0,0.5,0.10))
+#     ax4.set_ylim(0.0,0.4)
+#     ax4.set_yticks(np.arange(0.0,0.5,0.10))
     
-    ax4.axis('off')
+#     ax4.axis('off')
     
     plt.tight_layout()     
 
@@ -1107,12 +1113,12 @@ def main():  # Main code
     
     plt.close()
 
-## FIRST PLOT - INTENSITY VS. SCATTERING ANGLE
-# Polarized Bands - I and Radiometric Bands
-    fig, ((ax1,ax4)) = plt.subplots(
-        nrows=1, ncols=2, dpi=120)
-    #fig = plt.figure()
-    #ax1 = fig.add_subplot(111)
+## FIFTH PLOT - INTENSITY VS. SCATTERING ANGLE
+# # Polarized Bands - I and Radiometric Bands
+#     fig, ((ax1,ax4)) = plt.subplots(
+#         nrows=1, ncols=2, dpi=120)
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
     
     ax1.scatter(scat[:,0],i_obs[:,0],marker='x',color="green",label="355nm")
     ax1.scatter(scat[:,1],i_obs[:,1],marker='x',color="pink",label="380nm")
@@ -1139,10 +1145,10 @@ def main():  # Main code
     ax1.set_xticks(np.arange(60,190,30))
     ax1.set_xlabel("Scattering Angle (Deg)")
 
-    ax1.set_ylim(0.0,0.5)
-    ax1.set_yticks(np.arange(0.0,0.6,0.1))
+    ax1.set_ylim(-0.1,0.4)
+    ax1.set_yticks(np.arange(-0.1,0.5,0.1))
     ax1.set_ylabel('Equivalent Reflectance')
-    ax1.legend(loc='best')  # Upper right
+    ax1.legend(loc='upper right')  # Upper right
 
 # Residuals Text
 # Note: We calculate delta obs as model minus observation

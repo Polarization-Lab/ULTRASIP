@@ -71,9 +71,9 @@ Oin4 = np.array([h_i4,v_i4,k_4]);#Meridian
 
 #GRASP Basis
 n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
-h_o4 = np.cross(k_4,v_o4)/np.linalg.norm(np.cross(k_4,v_o4))
-Oout4 = np.array([h_o4,v_o4,k_4]); #GRASP   
+h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
+v_o4 = np.cross(k_4,h_o4)/np.linalg.norm(np.cross(k_4,h_o4))
+Oout4 = np.array([h_o4,v_o4]); #GRASP 
 
 #470 nm input
 stokesin4 = np.array([[qm_470], [um_470]]) #Meridian
