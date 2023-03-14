@@ -61,7 +61,7 @@ def main():  # Main code
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/7_FIREX"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1423/2_Bakersfield"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1423/3_Bakersfield"
 
 #Home Computer 
     # datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
@@ -893,13 +893,14 @@ def main():  # Main code
         i_median[loop,5] = eqr_i_660
         i_median[loop,6] = eqr_i_865
                 
-        scat_median[loop,0] = scat_355-90
-        scat_median[loop,1] = scat_380-90
-        scat_median[loop,2] = scat_445-90
-        scat_median[loop,3] = scat_470-90
-        scat_median[loop,4] = scat_555-90
-        scat_median[loop,5] = scat_660-90
-        scat_median[loop,6] = scat_865-90
+        scat_median[loop,0] = (scat_355-90)
+        scat_median[loop,1] = (scat_380-90)
+        scat_median[loop,2] = (scat_445-90)
+        scat_median[loop,3] = (scat_470-90)
+        scat_median[loop,4] = (scat_555-90)
+        scat_median[loop,5] = (scat_660-90)
+        scat_median[loop,6] = (scat_865-90)
+        print((scat_355-90))
         
         vza_median[loop,0] = vza_355
         vza_median[loop,1] = vza_380
