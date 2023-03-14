@@ -47,6 +47,7 @@ qm_470 = 0.02224747;
 um_470 = -0.01015127;
 qs_470 = -0.0243936;
 us_470 =  0.00118935;
+scat_ang = 136.14;
 
 
 #________________________Geometry Reconciliation___________________________#
@@ -120,5 +121,5 @@ if(raz_470 > 180.0):
     raz_470 = 360.-raz_470
 raz_470 = raz_470+180.
 
-scatt_angle = np.degrees(np.arccos(i@k_4))
+scatt_angle = np.degrees(np.arccos(-i@k_4))
 
