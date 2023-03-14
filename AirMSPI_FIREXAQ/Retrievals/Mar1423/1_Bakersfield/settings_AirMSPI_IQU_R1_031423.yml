@@ -4,7 +4,7 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1223/1_Bakersfield/AirMSPI_20160707_193736Z_CA-Bakersfield_ALL_RotfromMerd_newRAZ_ChromaticK.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1423/1_Bakersfield/AirMSPI_20160707_193736Z_CA-Bakersfield_ALL_RotfromMerd_newRAZ_ChromaticK.sdat"
   
 output:
     segment:
