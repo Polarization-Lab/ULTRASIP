@@ -61,7 +61,7 @@ def main():  # Main code
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/7_FIREX"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1423/4_Bakersfield"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1423/5_Bakersfield"
 
 #Home Computer 
     # datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
@@ -838,26 +838,26 @@ def main():  # Main code
         
         i_raz = np.array([np.cos(saz),-np.sin(saz)])
         
-        k_355 = -np.array([np.cos(vaz_355),-np.sin(vaz_355)])
-        raz_355=np.degrees(np.arccos(i_raz@k_355.T))+180;  #range 0 to 180
+        k_355 = np.array([np.cos(vaz_355),-np.sin(vaz_355)])
+        raz_355=np.degrees(np.arccos(-i_raz@k_355.T))+180;  #range 0 to 180
         
-        k_380 = -np.array([np.cos(vaz_380),-np.sin(vaz_380)])
-        raz_380=np.degrees(np.arccos(i_raz@k_380.T))+180;  #range 0 to 180
+        k_380 = np.array([np.cos(vaz_380),-np.sin(vaz_380)])
+        raz_380=np.degrees(np.arccos(-i_raz@k_380.T))+180;  #range 0 to 180
         
-        k_445 = -np.array([np.cos(vaz_445),-np.sin(vaz_445)])
-        raz_445=np.degrees(np.arccos(i_raz@k_445.T))+180;  #range 0 to 180
+        k_445 = np.array([np.cos(vaz_445),-np.sin(vaz_445)])
+        raz_445=np.degrees(np.arccos(-i_raz@k_445.T))+180;  #range 0 to 180
         
-        k_470 = -np.array([np.cos(vaz_470),-np.sin(vaz_470)])
-        raz_470=np.degrees(np.arccos(i_raz@k_470.T))+180;  #range 0 to 180
+        k_470 = np.array([np.cos(vaz_470),-np.sin(vaz_470)])
+        raz_470=np.degrees(np.arccos(-i_raz@k_470.T))+180;  #range 0 to 180
         
-        k_555 = -np.array([np.cos(vaz_555),-np.sin(vaz_555)])
-        raz_555=np.degrees(np.arccos(i_raz@k_555.T))+180;  #range 0 to 180
+        k_555 = np.array([np.cos(vaz_555),-np.sin(vaz_555)])
+        raz_555=np.degrees(np.arccos(-i_raz@k_555.T))+180;  #range 0 to 180
         
-        k_660 = -np.array([np.cos(vaz_660),-np.sin(vaz_660)])
-        raz_660=np.degrees(np.arccos(i_raz@k_660.T))+180;  #range 0 to 180
+        k_660 = np.array([np.cos(vaz_660),-np.sin(vaz_660)])
+        raz_660=np.degrees(np.arccos(-i_raz@k_660.T))+180;  #range 0 to 180
         
-        k_865 = -np.array([np.cos(vaz_865),-np.sin(vaz_865)])
-        raz_865=np.degrees(np.arccos(i_raz@k_865.T))+180;  #range 0 to 180
+        k_865 = np.array([np.cos(vaz_865),-np.sin(vaz_865)])
+        raz_865=np.degrees(np.arccos(-i_raz@k_865.T))+180;  #range 0 to 180
         
         
 ### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 
@@ -981,7 +981,7 @@ def main():  # Main code
         
 # Generate an output file name
 
-    outfile = outfile_base+"ALL_RotfromMerd_newRAZ_ChromaticK"+".sdat"
+    outfile = outfile_base+"ALL_RotfromMerd_newRAZ_negi_ChromaticK"+".sdat"
         
     print()
     print("Saving: "+outfile)
