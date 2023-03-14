@@ -38,7 +38,7 @@ vaz_470 = 172.39378;
 # saz = 90.20225;
 # vza_470 = 41.958958;
 # vaz_470 = 46.008686;
-#DATA FOR PAPER FROM FILE: AirMSPI_ER2_GRP_TERRAIN_20190817_001208Z_AZ-Prescott_467F_F01_V006.hdf
+#DATA FOR PAPER FROM FILE: AirMSPI_ER2_GRP_TERRAIN_20190817_001208Z_AZ-Prescott_646F_F01_V006.hdf
 saz = 89.48908;
 sza = 64.939064;
 vaz_470 = 220.95282;
@@ -71,8 +71,8 @@ Oin4 = np.array([h_i4,v_i4,k_4]);#Meridian
 
 #GRASP Basis
 n_o = np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-h_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
-v_o4 = np.cross(k_4,h_o4)/np.linalg.norm(np.cross(k_4,h_o4))
+v_o4 = np.cross(k_4,n_i4)/np.linalg.norm(np.cross(k_4,n_i4)) #intersection of transverse & reference
+h_o4 = np.cross(k_4,v_o4)/np.linalg.norm(np.cross(k_4,v_o4))
 Oout4 = np.array([h_o4,v_o4]); #GRASP 
 
 #470 nm input
@@ -108,15 +108,17 @@ rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np
 qg_470rots, ug_470rots = rotmatrix4@stokesin4s
 
 #Relative Azimuth Calculation
-raz_470m=np.arccos(-i@k_4.T);  #range 0 to 180
+ia = np.array([np.cos(saz),-np.sin(saz)])
+ka = np.array([np.cos(vaz_470),-np.sin(vaz_470)])
+raz_470m=np.arccos(ia@ka.T);  #range 0 to 180
 raz_470m=np.degrees(raz_470m)+180;         #inexplicable GRASP offset
 
-raz_470 = saz - vaz_470
+raz_470 = -(saz - vaz_470)
 if(raz_470 < 0.0):
     raz_470 = 360.+raz_470
 if(raz_470 > 180.0):
     raz_470 = 360.-raz_470
 raz_470 = raz_470+180.
 
-scatt_angle = np.arccos(i@k_4)
+scatt_angle = np.degrees(np.arccos(i@k_4))
 

@@ -61,7 +61,7 @@ def main():  # Main code
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/7_FIREX"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1223/1_Bakersfield"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1423/1_Bakersfield"
 
 #Home Computer 
     # datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
@@ -734,7 +734,6 @@ def main():  # Main code
         h_o4 = np.cross(k_4,n_o4)/np.linalg.norm(np.cross(k_4,n_o4)) #intersection of transverse & reference
         v_o4 = np.cross(k_4,h_o4)/np.linalg.norm(np.cross(k_4,h_o4))
         Oout4 = np.array([h_o4,v_o4]); #GRASP 
-        print(k_4,np.cross(h_o4,v_o4),np.cross(h_i4,v_i4))
         
         #660nm
         h_o6 = np.cross(k_6,n_o6)/np.linalg.norm(np.cross(k_6,n_o6)) #intersection of transverse & reference
@@ -763,6 +762,8 @@ def main():  # Main code
         rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
         qg_865, ug_865 = rotmatrix8@stokesin8
         
+        print("angles:",R_nalpha8,R_nalpha6,R_nalpha4)
+        
         # #Scat AirMSPI to GRASP
         # #470
         # R_nalpha4 = Oout4@(Oin4s.T);
@@ -782,58 +783,82 @@ def main():  # Main code
         # rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
         # qg_865, ug_865 = -stokesin8s #rotmatrix8@stokesin8s
     
-        print(stokesin4s, qg_470,ug_470)
+        
 # Calculate the relative azimuth angle in the GRASP convention
 # NOTE:Need k-vector for radiometric channels
         
-        raz_355 = saz - vaz_355
-        if(raz_355 < 0.0):
-            raz_355 = 360.+raz_355
-        if(raz_355 > 180.0):
-            raz_355 = 360.-raz_355
-        raz_355 = raz_355+180.
+        # raz_355 = saz - vaz_355
+        # if(raz_355 < 0.0):
+        #     raz_355 = 360.+raz_355
+        # if(raz_355 > 180.0):
+        #     raz_355 = 360.-raz_355
+        # raz_355 = raz_355+180.
         
-        raz_380 = saz - vaz_380
-        if(raz_380 < 0.0):
-            raz_380 = 360.+raz_380
-        if(raz_380 > 180.0):
-            raz_380 = 360.-raz_380
-        raz_380 = raz_380+180.
+        # raz_380 = saz - vaz_380
+        # if(raz_380 < 0.0):
+        #     raz_380 = 360.+raz_380
+        # if(raz_380 > 180.0):
+        #     raz_380 = 360.-raz_380
+        # raz_380 = raz_380+180.
         
-        raz_445 = saz - vaz_445
-        if(raz_445 < 0.0):
-            raz_445 = 360.+raz_445
-        if(raz_445 > 180.0):
-            raz_445 = 360.-raz_445
-        raz_445 = raz_445+180.
+        # raz_445 = saz - vaz_445
+        # if(raz_445 < 0.0):
+        #     raz_445 = 360.+raz_445
+        # if(raz_445 > 180.0):
+        #     raz_445 = 360.-raz_445
+        # raz_445 = raz_445+180.
         
-        raz_470 = saz - vaz_470
-        if(raz_470 < 0.0):
-            raz_470 = 360.+raz_470
-        if(raz_470 > 180.0):
-            raz_470 = 360.-raz_470
-        raz_470 = raz_470+180.
+        # raz_470 = saz - vaz_470
+        # if(raz_470 < 0.0):
+        #     raz_470 = 360.+raz_470
+        # if(raz_470 > 180.0):
+        #     raz_470 = 360.-raz_470
+        # raz_470 = raz_470+180.
         
-        raz_555 = saz - vaz_555
-        if(raz_555 < 0.0):
-            raz_555 = 360.+raz_555
-        if(raz_555 > 180.0):
-            raz_555 = 360.-raz_555
-        raz_555 = raz_555+180.
+        # raz_555 = saz - vaz_555
+        # if(raz_555 < 0.0):
+        #     raz_555 = 360.+raz_555
+        # if(raz_555 > 180.0):
+        #     raz_555 = 360.-raz_555
+        # raz_555 = raz_555+180.
         
-        raz_660 = saz - vaz_660
-        if(raz_660 < 0.0):
-            raz_660 = 360.+raz_660
-        if(raz_660 > 180.0):
-            raz_660 = 360.-raz_660
-        raz_660 = raz_660+180.
+        # raz_660 = saz - vaz_660
+        # if(raz_660 < 0.0):
+        #     raz_660 = 360.+raz_660
+        # if(raz_660 > 180.0):
+        #     raz_660 = 360.-raz_660
+        # raz_660 = raz_660+180.
         
-        raz_865 = saz - vaz_865
-        if(raz_865 < 0.0):
-            raz_865 = 360.+raz_865
-        if(raz_865 > 180.0):
-            raz_865 = 360.-raz_865
-        raz_865 = raz_865+180.
+        # raz_865 = saz - vaz_865
+        # if(raz_865 < 0.0):
+        #     raz_865 = 360.+raz_865
+        # if(raz_865 > 180.0):
+        #     raz_865 = 360.-raz_865
+        # raz_865 = raz_865+180.
+        
+        i_raz = np.array([np.cos(saz),-np.sin(saz)])
+        
+        k_355 = np.array([np.cos(vaz_355),-np.sin(vaz_355)])
+        raz_355=np.degrees(np.arccos(i_raz@k_355.T))+180;  #range 0 to 180
+        
+        k_380 = np.array([np.cos(vaz_380),-np.sin(vaz_380)])
+        raz_380=np.degrees(np.arccos(i_raz@k_380.T))+180;  #range 0 to 180
+        
+        k_445 = np.array([np.cos(vaz_445),-np.sin(vaz_445)])
+        raz_445=np.degrees(np.arccos(i_raz@k_445.T))+180;  #range 0 to 180
+        
+        k_470 = np.array([np.cos(vaz_470),-np.sin(vaz_470)])
+        raz_470=np.degrees(np.arccos(i_raz@k_470.T))+180;  #range 0 to 180
+        
+        k_555 = np.array([np.cos(vaz_555),-np.sin(vaz_555)])
+        raz_555=np.degrees(np.arccos(i_raz@k_555.T))+180;  #range 0 to 180
+        
+        k_660 = np.array([np.cos(vaz_660),-np.sin(vaz_660)])
+        raz_660=np.degrees(np.arccos(i_raz@k_660.T))+180;  #range 0 to 180
+        
+        k_865 = np.array([np.cos(vaz_865),-np.sin(vaz_865)])
+        raz_865=np.degrees(np.arccos(i_raz@k_865.T))+180;  #range 0 to 180
+        
         
 ### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 
 ### EQUIVALENT REFLECTANCES = PI*L/E0
@@ -955,7 +980,7 @@ def main():  # Main code
         
 # Generate an output file name
 
-    outfile = outfile_base+"ALL_RotfromScat_ChromaticK"+".sdat"
+    outfile = outfile_base+"ALL_RotfromMerd_newRAZ_ChromaticK"+".sdat"
         
     print()
     print("Saving: "+outfile)
