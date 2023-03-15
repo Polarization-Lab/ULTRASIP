@@ -61,7 +61,7 @@ def main():  # Main code
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/7_FIREX"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1423/7_Bakersfield"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1423/8_Bakersfield"
 
 #Home Computer 
     # datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
@@ -731,57 +731,57 @@ def main():  # Main code
         n_o8 = n_i8
         
         #470nm
-        h_o4 = np.cross(k_4,n_o4)/np.linalg.norm(np.cross(k_4,n_o4)) #intersection of transverse & reference
-        v_o4 = np.cross(k_4,h_o4)/np.linalg.norm(np.cross(k_4,h_o4))
+        v_o4 = np.cross(k_4,n_o4)/np.linalg.norm(np.cross(k_4,n_o4)) #intersection of transverse & reference
+        h_o4 = np.cross(k_4,v_o4)/np.linalg.norm(np.cross(k_4,v_o4))
         Oout4 = np.array([h_o4,v_o4]); #GRASP 
         
         #660nm
-        h_o6 = np.cross(k_6,n_o6)/np.linalg.norm(np.cross(k_6,n_o6)) #intersection of transverse & reference
-        v_o6 = np.cross(k_6,h_o6)/np.linalg.norm(np.cross(k_6,h_o6))
+        v_o6 = np.cross(k_6,n_o6)/np.linalg.norm(np.cross(k_6,n_o6)) #intersection of transverse & reference
+        h_o6 = np.cross(k_6,v_o6)/np.linalg.norm(np.cross(k_6,v_o6))
         Oout6 = np.array([h_o6,v_o6]); #GRASP 
         
         #865nm
-        h_o8 = np.cross(k_8,n_o8)/np.linalg.norm(np.cross(k_8,n_o8)) #intersection of transverse & reference
-        v_o8 = np.cross(k_8,h_o8)/np.linalg.norm(np.cross(k_8,h_o8))
+        v_o8 = np.cross(k_8,n_o8)/np.linalg.norm(np.cross(k_8,n_o8)) #intersection of transverse & reference
+        h_o8 = np.cross(k_8,v_o8)/np.linalg.norm(np.cross(k_8,v_o8))
         Oout8 = np.array([h_o8,v_o8]); #GRASP 
 
     
-        # # # #Meridian AirMSPI to GRASP 
-        # R_nalpha4 = Oout4@(Oin4.T);
-        # alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
-        # rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-        # qg_470, ug_470 = stokesin4 #rotmatrix4@stokesin4
+        # # #Meridian AirMSPI to GRASP 
+        R_nalpha4 = Oout4@(Oin4.T);
+        alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
+        rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
+        qg_470, ug_470 = rotmatrix4@stokesin4
         
-        # R_nalpha6 = Oout6@(Oin6.T);
-        # alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
-        # rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        # qg_660, ug_660 = stokesin6 #rotmatrix6@stokesin6
+        R_nalpha6 = Oout6@(Oin6.T);
+        alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
+        rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
+        qg_660, ug_660 = rotmatrix6@stokesin6
         
-        # R_nalpha8 = Oout8@(Oin8.T);
-        # alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
-        # rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        # qg_865, ug_865 = stokesin8 #rotmatrix8@stokesin8
+        R_nalpha8 = Oout8@(Oin8.T);
+        alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
+        rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
+        qg_865, ug_865 = rotmatrix8@stokesin8
         
         # print("angles:",R_nalpha8,R_nalpha6,R_nalpha4)
         
-        #Scat AirMSPI to GRASP
-        #470
-        R_nalpha4 = Oout4@(Oin4s.T);
-        alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
-        rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-        qg_470, ug_470 = -stokesin4s #rotmatrix4@stokesin4s
+        # #Scat AirMSPI to GRASP
+        # #470
+        # R_nalpha4 = Oout4@(Oin4s.T);
+        # alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
+        # rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
+        # qg_470, ug_470 = -stokesin4s #rotmatrix4@stokesin4s
         
-        #660
-        R_nalpha6 = Oout6@(Oin6s.T);
-        alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
-        rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        qg_660, ug_660 = -stokesin6s #rotmatrix6@stokesin6s
+        # #660
+        # R_nalpha6 = Oout6@(Oin6s.T);
+        # alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
+        # rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
+        # qg_660, ug_660 = -stokesin6s #rotmatrix6@stokesin6s
         
-        #865
-        R_nalpha8 = Oout8@(Oin8s.T);
-        alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
-        rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        qg_865, ug_865 = -stokesin8s #rotmatrix8@stokesin8s
+        # #865
+        # R_nalpha8 = Oout8@(Oin8s.T);
+        # alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
+        # rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
+        # qg_865, ug_865 = -stokesin8s #rotmatrix8@stokesin8s
     
         
 # Calculate the relative azimuth angle in the GRASP convention
