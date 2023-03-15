@@ -66,12 +66,12 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/7_FIREX"
-    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1423/6_Bakersfield"
-#Home Computer 
-    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
-    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1523/2_FIREX"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1523/3_Bakersfield"
+# #Home Computer 
+#     datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
+#     outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1523/2_FIREX"
 
 #Home Computer 
     # datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
@@ -113,29 +113,29 @@ def main():  # Main code
 
 # Set some bounds for the image (USER INPUT)
 
-    min_x = 1900
-    max_x = 2200
-    min_y = 1900
-    max_y = 2200
+    # min_x = 1900
+    # max_x = 2200
+    # min_y = 1900
+    # max_y = 2200
     
-    # #Bakersfield
-    # min_x = 1200
-    # max_x = 1900
-    # min_y = 1200
-    # max_y = 1900
+    #Bakersfield
+    min_x = 1200
+    max_x = 1900
+    min_y = 1200
+    max_y = 1900
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
 
-    box_x1 = 120
-    box_x2 = 125
-    box_y1 = 105
-    box_y2 = 110
+    # box_x1 = 120
+    # box_x2 = 125
+    # box_y1 = 105
+    # box_y2 = 110
 
-    # #Bakserfield
-    # box_x1 = 485
-    # box_x2 = 490
-    # box_y1 = 485
-    # box_y2 = 490
+    #Bakserfield
+    box_x1 = 485
+    box_x2 = 490
+    box_y1 = 485
+    box_y2 = 490
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
@@ -760,17 +760,17 @@ def main():  # Main code
         R_nalpha4 = Oout4@(Oin4.T);
         alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
         rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-        qg_470, ug_470 = rotmatrix4@stokesin4
+        qg_470, ug_470 = stokesin4 #rotmatrix4@stokesin4
         
         R_nalpha6 = Oout6@(Oin6.T);
         alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
         rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        qg_660, ug_660 = rotmatrix6@stokesin6
+        qg_660, ug_660 = stokesin6 #rotmatrix6@stokesin6
         
         R_nalpha8 = Oout8@(Oin8.T);
         alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
         rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        qg_865, ug_865 = rotmatrix8@stokesin8
+        qg_865, ug_865 = stokesin8 #rotmatrix8@stokesin8
         
         print("angles:",R_nalpha8,R_nalpha6,R_nalpha4)
         
