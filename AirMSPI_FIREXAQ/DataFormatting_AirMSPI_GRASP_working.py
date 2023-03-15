@@ -59,13 +59,13 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/7_FIREX"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1423/8_Bakersfield"
+    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1423/8_Bakersfield"
 
 #Home Computer 
-    # datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
-    # outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0823/5_FIREX"
+    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
+    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1523/1_FIREX"
 
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
@@ -86,46 +86,33 @@ def main():  # Main code
 # Crop images to same area to correct for parallax and set a region of interest
 # (ROI) to extract the data from
 
-# # Set bounds for the image (USER INPUT)
-
-#     min_x = 1900
-#     max_x = 2200
-#     min_y = 1900
-#     max_y = 2200
-    
 # # Set bounds for ROI (USER INPUT)
 # # Note: These coordinates are RELATIVE to the overall bounding box
 
-#     box_x1 = 120
-#     box_x2 = 125
-#     box_y1 = 105
-#     box_y2 = 110
-
-# Set some bounds for the image (USER INPUT)
-
-    # min_x = 1900
-    # max_x = 2200
-    # min_y = 1900
-    # max_y = 2200
+    #FIREX
+    min_x = 1900
+    max_x = 2200
+    min_y = 1900
+    max_y = 2200
     
-    #Bakersfield
-    min_x = 1200
-    max_x = 1900
-    min_y = 1200
-    max_y = 1900
+    # #Bakersfield
+    # min_x = 1200
+    # max_x = 1900
+    # min_y = 1200
+    # max_y = 1900
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
+    #FIREX
+    box_x1 = 120
+    box_x2 = 125
+    box_y1 = 105
+    box_y2 = 110
 
-    # box_x1 = 120
-    # box_x2 = 125
-    # box_y1 = 105
-    # box_y2 = 110
-
-    #Bakserfield
-    box_x1 = 485
-    box_x2 = 490
-    box_y1 = 485
-    box_y2 = 490
+    # #Bakserfield
+    # box_x1 = 485
+    # box_x2 = 490
+    # box_y1 = 485
+    # box_y2 = 490
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
@@ -706,26 +693,25 @@ def main():  # Main code
         
         #Define AirMSPI Meridian Plane (input coordinate system) for each wavelength channel
         #AirMSPI Mer 470 nm
-        n_i4 = np.cross(zenith,k_4)/np.linalg.norm(np.cross(zenith,k_4));
+        n_i4 = np.cross(k_4,zenith)/np.linalg.norm(np.cross(k_4,zenith));
         h_i4 = np.cross(k_4,n_i4)/np.linalg.norm(np.cross(k_4,n_i4)); #intersection of transverse & reference
         v_i4 = np.cross(k_4,h_i4)/np.linalg.norm(np.cross(k_4,h_i4));
         Oin4 = np.array([h_i4,v_i4]);
         
         #AirMSPI Mer 660 nm
-        n_i6 = np.cross(zenith,k_6)/np.linalg.norm(np.cross(zenith,k_6));
+        n_i6 = np.cross(k_6,zenith)/np.linalg.norm(np.cross(k_6,zenith));
         h_i6 = np.cross(k_6,n_i6)/np.linalg.norm(np.cross(k_6,n_i6)); #intersection of transverse & reference
         v_i6 = np.cross(k_6,h_i6)/np.linalg.norm(np.cross(k_6,h_i6));
         Oin6 = np.array([h_i6,v_i6]);
         
         #AirMSPI Mer 865 nm
-        n_i8 = np.cross(zenith,k_8)/np.linalg.norm(np.cross(zenith,k_8));
+        n_i8 = np.cross(k_8,zenith)/np.linalg.norm(np.cross(k_8,zenith));
         h_i8 = np.cross(k_8,n_i8)/np.linalg.norm(np.cross(k_8,n_i8)); #intersection of transverse & reference
         v_i8 = np.cross(k_8,h_i8)/np.linalg.norm(np.cross(k_8,h_i8));
         Oin8 = np.array([h_i8,v_i8]);
         
 
-        #GRASP Basis
-        #GRASP Basis
+        #GRASP Meridian Basis
         n_o4 = n_i4 #np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
         n_o6 = n_i6
         n_o8 = n_i8
@@ -785,96 +771,22 @@ def main():  # Main code
     
         
 # Calculate the relative azimuth angle in the GRASP convention
-# NOTE:Need k-vector for radiometric channels
-        
-        # raz_355 = saz - vaz_355
-        # if(raz_355 < 0.0):
-        #     raz_355 = 360.+raz_355
-        # if(raz_355 > 180.0):
-        #     raz_355 = 360.-raz_355
-        # raz_355 = raz_355+180.
-        
-        # raz_380 = saz - vaz_380
-        # if(raz_380 < 0.0):
-        #     raz_380 = 360.+raz_380
-        # if(raz_380 > 180.0):
-        #     raz_380 = 360.-raz_380
-        # raz_380 = raz_380+180.
-        
-        # raz_445 = saz - vaz_445
-        # if(raz_445 < 0.0):
-        #     raz_445 = 360.+raz_445
-        # if(raz_445 > 180.0):
-        #     raz_445 = 360.-raz_445
-        # raz_445 = raz_445+180.
-        
-        # raz_470 = saz - vaz_470
-        # if(raz_470 < 0.0):
-        #     raz_470 = 360.+raz_470
-        # if(raz_470 > 180.0):
-        #     raz_470 = 360.-raz_470
-        # raz_470 = raz_470+180.
-        
-        # raz_555 = saz - vaz_555
-        # if(raz_555 < 0.0):
-        #     raz_555 = 360.+raz_555
-        # if(raz_555 > 180.0):
-        #     raz_555 = 360.-raz_555
-        # raz_555 = raz_555+180.
-        
-        # raz_660 = saz - vaz_660
-        # if(raz_660 < 0.0):
-        #     raz_660 = 360.+raz_660
-        # if(raz_660 > 180.0):
-        #     raz_660 = 360.-raz_660
-        # raz_660 = raz_660+180.
-        
-        # raz_865 = saz - vaz_865
-        # if(raz_865 < 0.0):
-        #     raz_865 = 360.+raz_865
-        # if(raz_865 > 180.0):
-        #     raz_865 = 360.-raz_865
-        # raz_865 = raz_865+180.
-        
-        # i_raz = np.array([np.cos(saz),-np.sin(saz)])
-        
-        # k_355 = np.array([np.cos(vaz_355),-np.sin(vaz_355)])
-        # raz_355=np.degrees(np.arccos(i_raz@k_355.T))+180;  #range 0 to 180
-        
-        # k_380 = np.array([np.cos(vaz_380),-np.sin(vaz_380)])
-        # raz_380=np.degrees(np.arccos(i_raz@k_380.T))+180;  #range 0 to 180
-        
-        # k_445 = np.array([np.cos(vaz_445),-np.sin(vaz_445)])
-        # raz_445=np.degrees(np.arccos(i_raz@k_445.T))+180;  #range 0 to 180
-        
-        # k_470 = np.array([np.cos(vaz_470),-np.sin(vaz_470)])
-        # raz_470=np.degrees(np.arccos(i_raz@k_470.T))+180;  #range 0 to 180
-        
-        # k_555 = np.array([np.cos(vaz_555),-np.sin(vaz_555)])
-        # raz_555=np.degrees(np.arccos(-i_raz@k_555.T))+180;  #range 0 to 180
-        
-        # k_660 = np.array([np.cos(vaz_660),-np.sin(vaz_660)])
-        # raz_660=np.degrees(np.arccos(-i_raz@k_660.T))+180;  #range 0 to 180
-        
-        # k_865 = np.array([np.cos(vaz_865),-np.sin(vaz_865)])
-        # raz_865=np.degrees(np.arccos(-i_raz@k_865.T))+180;  #range 0 to 180
-        
         #Clarissa way
         raz_355 = (saz - vaz_355)
         if (raz_355 < 0.0):
-            raz_355 = raz_355 + 180
+            raz_355 = raz_355 + 360
         
         raz_380 = (saz - vaz_380)
         if (raz_380 < 0.0):
-            raz_380 = raz_380 + 180
+            raz_380 = raz_380 + 360
         
         raz_445 = (saz - vaz_445)
         if (raz_445 < 0.0):
-            raz_445 = raz_445 + 180
+            raz_445 = raz_445 + 360
         
         raz_470 = (saz - vaz_470)
         if (raz_470 < 0.0):
-            raz_470 = raz_470 + 180
+            raz_470 = raz_470 + 360
         
         raz_555 = (saz - vaz_555)
         if (raz_555 < 0.0):
@@ -882,11 +794,11 @@ def main():  # Main code
         
         raz_660 = (saz - vaz_660)
         if (raz_660 < 0.0):
-            raz_660 = raz_660 + 180
+            raz_660 = raz_660 + 360
             
         raz_865 = (saz - vaz_865)
         if (raz_865 < 0.0):
-            raz_865 = raz_865 + 180
+            raz_865 = raz_865 + 360
         
         
 ### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 
