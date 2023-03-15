@@ -736,17 +736,17 @@ def main():  # Main code
         R_nalpha4 = Oout4@(Oin4.T);
         alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
         rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-        qg_470, ug_470 = rotmatrix4@stokesin4
+        qg_470, ug_470 = -rotmatrix4@stokesin4
         
         R_nalpha6 = Oout6@(Oin6.T);
         alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
         rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        qg_660, ug_660 = rotmatrix6@stokesin6
+        qg_660, ug_660 = -rotmatrix6@stokesin6
         
         R_nalpha8 = Oout8@(Oin8.T);
         alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
         rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        qg_865, ug_865 = rotmatrix8@stokesin8
+        qg_865, ug_865 = -rotmatrix8@stokesin8
         
         # print("angles:",R_nalpha8,R_nalpha6,R_nalpha4)
         
@@ -798,7 +798,7 @@ def main():  # Main code
             
         raz_865 = (saz - vaz_865)
         if (raz_865 < 0.0):
-            raz_865 = raz_865 + 360
+            raz_865 = raz_865 + 180
         
         
 ### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 
@@ -875,9 +875,9 @@ def main():  # Main code
         i_in_polar_median[loop,1] = eqr_i_660
         i_in_polar_median[loop,2] = eqr_i_865
         
-        q_median[loop,0] = eqr_qg_470
-        q_median[loop,1] = eqr_qg_660
-        q_median[loop,2] = eqr_qg_865
+        q_median[loop,0] = -eqr_qg_470
+        q_median[loop,1] = -eqr_qg_660
+        q_median[loop,2] = -eqr_qg_865
         
         u_median[loop,0] = eqr_ug_470
         u_median[loop,1] = eqr_ug_660
