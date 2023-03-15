@@ -96,9 +96,9 @@ qs_470rot, us_470rot = rotmatrix4@stokesin4
 
 #Meridian AirMSPI to GRASP 
 R_nalpha4 = Oout4@(Oin4.T);
-alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]); 
+alpha4 = np.arctan2(R_nalpha4[0,1],R_nalpha4[0,0]); 
 print(np.degrees(alpha4)) 
-rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
+rotmatrix4 = np.array([[np.cos(2*alpha4),np.sin(2*alpha4)],[-np.sin(2*alpha4),np.cos(2*alpha4)]]); 
 qg_470rot, ug_470rot = rotmatrix4@stokesin4
 
 #Scat AirMSPI to GRASP
