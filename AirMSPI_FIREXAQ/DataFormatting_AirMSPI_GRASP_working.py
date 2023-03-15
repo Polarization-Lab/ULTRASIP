@@ -61,7 +61,7 @@ def main():  # Main code
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/7_FIREX"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1523/2_Bakersfield"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1523/4_Bakersfield"
 
 # #Home Computer 
 #     datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
@@ -773,32 +773,32 @@ def main():  # Main code
 # Calculate the relative azimuth angle in the GRASP convention
         #Clarissa way
         raz_355 = (saz - vaz_355)
-        if (raz_355 < 0.0):
-            raz_355 = raz_355 + 180
+        # if (raz_355 < 0.0):
+        #     raz_355 = raz_355 + 180
         
         raz_380 = (saz - vaz_380)
-        if (raz_380 < 0.0):
-            raz_380 = raz_380 + 180
+        # if (raz_380 < 0.0):
+        #     raz_380 = raz_380 + 180
         
         raz_445 = (saz - vaz_445)
-        if (raz_445 < 0.0):
-            raz_445 = raz_445 + 180
+        # if (raz_445 < 0.0):
+        #     raz_445 = raz_445 + 180
         
         raz_470 = (saz - vaz_470)
-        if (raz_470 < 0.0):
-            raz_470 = raz_470 + 180
+        # if (raz_470 < 0.0):
+        #     raz_470 = raz_470 + 180
         
         raz_555 = (saz - vaz_555)
-        if (raz_555 < 0.0):
-            raz_555 = raz_555 + 180
+        # if (raz_555 < 0.0):
+        #     raz_555 = raz_555 + 180
         
         raz_660 = (saz - vaz_660)
-        if (raz_660 < 0.0):
-            raz_660 = raz_660 + 180
+        # if (raz_660 < 0.0):
+        #     raz_660 = raz_660 + 180
             
         raz_865 = (saz - vaz_865)
-        if (raz_865 < 0.0):
-            raz_865 = raz_865 + 180
+        # if (raz_865 < 0.0):
+        #     raz_865 = raz_865 + 180
         
         
 ### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 
