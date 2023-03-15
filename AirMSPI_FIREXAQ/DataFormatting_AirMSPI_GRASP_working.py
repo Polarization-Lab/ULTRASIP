@@ -841,7 +841,7 @@ def main():  # Main code
         scat_median[loop,4] = (scat_555)
         scat_median[loop,5] = (scat_660)
         scat_median[loop,6] = (scat_865)
-        print((scat_355-90))
+        
         
         vza_median[loop,0] = vza_355
         vza_median[loop,1] = vza_380
@@ -879,9 +879,9 @@ def main():  # Main code
         q_median[loop,1] = eqr_qg_660
         q_median[loop,2] = eqr_qg_865
         
-        u_median[loop,0] = -eqr_ug_470
-        u_median[loop,1] = -eqr_ug_660
-        u_median[loop,2] = -eqr_ug_865
+        u_median[loop,0] = eqr_ug_470
+        u_median[loop,1] = eqr_ug_660
+        u_median[loop,2] = eqr_ug_865
           
         ipol_median[loop,0] = eqr_ipol_470
         ipol_median[loop,1] = eqr_ipol_660
