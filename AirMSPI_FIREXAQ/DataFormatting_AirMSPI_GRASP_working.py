@@ -774,19 +774,19 @@ def main():  # Main code
         #Clarissa way
         raz_355 = (saz - vaz_355)
         if (raz_355 < 0.0):
-            raz_355 = raz_355 + 360
+            raz_355 = raz_355 + 180
         
         raz_380 = (saz - vaz_380)
         if (raz_380 < 0.0):
-            raz_380 = raz_380 + 360
+            raz_380 = raz_380 + 180
         
         raz_445 = (saz - vaz_445)
         if (raz_445 < 0.0):
-            raz_445 = raz_445 + 360
+            raz_445 = raz_445 + 180
         
         raz_470 = (saz - vaz_470)
         if (raz_470 < 0.0):
-            raz_470 = raz_470 + 360
+            raz_470 = raz_470 + 180
         
         raz_555 = (saz - vaz_555)
         if (raz_555 < 0.0):
@@ -794,7 +794,7 @@ def main():  # Main code
         
         raz_660 = (saz - vaz_660)
         if (raz_660 < 0.0):
-            raz_660 = raz_660 + 360
+            raz_660 = raz_660 + 180
             
         raz_865 = (saz - vaz_865)
         if (raz_865 < 0.0):
