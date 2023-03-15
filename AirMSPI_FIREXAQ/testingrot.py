@@ -65,7 +65,7 @@ v_i4s = np.cross(k_4,h_i4s)/np.linalg.norm(np.cross(k_4,h_i4s));
 Oin4s = np.array([h_i4s,v_i4s,k_4]);
         
 #Define AirMSPI Meridian Plane (input coordinate system) for each wavelength channel
-n_i4 = np.cross(k_4,zenith)/np.linalg.norm(np.cross(k_4,zenith));
+n_i4 = np.cross(zenith,k_4)/np.linalg.norm(np.cross(zenith,k_4));
 h_i4 = np.cross(k_4,n_i4)/np.linalg.norm(np.cross(k_4,n_i4)); #intersection of transverse & reference
 v_i4 = np.cross(k_4,h_i4)/np.linalg.norm(np.cross(k_4,h_i4));
 Oin4 = np.array([h_i4,v_i4,k_4]);#Meridian    
