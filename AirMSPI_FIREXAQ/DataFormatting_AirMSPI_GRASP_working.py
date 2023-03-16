@@ -819,13 +819,21 @@ def main():  # Main code
         
         # print(-i@k_4,saz, vaz_470, vza_470,sza,raz_470)
         
-        raz_355 = 180 - (saz-vaz_355)
-        raz_380 = 180 - (saz-vaz_380)
-        raz_445 = 180 - (saz-vaz_445)
-        raz_470 = 180 - (saz-vaz_470)
-        raz_555 = 180 - (saz-vaz_555)
-        raz_660 = 180 - (saz-vaz_660)
-        raz_865 = 180 - (saz-vaz_865)
+        # raz_355 = 180 - (saz-vaz_355)
+        # raz_380 = 180 - (saz-vaz_380)
+        # raz_445 = 180 - (saz-vaz_445)
+        # raz_470 = 180 - (saz-vaz_470)
+        # raz_555 = 180 - (saz-vaz_555)
+        # raz_660 = 180 - (saz-vaz_660)
+        # raz_865 = 180 - (saz-vaz_865)
+        
+        raz_355 = (saz-vaz_355)
+        raz_380 = (saz-vaz_380)
+        raz_445 = (saz-vaz_445)
+        raz_470 = (saz-vaz_470)
+        raz_555 = (saz-vaz_555)
+        raz_660 = (saz-vaz_660)
+        raz_865 = (saz-vaz_865)
 
         
         
