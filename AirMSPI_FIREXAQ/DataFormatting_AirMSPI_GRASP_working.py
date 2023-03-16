@@ -800,23 +800,32 @@ def main():  # Main code
         # if (raz_865 < 0.0):
         #     raz_865 = raz_865 + 180
         
-        #Linear Alg Way 
-        #Define k vetors for all wavelengths #acosd(dot(i,k)/(norm(i)*norm(k)))
-        k_35 = np.array([np.cos(np.radians(vaz_355))*np.sin(np.radians(vza_355)), -np.sin(np.radians(vaz_355))*np.sin(np.radians(vza_355)), np.cos(np.radians(vza_355))]);
-        k_38 = np.array([np.cos(np.radians(vaz_380))*np.sin(np.radians(vza_380)), -np.sin(np.radians(vaz_380))*np.sin(np.radians(vza_380)), np.cos(np.radians(vza_380))]);
-        k_45 = np.array([np.cos(np.radians(vaz_445))*np.sin(np.radians(vza_445)), -np.sin(np.radians(vaz_445))*np.sin(np.radians(vza_445)), np.cos(np.radians(vza_445))]);
-        k_55 = np.array([np.cos(np.radians(vaz_555))*np.sin(np.radians(vza_555)), -np.sin(np.radians(vaz_555))*np.sin(np.radians(vza_555)), np.cos(np.radians(vza_555))]);
+        # #Linear Alg Way 
+        # #Define 1x2 k vectors for all wavelengths #acosd(dot(i,k)/(norm(i)*norm(k)))
+        # k_35 = np.array([np.cos(np.radians(vaz_355)), -np.sin(np.radians(vaz_355))]);
+        # k_38 = np.array([np.cos(np.radians(vaz_380)), -np.sin(np.radians(vaz_380))]);
+        # k_45 = np.array([np.cos(np.radians(vaz_445)), -np.sin(np.radians(vaz_445))]);
+        # k_55 = np.array([np.cos(np.radians(vaz_555)), -np.sin(np.radians(vaz_555))]);
         
-        #Find relative angle between them
-        raz_355 = np.degrees(np.arccos((-i@k_35)/(np.linalg.norm(-i)*np.linalg.norm(k_35))))
-        raz_380 = np.degrees(np.arccos((-i@k_38)/(np.linalg.norm(-i)*np.linalg.norm(k_38))))
-        raz_445 = np.degrees(np.arccos((-i@k_45)/(np.linalg.norm(-i)*np.linalg.norm(k_45))))
-        raz_470 = np.degrees(np.arccos((-i@k_4)/(np.linalg.norm(-i)*np.linalg.norm(k_4))))
-        raz_555 = np.degrees(np.arccos((-i@k_55)/(np.linalg.norm(-i)*np.linalg.norm(k_55))))
-        raz_660 = np.degrees(np.arccos((-i@k_6)/(np.linalg.norm(-i)*np.linalg.norm(k_6))))
-        raz_865 = np.degrees(np.arccos((-i@k_8)/(np.linalg.norm(-i)*np.linalg.norm(k_8))))
+        # #Define 1x2 illumination vector 
+        # #Find relative angle between them
+        # raz_355 = np.degrees(np.arccos((-i@k_35)/(np.linalg.norm(-i)*np.linalg.norm(k_35))))
+        # raz_380 = np.degrees(np.arccos((-i@k_38)/(np.linalg.norm(-i)*np.linalg.norm(k_38))))
+        # raz_445 = np.degrees(np.arccos((-i@k_45)/(np.linalg.norm(-i)*np.linalg.norm(k_45))))
+        # raz_470 = np.degrees(np.arccos((-i@k_4)/(np.linalg.norm(-i)*np.linalg.norm(k_4))))
+        # raz_555 = np.degrees(np.arccos((-i@k_55)/(np.linalg.norm(-i)*np.linalg.norm(k_55))))
+        # raz_660 = np.degrees(np.arccos((-i@k_6)/(np.linalg.norm(-i)*np.linalg.norm(k_6))))
+        # raz_865 = np.degrees(np.arccos((-i@k_8)/(np.linalg.norm(-i)*np.linalg.norm(k_8))))
         
-        print(-i@k_4,saz, vaz_470, vza_470,sza,raz_470)
+        # print(-i@k_4,saz, vaz_470, vza_470,sza,raz_470)
+        
+        raz_355 = 180 - np.degrees(np.arctan(saz-vaz_355))
+        raz_380 = 180 - np.degrees(np.arctan(saz-vaz_380))
+        raz_445 = 180 - np.degrees(np.arctan(saz-vaz_445))
+        raz_470 = 180 - np.degrees(np.arctan(saz-vaz_470))
+        raz_555 = 180 - np.degrees(np.arctan(saz-vaz_555))
+        raz_660 = 180 - np.degrees(np.arctan(saz-vaz_660))
+        raz_865 = 180 - np.degrees(np.arctan(saz-vaz_865))
 
         
         
