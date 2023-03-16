@@ -819,13 +819,13 @@ def main():  # Main code
         
         # print(-i@k_4,saz, vaz_470, vza_470,sza,raz_470)
         
-        raz_355 = 180 - np.degrees(np.arctan(saz-vaz_355))
-        raz_380 = 180 - np.degrees(np.arctan(saz-vaz_380))
-        raz_445 = 180 - np.degrees(np.arctan(saz-vaz_445))
-        raz_470 = 180 - np.degrees(np.arctan(saz-vaz_470))
-        raz_555 = 180 - np.degrees(np.arctan(saz-vaz_555))
-        raz_660 = 180 - np.degrees(np.arctan(saz-vaz_660))
-        raz_865 = 180 - np.degrees(np.arctan(saz-vaz_865))
+        raz_355 = 180 - np.degrees((saz-vaz_355))
+        raz_380 = 180 - np.degrees((saz-vaz_380))
+        raz_445 = 180 - np.degrees((saz-vaz_445))
+        raz_470 = 180 - np.degrees((saz-vaz_470))
+        raz_555 = 180 - np.degrees((saz-vaz_555))
+        raz_660 = 180 - np.degrees((saz-vaz_660))
+        raz_865 = 180 - np.degrees((saz-vaz_865))
 
         
         
