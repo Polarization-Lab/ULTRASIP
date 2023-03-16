@@ -25,10 +25,10 @@ def main():  # Main code
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX/Plots"
-    # basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/8_Bakersfield"
-    # figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/8_Bakersfield/Plots"
+    # basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX"
+    # figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1623/1_Bakersfield"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1623/1_Bakersfield/Plots"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -826,8 +826,8 @@ def main():  # Main code
     ax1.set_xticks(np.arange(60,190,30))
     ax1.set_xlabel("Scattering Angle (Deg)")
     
-    ax1.set_ylim(0,0.8)
-    ax1.set_yticks(np.arange(0,0.8,0.2))
+    ax1.set_ylim(-0.4,0.4)
+    ax1.set_yticks(np.arange(-0.4,0.4,0.2))
     ax1.set_ylabel('q (Q/I)')
     ax1.legend(loc='upper right')  # Upper right   
 
@@ -1148,7 +1148,7 @@ def main():  # Main code
     ax1.set_ylim(-0.1,0.4)
     ax1.set_yticks(np.arange(-0.1,0.5,0.1))
     ax1.set_ylabel('Equivalent Reflectance')
-    ax1.legend(loc='upper right')  # Upper right
+    ax1.legend(loc='lower left')  # Upper right
 
 # Residuals Text
 # Note: We calculate delta obs as model minus observation
