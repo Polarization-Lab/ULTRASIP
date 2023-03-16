@@ -61,7 +61,7 @@ def main():  # Main code
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/7_FIREX"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1523/4_Bakersfield"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1623/1_Bakersfield"
 
 # #Home Computer 
 #     datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
@@ -772,33 +772,52 @@ def main():  # Main code
         
 # Calculate the relative azimuth angle in the GRASP convention
         #Clarissa way
-        raz_355 = (saz - vaz_355)
+        #raz_355 = (saz - vaz_355) 
         # if (raz_355 < 0.0):
         #     raz_355 = raz_355 + 180
         
-        raz_380 = (saz - vaz_380)
+        #raz_380 = (saz - vaz_380) 
         # if (raz_380 < 0.0):
         #     raz_380 = raz_380 + 180
         
-        raz_445 = (saz - vaz_445)
+        #raz_445 = (saz - vaz_445) 
         # if (raz_445 < 0.0):
         #     raz_445 = raz_445 + 180
         
-        raz_470 = (saz - vaz_470)
+        #raz_470 = (saz - vaz_470) 
         # if (raz_470 < 0.0):
         #     raz_470 = raz_470 + 180
         
-        raz_555 = (saz - vaz_555)
+        #raz_555 = (saz - vaz_555) 
         # if (raz_555 < 0.0):
         #     raz_555 = raz_555 + 180
         
-        raz_660 = (saz - vaz_660)
+        #raz_660 = (saz - vaz_660)
         # if (raz_660 < 0.0):
         #     raz_660 = raz_660 + 180
             
-        raz_865 = (saz - vaz_865)
+        #raz_865 = (saz - vaz_865) 
         # if (raz_865 < 0.0):
         #     raz_865 = raz_865 + 180
+        
+        #Linear Alg Way 
+        #Define k vetors for all wavelengths #acosd(dot(i,k)/(norm(i)*norm(k)))
+        k_35 = np.array([np.cos(np.radians(vaz_355))*np.sin(np.radians(vza_355)), -np.sin(np.radians(vaz_355))*np.sin(np.radians(vza_355)), np.cos(np.radians(vza_355))]);
+        k_38 = np.array([np.cos(np.radians(vaz_380))*np.sin(np.radians(vza_380)), -np.sin(np.radians(vaz_380))*np.sin(np.radians(vza_380)), np.cos(np.radians(vza_380))]);
+        k_45 = np.array([np.cos(np.radians(vaz_445))*np.sin(np.radians(vza_445)), -np.sin(np.radians(vaz_445))*np.sin(np.radians(vza_445)), np.cos(np.radians(vza_445))]);
+        k_55 = np.array([np.cos(np.radians(vaz_555))*np.sin(np.radians(vza_555)), -np.sin(np.radians(vaz_555))*np.sin(np.radians(vza_555)), np.cos(np.radians(vza_555))]);
+        
+        #Find relative angle between them
+        raz_355 = np.degrees(np.arccos((i@k_35)/(np.linalg.norm(i)*np.linalg.norm(k_35))))
+        raz_380 = np.degrees(np.arccos((i@k_38)/(np.linalg.norm(i)*np.linalg.norm(k_38))))
+        raz_445 = np.degrees(np.arccos((i@k_45)/(np.linalg.norm(i)*np.linalg.norm(k_45))))
+        raz_470 = np.degrees(np.arccos((i@k_4)/(np.linalg.norm(i)*np.linalg.norm(k_4))))
+        raz_555 = np.degrees(np.arccos((i@k_55)/(np.linalg.norm(i)*np.linalg.norm(k_55))))
+        raz_660 = np.degrees(np.arccos((i@k_6)/(np.linalg.norm(i)*np.linalg.norm(k_6))))
+        raz_865 = np.degrees(np.arccos((i@k_8)/(np.linalg.norm(i)*np.linalg.norm(k_8))))
+        
+        print(raz_355,raz_660,raz_470,raz_865)
+
         
         
 ### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 

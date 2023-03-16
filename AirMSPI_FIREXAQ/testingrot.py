@@ -109,8 +109,8 @@ rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np
 qg_470rots, ug_470rots = rotmatrix4@stokesin4s
 
 #Relative Azimuth Calculation
-ia = np.array([np.cos(saz),np.sin(saz)])
-ka = np.array([np.cos(vaz_470),np.sin(vaz_470)])
+ia = np.array([np.cos(saz),-np.sin(saz)])
+ka = np.array([np.cos(vaz_470),-np.sin(vaz_470)])
 raz_470m=np.arccos(ia@ka.T);  #range 0 to 180
 raz_470m=np.degrees(raz_470m)+180;         #inexplicable GRASP offset
 
