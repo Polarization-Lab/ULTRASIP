@@ -808,15 +808,15 @@ def main():  # Main code
         k_55 = np.array([np.cos(np.radians(vaz_555))*np.sin(np.radians(vza_555)), -np.sin(np.radians(vaz_555))*np.sin(np.radians(vza_555)), np.cos(np.radians(vza_555))]);
         
         #Find relative angle between them
-        raz_355 = np.degrees(np.arccos((i@k_35)/(np.linalg.norm(i)*np.linalg.norm(k_35))))
-        raz_380 = np.degrees(np.arccos((i@k_38)/(np.linalg.norm(i)*np.linalg.norm(k_38))))
-        raz_445 = np.degrees(np.arccos((i@k_45)/(np.linalg.norm(i)*np.linalg.norm(k_45))))
-        raz_470 = np.degrees(np.arccos((i@k_4)/(np.linalg.norm(i)*np.linalg.norm(k_4))))
-        raz_555 = np.degrees(np.arccos((i@k_55)/(np.linalg.norm(i)*np.linalg.norm(k_55))))
-        raz_660 = np.degrees(np.arccos((i@k_6)/(np.linalg.norm(i)*np.linalg.norm(k_6))))
-        raz_865 = np.degrees(np.arccos((i@k_8)/(np.linalg.norm(i)*np.linalg.norm(k_8))))
+        raz_355 = np.degrees(np.arccos((-i@k_35)/(np.linalg.norm(-i)*np.linalg.norm(k_35))))
+        raz_380 = np.degrees(np.arccos((-i@k_38)/(np.linalg.norm(-i)*np.linalg.norm(k_38))))
+        raz_445 = np.degrees(np.arccos((-i@k_45)/(np.linalg.norm(-i)*np.linalg.norm(k_45))))
+        raz_470 = np.degrees(np.arccos((-i@k_4)/(np.linalg.norm(-i)*np.linalg.norm(k_4))))
+        raz_555 = np.degrees(np.arccos((-i@k_55)/(np.linalg.norm(-i)*np.linalg.norm(k_55))))
+        raz_660 = np.degrees(np.arccos((-i@k_6)/(np.linalg.norm(-i)*np.linalg.norm(k_6))))
+        raz_865 = np.degrees(np.arccos((-i@k_8)/(np.linalg.norm(-i)*np.linalg.norm(k_8))))
         
-        print(raz_355,raz_660,raz_470,raz_865)
+        print(-i@k_4,saz, vaz_470, vza_470,sza,raz_470)
 
         
         
