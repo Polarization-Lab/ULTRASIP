@@ -818,14 +818,13 @@ def main():  # Main code
         # #Find relative angle between them
         rotmat = np.array([[np.cos(np.radians(-saz+180)),-np.sin(np.radians(-saz+180))],[np.cos(np.radians(-saz+180)),np.sin(np.radians(-saz+180))]]);
         
-        k_35 = rotmat@k_35.T
-        k_38 = rotmat@k_38.T
-        k_45 = rotmat@k_45.T
-        k_55 = rotmat@k_55.T
-        
-        k_66 = rotmat@k_66.T
-        k_47 = rotmat@k_47.T
-        k_86 = rotmat@k_86.T
+        k_35 = rotmat@-k_35.T
+        k_38 = rotmat@-k_38.T
+        k_45 = rotmat@-k_45.T
+        k_55 = rotmat@-k_55.T       
+        k_66 = rotmat@-k_66.T
+        k_47 = rotmat@-k_47.T
+        k_86 = rotmat@-k_86.T
         print(k_66)
         
         raz_355 = np.degrees(np.arctan(k_35[1]/k_35[0]))
