@@ -958,7 +958,7 @@ def main():  # Main code
         
 # Generate an output file name
 
-    outfile = outfile_base+"ALL_RotfromMerd_newRAZCway_ChromaticK"+".sdat"
+    outfile = outfile_base+"ALL_RotfromScat_newRAZCway_ChromaticK"+".sdat"
         
     print()
     print("Saving: "+outfile)
