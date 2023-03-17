@@ -828,14 +828,14 @@ def main():  # Main code
         k_86 = rotmat@k_86.T
         print(k_66)
         
-        raz_355 = np.degrees(np.arctan(-k_35[1]/k_35[0]))
-        raz_380 = np.degrees(np.arctan(-k_38[1]/k_38[0]))
-        raz_445 = np.degrees(np.arctan(-k_45[1]/k_45[0]))
-        raz_555 = np.degrees(np.arctan(-k_55[1]/k_55[0]))
+        raz_355 = np.degrees(np.arctan(k_35[1]/k_35[0]))
+        raz_380 = np.degrees(np.arctan(k_38[1]/k_38[0]))
+        raz_445 = np.degrees(np.arctan(k_45[1]/k_45[0]))
+        raz_555 = np.degrees(np.arctan(k_55[1]/k_55[0]))
         
-        raz_470 = np.degrees(np.arctan(-k_47[1]/k_47[0]))
-        raz_660 = np.degrees(np.arctan(-k_66[1]/k_66[0]))
-        raz_865 = np.degrees(np.arctan(-k_86[1]/k_86[0]))
+        raz_470 = np.degrees(np.arctan(k_47[1]/k_47[0]))
+        raz_660 = np.degrees(np.arctan(k_66[1]/k_66[0]))
+        raz_865 = np.degrees(np.arctan(k_86[1]/k_86[0]))
 
 
 
