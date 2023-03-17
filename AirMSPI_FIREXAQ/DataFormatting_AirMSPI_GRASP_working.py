@@ -813,7 +813,7 @@ def main():  # Main code
 
         
         # #Define 1x2 illumination vector 
-        i2 = np.array([np.cos(np.radians(saz)), -np.sin(np.radians(saz))]);
+        i2 = -np.array([np.cos(np.radians(saz)), -np.sin(np.radians(saz))]);
         
         # #Find relative angle between them
         raz_355 = np.degrees(np.arccos((i2@k_35)/(np.linalg.norm(i2)*np.linalg.norm(k_35))))
@@ -924,9 +924,9 @@ def main():  # Main code
         q_median[loop,1] = -eqr_qg_660
         q_median[loop,2] = -eqr_qg_865
         
-        u_median[loop,0] = -eqr_ug_470
-        u_median[loop,1] = -eqr_ug_660
-        u_median[loop,2] = -eqr_ug_865
+        u_median[loop,0] = eqr_ug_470
+        u_median[loop,1] = eqr_ug_660
+        u_median[loop,2] = eqr_ug_865
           
         ipol_median[loop,0] = eqr_ipol_470
         ipol_median[loop,1] = eqr_ipol_660
