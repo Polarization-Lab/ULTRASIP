@@ -61,7 +61,7 @@ def main():  # Main code
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/7_FIREX"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1623/4_Bakersfield"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1723/1_Bakersfield"
 
 # #Home Computer 
 #     datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
@@ -802,20 +802,27 @@ def main():  # Main code
         
         # #Linear Alg Way 
         # #Define 1x2 k vectors for all wavelengths #acosd(dot(i,k)/(norm(i)*norm(k)))
-        # k_35 = np.array([np.cos(np.radians(vaz_355)), -np.sin(np.radians(vaz_355))]);
-        # k_38 = np.array([np.cos(np.radians(vaz_380)), -np.sin(np.radians(vaz_380))]);
-        # k_45 = np.array([np.cos(np.radians(vaz_445)), -np.sin(np.radians(vaz_445))]);
-        # k_55 = np.array([np.cos(np.radians(vaz_555)), -np.sin(np.radians(vaz_555))]);
+        k_35 = -np.array([np.cos(np.radians(vaz_355)), -np.sin(np.radians(vaz_355))]);
+        k_38 = -np.array([np.cos(np.radians(vaz_380)), -np.sin(np.radians(vaz_380))]);
+        k_45 = -np.array([np.cos(np.radians(vaz_445)), -np.sin(np.radians(vaz_445))]);
+        k_55 = -np.array([np.cos(np.radians(vaz_555)), -np.sin(np.radians(vaz_555))]);
+        
+        k_66 = -np.array([np.cos(np.radians(vaz_660)), -np.sin(np.radians(vaz_660))]);
+        k_47 = -np.array([np.cos(np.radians(vaz_470)), -np.sin(np.radians(vaz_470))]);
+        k_86 = -np.array([np.cos(np.radians(vaz_865)), -np.sin(np.radians(vaz_865))]);
+
         
         # #Define 1x2 illumination vector 
+        i2 = np.array([np.cos(np.radians(saz)), -np.sin(np.radians(saz))]);
+        
         # #Find relative angle between them
-        # raz_355 = np.degrees(np.arccos((-i@k_35)/(np.linalg.norm(-i)*np.linalg.norm(k_35))))
-        # raz_380 = np.degrees(np.arccos((-i@k_38)/(np.linalg.norm(-i)*np.linalg.norm(k_38))))
-        # raz_445 = np.degrees(np.arccos((-i@k_45)/(np.linalg.norm(-i)*np.linalg.norm(k_45))))
-        # raz_470 = np.degrees(np.arccos((-i@k_4)/(np.linalg.norm(-i)*np.linalg.norm(k_4))))
-        # raz_555 = np.degrees(np.arccos((-i@k_55)/(np.linalg.norm(-i)*np.linalg.norm(k_55))))
-        # raz_660 = np.degrees(np.arccos((-i@k_6)/(np.linalg.norm(-i)*np.linalg.norm(k_6))))
-        # raz_865 = np.degrees(np.arccos((-i@k_8)/(np.linalg.norm(-i)*np.linalg.norm(k_8))))
+        raz_355 = np.degrees(np.arccos((i2@k_35)/(np.linalg.norm(i2)*np.linalg.norm(k_35))))
+        raz_380 = np.degrees(np.arccos((i2@k_38)/(np.linalg.norm(i2)*np.linalg.norm(k_38))))
+        raz_445 = np.degrees(np.arccos((i2@k_45)/(np.linalg.norm(i2)*np.linalg.norm(k_45))))
+        raz_470 = np.degrees(np.arccos((i2@k_47)/(np.linalg.norm(i2)*np.linalg.norm(k_47))))
+        raz_555 = np.degrees(np.arccos((i2@k_55)/(np.linalg.norm(i2)*np.linalg.norm(k_55))))
+        raz_660 = np.degrees(np.arccos((i2@k_66)/(np.linalg.norm(i2)*np.linalg.norm(k_66))))
+        raz_865 = np.degrees(np.arccos((i2@k_86)/(np.linalg.norm(i2)*np.linalg.norm(k_86))))
         
         # print(-i@k_4,saz, vaz_470, vza_470,sza,raz_470)
         
@@ -827,15 +834,15 @@ def main():  # Main code
         # raz_660 = 180 - (saz-vaz_660)
         # raz_865 = 180 - (saz-vaz_865)
         
-        raz_355 = ((180-saz)-vaz_355)
-        raz_380 = ((180-saz)-vaz_380)
-        raz_445 = ((180-saz)-vaz_445)
-        raz_470 = ((180-saz)-vaz_470)
-        raz_555 = ((180-saz)-vaz_555)
-        raz_660 = ((180-saz)-vaz_660)
-        raz_865 = ((180-saz)-vaz_865)
+        # raz_355 = ((180-saz)-vaz_355)
+        # raz_380 = ((180-saz)-vaz_380)
+        # raz_445 = ((180-saz)-vaz_445)
+        # raz_470 = ((180-saz)-vaz_470)
+        # raz_555 = ((180-saz)-vaz_555)
+        # raz_660 = ((180-saz)-vaz_660)
+        # raz_865 = ((180-saz)-vaz_865)
         
-        print(saz,vaz_470,raz_470)
+        print(saz,vaz_470,raz_470,scat_470)
 
         
         
@@ -913,9 +920,9 @@ def main():  # Main code
         i_in_polar_median[loop,1] = eqr_i_660
         i_in_polar_median[loop,2] = eqr_i_865
         
-        q_median[loop,0] = eqr_qg_470
-        q_median[loop,1] = eqr_qg_660
-        q_median[loop,2] = eqr_qg_865
+        q_median[loop,0] = -eqr_qg_470
+        q_median[loop,1] = -eqr_qg_660
+        q_median[loop,2] = -eqr_qg_865
         
         u_median[loop,0] = eqr_ug_470
         u_median[loop,1] = eqr_ug_660
