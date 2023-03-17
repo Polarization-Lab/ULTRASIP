@@ -27,8 +27,8 @@ def main():  # Main code
 
     # basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX"
     # figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX/Plots"
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1623/Case2_Bakersfield"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1623/Case2_Bakersfield/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1623/3_Bakersfield"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1623/3_Bakersfield/Plots"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
