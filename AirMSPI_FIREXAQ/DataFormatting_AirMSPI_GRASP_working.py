@@ -813,16 +813,40 @@ def main():  # Main code
 
         
         # #Define 1x2 illumination vector 
-        i2 = np.array([np.cos(np.radians(saz)), -np.sin(np.radians(saz))]);
+        #i2 = np.array([np.cos(np.radians(saz)), -np.sin(np.radians(saz))]);
         
         # #Find relative angle between them
-        raz_355 = 180+np.degrees(np.arccos((i2@k_35)/(np.linalg.norm(i2)*np.linalg.norm(k_35))))
-        raz_380 = 180+np.degrees(np.arccos((i2@k_38)/(np.linalg.norm(i2)*np.linalg.norm(k_38))))
-        raz_445 = 180+np.degrees(np.arccos((i2@k_45)/(np.linalg.norm(i2)*np.linalg.norm(k_45))))
-        raz_470 = 180+np.degrees(np.arccos((i2@k_47)/(np.linalg.norm(i2)*np.linalg.norm(k_47))))
-        raz_555 = 180+np.degrees(np.arccos((i2@k_55)/(np.linalg.norm(i2)*np.linalg.norm(k_55))))
-        raz_660 = 180+np.degrees(np.arccos((i2@k_66)/(np.linalg.norm(i2)*np.linalg.norm(k_66))))
-        raz_865 = 180+np.degrees(np.arccos((i2@k_86)/(np.linalg.norm(i2)*np.linalg.norm(k_86))))
+        rotmat = np.array([[np.cos(np.radians(-saz+180)),-np.sin(np.radians(-saz+180))],[np.cos(np.radians(-saz+180)),np.sin(np.radians(-saz+180))]]);
+        
+        k_35 = rotmat@k_35.T
+        k_38 = rotmat@k_38.T
+        k_45 = rotmat@k_45.T
+        k_55 = rotmat@k_55.T
+        
+        k_66 = rotmat@k_66.T
+        k_47 = rotmat@k_47.T
+        k_86 = rotmat@k_86.T
+        print(k_66)
+        
+        raz_355 = np.degrees(np.arctan(-k_35[1]/k_35[0]))
+        raz_380 = np.degrees(np.arctan(-k_38[1]/k_38[0]))
+        raz_445 = np.degrees(np.arctan(-k_45[1]/k_45[0]))
+        raz_555 = np.degrees(np.arctan(-k_55[1]/k_55[0]))
+        
+        raz_470 = np.degrees(np.arctan(-k_47[1]/k_47[0]))
+        raz_660 = np.degrees(np.arctan(-k_66[1]/k_66[0]))
+        raz_865 = np.degrees(np.arctan(-k_86[1]/k_86[0]))
+
+
+
+
+        # raz_355 = 180+np.degrees(np.arccos((i2@k_35)/(np.linalg.norm(i2)*np.linalg.norm(k_35))))
+        # raz_380 = 180+np.degrees(np.arccos((i2@k_38)/(np.linalg.norm(i2)*np.linalg.norm(k_38))))
+        # raz_445 = 180+np.degrees(np.arccos((i2@k_45)/(np.linalg.norm(i2)*np.linalg.norm(k_45))))
+        # raz_470 = 180+np.degrees(np.arccos((i2@k_47)/(np.linalg.norm(i2)*np.linalg.norm(k_47))))
+        # raz_555 = 180+np.degrees(np.arccos((i2@k_55)/(np.linalg.norm(i2)*np.linalg.norm(k_55))))
+        # raz_660 = 180+np.degrees(np.arccos((i2@k_66)/(np.linalg.norm(i2)*np.linalg.norm(k_66))))
+        # raz_865 = 180+np.degrees(np.arccos((i2@k_86)/(np.linalg.norm(i2)*np.linalg.norm(k_86))))
         
         # print(-i@k_4,saz, vaz_470, vza_470,sza,raz_470)
         
