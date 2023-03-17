@@ -802,14 +802,14 @@ def main():  # Main code
         
         # #Linear Alg Way 
         # #Define 1x2 k vectors for all wavelengths #acosd(dot(i,k)/(norm(i)*norm(k)))
-        k_35 = -np.array([np.cos(np.radians(vaz_355)), -np.sin(np.radians(vaz_355))]);
-        k_38 = -np.array([np.cos(np.radians(vaz_380)), -np.sin(np.radians(vaz_380))]);
-        k_45 = -np.array([np.cos(np.radians(vaz_445)), -np.sin(np.radians(vaz_445))]);
-        k_55 = -np.array([np.cos(np.radians(vaz_555)), -np.sin(np.radians(vaz_555))]);
+        k_35 = np.array([np.cos(np.radians(vaz_355)), -np.sin(np.radians(vaz_355))]);
+        k_38 = np.array([np.cos(np.radians(vaz_380)), -np.sin(np.radians(vaz_380))]);
+        k_45 = np.array([np.cos(np.radians(vaz_445)), -np.sin(np.radians(vaz_445))]);
+        k_55 = np.array([np.cos(np.radians(vaz_555)), -np.sin(np.radians(vaz_555))]);
         
-        k_66 = -np.array([np.cos(np.radians(vaz_660)), -np.sin(np.radians(vaz_660))]);
-        k_47 = -np.array([np.cos(np.radians(vaz_470)), -np.sin(np.radians(vaz_470))]);
-        k_86 = -np.array([np.cos(np.radians(vaz_865)), -np.sin(np.radians(vaz_865))]);
+        k_66 = np.array([np.cos(np.radians(vaz_660)), -np.sin(np.radians(vaz_660))]);
+        k_47 = np.array([np.cos(np.radians(vaz_470)), -np.sin(np.radians(vaz_470))]);
+        k_86 = np.array([np.cos(np.radians(vaz_865)), -np.sin(np.radians(vaz_865))]);
 
         
         # #Define 1x2 illumination vector 
