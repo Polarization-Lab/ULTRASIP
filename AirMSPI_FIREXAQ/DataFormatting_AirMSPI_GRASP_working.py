@@ -61,7 +61,7 @@ def main():  # Main code
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/7_FIREX"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1723/1_Bakersfield"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2023/1_Bakersfield"
 
 # #Home Computer 
 #     datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
@@ -772,69 +772,69 @@ def main():  # Main code
         
 # Calculate the relative azimuth angle in the GRASP convention
         #Clarissa way
-        #raz_355 = (saz - vaz_355) 
-        # if (raz_355 < 0.0):
-        #     raz_355 = raz_355 + 180
+        raz_355 = (saz - vaz_355) 
+        if (raz_355 < 0.0):
+            raz_355 = raz_355 + 180
         
-        #raz_380 = (saz - vaz_380) 
-        # if (raz_380 < 0.0):
-        #     raz_380 = raz_380 + 180
+        raz_380 = (saz - vaz_380) 
+        if (raz_380 < 0.0):
+            raz_380 = raz_380 + 180
         
-        #raz_445 = (saz - vaz_445) 
-        # if (raz_445 < 0.0):
-        #     raz_445 = raz_445 + 180
+        raz_445 = (saz - vaz_445) 
+        if (raz_445 < 0.0):
+            raz_445 = raz_445 + 180
         
-        #raz_470 = (saz - vaz_470) 
-        # if (raz_470 < 0.0):
-        #     raz_470 = raz_470 + 180
+        raz_470 = (saz - vaz_470) 
+        if (raz_470 < 0.0):
+            raz_470 = raz_470 + 180
         
-        #raz_555 = (saz - vaz_555) 
-        # if (raz_555 < 0.0):
-        #     raz_555 = raz_555 + 180
+        raz_555 = (saz - vaz_555) 
+        if (raz_555 < 0.0):
+            raz_555 = raz_555 + 180
         
-        #raz_660 = (saz - vaz_660)
-        # if (raz_660 < 0.0):
-        #     raz_660 = raz_660 + 180
+        raz_660 = (saz - vaz_660)
+        if (raz_660 < 0.0):
+            raz_660 = raz_660 + 180
             
-        #raz_865 = (saz - vaz_865) 
-        # if (raz_865 < 0.0):
-        #     raz_865 = raz_865 + 180
+        raz_865 = (saz - vaz_865) 
+        if (raz_865 < 0.0):
+            raz_865 = raz_865 + 180
         
         # #Linear Alg Way 
         # #Define 1x2 k vectors for all wavelengths #acosd(dot(i,k)/(norm(i)*norm(k)))
-        k_35 = np.array([np.cos(np.radians(vaz_355)), -np.sin(np.radians(vaz_355))]);
-        k_38 = np.array([np.cos(np.radians(vaz_380)), -np.sin(np.radians(vaz_380))]);
-        k_45 = np.array([np.cos(np.radians(vaz_445)), -np.sin(np.radians(vaz_445))]);
-        k_55 = np.array([np.cos(np.radians(vaz_555)), -np.sin(np.radians(vaz_555))]);
+        # k_35 = np.array([np.cos(np.radians(vaz_355)), -np.sin(np.radians(vaz_355))]);
+        # k_38 = np.array([np.cos(np.radians(vaz_380)), -np.sin(np.radians(vaz_380))]);
+        # k_45 = np.array([np.cos(np.radians(vaz_445)), -np.sin(np.radians(vaz_445))]);
+        # k_55 = np.array([np.cos(np.radians(vaz_555)), -np.sin(np.radians(vaz_555))]);
         
-        k_66 = np.array([np.cos(np.radians(vaz_660)), -np.sin(np.radians(vaz_660))]);
-        k_47 = np.array([np.cos(np.radians(vaz_470)), -np.sin(np.radians(vaz_470))]);
-        k_86 = np.array([np.cos(np.radians(vaz_865)), -np.sin(np.radians(vaz_865))]);
+        # k_66 = np.array([np.cos(np.radians(vaz_660)), -np.sin(np.radians(vaz_660))]);
+        # k_47 = np.array([np.cos(np.radians(vaz_470)), -np.sin(np.radians(vaz_470))]);
+        # k_86 = np.array([np.cos(np.radians(vaz_865)), -np.sin(np.radians(vaz_865))]);
 
         
-        # #Define 1x2 illumination vector 
-        #i2 = np.array([np.cos(np.radians(saz)), -np.sin(np.radians(saz))]);
+        # # #Define 1x2 illumination vector 
+        # #i2 = np.array([np.cos(np.radians(saz)), -np.sin(np.radians(saz))]);
         
-        # #Find relative angle between them
-        rotmat = np.array([[np.cos(np.radians(-saz+180)),-np.sin(np.radians(-saz+180))],[np.cos(np.radians(-saz+180)),np.sin(np.radians(-saz+180))]]);
+        # # #Find relative angle between them
+        # rotmat = np.array([[np.cos(np.radians(-saz+180)),-np.sin(np.radians(-saz+180))],[np.cos(np.radians(-saz+180)),np.sin(np.radians(-saz+180))]]);
         
-        k_35 = rotmat@-k_35.T
-        k_38 = rotmat@-k_38.T
-        k_45 = rotmat@-k_45.T
-        k_55 = rotmat@-k_55.T       
-        k_66 = rotmat@-k_66.T
-        k_47 = rotmat@-k_47.T
-        k_86 = rotmat@-k_86.T
-        print(k_66)
+        # k_35 = rotmat@-k_35.T
+        # k_38 = rotmat@-k_38.T
+        # k_45 = rotmat@-k_45.T
+        # k_55 = rotmat@-k_55.T       
+        # k_66 = rotmat@-k_66.T
+        # k_47 = rotmat@-k_47.T
+        # k_86 = rotmat@-k_86.T
+        # print(k_66)
         
-        raz_355 = np.degrees(np.arctan(k_35[1]/k_35[0]))
-        raz_380 = np.degrees(np.arctan(k_38[1]/k_38[0]))
-        raz_445 = np.degrees(np.arctan(k_45[1]/k_45[0]))
-        raz_555 = np.degrees(np.arctan(k_55[1]/k_55[0]))
+        # raz_355 = np.degrees(np.arctan(k_35[1]/k_35[0]))
+        # raz_380 = np.degrees(np.arctan(k_38[1]/k_38[0]))
+        # raz_445 = np.degrees(np.arctan(k_45[1]/k_45[0]))
+        # raz_555 = np.degrees(np.arctan(k_55[1]/k_55[0]))
         
-        raz_470 = np.degrees(np.arctan(k_47[1]/k_47[0]))
-        raz_660 = np.degrees(np.arctan(k_66[1]/k_66[0]))
-        raz_865 = np.degrees(np.arctan(k_86[1]/k_86[0]))
+        # raz_470 = np.degrees(np.arctan(k_47[1]/k_47[0]))
+        # raz_660 = np.degrees(np.arctan(k_66[1]/k_66[0]))
+        # raz_865 = np.degrees(np.arctan(k_86[1]/k_86[0]))
 
 
 
