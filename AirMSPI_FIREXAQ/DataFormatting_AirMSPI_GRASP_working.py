@@ -792,33 +792,33 @@ def main():  # Main code
         
 # Calculate the relative azimuth angle in the GRASP convention
         #Clarissa way
-        raz_355 = (saz - vaz_355) 
-        if (raz_355 < 0.0):
-            raz_355 = raz_355 + 180
+        # raz_355 = (saz - vaz_355) 
+        # if (raz_355 < 0.0):
+        #     raz_355 = raz_355 + 180
         
-        raz_380 = (saz - vaz_380) 
-        if (raz_380 < 0.0):
-            raz_380 = raz_380 + 180
+        # raz_380 = (saz - vaz_380) 
+        # if (raz_380 < 0.0):
+        #     raz_380 = raz_380 + 180
         
-        raz_445 = (saz - vaz_445) 
-        if (raz_445 < 0.0):
-            raz_445 = raz_445 + 180
+        # raz_445 = (saz - vaz_445) 
+        # if (raz_445 < 0.0):
+        #     raz_445 = raz_445 + 180
         
-        raz_470 = (saz - vaz_470) 
-        if (raz_470 < 0.0):
-            raz_470 = raz_470 + 180
+        # raz_470 = (saz - vaz_470) 
+        # if (raz_470 < 0.0):
+        #     raz_470 = raz_470 + 180
         
-        raz_555 = (saz - vaz_555) 
-        if (raz_555 < 0.0):
-            raz_555 = raz_555 + 180
+        # raz_555 = (saz - vaz_555) 
+        # if (raz_555 < 0.0):
+        #     raz_555 = raz_555 + 180
         
-        raz_660 = (saz - vaz_660)
-        if (raz_660 < 0.0):
-            raz_660 = raz_660 + 180
+        # raz_660 = (saz - vaz_660)
+        # if (raz_660 < 0.0):
+        #     raz_660 = raz_660 + 180
             
-        raz_865 = (saz - vaz_865) 
-        if (raz_865 < 0.0):
-            raz_865 = raz_865 + 180
+        # raz_865 = (saz - vaz_865) 
+        # if (raz_865 < 0.0):
+        #     raz_865 = raz_865 + 180
         
         # #Linear Alg Way 
         # #Define 1x2 k vectors for all wavelengths #acosd(dot(i,k)/(norm(i)*norm(k)))
@@ -877,17 +877,16 @@ def main():  # Main code
         raz_660 = (saz-vaz_660)
         raz_865 = (saz-vaz_865)
         
-        # raz_355 = ((180-saz)-vaz_355)
-        # raz_380 = ((180-saz)-vaz_380)
-        # raz_445 = ((180-saz)-vaz_445)
-        # raz_470 = ((180-saz)-vaz_470)
-        # raz_555 = ((180-saz)-vaz_555)
-        # raz_660 = ((180-saz)-vaz_660)
-        # raz_865 = ((180-saz)-vaz_865)
+        if(loop == mid_step):
+            raz_355 = 180- (saz-vaz_355)
+            raz_380 = 180-(saz-vaz_380)
+            raz_445 = 180-(saz-vaz_445)
+            raz_470 = 180-(saz-vaz_470)
+            raz_555 = 180-(saz-vaz_555)
+            raz_660 = 180-(saz-vaz_660)
+            raz_865 = 180-(saz-vaz_865)
         
-        print(saz,vaz_470,raz_470,scat_470)
-
-        
+      
         
 ### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 
 ### EQUIVALENT REFLECTANCES = PI*L/E0
