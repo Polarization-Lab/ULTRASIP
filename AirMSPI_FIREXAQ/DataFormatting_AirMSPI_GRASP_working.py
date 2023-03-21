@@ -800,14 +800,7 @@ def main():  # Main code
         raz_660 = 180 - (saz - vaz_660);
         raz_865 = 180 - (saz - vaz_865);
         
-        if (loop == mid_step):
-            raz_355 = -raz_355 + 180
-            raz_380 = -raz_380 + 180
-            raz_445 = -raz_445 + 180
-            raz_470 = -raz_470 + 180
-            raz_555 = -raz_555 + 180
-            raz_660 = -raz_660 + 180
-            raz_865 = -raz_865 + 180
+
             
         
 
