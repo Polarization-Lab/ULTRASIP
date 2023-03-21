@@ -687,7 +687,7 @@ def main():  # Main code
         
         #AirMSPI Scat 865 nm
         n_i8s = np.cross(i,k_8)/np.linalg.norm(np.cross(i,k_8));
-        h_i8s=np.cross(k_8,n_i8s)/np.linalg.norm(np.cross(k_8,n_i8s)); #intersection of transverse & reference
+        h_i8s=  np.cross(k_8,n_i8s)/np.linalg.norm(np.cross(k_8,n_i8s)); #intersection of transverse & reference
         v_i8s = np.cross(k_8,h_i8s)/np.linalg.norm(np.cross(k_8,h_i8s));
         Oin8s = np.array([h_i8s,v_i8s,k_8]);
         
@@ -752,42 +752,42 @@ def main():  # Main code
         # Oout8 = np.array([h_o8,v_o8,k_8]); #GRASP 
 
     
-        # # # #Meridian AirMSPI to GRASP 
-        # R_nalpha4 = Oout4@(Oin4.T);
-        # alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
-        # rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-        # qg_470, ug_470 = rotmatrix4@stokesin4
+        # # #Meridian AirMSPI to GRASP 
+        R_nalpha4 = Oout4@(Oin4.T);
+        alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
+        rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
+        qg_470, ug_470 = rotmatrix4@stokesin4
         
-        # R_nalpha6 = Oout6@(Oin6.T);
-        # alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
-        # rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        # qg_660, ug_660 = rotmatrix6@stokesin6
+        R_nalpha6 = Oout6@(Oin6.T);
+        alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
+        rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
+        qg_660, ug_660 = rotmatrix6@stokesin6
         
-        # R_nalpha8 = Oout8@(Oin8.T);
-        # alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
-        # rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        # qg_865, ug_865 = rotmatrix8@stokesin8
+        R_nalpha8 = Oout8@(Oin8.T);
+        alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
+        rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
+        qg_865, ug_865 = rotmatrix8@stokesin8
         
         # print("angles:",R_nalpha8,R_nalpha6,R_nalpha4)
         
-        #Scat AirMSPI to GRASP
-        #470
-        R_nalpha4 = Oout4@(Oin4s.T);
-        alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
-        rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-        qg_470, ug_470 = stokesin4s #rotmatrix4@stokesin4s
+        # #Scat AirMSPI to GRASP
+        # #470
+        # R_nalpha4 = Oout4@(Oin4s.T);
+        # alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
+        # rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
+        # qg_470, ug_470 = stokesin4s #rotmatrix4@stokesin4s
         
-        #660
-        R_nalpha6 = Oout6@(Oin6s.T);
-        alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
-        rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        qg_660, ug_660 = stokesin6s #rotmatrix6@stokesin6s
+        # #660
+        # R_nalpha6 = Oout6@(Oin6s.T);
+        # alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
+        # rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
+        # qg_660, ug_660 = stokesin6s #rotmatrix6@stokesin6s
         
-        #865
-        R_nalpha8 = Oout8@(Oin8s.T);
-        alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
-        rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        qg_865, ug_865 = stokesin8s #rotmatrix8@stokesin8s
+        # #865
+        # R_nalpha8 = Oout8@(Oin8s.T);
+        # alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
+        # rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
+        # qg_865, ug_865 = stokesin8s #rotmatrix8@stokesin8s
     
         
 # Calculate the relative azimuth angle in the GRASP convention
