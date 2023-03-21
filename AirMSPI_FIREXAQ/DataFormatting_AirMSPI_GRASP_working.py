@@ -792,13 +792,13 @@ def main():  # Main code
         
 # Calculate the relative azimuth angle in the GRASP convention
         #Clarissa way
-        raz_355 = 180-(saz - vaz_355);
-        raz_380 = 180-(saz - vaz_380);
-        raz_445 =  180-(saz - vaz_445);
-        raz_470 = 180-(saz - vaz_470);
-        raz_555 = 180-(saz - vaz_555);
-        raz_660 = 180-(saz - vaz_660);
-        raz_865 = 180-(saz - vaz_865);
+        raz_355 = 180+(saz - vaz_355);
+        raz_380 = 180+(saz - vaz_380);
+        raz_445 =  180+(saz - vaz_445);
+        raz_470 = 180+(saz - vaz_470);
+        raz_555 = 180+(saz - vaz_555);
+        raz_660 = 180+(saz - vaz_660);
+        raz_865 = 180+(saz - vaz_865);
         
         # # if(loop == mid_step):
         # raz_355 = (saz - vaz_355);
