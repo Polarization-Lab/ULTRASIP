@@ -775,30 +775,30 @@ def main():  # Main code
         R_nalpha4 = Oout4@(Oin4s.T);
         alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
         rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-        qg_470, ug_470 = stokesin4s #rotmatrix4@stokesin4s
+        qg_470, ug_470 = -stokesin4s #rotmatrix4@stokesin4s
         
         #660
         R_nalpha6 = Oout6@(Oin6s.T);
         alpha6 = np.arctan2(-R_nalpha6[0,1],R_nalpha6[0,0]);  
         rotmatrix6 = np.array([[np.cos(2*alpha6),-np.sin(2*alpha6)],[np.sin(2*alpha6),np.cos(2*alpha6)]]); 
-        qg_660, ug_660 = stokesin6s #rotmatrix6@stokesin6s
+        qg_660, ug_660 = -stokesin6s #rotmatrix6@stokesin6s
         
         #865
         R_nalpha8 = Oout8@(Oin8s.T);
         alpha8 = np.arctan2(-R_nalpha8[0,1],R_nalpha8[0,0]);  
         rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
-        qg_865, ug_865 = stokesin8s #rotmatrix8@stokesin8s
+        qg_865, ug_865 = -stokesin8s #rotmatrix8@stokesin8s
     
         
 # Calculate the relative azimuth angle in the GRASP convention
         #Clarissa way
-        # raz_355 = 180-(saz - vaz_355);
-        # raz_380 = 180-(saz - vaz_380);
-        # raz_445 =  180-(saz - vaz_445);
-        # raz_470 = 180-(saz - vaz_470);
-        # raz_555 = 180-(saz - vaz_555);
-        # raz_660 = 180-(saz - vaz_660);
-        # raz_865 = 180-(saz - vaz_865);
+        raz_355 = 180-(saz - vaz_355);
+        raz_380 = 180-(saz - vaz_380);
+        raz_445 =  180-(saz - vaz_445);
+        raz_470 = 180-(saz - vaz_470);
+        raz_555 = 180-(saz - vaz_555);
+        raz_660 = 180-(saz - vaz_660);
+        raz_865 = 180-(saz - vaz_865);
         
         # # # if(loop == mid_step):
         # raz_355 = (saz - vaz_355);
@@ -810,33 +810,33 @@ def main():  # Main code
         # raz_865 = (saz - vaz_865);
 
         # #Clarissa way
-        raz_355 = (saz - vaz_355)
-        if (raz_355 < 0.0):
-            raz_355 = raz_355 + 180
+        # raz_355 = (saz - vaz_355)
+        # if (raz_355 < 0.0):
+        #     raz_355 = raz_355 + 180
         
-        raz_380 = (saz - vaz_380)
-        if (raz_380 < 0.0):
-            raz_380 = raz_380 + 180
+        # raz_380 = (saz - vaz_380)
+        # if (raz_380 < 0.0):
+        #     raz_380 = raz_380 + 180
         
-        raz_445 = (saz - vaz_445)
-        if (raz_445 < 0.0):
-            raz_445 = raz_445 + 180
+        # raz_445 = (saz - vaz_445)
+        # if (raz_445 < 0.0):
+        #     raz_445 = raz_445 + 180
         
-        raz_470 = (saz - vaz_470)
-        if (raz_470 < 0.0):
-            raz_470 = raz_470 + 180
+        # raz_470 = (saz - vaz_470)
+        # if (raz_470 < 0.0):
+        #     raz_470 = raz_470 + 180
         
-        raz_555 = (saz - vaz_555)
-        if (raz_555 < 0.0):
-            raz_555 = raz_555 + 180
+        # raz_555 = (saz - vaz_555)
+        # if (raz_555 < 0.0):
+        #     raz_555 = raz_555 + 180
         
-        raz_660 = (saz - vaz_660)
-        if (raz_660 < 0.0):
-            raz_660 = raz_660 + 180
+        # raz_660 = (saz - vaz_660)
+        # if (raz_660 < 0.0):
+        #     raz_660 = raz_660 + 180
             
-        raz_865 = (saz - vaz_865)
-        if (raz_865 < 0.0):
-            raz_865 = raz_865 + 180
+        # raz_865 = (saz - vaz_865)
+        # if (raz_865 < 0.0):
+        #     raz_865 = raz_865 + 180
         
 
 
