@@ -792,13 +792,13 @@ def main():  # Main code
         
 # Calculate the relative azimuth angle in the GRASP convention
         #Clarissa way
-        # raz_355 = 180+(saz - vaz_355);
-        # raz_380 = 180+(saz - vaz_380);
-        # raz_445 =  180+(saz - vaz_445);
-        # raz_470 = 180+(saz - vaz_470);
-        # raz_555 = 180+(saz - vaz_555);
-        # raz_660 = 180+(saz - vaz_660);
-        # raz_865 = 180+(saz - vaz_865);
+        raz_355 = 180-(saz - vaz_355);
+        raz_380 = 180-(saz - vaz_380);
+        raz_445 =  180-(saz - vaz_445);
+        raz_470 = 180-(saz - vaz_470);
+        raz_555 = 180-(saz - vaz_555);
+        raz_660 = 180-(saz - vaz_660);
+        raz_865 = 180-(saz - vaz_865);
         
         # # if(loop == mid_step):
         # raz_355 = (saz - vaz_355);
@@ -838,24 +838,7 @@ def main():  # Main code
         # if (raz_865 < 0.0):
         #     raz_865 = raz_865 + 180
         
-        raz_355 = saz - vaz_355
-        
-        raz_380 = saz - vaz_380
 
-        
-        raz_445 = saz - vaz_445
-
-        
-        raz_470 = saz - vaz_470
-
-        
-        raz_555 = saz - vaz_555
-
-        
-        raz_660 = saz - vaz_660
-
-        
-        raz_865 = saz - vaz_865
 
 
             
@@ -923,27 +906,27 @@ def main():  # Main code
         vza_median[loop,11] = vza_865
         vza_median[loop,12] = vza_865
         
-        raz_median[loop,0] = -raz_355
-        raz_median[loop,1] = -raz_380
-        raz_median[loop,2] = -raz_445
-        raz_median[loop,3] = -raz_470
-        raz_median[loop,4] = -raz_470
-        raz_median[loop,5] = -raz_470
-        raz_median[loop,6] = -raz_555
-        raz_median[loop,7] = -raz_660
-        raz_median[loop,8] = -raz_660
-        raz_median[loop,9] = -raz_660
-        raz_median[loop,10] = -raz_865
-        raz_median[loop,11] = -raz_865
-        raz_median[loop,12] = -raz_865
+        raz_median[loop,0] = raz_355
+        raz_median[loop,1] = raz_380
+        raz_median[loop,2] = raz_445
+        raz_median[loop,3] = raz_470
+        raz_median[loop,4] = raz_470
+        raz_median[loop,5] = raz_470
+        raz_median[loop,6] = raz_555
+        raz_median[loop,7] = raz_660
+        raz_median[loop,8] = raz_660
+        raz_median[loop,9] = raz_660
+        raz_median[loop,10] = raz_865
+        raz_median[loop,11] = raz_865
+        raz_median[loop,12] = raz_865
         
         i_in_polar_median[loop,0] = eqr_i_470
         i_in_polar_median[loop,1] = eqr_i_660
         i_in_polar_median[loop,2] = eqr_i_865
         
-        q_median[loop,0] = eqr_qg_470
-        q_median[loop,1] = eqr_qg_660
-        q_median[loop,2] = eqr_qg_865
+        q_median[loop,0] = -eqr_qg_470
+        q_median[loop,1] = -eqr_qg_660
+        q_median[loop,2] = -eqr_qg_865
         
         u_median[loop,0] = eqr_ug_470
         u_median[loop,1] = eqr_ug_660
