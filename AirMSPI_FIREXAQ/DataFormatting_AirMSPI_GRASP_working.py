@@ -839,47 +839,24 @@ def main():  # Main code
         #     raz_865 = raz_865 + 180
         
         raz_355 = saz - vaz_355
-        if(raz_355 < 0.0):
-            raz_355 = 180.+raz_355
-        if(raz_355 > 180.0):
-            raz_355 = 360.-raz_355
-            raz_355 = raz_355+180.
         
         raz_380 = saz - vaz_380
-        if(raz_380 < 0.0):
-            raz_380 = 180.+raz_380
-        if(raz_380 > 180.0):
-            raz_380 = raz_380-180.
+
         
         raz_445 = saz - vaz_445
-        if(raz_445 < 0.0):
-            raz_445 = 180.+raz_445
-        if(raz_445 > 180.0):
-            raz_445 = raz_445-180.
+
         
         raz_470 = saz - vaz_470
-        if(raz_470 < 0.0):
-            raz_470 = 180.+raz_470
-        if(raz_470 > 180.0):
-            raz_470 = raz_470-180.
+
         
         raz_555 = saz - vaz_555
-        if(raz_555 < 0.0):
-            raz_555 = 180.+raz_555
-        if(raz_555 > 180.0):
-            raz_555 = raz_555-180.
+
         
         raz_660 = saz - vaz_660
-        if(raz_660 < 0.0):
-            raz_660 = 180.+raz_660
-        if(raz_660 > 180.0):
-            raz_660 = raz_660-180.
+
         
         raz_865 = saz - vaz_865
-        if(raz_865 < 0.0):
-            raz_865 = 180.+raz_865
-        if(raz_865 > 180.0):
-            raz_865 = raz_865-180.
+
 
             
         
@@ -946,19 +923,19 @@ def main():  # Main code
         vza_median[loop,11] = vza_865
         vza_median[loop,12] = vza_865
         
-        raz_median[loop,0] = raz_355
-        raz_median[loop,1] = raz_380
-        raz_median[loop,2] = raz_445
-        raz_median[loop,3] = raz_470
-        raz_median[loop,4] = raz_470
-        raz_median[loop,5] = raz_470
-        raz_median[loop,6] = raz_555
-        raz_median[loop,7] = raz_660
-        raz_median[loop,8] = raz_660
-        raz_median[loop,9] = raz_660
-        raz_median[loop,10] = raz_865
-        raz_median[loop,11] = raz_865
-        raz_median[loop,12] = raz_865
+        raz_median[loop,0] = -raz_355
+        raz_median[loop,1] = -raz_380
+        raz_median[loop,2] = -raz_445
+        raz_median[loop,3] = -raz_470
+        raz_median[loop,4] = -raz_470
+        raz_median[loop,5] = -raz_470
+        raz_median[loop,6] = -raz_555
+        raz_median[loop,7] = -raz_660
+        raz_median[loop,8] = -raz_660
+        raz_median[loop,9] = -raz_660
+        raz_median[loop,10] = -raz_865
+        raz_median[loop,11] = -raz_865
+        raz_median[loop,12] = -raz_865
         
         i_in_polar_median[loop,0] = eqr_i_470
         i_in_polar_median[loop,1] = eqr_i_660
