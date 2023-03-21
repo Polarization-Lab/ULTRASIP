@@ -712,24 +712,24 @@ def main():  # Main code
         
 
         #GRASP Meridian Basis
-        n_o4 = n_i4 #np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
-        n_o6 = n_i6
-        n_o8 = n_i8
+        n_o4 = n_i4;
+        n_o6 = n_i6;
+        n_o8 = n_i8;
         
         #470nm
         v_o4 = np.cross(k_4,n_o4)/np.linalg.norm(np.cross(k_4,n_o4)) #intersection of transverse & reference
         h_o4 = np.cross(k_4,v_o4)/np.linalg.norm(np.cross(k_4,v_o4))
-        Oout4 = np.array([h_o4,v_o4,-k_4]); #GRASP 
+        Oout4 = np.array([h_o4,v_o4,k_4]); #GRASP 
         
         #660nm
         v_o6 = np.cross(k_6,n_o6)/np.linalg.norm(np.cross(k_6,n_o6)) #intersection of transverse & reference
         h_o6 = np.cross(k_6,v_o6)/np.linalg.norm(np.cross(k_6,v_o6))
-        Oout6 = np.array([h_o6,v_o6,-k_6]); #GRASP 
+        Oout6 = np.array([h_o6,v_o6,k_6]); #GRASP 
         
         #865nm
         v_o8 = np.cross(k_8,n_o8)/np.linalg.norm(np.cross(k_8,n_o8)) #intersection of transverse & reference
         h_o8 = np.cross(k_8,v_o8)/np.linalg.norm(np.cross(k_8,v_o8))
-        Oout8 = np.array([h_o8,v_o8,-k_8]); #GRASP 
+        Oout8 = np.array([h_o8,v_o8,k_8]); #GRASP 
         
         # #GRASP Scattering Basis
         # n_o4 = n_i4s #np.cross(nor,zenith)/np.linalg.norm(np.cross(nor,zenith));
@@ -869,13 +869,13 @@ def main():  # Main code
         
         # print(-i@k_4,saz, vaz_470, vza_470,sza,raz_470)
         
-        # raz_355 = 180 - (saz-vaz_355)
-        # raz_380 = 180 - (saz-vaz_380)
-        # raz_445 = 180 - (saz-vaz_445)
-        # raz_470 = 180 - (saz-vaz_470)
-        # raz_555 = 180 - (saz-vaz_555)
-        # raz_660 = 180 - (saz-vaz_660)
-        # raz_865 = 180 - (saz-vaz_865)
+        raz_355 = 180 - (saz-vaz_355)
+        raz_380 = 180 - (saz-vaz_380)
+        raz_445 = 180 - (saz-vaz_445)
+        raz_470 = 180 - (saz-vaz_470)
+        raz_555 = 180 - (saz-vaz_555)
+        raz_660 = 180 - (saz-vaz_660)
+        raz_865 = 180 - (saz-vaz_865)
         
         # raz_355 = ((180-saz)-vaz_355)
         # raz_380 = ((180-saz)-vaz_380)
@@ -963,9 +963,9 @@ def main():  # Main code
         i_in_polar_median[loop,1] = eqr_i_660
         i_in_polar_median[loop,2] = eqr_i_865
         
-        q_median[loop,0] = eqr_qg_470
-        q_median[loop,1] = eqr_qg_660
-        q_median[loop,2] = eqr_qg_865
+        q_median[loop,0] =-eqr_qg_470
+        q_median[loop,1] = -eqr_qg_660
+        q_median[loop,2] = -eqr_qg_865
         
         u_median[loop,0] = eqr_ug_470
         u_median[loop,1] = eqr_ug_660
