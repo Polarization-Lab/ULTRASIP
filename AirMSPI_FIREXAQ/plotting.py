@@ -27,8 +27,12 @@ def main():  # Main code
 
     # basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX"
     # figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX/Plots"
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2123/1_Bakersfield"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2123/1_Bakersfield/Plots"
+    #basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2123/1_Bakersfield"
+    #figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2123/1_Bakersfield/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Retrieval_Files"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Retrieval_Files/Plots"
+
+
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -753,14 +757,14 @@ def main():  # Main code
     #print(i_mod[:,3])
     #print(i_obs[:,3])
     # print(scat[:,6])
-    ax1.set_xlim(60,180)
-    ax1.set_xticks(np.arange(60,190,30))
+    ax1.set_xlim(100,180)
+    ax1.set_xticks(np.arange(100,190,10))
     ax1.set_xlabel("Scattering Angle (Deg)")
 
     ax1.set_ylim(0.0,0.5)
     ax1.set_yticks(np.arange(0.0,0.6,0.1))
     ax1.set_ylabel('Equivalent Reflectance')
-    ax1.legend(loc='best')  # Upper right
+    ax1.legend(loc='upper left')  # Upper right
 
 # # Residuals Text
 # # Note: We calculate delta obs as model minus observation
@@ -822,14 +826,14 @@ def main():  # Main code
     ax1.plot(scat[:,5],q_mod[:,1],color="red")
     ax1.plot(scat[:,6],q_mod[:,2],color="orange")
  
-    ax1.set_xlim(60,180)
-    ax1.set_xticks(np.arange(60,190,30))
+    ax1.set_xlim(100,180)
+    ax1.set_xticks(np.arange(100,190,10))
     ax1.set_xlabel("Scattering Angle (Deg)")
     
     ax1.set_ylim(-0.4,0.4)
     ax1.set_yticks(np.arange(-0.4,0.4,0.2))
     ax1.set_ylabel('q (Q/I)')
-    ax1.legend(loc='upper right')  # Upper right   
+    ax1.legend(loc='upper left')  # Upper right   
 
 # # Residuals Text
 # # Note: We calculate delta obs as model minus observation
@@ -891,14 +895,14 @@ def main():  # Main code
     ax1.plot(scat[:,5],u_mod[:,1],color="red")
     ax1.plot(scat[:,6],u_mod[:,2],color="orange")
  
-    ax1.set_xlim(60,180)
-    ax1.set_xticks(np.arange(60,190,30))
+    ax1.set_xlim(100,180)
+    ax1.set_xticks(np.arange(100,190,10))
     ax1.set_xlabel("Scattering Angle (Deg)")
     
     ax1.set_ylim(-0.2,0.1)
     ax1.set_yticks(np.arange(-0.1,0.2,0.1))
     ax1.set_ylabel('u (U/I)')
-    ax1.legend(loc='upper right')  # Upper right
+    ax1.legend(loc='upper left')  # Upper right
 
 # # Residuals Text
 # # Note: We calculate delta obs as model minus observation
@@ -1019,14 +1023,14 @@ def main():  # Main code
     #print(i_mod[:,3])
     #print(i_obs[:,3])
     # print(scat[:,6])
-    ax1.set_xlim(60,180)
-    ax1.set_xticks(np.arange(60,190,30))
+    ax1.set_xlim(100,180)
+    ax1.set_xticks(np.arange(100,190,10))
     ax1.set_xlabel("Scattering Angle (Deg)")
 
     ax1.set_ylim(0.0,0.5)
     ax1.set_yticks(np.arange(0.0,0.6,0.1))
     ax1.set_ylabel('Equivalent Reflectance')
-    ax1.legend(loc='upper right')  # Upper right #best
+    ax1.legend(loc='upper left')  # Upper right #best
 
 # # Residuals Text
 # # Note: We calculate delta obs as model minus observation
@@ -1141,8 +1145,8 @@ def main():  # Main code
     #print(i_mod[:,3])
     #print(i_obs[:,3])
     # print(scat[:,6])
-    ax1.set_xlim(60,180)
-    ax1.set_xticks(np.arange(60,190,30))
+    ax1.set_xlim(100,180)
+    ax1.set_xticks(np.arange(100,190,10))
     ax1.set_xlabel("Scattering Angle (Deg)")
 
     ax1.set_ylim(-0.1,0.4)

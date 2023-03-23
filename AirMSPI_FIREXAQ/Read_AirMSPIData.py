@@ -36,7 +36,7 @@ import numpy as np
 import os
 import time
 
-def read_data(datapath,num_step,sequence_num,num_int,num_pol):
+def main(datapath,num_step,sequence_num,num_int,num_pol):
 
     #Array Definitions
     wavelens = np.empty((num_step,num_int))
@@ -65,17 +65,29 @@ def read_data(datapath,num_step,sequence_num,num_int,num_pol):
     # (ROI) to extract the data from
     
     # Set bounds for the image (USER INPUT)
-    min_x = 1900
-    max_x = 2200
-    min_y = 1900
-    max_y = 2200
+    # min_x = 1900
+    # max_x = 2200
+    # min_y = 1900
+    # max_y = 2200
+    
+    #Bakersfield
+    min_x = 1200
+    max_x = 1900
+    min_y = 1200
+    max_y = 1900
             
     # Set bounds for ROI (USER INPUT)
     # Note: These coordinates are RELATIVE to the overall bounding box
-    roi_x1 = 120
-    roi_x2 = 125
-    roi_y1 = 105
-    roi_y2 = 110
+    # roi_x1 = 120
+    # roi_x2 = 125
+    # roi_y1 = 105
+    # roi_y2 = 110
+    
+    #Bakserfield
+    roi_x1 = 485
+    roi_x2 = 490
+    roi_y1 = 485
+    roi_y2 = 490
     
     # Change directory to the datapath
     os.chdir(datapath)
@@ -230,17 +242,18 @@ def read_data(datapath,num_step,sequence_num,num_int,num_pol):
             um[num_step,num_pol] = ums[num_pol]
             dolp[num_step,num_pol] = dolpms[num_pol]
                         
-        f.close()
+        #f.close()
     
-    return esd,evel_coord,lat_coord,long_coord,i[:],view_zen[:],view_az[:],E0_values[:],ipol[:],qm[:],um[:],dolp[:]
+    return esd,evel_coord,lat_coord,long_coord,i[:],saz_470,sza_470,view_zen[:],view_az[:],E0_values[:],ipol[:],qm[:],um[:],dolp[:]
 
-if __name__ == 'read_data':
+### END MAIN FUNCTION
+if __name__ == '__main__':
     
-
-        print('hello')
+    x = 1;
+    print('hello')
     #Work Computer
-        datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-        outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_021623"
+    datapath = "C:/Users/ULTRASIP_1/Documents/B_ex/"
+        #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_021623"
 
     #Home Computer 
        # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -250,16 +263,16 @@ if __name__ == 'read_data':
     # Set the length of one measurement sequence of step-and-stare observations
     # NOTE: This will typically be an odd number (9,7,5,...)
 
-        num_step = 5
+    num_step = 1
         
         
     # Set the index of the sequence of step-and-stare files
     # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
-        step_ind = 0
+    step_ind = 0
         
         
-        num_int = 8 
-        num_pol = 3
+    num_int = 7 
+    num_pol = 3
         
-        esd,evel_coord,lat_coord,long_coord,i,view_zen,view_az,E0_values,ipol,qm,um,dolp = read_data(datapath,num_step,step_ind,num_int,num_pol) 
+    esd,evel_coord,lat_coord,long_coord,i,saz_470,sza_470,view_zen,view_az,E0_values,ipol,qm,um,dolp = main(datapath,num_step,step_ind,num_int,num_pol) 

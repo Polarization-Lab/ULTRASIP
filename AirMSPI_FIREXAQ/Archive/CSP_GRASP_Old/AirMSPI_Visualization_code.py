@@ -31,14 +31,14 @@ def main():  # Main code
 # NOTE: basepath is the location of the AirMSPI HDF data files
 #       figpath is where the output should be stored
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_Data/"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/1_022323"
+    basepath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Retrieval_Files/Plots"
 
     
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 7
+    num_step = 5
     
 # Set the index of the group of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
@@ -52,6 +52,7 @@ def main():  # Main code
     # min_y = 1900
     # max_y = 2200
     
+    #Bakersfield
     min_x = 1200
     max_x = 1900
     min_y = 1200
@@ -64,6 +65,8 @@ def main():  # Main code
     # box_y1 = 105
     # box_y2 = 110
 
+
+    #Bakserfield
     box_x1 = 485
     box_x2 = 490
     box_y1 = 485

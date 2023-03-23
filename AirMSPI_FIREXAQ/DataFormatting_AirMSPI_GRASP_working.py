@@ -61,8 +61,8 @@ def main():  # Main code
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/7_FIREX"
-    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2123/1_Bakersfield"
-    outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2223/negquno180onraz_Bakersfield"
+    #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
 
 # #Home Computer 
@@ -791,20 +791,20 @@ def main():  # Main code
         # rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
         # qg_865, ug_865 = -stokesin8s #rotmatrix8@stokesin8s
         
-        qg_470, ug_470 = stokesin4
-        qg_660, ug_660 = stokesin6
-        qg_865, ug_865 = stokesin8
+        qg_470, ug_470 = -stokesin4
+        qg_660, ug_660 = -stokesin6
+        qg_865, ug_865 = -stokesin8
     
         
 # Calculate the relative azimuth angle in the GRASP convention
         #Clarissa way
-        raz_355 = 180-(saz - vaz_355);
-        raz_380 = 180-(saz - vaz_380);
-        raz_445 =  180-(saz - vaz_445);
-        raz_470 = 180-(saz - vaz_470);
-        raz_555 = 180-(saz - vaz_555);
-        raz_660 = 180-(saz - vaz_660);
-        raz_865 = 180-(saz - vaz_865);
+        raz_355 = (saz - vaz_355);
+        raz_380 = (saz - vaz_380);
+        raz_445 =  (saz - vaz_445);
+        raz_470 = (saz - vaz_470);
+        raz_555 = (saz - vaz_555);
+        raz_660 = (saz - vaz_660);
+        raz_865 = (saz - vaz_865);
         
         # # # if(loop == mid_step):
         # raz_355 = (saz - vaz_355);
@@ -934,9 +934,9 @@ def main():  # Main code
         q_median[loop,1] = eqr_qg_660
         q_median[loop,2] = eqr_qg_865
         
-        u_median[loop,0] = -eqr_ug_470
-        u_median[loop,1] = -eqr_ug_660
-        u_median[loop,2] = -eqr_ug_865
+        u_median[loop,0] = eqr_ug_470
+        u_median[loop,1] = eqr_ug_660
+        u_median[loop,2] = eqr_ug_865
           
         ipol_median[loop,0] = eqr_ipol_470
         ipol_median[loop,1] = eqr_ipol_660

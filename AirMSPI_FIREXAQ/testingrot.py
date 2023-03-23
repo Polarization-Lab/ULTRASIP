@@ -38,22 +38,19 @@ vaz_470 = 172.39378;
 # saz = 90.20225;
 # vza_470 = 41.958958;
 # vaz_470 = 46.008686;
-#DATA FOR PAPER FROM FILE: AirMSPI_ER2_GRP_TERRAIN_20190817_001208Z_AZ-Prescott_646F_F01_V006.hdf
-saz = 89.48908;
-sza = 64.939064;
-vaz_470 = 220.95282;
-vza_470 = 64.98406;
-qm_470 = 0.02224747;
-um_470 = -0.01015127;
-qs_470 = -0.0243936;
-us_470 =  0.00118935;
-scat_ang = 136.14;
+#DATA FOR PAPER FROM FILE: AirMSPI_ER2_GRP_TERRAIN_20160707_193922Z_CA-Bakersfield_478A_F01_V006.hdf
+saz = 338.40863;
+sza = 13.67374;
+vaz_470 = 159.792;
+vza_470 = 47.8;
+qm_470 = -0.0092432;
+um_470 = 0.0009952;
+#scat_ang = 136.14;
 
 
 #________________________Geometry Reconciliation___________________________#
 
 zenith= np.array([0, 0, 1]);
-nor= np.array([1, 0, 0]);
 i = np.array([np.cos(np.radians(saz))*np.sin(np.radians(sza)), -np.sin(np.radians(saz))*np.sin(np.radians(sza)), -np.cos(np.radians(sza))]); #illumination vec,flip sign of sza
 k_4 = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.sin(np.radians(vaz_470))*np.sin(np.radians(vza_470)), np.cos(np.radians(vza_470))]);
 
@@ -65,48 +62,48 @@ v_i4s = np.cross(k_4,h_i4s)/np.linalg.norm(np.cross(k_4,h_i4s));
 Oin4s = np.array([h_i4s,v_i4s,k_4]);
         
 #Define AirMSPI Meridian Plane (input coordinate system) for each wavelength channel
-n_i4 = np.cross(zenith,k_4)/np.linalg.norm(np.cross(zenith,k_4));
+n_i4 = np.cross(k_4,zenith)/np.linalg.norm(np.cross(k_4,zenith));
 h_i4 = np.cross(k_4,n_i4)/np.linalg.norm(np.cross(k_4,n_i4)); #intersection of transverse & reference
 v_i4 = np.cross(k_4,h_i4)/np.linalg.norm(np.cross(k_4,h_i4));
 Oin4 = np.array([h_i4,v_i4,k_4]);#Meridian    
 
-#GRASP Basis
-#n_o = np.cross(k_4,zenith)/np.linalg.norm(np.cross(k_4,zenith));
-v_o4 = np.cross(k_4,n_i4)/np.linalg.norm(np.cross(k_4,n_i4)) #intersection of transverse & reference
+#GRASP Meridian Basis
+n_o = np.cross(k_4,zenith)/np.linalg.norm(np.cross(k_4,zenith));
+v_o4 = np.cross(k_4,n_o)/np.linalg.norm(np.cross(k_4,n_o)) #intersection of transverse & reference
 h_o4 = np.cross(k_4,v_o4)/np.linalg.norm(np.cross(k_4,v_o4))
-Oout4 = np.array([h_o4,v_o4]); #GRASP 
+Oout4 = np.array([h_o4,v_o4,k_4]); #GRASP 
 
 #470 nm input
 stokesin4 = np.array([[qm_470], [um_470]]) #Meridian
-stokesin4s = np.array([[qs_470], [us_470]]) #Scattering
+#stokesin4s = np.array([[qs_470], [us_470]]) #Scattering
 
-#Scattering to Meridian - AirMSPI
-R_nalpha4 = Oin4@(Oin4s.T);
-alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
-rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-qm_470rot, um_470rot = rotmatrix4@stokesin4s
+# #Scattering to Meridian - AirMSPI
+# R_nalpha4 = Oin4@(Oin4s.T);
+# alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
+# rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
+# qm_470rot, um_470rot = rotmatrix4@stokesin4s
 
 
-#Meridian to Scat - AirMSPI
-R_nalpha4 = Oin4s@(Oin4.T);
-alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
-rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-qs_470rot, us_470rot = rotmatrix4@stokesin4
+# #Meridian to Scat - AirMSPI
+# R_nalpha4 = Oin4s@(Oin4.T);
+# alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
+# rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
+# qs_470rot, us_470rot = rotmatrix4@stokesin4
 
 
 #Meridian AirMSPI to GRASP 
-R_nalpha4 = Oout4@(Oin4.T);
-alpha4 = np.arctan2(R_nalpha4[0,1],R_nalpha4[0,0]); 
+R_nalpha4 = (Oout4)@(Oin4.T);
+alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]); 
 print(np.degrees(alpha4)) 
 rotmatrix4 = np.array([[np.cos(2*alpha4),np.sin(2*alpha4)],[-np.sin(2*alpha4),np.cos(2*alpha4)]]); 
 qg_470rot, ug_470rot = rotmatrix4@stokesin4
 
-#Scat AirMSPI to GRASP
-R_nalpha4 = Oout4@(Oin4s.T);
-alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
-print(np.degrees(alpha4)) 
-rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-qg_470rots, ug_470rots = rotmatrix4@stokesin4s
+# #Scat AirMSPI to GRASP
+# R_nalpha4 = Oout4@(Oin4s.T);
+# alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
+# print(np.degrees(alpha4)) 
+# rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
+# qg_470rots, ug_470rots = rotmatrix4@stokesin4s
 
 #Relative Azimuth Calculation
 ia = np.array([np.cos(saz),-np.sin(saz)])
@@ -114,9 +111,9 @@ ka = np.array([np.cos(vaz_470),-np.sin(vaz_470)])
 raz_470m=np.arccos(ia@ka.T);  #range 0 to 180
 raz_470m=np.degrees(raz_470m)+180;         #inexplicable GRASP offset
 
-raz_470 = (saz - vaz_470)
-if (raz_470 < 0.0):
-    raz_470 = raz_470 + 180
+raz_470 = 180-(saz - vaz_470)
+# if (raz_470 < 0.0):
+#     raz_470 = raz_470 + 180
 
 # if(raz_470 < 0.0):
 #     raz_470 = 360.+raz_470
@@ -124,5 +121,5 @@ if (raz_470 < 0.0):
 #     raz_470 = 360.-raz_470
 # raz_470 = raz_470+180.
 
-scatt_angle = np.degrees(np.arccos(-i@k_4))
+scatt_angle = np.degrees(np.arccos(i@k_4))
 
