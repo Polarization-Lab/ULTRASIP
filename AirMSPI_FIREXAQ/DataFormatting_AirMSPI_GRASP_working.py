@@ -791,9 +791,9 @@ def main():  # Main code
         # rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
         # qg_865, ug_865 = -stokesin8s #rotmatrix8@stokesin8s
         
-        qg_470, ug_470 = -stokesin4
-        qg_660, ug_660 = -stokesin6
-        qg_865, ug_865 = -stokesin8
+        qg_470, ug_470 = stokesin4
+        qg_660, ug_660 = stokesin6
+        qg_865, ug_865 = stokesin8
     
         
 # Calculate the relative azimuth angle in the GRASP convention
@@ -934,9 +934,9 @@ def main():  # Main code
         q_median[loop,1] = eqr_qg_660
         q_median[loop,2] = eqr_qg_865
         
-        u_median[loop,0] = eqr_ug_470
-        u_median[loop,1] = eqr_ug_660
-        u_median[loop,2] = eqr_ug_865
+        u_median[loop,0] = -eqr_ug_470
+        u_median[loop,1] = -eqr_ug_660
+        u_median[loop,2] = -eqr_ug_865
           
         ipol_median[loop,0] = eqr_ipol_470
         ipol_median[loop,1] = eqr_ipol_660
@@ -978,7 +978,7 @@ def main():  # Main code
         
 # Generate an output file name
 
-    outfile = outfile_base+"ALL_RotfromScat_newRAZCway"+".sdat"
+    outfile = outfile_base+".sdat"
         
     print()
     print("Saving: "+outfile)
