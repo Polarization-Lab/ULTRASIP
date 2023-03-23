@@ -930,13 +930,13 @@ def main():  # Main code
         i_in_polar_median[loop,1] = eqr_i_660
         i_in_polar_median[loop,2] = eqr_i_865
         
-        q_median[loop,0] = -eqr_qg_470
-        q_median[loop,1] = -eqr_qg_660
-        q_median[loop,2] = -eqr_qg_865
+        q_median[loop,0] = eqr_qg_470
+        q_median[loop,1] = eqr_qg_660
+        q_median[loop,2] = eqr_qg_865
         
-        u_median[loop,0] = eqr_ug_470
-        u_median[loop,1] = eqr_ug_660
-        u_median[loop,2] = eqr_ug_865
+        u_median[loop,0] = -eqr_ug_470
+        u_median[loop,1] = -eqr_ug_660
+        u_median[loop,2] = -eqr_ug_865
           
         ipol_median[loop,0] = eqr_ipol_470
         ipol_median[loop,1] = eqr_ipol_660
