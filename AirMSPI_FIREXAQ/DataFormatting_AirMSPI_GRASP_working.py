@@ -807,7 +807,7 @@ def main():  # Main code
         raz_660 = (saz - vaz_660);
         raz_865 = (saz - vaz_865);
 
-        if(loop == mid_step):
+        if(0<=vza_470 <=5):
             raz_355 = 180-(saz - vaz_355);
             raz_380 = 180-(saz - vaz_380);
             raz_445 = 180-(saz - vaz_445);
