@@ -798,23 +798,23 @@ def main():  # Main code
         
 # Calculate the relative azimuth angle in the GRASP convention
         
-        # # if(loop == mid_step):
-        raz_355 = (saz - vaz_355);
-        raz_380 = (saz - vaz_380);
-        raz_445 =  (saz - vaz_445);
-        raz_470 = (saz - vaz_470);
-        raz_555 = (saz - vaz_555);
-        raz_660 = (saz - vaz_660);
-        raz_865 = (saz - vaz_865);
+        # # # if(loop == mid_step):
+        # raz_355 = (saz - vaz_355);
+        # raz_380 = (saz - vaz_380);
+        # raz_445 =  (saz - vaz_445);
+        # raz_470 = (saz - vaz_470);
+        # raz_555 = (saz - vaz_555);
+        # raz_660 = (saz - vaz_660);
+        # raz_865 = (saz - vaz_865);
 
-        if(0<=vza_470 <=5):
-            raz_355 = 180-(saz - vaz_355);
-            raz_380 = 180-(saz - vaz_380);
-            raz_445 = 180-(saz - vaz_445);
-            raz_470 = 180-(saz - vaz_470);
-            raz_555 = 180-(saz - vaz_555);
-            raz_660 = 180-(saz - vaz_660);
-            raz_865 = 180-(saz - vaz_865);
+        # if(0<=vza_470 <=5):
+        #     raz_355 = 180-(saz - vaz_355);
+        #     raz_380 = 180-(saz - vaz_380);
+        #     raz_445 = 180-(saz - vaz_445);
+        #     raz_470 = 180-(saz - vaz_470);
+        #     raz_555 = 180-(saz - vaz_555);
+        #     raz_660 = 180-(saz - vaz_660);
+        #     raz_865 = 180-(saz - vaz_865);
         # # #Clarissa way
         # raz_355 = (saz - vaz_355)
         # if (raz_355 < 0.0):
@@ -843,6 +843,55 @@ def main():  # Main code
         # raz_865 = (saz - vaz_865)
         # if (raz_865 < 0.0):
         #     raz_865 = raz_865 + 180
+        
+        raz_355 = saz - vaz_355
+        if(raz_355 < 0.0):
+            raz_355 = 360.+raz_355
+        if(raz_355 > 180.0):
+            raz_355 = 360.-raz_355
+            raz_355 = raz_355+180.
+        
+        raz_380 = saz - vaz_380
+        if(raz_380 < 0.0):
+            raz_380 = 360.+raz_380
+        if(raz_380 > 180.0):
+            raz_380 = 360.-raz_380
+            raz_380 = raz_380+180.
+        
+        raz_445 = saz - vaz_445
+        if(raz_445 < 0.0):
+            raz_445 = 360.+raz_445
+        if(raz_445 > 180.0):
+            raz_445 = 360.-raz_445
+            raz_445 = raz_445+180.
+        
+        raz_470 = saz - vaz_470
+        if(raz_470 < 0.0):
+            raz_470 = 360.+raz_470
+        if(raz_470 > 180.0):
+            raz_470 = 360.-raz_470
+            raz_470 = raz_470+180.
+        
+        raz_555 = saz - vaz_555
+        if(raz_555 < 0.0):
+            raz_555 = 360.+raz_555
+        if(raz_555 > 180.0):
+            raz_555 = 360.-raz_555
+            raz_555 = raz_555+180.
+        
+        raz_660 = saz - vaz_660
+        if(raz_660 < 0.0):
+            raz_660 = 360.+raz_660
+        if(raz_660 > 180.0):
+            raz_660 = 360.-raz_660
+            raz_660 = raz_660+180.
+        
+        raz_865 = saz - vaz_865
+        if(raz_865 < 0.0):
+            raz_865 = 360.+raz_865
+        if(raz_865 > 180.0):
+            raz_865 = 360.-raz_865
+            raz_865 = raz_865+180.
         
 
 
