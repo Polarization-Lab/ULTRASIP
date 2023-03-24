@@ -58,10 +58,10 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/7_FIREX"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2223/1_Bakersfield"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    # datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2423/1_FIREX"
+    # outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2423/1_Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
 
@@ -806,6 +806,21 @@ def main():  # Main code
         raz_555 = (saz - vaz_555);
         raz_660 = (saz - vaz_660);
         raz_865 = (saz - vaz_865);
+        
+        if raz_355 < 0.0:
+            raz_355 = raz_355 + 360
+        if raz_380 < 0.0:
+            raz_380 = raz_380 + 360
+        if raz_445 < 0.0:
+            raz_445 = raz_445 + 360
+        if raz_470 < 0.0:
+            raz_470 = raz_470 + 360
+        if raz_555 < 0.0:
+            raz_555 = raz_555 + 360
+        if raz_660 < 0.0:
+            raz_660 = raz_660 + 360
+        if raz_865 < 0.0:
+            raz_865 = raz_865 + 360
 
         # raz_355 = 180-(saz - vaz_355);
         # raz_380 = 180-(saz - vaz_380);
@@ -902,9 +917,9 @@ def main():  # Main code
         i_in_polar_median[loop,1] = eqr_i_660
         i_in_polar_median[loop,2] = eqr_i_865
         
-        q_median[loop,0] = eqr_qg_470
-        q_median[loop,1] = eqr_qg_660
-        q_median[loop,2] = eqr_qg_865
+        q_median[loop,0] = -eqr_qg_470
+        q_median[loop,1] = -eqr_qg_660
+        q_median[loop,2] = -eqr_qg_865
         
         u_median[loop,0] = eqr_ug_470
         u_median[loop,1] = eqr_ug_660
