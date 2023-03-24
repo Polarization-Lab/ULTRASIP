@@ -91,30 +91,30 @@ def main():  # Main code
 # # Set bounds for ROI (USER INPUT)
 # # Note: These coordinates are RELATIVE to the overall bounding box
 
-    # #FIREX
-    # min_x = 1900
-    # max_x = 2200
-    # min_y = 1900
-    # max_y = 2200
+    #FIREX
+    min_x = 1900
+    max_x = 2200
+    min_y = 1900
+    max_y = 2200
     
-    #Bakersfield
-    min_x = 1200
-    max_x = 1900
-    min_y = 1200
-    max_y = 1900
+    # #Bakersfield
+    # min_x = 1200
+    # max_x = 1900
+    # min_y = 1200
+    # max_y = 1900
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
-    # #FIREX
-    # box_x1 = 120
-    # box_x2 = 125
-    # box_y1 = 105
-    # box_y2 = 110
+    #FIREX
+    box_x1 = 120
+    box_x2 = 125
+    box_y1 = 105
+    box_y2 = 110
 
-    #Bakserfield
-    box_x1 = 485
-    box_x2 = 490
-    box_y1 = 485
-    box_y2 = 490
+    # #Bakserfield
+    # box_x1 = 485
+    # box_x2 = 490
+    # box_y1 = 485
+    # box_y2 = 490
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
