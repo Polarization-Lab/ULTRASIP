@@ -25,12 +25,12 @@ def main():  # Main code
 #       figpath is where the image output should be stored
 
 
-    # basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX"
-    # figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2423/1_FIREX"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2423/1_FIREX/Plots"
     #basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2123/1_Bakersfield"
     #figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2123/1_Bakersfield/Plots"
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Retrieval_Files"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Retrieval_Files/Plots"
+    # basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Retrieval_Files"
+    # figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Retrieval_Files/Plots"
 
 
 
@@ -826,12 +826,12 @@ def main():  # Main code
     ax1.plot(scat[:,5],q_mod[:,1],color="red")
     ax1.plot(scat[:,6],q_mod[:,2],color="orange")
  
-    ax1.set_xlim(100,180)
-    ax1.set_xticks(np.arange(100,190,10))
+    ax1.set_xlim(50,150)
+    ax1.set_xticks(np.arange(50,150,10))
     ax1.set_xlabel("Scattering Angle (Deg)")
     
-    ax1.set_ylim(-0.4,0.4)
-    ax1.set_yticks(np.arange(-0.4,0.4,0.2))
+    ax1.set_ylim(-0.1,0.3)
+    ax1.set_yticks(np.arange(-0.1,0.3,0.1))
     ax1.set_ylabel('q (Q/I)')
     ax1.legend(loc='upper left')  # Upper right   
 
@@ -895,12 +895,12 @@ def main():  # Main code
     ax1.plot(scat[:,5],u_mod[:,1],color="red")
     ax1.plot(scat[:,6],u_mod[:,2],color="orange")
  
-    ax1.set_xlim(100,180)
-    ax1.set_xticks(np.arange(100,190,10))
+    ax1.set_xlim(50,150)
+    ax1.set_xticks(np.arange(50,150,10))
     ax1.set_xlabel("Scattering Angle (Deg)")
     
-    ax1.set_ylim(-0.2,0.1)
-    ax1.set_yticks(np.arange(-0.1,0.2,0.1))
+    ax1.set_ylim(-0.5,0.2)
+    ax1.set_yticks(np.arange(-0.5,0.2,0.1))
     ax1.set_ylabel('u (U/I)')
     ax1.legend(loc='upper left')  # Upper right
 
@@ -1145,12 +1145,12 @@ def main():  # Main code
     #print(i_mod[:,3])
     #print(i_obs[:,3])
     # print(scat[:,6])
-    ax1.set_xlim(100,180)
-    ax1.set_xticks(np.arange(100,190,10))
+    ax1.set_xlim(50,150)
+    ax1.set_xticks(np.arange(50,150,10))
     ax1.set_xlabel("Scattering Angle (Deg)")
 
-    ax1.set_ylim(-0.1,0.4)
-    ax1.set_yticks(np.arange(-0.1,0.5,0.1))
+    ax1.set_ylim(-0.1,0.3)
+    ax1.set_yticks(np.arange(-0.1,0.4,0.1))
     ax1.set_ylabel('Equivalent Reflectance')
     ax1.legend(loc='lower left')  # Upper right
 
