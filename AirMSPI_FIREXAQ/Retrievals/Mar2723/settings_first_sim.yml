@@ -106,9 +106,9 @@ retrieval:
             retrieved: true
             mode[1]: 
                 initial_guess: 
-                    value:                        [0.007]
-                    min:                          [0.001]
-                    max:                          [0.500]
+                    value:                        [0]
+                    min:                          [0]
+                    max:                          [0]
                     index_of_wavelength_involved: [0]
                 single_pixel:
                     a_priori_estimates:
