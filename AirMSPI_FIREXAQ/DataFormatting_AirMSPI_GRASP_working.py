@@ -808,19 +808,19 @@ def main():  # Main code
         raz_865 = (saz - vaz_865);
         
         if raz_355 < 0.0:
-            raz_355 = raz_355 + 360
+            raz_355 = raz_355 + 180
         if raz_380 < 0.0:
-            raz_380 = raz_380 + 360
+            raz_380 = raz_380 + 180
         if raz_445 < 0.0:
-            raz_445 = raz_445 + 360
+            raz_445 = raz_445 + 180
         if raz_470 < 0.0:
-            raz_470 = raz_470 + 360
+            raz_470 = raz_470 + 180
         if raz_555 < 0.0:
-            raz_555 = raz_555 + 360
+            raz_555 = raz_555 + 180
         if raz_660 < 0.0:
-            raz_660 = raz_660 + 360
+            raz_660 = raz_660 + 180
         if raz_865 < 0.0:
-            raz_865 = raz_865 + 360
+            raz_865 = raz_865 + 180
 
         # raz_355 = 180-(saz - vaz_355);
         # raz_380 = 180-(saz - vaz_380);
@@ -949,7 +949,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat_360raznegU'
+    outfile_base = 'RotfromScat_180negonlyraznegU'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
