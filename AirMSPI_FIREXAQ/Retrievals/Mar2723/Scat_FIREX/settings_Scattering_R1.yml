@@ -4,7 +4,7 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Scat_FIREX/RotfromScat_360raznegQU.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Scat_FIREX/RotfromScat_360raznegQ.sdat"
   
 output:
     segment:
