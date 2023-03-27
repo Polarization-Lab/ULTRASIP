@@ -9,7 +9,7 @@ input:
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["Scattering_FIREX_360raznegQU_Mar2723.txt", screen] # screen, "filename"
+        stream: ["Scattering_FIREX_360raznegQ_Mar2723.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
