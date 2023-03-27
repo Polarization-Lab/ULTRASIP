@@ -1,8 +1,8 @@
 # YML file for running a backward example of GSFC1 
 
-input: {driver: sdata, file: bench.sdat}
+input: {driver: sdata, file: "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/bench.sdat"}
 output:
-    segment: {function: classic, stream: bench_first_sim_rslts.txt}
+    segment: {function: classic, stream: "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/bench_first_sim_rslts.txt"}
 retrieval:
     
     general: {path_to_internal_files: /usr/local/share/grasp/kernels/}    
