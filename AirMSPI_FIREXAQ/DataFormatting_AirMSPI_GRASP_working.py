@@ -60,7 +60,7 @@ def main():  # Main code
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     # datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Scat_FIREX"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Mer_FIREX"
     # outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2423/1_Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
@@ -791,9 +791,9 @@ def main():  # Main code
         # rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
         # qg_865, ug_865 = -stokesin8s #rotmatrix8@stokesin8s
         
-        qg_470, ug_470 = -stokesin4s
-        qg_660, ug_660 = -stokesin6s
-        qg_865, ug_865 = -stokesin8s
+        qg_470, ug_470 = -stokesin4
+        qg_660, ug_660 = -stokesin6
+        qg_865, ug_865 = -stokesin8
     
         
 # Calculate the relative azimuth angle in the GRASP convention
@@ -807,20 +807,20 @@ def main():  # Main code
         raz_660 = (saz - vaz_660);
         raz_865 = (saz - vaz_865);
         
-        if raz_355 < 0.0:
-            raz_355 = raz_355 + 360
-        if raz_380 < 0.0:
-            raz_380 = raz_380 + 360
-        if raz_445 < 0.0:
-            raz_445 = raz_445 + 360
-        if raz_470 < 0.0:
-            raz_470 = raz_470 + 360
-        if raz_555 < 0.0:
-            raz_555 = raz_555 + 360
-        if raz_660 < 0.0:
-            raz_660 = raz_660 + 360
-        if raz_865 < 0.0:
-            raz_865 = raz_865 + 360
+        # if raz_355 < 0.0:
+        #     raz_355 = raz_355 + 360
+        # if raz_380 < 0.0:
+        #     raz_380 = raz_380 + 360
+        # if raz_445 < 0.0:
+        #     raz_445 = raz_445 + 360
+        # if raz_470 < 0.0:
+        #     raz_470 = raz_470 + 360
+        # if raz_555 < 0.0:
+        #     raz_555 = raz_555 + 360
+        # if raz_660 < 0.0:
+        #     raz_660 = raz_660 + 360
+        # if raz_865 < 0.0:
+        #     raz_865 = raz_865 + 360
 
         # raz_355 = 180-(saz - vaz_355);
         # raz_380 = 180-(saz - vaz_380);
@@ -949,7 +949,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat_360raznegU'
+    outfile_base = 'RotfromMerd_raznegU'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
