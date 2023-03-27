@@ -25,8 +25,8 @@ def main():  # Main code
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Mer_FIREX"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Mer_FIREX/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Scat_FIREX"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Scat_FIREX/Plots"
 
 
 
@@ -73,7 +73,7 @@ def main():  # Main code
 
 # Get the text file listing
 
-    file_list = glob.glob('Meridian*FIREXraz*.txt')
+    file_list = glob.glob('Scattering*180raznegQ_Mar*.txt')
     
     num_files = len(file_list)
     
@@ -750,8 +750,8 @@ def main():  # Main code
     ax1.plot(scat[:,5],q_mod[:,1],color="red")
     ax1.plot(scat[:,6],q_mod[:,2],color="orange")
      
-    xmin = scat[:,3].min()-1;
-    xmax = scat[:,3].max()+1;
+    xmin = scat[:,3].min()-10;
+    xmax = scat[:,3].max()+10;
     xticks = xmax.round()/10;
     
     ymin = q_mod.min()-0.1;
@@ -796,8 +796,8 @@ def main():  # Main code
     ax1.plot(scat[:,5],u_mod[:,1],color="red")
     ax1.plot(scat[:,6],u_mod[:,2],color="orange")
  
-    xmin = scat[:,3].min()-1;
-    xmax = scat[:,3].max()+1;
+    xmin = scat[:,3].min()-10;
+    xmax = scat[:,3].max()+10;
     xticks = xmax.round()/10;
     
     ymin = u_mod.min()-0.1;
@@ -909,8 +909,8 @@ def main():  # Main code
     ax1.plot(scat[:,5],i_mod[:,5],color="red")
     ax1.plot(scat[:,6],i_mod[:,6],color="orange")
 
-    xmin = scat[:,3].min()-1;
-    xmax = scat[:,3].max()+1;
+    xmin = scat[:,3].min()-10;
+    xmax = scat[:,3].max()+10;
     xticks = xmax.round()/10;
     
     ymin = i_mod.min()-0.1;
