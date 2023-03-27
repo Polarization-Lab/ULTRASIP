@@ -791,9 +791,9 @@ def main():  # Main code
         # rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
         # qg_865, ug_865 = -stokesin8s #rotmatrix8@stokesin8s
         
-        qg_470, ug_470 = -stokesin4s
-        qg_660, ug_660 = -stokesin6s
-        qg_865, ug_865 = -stokesin8s
+        qg_470, ug_470 = stokesin4s
+        qg_660, ug_660 = stokesin6s
+        qg_865, ug_865 = stokesin8s
     
         
 # Calculate the relative azimuth angle in the GRASP convention
@@ -949,7 +949,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat_180raznegQU'
+    outfile_base = 'RotfromScat_180razQU'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
