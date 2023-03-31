@@ -42,9 +42,11 @@ vaz_470 = 172.39378;
 saz = 338.40863;
 sza = 13.67374;
 vaz_470 = 159.792;
-vza_470 = 47.8;
+vza_470 = 46.0632;
 qm_470 = -0.0092432;
 um_470 = 0.0009952;
+qs_470 = -0.0296374;
+us_470 = 0.00175563;
 #scat_ang = 136.14;
 
 
@@ -75,7 +77,7 @@ Oout4 = np.array([h_o4,v_o4,k_4]); #GRASP
 
 #470 nm input
 stokesin4 = np.array([[qm_470], [um_470]]) #Meridian
-#stokesin4s = np.array([[qs_470], [us_470]]) #Scattering
+stokesin4s = np.array([[qs_470], [us_470]]) #Scattering
 
 # #Scattering to Meridian - AirMSPI
 # R_nalpha4 = Oin4@(Oin4s.T);
@@ -98,12 +100,12 @@ print(np.degrees(alpha4))
 rotmatrix4 = np.array([[np.cos(2*alpha4),np.sin(2*alpha4)],[-np.sin(2*alpha4),np.cos(2*alpha4)]]); 
 qg_470rot, ug_470rot = rotmatrix4@stokesin4
 
-# #Scat AirMSPI to GRASP
-# R_nalpha4 = Oout4@(Oin4s.T);
-# alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
-# print(np.degrees(alpha4)) 
-# rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
-# qg_470rots, ug_470rots = rotmatrix4@stokesin4s
+#Scat AirMSPI to GRASP
+R_nalpha4 = Oout4@(Oin4s.T);
+alpha4 = np.arctan2(-R_nalpha4[0,1],R_nalpha4[0,0]);  
+print(np.degrees(alpha4)) 
+rotmatrix4 = np.array([[np.cos(2*alpha4),-np.sin(2*alpha4)],[np.sin(2*alpha4),np.cos(2*alpha4)]]); 
+qg_470rots, ug_470rots = rotmatrix4@stokesin4s
 
 #Relative Azimuth Calculation
 ia = np.array([np.cos(saz),-np.sin(saz)])

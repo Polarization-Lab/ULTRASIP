@@ -60,8 +60,8 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_012523"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_012523"
 
 #Home Computer 
    # datapath = "C:/Users/Clarissa/Desktop/AirMSPI/Prescott/FIREX-AQ_8212019"
@@ -71,7 +71,7 @@ def main():  # Main code
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 5
+    num_step = 1
     
 # Calculate the middle of the sequence
 
@@ -86,20 +86,39 @@ def main():  # Main code
 # Crop images to same area to correct for parallax and set a region of interest
 # (ROI) to extract the data from
 
-# Set bounds for the image (USER INPUT)
+# # Set bounds for the image (USER INPUT)
 
-    min_x = 1900
-    max_x = 2200
-    min_y = 1900
-    max_y = 2200
+#     min_x = 1900
+#     max_x = 2200
+#     min_y = 1900
+#     max_y = 2200
     
-# Set bounds for ROI (USER INPUT)
-# Note: These coordinates are RELATIVE to the overall bounding box
+# # Set bounds for ROI (USER INPUT)
+# # Note: These coordinates are RELATIVE to the overall bounding box
 
-    box_x1 = 120
-    box_x2 = 125
-    box_y1 = 105
-    box_y2 = 110
+#     box_x1 = 120
+#     box_x2 = 125
+#     box_y1 = 105
+#     box_y2 = 110
+    
+    #Bakersfield
+    min_x = 1200
+    max_x = 1900
+    min_y = 1200
+    max_y = 1900
+            
+    # Set bounds for ROI (USER INPUT)
+    # Note: These coordinates are RELATIVE to the overall bounding box
+    # roi_x1 = 120
+    # roi_x2 = 125
+    # roi_y1 = 105
+    # roi_y2 = 110
+    
+    #Bakserfield
+    box_x1 = 485
+    box_x2 = 490
+    box_y1 = 485
+    box_y2 = 490
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
@@ -280,6 +299,8 @@ def main():  # Main code
         sza_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/Sun_zenith/'][:]
         Qs_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/Q_scatter/'][:]
         Us_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/U_scatter/'][:]
+        Qm_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/Q_meridian/'][:]
+        Um_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/U_meridian/'][:]
         vaz_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/View_azimuth/'][:]
         vza_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/View_zenith/'][:]
         
@@ -436,10 +457,13 @@ def main():  # Main code
         img_vza_865 = np.flipud(vza_865[min_y:max_y,min_x:max_x])        
         
         img_qs_470 = np.flipud(Qs_470[min_y:max_y,min_x:max_x])
+        img_qm_470 = np.flipud(Qm_470[min_y:max_y,min_x:max_x])
         img_qs_660 = np.flipud(Qs_660[min_y:max_y,min_x:max_x])
         img_qs_865 = np.flipud(Qs_865[min_y:max_y,min_x:max_x])
         
         img_us_470 = np.flipud(Us_470[min_y:max_y,min_x:max_x])
+        img_um_470 = np.flipud(Um_470[min_y:max_y,min_x:max_x])
+
         img_us_660 = np.flipud(Us_660[min_y:max_y,min_x:max_x])
         img_us_865 = np.flipud(Us_865[min_y:max_y,min_x:max_x])
         
@@ -513,10 +537,13 @@ def main():  # Main code
         box_vza_865 = img_vza_865[box_x1:box_x2,box_y1:box_y2]
         
         box_qs_470 = img_qs_470[box_x1:box_x2,box_y1:box_y2]
+        box_qm_470 = img_qm_470[box_x1:box_x2,box_y1:box_y2]
         box_qs_660 = img_qs_660[box_x1:box_x2,box_y1:box_y2]
         box_qs_865 = img_qs_865[box_x1:box_x2,box_y1:box_y2]
         
         box_us_470 = img_us_470[box_x1:box_x2,box_y1:box_y2]
+        box_um_470 = img_um_470[box_x1:box_x2,box_y1:box_y2]
+
         box_us_660 = img_us_660[box_x1:box_x2,box_y1:box_y2]
         box_us_865 = img_us_865[box_x1:box_x2,box_y1:box_y2]
         
@@ -587,10 +614,13 @@ def main():  # Main code
         vza_865 = np.median(box_vza_865[good])
         
         qs_470 = np.median(box_qs_470[good])
+        qm_470 = np.median(box_qm_470[good])
         qs_660 = np.median(box_qs_660[good])
         qs_865 = np.median(box_qs_865[good])
         
         us_470 = np.median(box_us_470[good])
+        um_470 = np.median(box_um_470[good])
+
         us_660 = np.median(box_us_660[good])
         us_865 = np.median(box_us_865[good])
         
@@ -604,6 +634,9 @@ def main():  # Main code
         
         saz = np.median(box_saz[good])
         sza = np.median(box_sza[good])
+        
+        print('data:',qm_470,um_470,qs_470,us_470,vaz_470,vza_470,saz,sza)
+
         
 # If this is the center acquisition, process the navigation information
 

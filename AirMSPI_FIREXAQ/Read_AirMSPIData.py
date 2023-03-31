@@ -46,6 +46,8 @@ def main(datapath,num_step,sequence_num,num_int,num_pol):
     ipol = np.empty((num_step,num_pol))
     qm = np.empty((num_step,num_pol))
     um = np.empty((num_step,num_pol))
+    qs = np.empty((num_step,num_pol))
+    us = np.empty((num_step,num_pol))
     dolp = np.empty((num_step,num_pol))
     
     sun_zen = np.empty((num_step,1))
@@ -65,29 +67,29 @@ def main(datapath,num_step,sequence_num,num_int,num_pol):
     # (ROI) to extract the data from
     
     # Set bounds for the image (USER INPUT)
-    min_x = 1900
-    max_x = 2200
-    min_y = 1900
-    max_y = 2200
+    # min_x = 1900
+    # max_x = 2200
+    # min_y = 1900
+    # max_y = 2200
     
-    # #Bakersfield
-    # min_x = 1200
-    # max_x = 1900
-    # min_y = 1200
-    # max_y = 1900
+    #Bakersfield
+    min_x = 1200
+    max_x = 1900
+    min_y = 1200
+    max_y = 1900
             
     # Set bounds for ROI (USER INPUT)
     # Note: These coordinates are RELATIVE to the overall bounding box
-    roi_x1 = 120
-    roi_x2 = 125
-    roi_y1 = 105
-    roi_y2 = 110
+    # roi_x1 = 120
+    # roi_x2 = 125
+    # roi_y1 = 105
+    # roi_y2 = 110
     
-    # #Bakserfield
-    # roi_x1 = 485
-    # roi_x2 = 490
-    # roi_y1 = 485
-    # roi_y2 = 490
+    #Bakserfield
+    roi_x1 = 385
+    roi_x2 = 390
+    roi_y1 = 385
+    roi_y2 = 390
     
     # Change directory to the datapath
     os.chdir(datapath)
@@ -95,7 +97,7 @@ def main(datapath,num_step,sequence_num,num_int,num_pol):
     # Get the list of files in the directory
     # NOTE: Python returns the files in a strange order, so they will need to be sorted by time
     #Search for files with the correct names
-    search_str = '*TERRAIN*.hdf'
+    search_str = '*TERRAIN*478A*.hdf'
     file_list = np.array(glob.glob(search_str))
     
     # Get the number of files    
@@ -130,12 +132,16 @@ def main(datapath,num_step,sequence_num,num_int,num_pol):
         ipol_470 = np.median(np.flipud(f[channel470+'IPOL/'][:][min_y:max_y,min_x:max_x])[roi_x1:roi_x2,roi_y1:roi_y2])
         qm_470 = np.median(np.flipud(f[channel470+'Q_meridian/'][:][min_y:max_y,min_x:max_x])[roi_x1:roi_x2,roi_y1:roi_y2])
         um_470 = np.median(np.flipud(f[channel470+'U_meridian/'][:][min_y:max_y,min_x:max_x])[roi_x1:roi_x2,roi_y1:roi_y2])
+        qs_470 = np.median(np.flipud(f[channel470+'Q_scatter/'][:][min_y:max_y,min_x:max_x])[roi_x1:roi_x2,roi_y1:roi_y2])
+        us_470 = np.median(np.flipud(f[channel470+'U_scatter/'][:][min_y:max_y,min_x:max_x])[roi_x1:roi_x2,roi_y1:roi_y2])
         dolp_470 = np.median(np.flipud(f[channel470+'DOLP/'][:][min_y:max_y,min_x:max_x])[roi_x1:roi_x2,roi_y1:roi_y2])
             
         vaz_470 = np.median(np.flipud(f[channel470+'View_azimuth/'][:][min_y:max_y,min_x:max_x])[roi_x1:roi_x2,roi_y1:roi_y2])        
         vza_470 = np.median(np.flipud(f[channel470+'View_zenith/'][:][min_y:max_y,min_x:max_x])[roi_x1:roi_x2,roi_y1:roi_y2]) 
         saz_470 = np.median(np.flipud(f[channel470+'Sun_azimuth/'][:][min_y:max_y,min_x:max_x])[roi_x1:roi_x2,roi_y1:roi_y2])        
         sza_470 = np.median(np.flipud(f[channel470+'Sun_zenith/'][:][min_y:max_y,min_x:max_x])[roi_x1:roi_x2,roi_y1:roi_y2])
+        
+        print('data:',qm_470,um_470,qs_470,us_470,vaz_470,vza_470,saz_470,sza_470)
             
         channel555 = '/HDFEOS/GRIDS/555nm_band/Data Fields/';
         i_555 = np.median(np.flipud(f[channel555+'I/'][:][min_y:max_y,min_x:max_x])[roi_x1:roi_x2,roi_y1:roi_y2])
@@ -223,6 +229,8 @@ def main(datapath,num_step,sequence_num,num_int,num_pol):
         ipols = np.array([ipol_470,ipol_660,ipol_865])
         qms = np.array([qm_470,qm_660,qm_865])
         ums = np.array([um_470,um_660,um_865])
+        qsr = np.array([qs_470,qm_660,qm_865])
+        usr = np.array([us_470,um_660,um_865])
         dolpms = np.array([dolp_470,dolp_660,dolp_865])
 
         vza = np.array([vza_355,vza_380,vza_445,vza_470,vza_555,vza_660,vza_865])
@@ -240,11 +248,13 @@ def main(datapath,num_step,sequence_num,num_int,num_pol):
             ipol[num_step,num_pol] = ipols[num_pol] 
             qm[num_step,num_pol] = qms[num_pol]
             um[num_step,num_pol] = ums[num_pol]
+            qs[num_step,num_pol] = qsr[num_pol]
+            us[num_step,num_pol] = usr[num_pol]
             dolp[num_step,num_pol] = dolpms[num_pol]
                         
         #f.close()
     
-    return esd,evel_coord,lat_coord,long_coord,i[:],saz_470,sza_470,view_zen[:],view_az[:],E0_values[:],ipol[:],qm[:],um[:],dolp[:]
+    return qs,us,esd,evel_coord,lat_coord,long_coord,i[:],saz_470,sza_470,view_zen[:],view_az[:],E0_values[:],ipol[:],qm[:],um[:],dolp[:]
 
 ### END MAIN FUNCTION
 if __name__ == '__main__':
@@ -252,11 +262,11 @@ if __name__ == '__main__':
     x = 1;
     print('hello')
     #Work Computer
-    #datapath = "C:/Users/ULTRASIP_1/Documents/B_ex/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy"
         #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/2_021623"
 
     #Home Computer 
-    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
+    #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
        # outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/SDATA_Files"
 
     # Load in the set of measurement sequences
@@ -275,4 +285,4 @@ if __name__ == '__main__':
     num_int = 7 
     num_pol = 3
         
-    esd,evel_coord,lat_coord,long_coord,i,saz_470,sza_470,view_zen,view_az,E0_values,ipol,qm,um,dolp = main(datapath,num_step,step_ind,num_int,num_pol) 
+    qs,us,esd,evel_coord,lat_coord,long_coord,i,saz_470,sza_470,view_zen,view_az,E0_values,ipol,qm,um,dolp = main(datapath,num_step,step_ind,num_int,num_pol) 
