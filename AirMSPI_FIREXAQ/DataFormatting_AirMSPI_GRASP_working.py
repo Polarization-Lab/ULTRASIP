@@ -845,6 +845,20 @@ def main():  # Main code
         raz_660 = -(vaz_660-saz);
         raz_865 = -(vaz_865-saz);
 
+        if raz_355 < 0.0:
+            raz_355 = raz_355 + 360
+        if raz_380 < 0.0:
+            raz_380 = raz_380 + 360
+        if raz_445 < 0.0:
+            raz_445 = raz_445 + 360
+        if raz_470 < 0.0:
+            raz_470 = raz_470 + 360
+        if raz_555 < 0.0:
+            raz_555 = raz_555 + 360
+        if raz_660 < 0.0:
+            raz_660 = raz_660 + 360
+        if raz_865 < 0.0:
+            raz_865 = raz_865 + 360
         
 
 
