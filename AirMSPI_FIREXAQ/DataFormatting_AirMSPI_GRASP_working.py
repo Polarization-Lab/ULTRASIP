@@ -822,13 +822,21 @@ def main():  # Main code
         # if raz_865 < 0.0:
         #     raz_865 = raz_865 + 360
 
-        raz_355 = -(saz - vaz_355);
-        raz_380 = -(saz - vaz_380);
-        raz_445 = -(saz - vaz_445);
-        raz_470 = -(saz - vaz_470);
-        raz_555 = -(saz - vaz_555);
-        raz_660 = -(saz - vaz_660);
-        raz_865 = -(saz - vaz_865);
+        # raz_355 = (saz - vaz_355);
+        # raz_380 = (saz - vaz_380);
+        # raz_445 = (saz - vaz_445);
+        # raz_470 = (saz - vaz_470);
+        # raz_555 = (saz - vaz_555);
+        # raz_660 = (saz - vaz_660);
+        # raz_865 = (saz - vaz_865);
+        
+        raz_355 = (vaz_355-saz);
+        raz_380 = (vaz_380-saz);
+        raz_445 = (vaz_445-saz);
+        raz_470 = (vaz_470-saz);
+        raz_555 = (vaz_555-saz);
+        raz_660 = (vaz_660-saz);
+        raz_865 = (vaz_865-saz);
 
         
 
@@ -921,9 +929,9 @@ def main():  # Main code
         q_median[loop,1] = eqr_qg_660
         q_median[loop,2] = eqr_qg_865
         
-        u_median[loop,0] = eqr_ug_470
-        u_median[loop,1] = eqr_ug_660
-        u_median[loop,2] = eqr_ug_865
+        u_median[loop,0] = -eqr_ug_470
+        u_median[loop,1] = -eqr_ug_660
+        u_median[loop,2] = -eqr_ug_865
           
         ipol_median[loop,0] = eqr_ipol_470
         ipol_median[loop,1] = eqr_ipol_660
