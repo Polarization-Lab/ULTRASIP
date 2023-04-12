@@ -58,10 +58,10 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    # datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Scat_FIREX"
-    # outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2423/1_Bakersfield"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Scat_FIREX"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1223/1_Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
 
@@ -91,30 +91,30 @@ def main():  # Main code
 # # Set bounds for ROI (USER INPUT)
 # # Note: These coordinates are RELATIVE to the overall bounding box
 
-    #FIREX
-    min_x = 1900
-    max_x = 2200
-    min_y = 1900
-    max_y = 2200
+    # #FIREX
+    # min_x = 1900
+    # max_x = 2200
+    # min_y = 1900
+    # max_y = 2200
     
-    # #Bakersfield
-    # min_x = 1200
-    # max_x = 1900
-    # min_y = 1200
-    # max_y = 1900
+    #Bakersfield
+    min_x = 1200
+    max_x = 1900
+    min_y = 1200
+    max_y = 1900
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
     #FIREX
-    box_x1 = 120
-    box_x2 = 125
-    box_y1 = 105
-    box_y2 = 110
+    # box_x1 = 120
+    # box_x2 = 125
+    # box_y1 = 105
+    # box_y2 = 110
 
     # #Bakserfield
-    # box_x1 = 485
-    # box_x2 = 490
-    # box_y1 = 485
-    # box_y2 = 490
+    box_x1 = 485
+    box_x2 = 490
+    box_y1 = 485
+    box_y2 = 490
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
@@ -791,9 +791,9 @@ def main():  # Main code
         # rotmatrix8 = np.array([[np.cos(2*alpha8),-np.sin(2*alpha8)],[np.sin(2*alpha8),np.cos(2*alpha8)]]); 
         # qg_865, ug_865 = -stokesin8s #rotmatrix8@stokesin8s
         
-        qg_470, ug_470 = stokesin4s
-        qg_660, ug_660 = stokesin6s
-        qg_865, ug_865 = stokesin8s
+        qg_470, ug_470 = stokesin4
+        qg_660, ug_660 = stokesin6
+        qg_865, ug_865 = stokesin8
     
         
 # Calculate the relative azimuth angle in the GRASP convention
@@ -822,13 +822,13 @@ def main():  # Main code
         # if raz_865 < 0.0:
         #     raz_865 = raz_865 + 360
 
-        raz_355 = 180-(saz - vaz_355);
-        raz_380 = 180-(saz - vaz_380);
-        raz_445 = 180-(saz - vaz_445);
-        raz_470 = 180-(saz - vaz_470);
-        raz_555 = 180-(saz - vaz_555);
-        raz_660 = 180-(saz - vaz_660);
-        raz_865 = 180-(saz - vaz_865);
+        raz_355 = -(saz - vaz_355);
+        raz_380 = -(saz - vaz_380);
+        raz_445 = -(saz - vaz_445);
+        raz_470 = -(saz - vaz_470);
+        raz_555 = -(saz - vaz_555);
+        raz_660 = -(saz - vaz_660);
+        raz_865 = -(saz - vaz_865);
 
         
 
@@ -921,9 +921,9 @@ def main():  # Main code
         q_median[loop,1] = eqr_qg_660
         q_median[loop,2] = eqr_qg_865
         
-        u_median[loop,0] = eqr_ug_470
-        u_median[loop,1] = eqr_ug_660
-        u_median[loop,2] = eqr_ug_865
+        u_median[loop,0] = -eqr_ug_470
+        u_median[loop,1] = -eqr_ug_660
+        u_median[loop,2] = -eqr_ug_865
           
         ipol_median[loop,0] = eqr_ipol_470
         ipol_median[loop,1] = eqr_ipol_660
@@ -949,7 +949,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat_180razQU'
+    outfile_base = 'RotfromScat_negrazQnegU'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
