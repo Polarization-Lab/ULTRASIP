@@ -668,7 +668,6 @@ def main():  # Main code
         
         #Vector Definitions
         zenith= np.array([0, 0, 1]);
-
         i = np.array([np.cos(np.radians(saz))*np.sin(np.radians(sza)), -np.sin(np.radians(saz))*np.sin(np.radians(sza)), -np.cos(np.radians(sza))]); #illumination vec,flip sign of sza
         k_4 = np.array([np.cos(np.radians(vaz_470))*np.sin(np.radians(vza_470)), -np.sin(np.radians(vaz_470))*np.sin(np.radians(vza_470)), np.cos(np.radians(vza_470))]);
         k_6 = np.array([np.cos(np.radians(vaz_660))*np.sin(np.radians(vza_660)), -np.sin(np.radians(vaz_660))*np.sin(np.radians(vza_660)), np.cos(np.radians(vza_660))]);
@@ -780,9 +779,9 @@ def main():  # Main code
         i_in_polar_median[loop,1] = eqr_i_660
         i_in_polar_median[loop,2] = eqr_i_865
         
-        q_median[loop,0] = eqr_qg_470
-        q_median[loop,1] = eqr_qg_660
-        q_median[loop,2] = eqr_qg_865
+        q_median[loop,0] = -eqr_qg_470
+        q_median[loop,1] = -eqr_qg_660
+        q_median[loop,2] = -eqr_qg_865
         
         u_median[loop,0] = -eqr_ug_470
         u_median[loop,1] = -eqr_ug_660
