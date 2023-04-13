@@ -4,11 +4,11 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1223/1_Bakersfield/RotfromScattering.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1223/2_Bakersfield/RotfromScattering.sdat"
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["Scattering_1_Bakersfield_Apr_12_23.txt", screen] # screen, "filename"
+        stream: ["Scattering_2_Bakersfield_Apr_12_23.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
