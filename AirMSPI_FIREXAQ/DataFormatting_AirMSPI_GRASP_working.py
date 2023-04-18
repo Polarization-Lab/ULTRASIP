@@ -674,9 +674,9 @@ def main():  # Main code
         k_8 = np.array([np.cos(np.radians(vaz_865))*np.sin(np.radians(vza_865)), -np.sin(np.radians(vaz_865))*np.sin(np.radians(vza_865)), np.cos(np.radians(vza_865))]);
 
   
-        qg_470, ug_470 = stokesin4
-        qg_660, ug_660 = stokesin6
-        qg_865, ug_865 = stokesin8
+        qg_470, ug_470 = stokesin4s
+        qg_660, ug_660 = stokesin6s
+        qg_865, ug_865 = stokesin8s
     
         
 # Calculate the relative azimuth angle in the GRASP convention
@@ -824,9 +824,9 @@ def main():  # Main code
         i_in_polar_median[loop,1] = eqr_i_660
         i_in_polar_median[loop,2] = eqr_i_865
         
-        q_median[loop,0] = eqr_qg_470
-        q_median[loop,1] = eqr_qg_660
-        q_median[loop,2] = eqr_qg_865
+        q_median[loop,0] = -eqr_qg_470
+        q_median[loop,1] = -eqr_qg_660
+        q_median[loop,2] = -eqr_qg_865
         
         u_median[loop,0] = eqr_ug_470
         u_median[loop,1] = eqr_ug_660
@@ -856,7 +856,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromMerdU'
+    outfile_base = 'RotfromScatnegQ'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
