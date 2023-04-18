@@ -705,13 +705,44 @@ def main():  # Main code
         k_865 = np.array([np.cos(np.radians(vaz_865)), -np.sin(np.radians(vaz_865))]);
         k_865 = k_355/np.linalg.norm(k_865);
 
-        raz_355 = 360-np.degrees(np.arccos(ip@k_355)) 
-        raz_380 = 360-np.degrees(np.arccos(ip@k_380)) 
-        raz_445 = 360-np.degrees(np.arccos(ip@k_445)) 
-        raz_470 = 360-np.degrees(np.arccos(ip@k_470)) 
-        raz_555 = 360-np.degrees(np.arccos(ip@k_555)) 
-        raz_660 = 360-np.degrees(np.arccos(ip@k_660)) 
-        raz_865 = 360-np.degrees(np.arccos(ip@k_865)) 
+        # raz_355 = np.degrees(np.arccos(ip@k_355)) 
+        # raz_380 = np.degrees(np.arccos(ip@k_380)) 
+        # raz_445 = np.degrees(np.arccos(ip@k_445)) 
+        # raz_470 = np.degrees(np.arccos(ip@k_470)) 
+        # raz_555 = np.degrees(np.arccos(ip@k_555)) 
+        # raz_660 = np.degrees(np.arccos(ip@k_660)) 
+        # raz_865 = np.degrees(np.arccos(ip@k_865)) 
+        
+        if saz >= 180: 
+            saz = saz - 180
+        else:
+            saz = saz + 180
+        
+        raz_355 = saz - vaz_355
+        raz_380 = saz - vaz_380
+        raz_445 = saz - vaz_445
+        raz_470 = saz - vaz_470
+        raz_555 = saz - vaz_555
+        raz_660 = saz - vaz_660
+        raz_865 = saz - vaz_865
+        
+        print(raz_355,raz_380,raz_445,raz_555,raz_660,raz_865)
+
+        if raz_355 < 0:
+            raz_355 = raz_355 + 360
+        if raz_380 < 0:
+            raz_380 = raz_380 + 360
+        if raz_445 < 0:
+            raz_445 = raz_445 + 360
+        if raz_555 < 0:
+            raz_555 = raz_555 + 360
+        if raz_660 < 0:
+            raz_660 = raz_660 + 360
+        if raz_865 < 0:
+            raz_865 = raz_865 + 360
+            
+        print(raz_355,raz_380,raz_445,raz_555,raz_660,raz_865)
+
 
         
 
