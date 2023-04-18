@@ -828,9 +828,9 @@ def main():  # Main code
         q_median[loop,1] = eqr_qg_660
         q_median[loop,2] = eqr_qg_865
         
-        u_median[loop,0] = -eqr_ug_470
-        u_median[loop,1] = -eqr_ug_660
-        u_median[loop,2] = -eqr_ug_865
+        u_median[loop,0] = eqr_ug_470
+        u_median[loop,1] = eqr_ug_660
+        u_median[loop,2] = eqr_ug_865
           
         ipol_median[loop,0] = eqr_ipol_470
         ipol_median[loop,1] = eqr_ipol_660
@@ -856,7 +856,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromMerd'
+    outfile_base = 'RotfromMerdU'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
