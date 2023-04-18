@@ -32,7 +32,9 @@ def main():  # Main code
 #       figpath is where the output should be stored
 
     basepath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Retrieval_Files/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/Prescott816_Data/"
+    #figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Retrieval_Files/Plots"
+    figpath = 'C:/Users/ULTRASIP_1/Documents/Clarissa/Figures'
 
     
 # Set the length of a sequence of step-and-stare observations
@@ -47,16 +49,16 @@ def main():  # Main code
     
 # Set some bounds for the image (USER INPUT)
 
-    # min_x = 1900
-    # max_x = 2200
-    # min_y = 1900
-    # max_y = 2200
+    min_x = 1900
+    max_x = 2200
+    min_y = 1900
+    max_y = 2200
     
-    #Bakersfield
-    min_x = 1200
-    max_x = 1900
-    min_y = 1200
-    max_y = 1900
+    # #Bakersfield
+    # min_x = 1200
+    # max_x = 1900
+    # min_y = 1200
+    # max_y = 1900
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
 
@@ -64,13 +66,17 @@ def main():  # Main code
     # box_x2 = 125
     # box_y1 = 105
     # box_y2 = 110
+    box_x1 = 45
+    box_x2 = 50
+    box_y1 = 220
+    box_y2 = 225
 
 
-    #Bakserfield
-    box_x1 = 485
-    box_x2 = 490
-    box_y1 = 485
-    box_y2 = 490
+    # #Bakserfield
+    # box_x1 = 485
+    # box_x2 = 490
+    # box_y1 = 485
+    # box_y2 = 490
 
 ### Read the AirMSPI data
 
@@ -161,26 +167,26 @@ def main():  # Main code
         dset = f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/']
         I_355 = dset[:]
     
-#        dset = f['/HDFEOS/GRIDS/380nm_band/Data Fields/I/']
-#        I_380 = dset[:]
+        dset = f['/HDFEOS/GRIDS/380nm_band/Data Fields/I/']
+        I_380 = dset[:]
     
-#        dset = f['/HDFEOS/GRIDS/445nm_band/Data Fields/I/']
-#        I_445 = dset[:]
+        dset = f['/HDFEOS/GRIDS/445nm_band/Data Fields/I/']
+        I_445 = dset[:]
     
-#        dset = f['/HDFEOS/GRIDS/470nm_band/Data Fields/I/']
-#        I_470 = dset[:]
+        dset = f['/HDFEOS/GRIDS/470nm_band/Data Fields/I/']
+        I_470 = dset[:]
     
-#        dset = f['/HDFEOS/GRIDS/555nm_band/Data Fields/I/']
-#        I_555 = dset[:]
+        dset = f['/HDFEOS/GRIDS/555nm_band/Data Fields/I/']
+        I_555 = dset[:]
     
-#        dset = f['/HDFEOS/GRIDS/660nm_band/Data Fields/I/']
-#        I_660 = dset[:]
+        dset = f['/HDFEOS/GRIDS/660nm_band/Data Fields/I/']
+        I_660 = dset[:]
     
-#        dset = f['/HDFEOS/GRIDS/865nm_band/Data Fields/I/']
-#        I_865 = dset[:]
+        dset = f['/HDFEOS/GRIDS/865nm_band/Data Fields/I/']
+        I_865 = dset[:]
     
-#        dset = f['/HDFEOS/GRIDS/935nm_band/Data Fields/I/']
-#        I_935 = dset[:]
+        dset = f['/HDFEOS/GRIDS/935nm_band/Data Fields/I/']
+        I_935 = dset[:]
 
 # Get the polarimetric datasets
 

@@ -97,6 +97,8 @@ def main():  # Main code
     min_y = 1900
     max_y = 2200
     
+
+    
     #Bakersfield
     # min_x = 1200
     # max_x = 1900
@@ -105,10 +107,16 @@ def main():  # Main code
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
     #FIREX
-    box_x1 = 120
-    box_x2 = 125
-    box_y1 = 105
-    box_y2 = 110
+    # box_x1 = 120
+    # box_x2 = 125
+    # box_y1 = 105
+    # box_y2 = 110
+    
+    #FIREX  8/16
+    box_x1 = 45
+    box_x2 = 50
+    box_y1 = 220
+    box_y2 = 225
 
     # #Bakserfield
     # box_x1 = 485
@@ -674,9 +682,9 @@ def main():  # Main code
         k_8 = np.array([np.cos(np.radians(vaz_865))*np.sin(np.radians(vza_865)), -np.sin(np.radians(vaz_865))*np.sin(np.radians(vza_865)), np.cos(np.radians(vza_865))]);
 
   
-        qg_470, ug_470 = -stokesin4s
-        qg_660, ug_660 = -stokesin6s
-        qg_865, ug_865 = -stokesin8s
+        qg_470, ug_470 = stokesin4
+        qg_660, ug_660 = stokesin6
+        qg_865, ug_865 = stokesin8
     
         
 # Calculate the relative azimuth angle in the GRASP convention
@@ -856,7 +864,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat'
+    outfile_base = 'RotfromMerd'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
