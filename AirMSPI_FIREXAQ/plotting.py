@@ -25,8 +25,8 @@ def main():  # Main code
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Scat_FIREX"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Scat_FIREX/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
 
 
 
@@ -73,7 +73,7 @@ def main():  # Main code
 
 # Get the text file listing
 
-    file_list = glob.glob('Scattering*180raznegQ_Mar*.txt')
+    file_list = glob.glob('Meridian*U*.txt')
     
     num_files = len(file_list)
     
