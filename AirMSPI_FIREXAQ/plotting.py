@@ -25,8 +25,8 @@ def main():  # Main code
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1923/4_FIREX"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1923/4_FIREX/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1923/3_FIREX2"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1923/3_FIREX2/Plots"
 
 
 
@@ -754,8 +754,8 @@ def main():  # Main code
     xmax = scat[:,3].max()+10;
     xticks = xmax.round()/10;
     
-    ymin = q_mod.min()-0.6;
-    ymax = q_mod.max()+0.2;
+    ymin = q_mod.min()-0.2;
+    ymax = q_mod.max()+0.3;
     yticks = ymax/3;
  
     ax1.set_xlim(xmin.round(),xmax.round())
@@ -800,8 +800,8 @@ def main():  # Main code
     xmax = scat[:,3].max()+10;
     xticks = xmax.round()/10;
     
-    ymin = u_mod.min()-0.6;
-    ymax = u_mod.max()+0.4;
+    ymin = u_mod.min()-0.5;
+    ymax = u_mod.max()+0.5;
     yticks = ymax/2;
  
     ax1.set_xlim(xmin.round(),xmax.round())

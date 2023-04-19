@@ -58,9 +58,9 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott816_Data/"
-    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1923/4_Bakersfield"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott816_Data/"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1923/4_FIREX2"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
@@ -91,19 +91,19 @@ def main():  # Main code
 # # Set bounds for ROI (USER INPUT)
 # # Note: These coordinates are RELATIVE to the overall bounding box
 
-    # # #FIREX
-    # min_x = 1900
-    # max_x = 2200
-    # min_y = 1900
-    # max_y = 2200
+    # #FIREX
+    min_x = 1900
+    max_x = 2200
+    min_y = 1900
+    max_y = 2200
     
 
     
-    #Bakersfield
-    min_x = 1200
-    max_x = 1900
-    min_y = 1200
-    max_y = 1900
+    # #Bakersfield
+    # min_x = 1200
+    # max_x = 1900
+    # min_y = 1200
+    # max_y = 1900
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
     #FIREX
@@ -112,17 +112,17 @@ def main():  # Main code
     # box_y1 = 105
     # box_y2 = 110
     
-    # #FIREX  8/16
-    # box_x1 = 45
-    # box_x2 = 50
-    # box_y1 = 220
-    # box_y2 = 225
+    #FIREX  8/16
+    box_x1 = 45
+    box_x2 = 50
+    box_y1 = 220
+    box_y2 = 225
 
-    #Bakserfield
-    box_x1 = 485
-    box_x2 = 490
-    box_y1 = 485
-    box_y2 = 490
+    # #Bakserfield
+    # box_x1 = 485
+    # box_x2 = 490
+    # box_y1 = 485
+    # box_y2 = 490
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
@@ -864,7 +864,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat'
+    outfile_base = 'RotfromScat2'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
