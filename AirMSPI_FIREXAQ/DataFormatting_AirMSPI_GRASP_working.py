@@ -58,9 +58,9 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott816_Data/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Scat_FIREXTest"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1923/4_FIREX"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
@@ -82,7 +82,7 @@ def main():  # Main code
 # Set the index of the sequence of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
-    step_ind = 1
+    step_ind = 0
     
 #_______________Region of Interest___________________#
 # Crop images to same area to correct for parallax and set a region of interest
@@ -107,16 +107,16 @@ def main():  # Main code
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
     #FIREX
-    # box_x1 = 120
-    # box_x2 = 125
-    # box_y1 = 105
-    # box_y2 = 110
+    box_x1 = 120
+    box_x2 = 125
+    box_y1 = 105
+    box_y2 = 110
     
-    #FIREX  8/16
-    box_x1 = 45
-    box_x2 = 50
-    box_y1 = 220
-    box_y2 = 225
+    # #FIREX  8/16
+    # box_x1 = 45
+    # box_x2 = 50
+    # box_y1 = 220
+    # box_y2 = 225
 
     # #Bakserfield
     # box_x1 = 485
@@ -832,13 +832,13 @@ def main():  # Main code
         i_in_polar_median[loop,1] = eqr_i_660
         i_in_polar_median[loop,2] = eqr_i_865
         
-        q_median[loop,0] = eqr_qg_470
-        q_median[loop,1] = eqr_qg_660
-        q_median[loop,2] = eqr_qg_865
+        q_median[loop,0] = -eqr_qg_470
+        q_median[loop,1] = -eqr_qg_660
+        q_median[loop,2] = -eqr_qg_865
         
-        u_median[loop,0] = eqr_ug_470
-        u_median[loop,1] = eqr_ug_660
-        u_median[loop,2] = eqr_ug_865
+        u_median[loop,0] = -eqr_ug_470
+        u_median[loop,1] = -eqr_ug_660
+        u_median[loop,2] = -eqr_ug_865
           
         ipol_median[loop,0] = eqr_ipol_470
         ipol_median[loop,1] = eqr_ipol_660
@@ -864,7 +864,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScatpos'
+    outfile_base = 'RotfromScat'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
