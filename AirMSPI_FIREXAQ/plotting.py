@@ -25,8 +25,8 @@ def main():  # Main code
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/2_FIREX"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/2_FIREX/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1923/4_FIREX"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1923/4_FIREX/Plots"
 
 
 
@@ -73,7 +73,7 @@ def main():  # Main code
 
 # Get the text file listing
 
-    file_list = glob.glob('Meridian*.txt')
+    file_list = glob.glob('Merd*.txt')
     
     num_files = len(file_list)
     
@@ -754,8 +754,8 @@ def main():  # Main code
     xmax = scat[:,3].max()+10;
     xticks = xmax.round()/10;
     
-    ymin = q_mod.min()-0.1;
-    ymax = q_mod.max()+0.5;
+    ymin = q_mod.min()-0.6;
+    ymax = q_mod.max()+0.2;
     yticks = ymax/3;
  
     ax1.set_xlim(xmin.round(),xmax.round())
@@ -800,8 +800,8 @@ def main():  # Main code
     xmax = scat[:,3].max()+10;
     xticks = xmax.round()/10;
     
-    ymin = u_mod.min()-0.1;
-    ymax = u_mod.max()+0.1;
+    ymin = u_mod.min()-0.6;
+    ymax = u_mod.max()+0.4;
     yticks = ymax/2;
  
     ax1.set_xlim(xmin.round(),xmax.round())

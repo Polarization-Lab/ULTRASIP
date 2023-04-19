@@ -45,7 +45,7 @@ def main():  # Main code
 # Set the index of the group of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
-    step_ind = 0
+    step_ind = 1
     
 # Set some bounds for the image (USER INPUT)
 
