@@ -11,6 +11,7 @@ Acknowledgement: Sierra Macleod
 #Import Libraries
 import serial
 import time
+from enum import IntEnum
 
 # Define constants
 
@@ -31,6 +32,7 @@ CMD_MV_ABS = 0x35
 CMD_MV_HOME = 0x36
 CMD_MV_ENT_COORD = 0x33
 CMD_ALIGN_ENT_COORD = 0x83
+CMD_GET_SET_PT_SL = 0x81
 # ... etc. you probably don't need to write one for every command,
 # but it's good form to make constants for the ones you plan to use.
 # makes it more readable for future you and anyone else reading it
@@ -62,6 +64,12 @@ GEN_CWM = 3   # Moving clockwise
 GEN_CCWM = 2  # Moving counter-clockwise
 GEN_UPM = 1   # Moving up
 GEN_DWNM = 0  # Moving down
+
+class LimitAxis(IntEnum):
+    CW = 0
+    CCW = 1
+    UP = 2
+    DOWN = 3
 
 def int_to_bytes(val):
     conv = list(val.to_bytes(2, byteorder='little', signed=True))
@@ -118,9 +126,9 @@ class GenStatus:
 class BasicResponse:
     def __init__(self, data: list):
         print(data)
-        self.pan_coord = bytes_to_int(data.pop(0), data.pop(0))   # PAN = -3600 to +3600 = -360.0 deg to +360.0 deg
-        self.tilt_coord =  bytes_to_int(data.pop(0), data.pop(0))  # TILT = -1800 to +1800 = -180.0 deg to +180.0 deg
-
+        self.pan_coord = (bytes_to_int(data.pop(0), data.pop(0)) - 4096) / 10   # PAN = -3600 to +3600 = -360.0 deg to +360.0 deg
+        self.tilt_coord =  (bytes_to_int(data.pop(0), data.pop(0)) - 4096) / 10  # TILT = -1800 to +1800 = -180.0 deg to +180.0 deg
+        
         self.pan_status = PanStatus(data.pop(0))
         self.tilt_status = TiltStatus(data.pop(0))
         self.gen_status = GenStatus(data.pop(0))
@@ -150,10 +158,10 @@ class BasicResponse:
                                       zoom_coord=self.zoom_cord,
                                       focus_coord=self.focus_coord,
                                       cam_data=cam_data)
-        # return ('[Response]\n'
-        #        'Pan coord:  {pan_coord} deg\n'
-        #        'Tilt coord: {tilt_coord} deg\n').format(pan_coord=self.pan_coord,
-        #                                      tilt_coord=self.tilt_coord)
+        return ('[Response]\n'
+                'Pan coord:  {pan_coord} deg\n'
+                'Tilt coord: {tilt_coord} deg\n').format(pan_coord=self.pan_coord,
+                                              tilt_coord=self.tilt_coord)
         
 
 
@@ -275,7 +283,7 @@ def get_status_jog(serial_port,
                                                           data=[hex(x) for x in rsp_data]))
 
     formatted_resp = BasicResponse(rsp_data)
-    print(rsp_data)
+    print(formatted_resp)
 
 def init_autobaud(serial_port):
     print('Initializing Autobaud')
@@ -377,7 +385,7 @@ def mv_to_home(serial_port,pan,tilt, get_response=True):
     # Check LRC is valid
     lrc_matches = calc_checksum(rsp_cmd, rsp_data) == rsp_lrc
 
-    print(('RCV | MV TO Coord | '
+    print(('RCV | MV TO Home | '
            'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
            'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
                                                           id=hex(rsp_identity),
@@ -387,3 +395,37 @@ def mv_to_home(serial_port,pan,tilt, get_response=True):
 
     formatted_resp = BasicResponse(rsp_data)
     print(formatted_resp)
+
+def get_set_pan_tilt_soft_lims(serial_port, axis: LimitAxis, do_set=False, get_response=True):
+    print(f'Getting soft limit for axis {axis.name}')
+    
+    buffer = build_req(CMD_GET_SET_PT_SL, [int(axis) | (int(do_set) << 7)])
+
+    response_raw = send_request(serial_port, buffer, get_rsp=get_response)
+    if not get_response:
+        return
+
+    response = remove_escapes(response_raw)
+
+    return_code = response.pop(0)  # Pop ACK/NACK off front
+    response.pop()  # Pop ETX from back
+    rsp_identity = response.pop(0)  # Pop Identity off front
+    rsp_cmd = response.pop(0) # Pull cmd byte
+    rsp_lrc = response.pop() # Pull LRC from back
+    rsp_data = response  # Everything else is data
+
+    # Check LRC is valid
+    lrc_matches = calc_checksum(rsp_cmd, rsp_data) == rsp_lrc
+
+    print(('RCV | MV TO Home | '
+           'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
+           'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
+                                                          id=hex(rsp_identity),
+                                                          cmd=hex(rsp_cmd),
+                                                          lrc_match='YES' if lrc_matches else 'NO',
+                                                          data=[hex(x) for x in rsp_data]))
+    
+    axis_number = rsp_data.pop(0)
+    print(f'Axis: {axis_number}')
+    limit_value = bytes_to_int(rsp_data.pop(0), rsp_data.pop(0))
+    print(f'Limit value set to {limit_value}')

@@ -32,7 +32,7 @@ def main():  # Main code
 #       figpath is where the output should be stored
 
     basepath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    basepath = "C:/Users/ULTRASIP_1/Documents/Prescott816_Data/"
+    basepath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data2/"
     #figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Retrieval_Files/Plots"
     figpath = 'C:/Users/ULTRASIP_1/Documents/Clarissa/Figures'
 
@@ -45,7 +45,7 @@ def main():  # Main code
 # Set the index of the group of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
-    step_ind = 1
+    step_ind = 0
     
 # Set some bounds for the image (USER INPUT)
 
@@ -66,10 +66,14 @@ def main():  # Main code
     # box_x2 = 125
     # box_y1 = 105
     # box_y2 = 110
-    box_x1 = 45
-    box_x2 = 50
-    box_y1 = 220
-    box_y2 = 225
+    # box_x1 = 45
+    # box_x2 = 50
+    # box_y1 = 220
+    # box_y2 = 225
+    box_x1 = 135
+    box_x2 = 140
+    box_y1 = 140
+    box_y2 = 145
 
 
     # #Bakserfield

@@ -12,6 +12,18 @@ Note: Must have PTCR-20 installed on computer.
 import serial
 import time
 import motor_commands as mc
+from motor_commands import LimitAxis
+
+
+def map_range(x, in_min, in_max, out_min, out_max):
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+
+# tilt range: -68.4 to +68.4
+def move_to_coords(pan=None, tilt=None):
+    calc_pan = 9999 if pan is None else int(map_range(pan, -360, 360, 0, -622))
+    calc_tilt = 9999 if tilt is None else int(map_range(tilt - 5, -68.4, 68.4, 180, -540))
+    print(f'Moving to coords pan: {pan}deg (calc: {calc_pan}), tilt: {tilt}deg (calc: {calc_tilt})')
+    mc.mv_to_coord(moog, calc_pan, calc_tilt)
 
                          
 if __name__ == '__main__':
@@ -19,34 +31,42 @@ if __name__ == '__main__':
     moog = serial.Serial()
     moog.baudrate = 9600
     moog.port = 'COM2'
-
-    time.sleep(3)
     moog.open()
     #print(moog)
 
     #print("Moog is open?  " + str(moog.is_open))
     #print("Moog is writable?  " + str(moog.writable()))
-    time.sleep(3)
-
     mc.init_autobaud(moog);
 
    # print('Fetching with response:')
     mc.get_status_jog(moog)
     mc.mv_to_home(moog,0000,0000)
-    time.sleep(10)
+
+    time.sleep(3)
+ 
 
  #coordinate must consist of the desired position to 1/10th degree 
  #multiplied by 10, i.e., +90.0° should be sent as 900.   
    
-    pan = 15*10;
-    tilt = 12*10;
-    mc.mv_to_coord(moog,pan,9999)
+    # pan = 150;
+    # tilt = 20;
+    #mc.mv_to_coord(moog,pan,tilt)
+    move_to_coords(tilt=-50.0)
     time.sleep(3)
-    mc.mv_to_coord(moog,9999,tilt)
+    move_to_coords(tilt=0)
     time.sleep(3)
-    mc.get_status_jog(moog)
-    time.sleep(10)
+    move_to_coords(tilt=50.0)
+    time.sleep(3)
+    #mc.get_set_pan_tilt_soft_lims(moog, LimitAxis.CW)
+    #mc.get_set_pan_tilt_soft_lims(moog, LimitAxis.CCW)
+    #mc.get_set_pan_tilt_soft_lims(moog, LimitAxis.UP)
+    #mc.get_set_pan_tilt_soft_lims(moog, LimitAxis.DOWN)
+   
+    #mc.mv_to_coord(moog,9999,-100)
+
+    time.sleep(3)
     mc.mv_to_home(moog,0000,0000)
+    
 
     moog.close()
 

@@ -191,13 +191,13 @@ def mv_to_coord(serial_port,pan,tilt, get_response=True):
     # Check LRC is valid
     lrc_matches = calc_checksum(rsp_cmd, rsp_data) == rsp_lrc
 
-    # print(('RCV | MV TO Coord | '
-    #        'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
-    #        'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
-    #                                                       id=hex(rsp_identity),
-    #                                                       cmd=hex(rsp_cmd),
-    #                                                       lrc_match='YES' if lrc_matches else 'NO',
-    #                                                       data=[hex(x) for x in rsp_data]))
+    print(('RCV | MV TO Coord | '
+            'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
+            'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
+                                                          id=hex(rsp_identity),
+                                                          cmd=hex(rsp_cmd),
+                                                          lrc_match='YES' if lrc_matches else 'NO',
+                                                          data=[hex(x) for x in rsp_data]))
 
 def mv_to_abszero(serial_port,get_response=True):
 
@@ -220,13 +220,13 @@ def mv_to_abszero(serial_port,get_response=True):
     # Check LRC is valid
     lrc_matches = calc_checksum(rsp_cmd, rsp_data) == rsp_lrc
 
-    # print(('RCV | MV TO ABS | '
-    #        'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
-    #        'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
-    #                                                       id=hex(rsp_identity),
-    #                                                       cmd=hex(rsp_cmd),
-    #                                                       lrc_match='YES' if lrc_matches else 'NO',
-    #                                                       data=[hex(x) for x in rsp_data]))
+    print(('RCV | MV TO ABS | '
+            'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
+            'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
+                                                          id=hex(rsp_identity),
+                                                          cmd=hex(rsp_cmd),
+                                                          lrc_match='YES' if lrc_matches else 'NO',
+                                                          data=[hex(x) for x in rsp_data]))
 
 def mv_to_home(serial_port,pan,tilt, get_response=True):
     
@@ -251,10 +251,10 @@ def mv_to_home(serial_port,pan,tilt, get_response=True):
     # Check LRC is valid
     lrc_matches = calc_checksum(rsp_cmd, rsp_data) == rsp_lrc
 
-    # print(('RCV | MV TO Coord | '
-    #        'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
-    #        'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
-    #                                                       id=hex(rsp_identity),
-    #                                                       cmd=hex(rsp_cmd),
-    #                                                       lrc_match='YES' if lrc_matches else 'NO',
-    #                                                       data=[hex(x) for x in rsp_data]))
+    print(('RCV | MV TO Coord | '
+            'ACK: {ack_rsp}, ID: {id}, CMD: {cmd}, '
+            'LRC match: {lrc_match}, Data: {data}').format(ack_rsp='YES' if return_code == CTRL_ACK else 'NO',
+                                                          id=hex(rsp_identity),
+                                                          cmd=hex(rsp_cmd),
+                                                          lrc_match='YES' if lrc_matches else 'NO',
+                                                          data=[hex(x) for x in rsp_data]))
