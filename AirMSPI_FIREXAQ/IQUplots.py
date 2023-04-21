@@ -25,8 +25,8 @@ def main():  # Main code
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Mer_FIREX"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar2723/Mer_FIREX/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr2023/1_FIREX2"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr2023/1_FIREX2/Plots"
 
 
 
@@ -73,7 +73,7 @@ def main():  # Main code
 
 # Get the text file listing
 
-    file_list = glob.glob('Meridian*180*.txt')
+    file_list = glob.glob('Merd*.txt')
     
     num_files = len(file_list)
     
@@ -813,8 +813,8 @@ def main():  # Main code
     ax3.plot(scat[:,5],u_mod[:,1],color="red")
     ax3.plot(scat[:,6],u_mod[:,2],color="orange")
          
-    ymin = -0.6;
-    ymax =0.4;
+    ymin = -0.5;
+    ymax =0.5;
     yticks = 0.3;
      
     ax3.set_ylim(ymin,ymax)

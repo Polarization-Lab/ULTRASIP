@@ -294,7 +294,7 @@ def main():  # Main code
 
 # Generate the output filename
         print(timeoffile_hhmmss)
-        outfile = "Bakersfield_{}".format(loop)
+        outfile = "FIREX2_{}".format(loop)
         outfile = outfile+"_"+str(timeoffile_hhmmss)+"_"+str(step_ind)+"v04.png"
         plt.axis('off')
         plt.title("Time: " + str(timeoffile_hhmmss)+" Angle: "+str(angleoffile))
