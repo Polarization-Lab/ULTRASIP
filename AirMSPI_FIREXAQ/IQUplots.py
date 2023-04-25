@@ -25,8 +25,8 @@ def main():  # Main code
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1923/4_FIREX"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1923/4_FIREX/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr2523/1_FIREX"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr2523/1_FIREX/Plots"
 
 
 
@@ -777,7 +777,7 @@ def main():  # Main code
     ax1.set_yscale("log")
     # ax1.set_ylim(5e-2,2.5e-1)
     # ax1.set_yticks(np.arange(0.03,0.3,0.06))
-    #ax1.set_ylabel('BRF(I)', fontsize='xx-large')
+    # ax1.set_ylabel('BRF(I)', fontsize='xx-large')
     ax1.yaxis.set_label_coords(-.15, .5)
     ax1.xaxis.set_label_coords(.5, -.1)
     ax1.set_xticks([])
@@ -794,13 +794,13 @@ def main():  # Main code
     ax2.plot(scat[:,5],q_mod[:,1],color="red")
     ax2.plot(scat[:,6],q_mod[:,2],color="orange")
          
-    ymin = -0.1;
-    ymax = 0.35;
+    ymin = -0.4;
+    ymax = 0.3;
     yticks = 0.1;
      
     ax2.set_ylim(ymin,ymax)
     ax2.set_yticks(np.arange(ymin,ymax,yticks))
-    #ax2.set_ylabel('BRF(Q)', fontsize='xx-large')
+    # ax2.set_ylabel('BRF(Q)', fontsize='xx-large')
     ax2.yaxis.set_label_coords(-.15, .5)
     ax2.xaxis.set_label_coords(.5, -.1)
     ax2.set_xticks([])
@@ -817,18 +817,18 @@ def main():  # Main code
     ax3.plot(scat[:,5],u_mod[:,1],color="red")
     ax3.plot(scat[:,6],u_mod[:,2],color="orange")
          
-    ymin = -0.01;
-    ymax =0.035;
-    yticks = 0.01;
+    ymin = -0.5;
+    ymax =0.2;
+    yticks = 0.2;
      
     ax3.set_ylim(ymin,ymax)
     ax3.set_yticks(np.arange(ymin,ymax,yticks))
-    #ax3.set_ylabel('BRF(U)', fontsize='xx-large')
+    # ax3.set_ylabel('BRF(U)', fontsize='xx-large')
     
-    #ax3.set_xlim(60,145)
-    #ax3.set_xticks(np.arange(60,145,10))
-    ax3.set_xlim(110,175)
-    ax3.set_xticks(np.arange(110,175,10))
+    # ax3.set_xlim(60,145)
+    # ax3.set_xticks(np.arange(60,145,10))
+    ax3.set_xlim(65,150)
+    ax3.set_xticks(np.arange(65,150,10))
     ax3.set_xlabel( u"\u03A9 [\u00b0]",fontsize='xx-large')
     
     ax3.yaxis.set_label_coords(-.15, .5)
