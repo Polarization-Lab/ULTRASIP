@@ -794,8 +794,8 @@ def main():  # Main code
     ax2.plot(scat[:,5],q_mod[:,1],color="red")
     ax2.plot(scat[:,6],q_mod[:,2],color="orange")
          
-    ymin = -0.4;
-    ymax = 0.3;
+    ymin = 0.0;
+    ymax = 0.5;
     yticks = 0.1;
      
     ax2.set_ylim(ymin,ymax)
@@ -817,9 +817,9 @@ def main():  # Main code
     ax3.plot(scat[:,5],u_mod[:,1],color="red")
     ax3.plot(scat[:,6],u_mod[:,2],color="orange")
          
-    ymin = -0.5;
-    ymax =0.2;
-    yticks = 0.2;
+    ymin = -0.06;
+    ymax =0.01;
+    yticks = 0.02;
      
     ax3.set_ylim(ymin,ymax)
     ax3.set_yticks(np.arange(ymin,ymax,yticks))

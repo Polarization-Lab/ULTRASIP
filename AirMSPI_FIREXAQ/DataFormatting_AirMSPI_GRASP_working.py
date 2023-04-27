@@ -687,9 +687,9 @@ def main():  # Main code
         k_8 = np.array([np.cos(np.radians(vaz_865))*np.sin(np.radians(vza_865)), -np.sin(np.radians(vaz_865))*np.sin(np.radians(vza_865)), np.cos(np.radians(vza_865))]);
 
   
-        qg_470, ug_470 = stokesin4
-        qg_660, ug_660 = stokesin6
-        qg_865, ug_865 = stokesin8
+        qg_470, ug_470 = stokesin4s
+        qg_660, ug_660 = stokesin6s
+        qg_865, ug_865 = stokesin8s
     
         
 # Calculate the relative azimuth angle in the GRASP convention

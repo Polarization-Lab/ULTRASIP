@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Wed Apr 26 11:14:58 2023
 
-# AirMSPI_L1B2_VIS_Prescott_04.py
-#
-# This is a Python 3.9.13 code to read AirMSPI L1B2 data and make plots.
-#
-# Creation Date: 2022-07-26
-# Last Modified: 2022-07-26
-#
-# by Michael J. Garay
-# (Michael.J.Garay@jpl.nasa.gov)
+@author: ULTRASIP_1
+"""
+
+#Script to choose ROI
 
 # Import packages
 
@@ -158,9 +155,7 @@ def main():  # Main code
         timeoffile_hhmmss = words[5]
         angleoffile = words[7]
 
-# Set the timer for reading the file
 
-        start_time = time.time()
         
 # Open the HDF-5 file
 
@@ -169,67 +164,66 @@ def main():  # Main code
 # Get the intensity datasets
 
         dset = f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/']
-        I_355 = dset[:]
+        I_355 = dset[:][min_y:max_y,min_x:max_x]
     
         dset = f['/HDFEOS/GRIDS/380nm_band/Data Fields/I/']
-        I_380 = dset[:]
+        I_380 = dset[:][min_y:max_y,min_x:max_x]
     
         dset = f['/HDFEOS/GRIDS/445nm_band/Data Fields/I/']
-        I_445 = dset[:]
+        I_445 = dset[:][min_y:max_y,min_x:max_x]
     
         dset = f['/HDFEOS/GRIDS/470nm_band/Data Fields/I/']
-        I_470 = dset[:]
+        I_470 = dset[:][min_y:max_y,min_x:max_x]
     
         dset = f['/HDFEOS/GRIDS/555nm_band/Data Fields/I/']
-        I_555 = dset[:]
+        I_555 = dset[:][min_y:max_y,min_x:max_x]
     
         dset = f['/HDFEOS/GRIDS/660nm_band/Data Fields/I/']
-        I_660 = dset[:]
+        I_660 = dset[:][min_y:max_y,min_x:max_x]
     
         dset = f['/HDFEOS/GRIDS/865nm_band/Data Fields/I/']
-        I_865 = dset[:]
+        I_865 = dset[:][min_y:max_y,min_x:max_x]
     
         dset = f['/HDFEOS/GRIDS/935nm_band/Data Fields/I/']
-        I_935 = dset[:]
-
-# Get the polarimetric datasets
-
-#        dset = f['/HDFEOS/GRIDS/470nm_band/Data Fields/IPOL/']
-#        Ipol_470 = dset[:]
-    
-#        dset = f['/HDFEOS/GRIDS/470nm_band/Data Fields/DOLP/']
-#        DOLP_470 = dset[:]
-    
-#        dset = f['/HDFEOS/GRIDS/470nm_band/Data Fields/Q_scatter/']
-#        Q_470 = dset[:]
-    
-#        dset = f['/HDFEOS/GRIDS/470nm_band/Data Fields/U_scatter/']
-#        U_470 = dset[:]
-    
-#        dset = f['/HDFEOS/GRIDS/660nm_band/Data Fields/IPOL/']
-#        Ipol_660 = dset[:]
-    
-#        dset = f['/HDFEOS/GRIDS/660nm_band/Data Fields/DOLP/']
-#        DOLP_660 = dset[:]
-    
-#        dset = f['/HDFEOS/GRIDS/865nm_band/Data Fields/IPOL/']
-#        Ipol_865 = dset[:]
-    
-#        dset = f['/HDFEOS/GRIDS/865nm_band/Data Fields/DOLP/']
-#        DOLP_865 = dset[:]
+        I_935 = dset[:][min_y:max_y,min_x:max_x]
     
 # Close the file
 
         f.close()
 
 # Print the time
+                
+        img = np.flipud(I_355)
 
-        end_time = time.time()
-        print("Time to Read AirMSPI data was %g seconds" % (end_time - start_time))
+            
+        #I_355_rolled = np.lib.stride_tricks.sliding_window_view(img, 5, axis = 0)
+        #I_355_rolled = np.lib.stride_tricks.sliding_window_view(img, 5, axis = 1)
         
-        print(np.size(I_355))
+        #rolled_std = np.std(I_355_rolled, axis=2)
+
         
-        img = np.flipud(I_355[min_y:max_y,min_x:max_x])
+    return img
+        
+
+### END MAIN FUNCTION
+if __name__ == '__main__':
+        img = main() 
+        
+        imgr =  np.lib.stride_tricks.sliding_window_view(img, 5, axis = 0)
+        imroll = np.lib.stride_tricks.sliding_window_view(imgr, 5, axis = 1)
+        
+        std = np.std(imroll,axis=0)
+
+
+        std_min = np.amin(std)
+        std_idx = np.where(std==std_min)
+        
+       # i1 = Ir[std_idx[0][:],std_idx[1][:],std_idx[2][:],std_idx[2][:]]
+       
+        box_x1 = (std_idx[0][2])+5
+        box_x2 =  (std_idx[0][2])-5
+        box_y1 = (std_idx[0][2])+5
+        box_y2 = (std_idx[0][2])-5
         
         good = (img > 0.0)
         img_good = img[good]
@@ -244,13 +238,14 @@ def main():  # Main code
         img_max = np.amax(img[good])
         img_med = np.median(img[good])
         img_mean = np.mean(img[good])
-
+    
         print("IMAGE RANGE")    
         print(img_min)
         print(img_max)
         print(img_mean)
         print(img_med)
         
+        stdcheck = np.std(img[box_x2:box_x1,box_y2:box_y1])
         plot_min = 0.7*img_mean
         plot_max = 1.5*img_mean
 
@@ -276,41 +271,17 @@ def main():  # Main code
     
         im = ax1.pcolormesh(x,y,img,shading='nearest',cmap=plt.cm.gist_gray,
             vmin=plot_min,vmax=plot_max)
-            
-# Plot the box
 
+        # Plot the box
+
+        
         ax1.plot([box_x1,box_x2],[box_y1,box_y1],color="lime",linewidth=1) # Bottom
         ax1.plot([box_x2,box_x2],[box_y1,box_y2],color="lime",linewidth=1) # Right
         ax1.plot([box_x1,box_x2],[box_y2,box_y2],color="lime",linewidth=1) # Top
         ax1.plot([box_x1,box_x1],[box_y1,box_y2],color="lime",linewidth=1) # Left
-        
-# Set the aspect ratio
-            
+                
+        # Set the aspect ratio
+                    
         ax1.set_aspect('equal')
         
-# Save the data
-    
-        os.chdir(figpath)
 
-# Generate the output filename
-        print(timeoffile_hhmmss)
-        outfile = "Bakersfield_{}".format(loop)
-        outfile = outfile+"_"+str(timeoffile_hhmmss)+"_"+str(step_ind)+"v04.png"
-        plt.axis('off')
-        plt.title("Time: " + str(timeoffile_hhmmss)+" Angle: "+str(angleoffile))
-        plt.savefig(outfile,dpi=120)
-    
-# Print the time
-
-    all_end_time = time.time()
-    print("Total elapsed time was %g seconds" % (all_end_time - all_start_time))
-
-# Tell user completion was successful
-
-    print("\nSuccessful Completion\n")
-
-### END MAIN FUNCTION
-
-
-if __name__ == '__main__':
-    main()    
