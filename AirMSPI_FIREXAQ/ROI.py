@@ -15,21 +15,101 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import time
+from matplotlib import patches
 
+
+
+def image_crop(a):
+        #np.clip(a, 0, None, out=a)
+        a[a == -999] = np.nan
+        mid_row = a.shape[0] // 2
+        mid_col = a.shape[1] // 2
+        start_row = mid_row - 524
+        end_row = mid_row + 524
+        start_col = mid_col - 524
+        end_col = mid_col + 524
+        
+        a = a[start_row:end_row, start_col:end_col]
+        return a
+
+
+def calculate_std(image):
+# Define the size of the regions we'll calculate the standard deviation for
+    region_size = 5
+
+    # Calculate the standard deviation over the regions
+    std_dev = np.zeros_like(image)
+    for i in range(region_size//2, image.shape[0] - region_size//2):
+        for j in range(region_size//2, image.shape[1] - region_size//2):
+            std_dev[i,j] = np.std(image[i-region_size//2:i+region_size//2+1, j-region_size//2:j+region_size//2+1])
+
+    return std_dev
+
+def calculate_median(image):
+# Define the size of the regions we'll calculate the standard deviation for
+    region_size = 5
+
+    # Calculate the standard deviation over the regions
+    median_img = np.zeros_like(image)
+    for i in range(region_size//2, image.shape[0] - region_size//2):
+        for j in range(region_size//2, image.shape[1] - region_size//2):
+            median_img[i,j] = np.median(image[i-region_size//2:i+region_size//2+1, j-region_size//2:j+region_size//2+1])
+
+    return median_img
 # Start the main code
+
+def  choose_roi(image): 
+            std_dev = calculate_std(image)
+            med_img = calculate_median(image)
+    # Plot the original image and the standard deviation image side by side
+            fig, ax = plt.subplots(1,2,  figsize=(16, 8))
+            ax[0].imshow(image , cmap = 'gray')
+            ax[0].set_title('Original Image')
+            ax[0].axis('off')
+            im = ax[1].imshow(std_dev, cmap = 'jet')
+            ax[1].set_title('Standard Deviation')
+            ax[1].grid(True)
+            cbar = fig.colorbar(im, ax = ax[1], fraction = 0.046, pad=0.04)
+            
+            plt.show()
+
+        # Prompt the user to choose a region
+            x = int(input('Enter x-coordinate of region: '))
+            y = int(input('Enter y-coordinate of region: '))
+
+          
+            # Create a new figure with 1 row and 2 columns
+            fig, axs = plt.subplots(1, 2, figsize=(16, 8))
+
+        # Plot the original image with the selected region of interest highlighted
+            axs[0].imshow(image, cmap='gray')
+            axs[0].add_patch(patches.Rectangle((x, y), 5, 5, linewidth=5, edgecolor='w', facecolor='none'))
+            axs[0].set_title('Selected Region of Interest')
+
+            # Plot the standard deviation image with the selected region of interest highlighted
+            im = axs[1].imshow(std_dev, cmap='jet')
+            axs[1].add_patch(patches.Rectangle((x, y),5,5,linewidth=5, edgecolor='w', facecolor='none'))
+            axs[1].set_title('Standard Deviation with Selected Region of Interest')
+            cbar = fig.colorbar(im, ax=axs[1], fraction=0.046, pad=0.04)
+
+        # Show the plot
+            plt.show()
+            
+            print('Standard deviation of region:', std_dev[x,y])
+            region_data = med_img[x, y]
+            print('Median image value is:',region_data)
+            
+            return x,y
 
 def main():  # Main code
 
-# Set the overall timer
-
-    all_start_time = time.time()
 
 # Set the paths
 # NOTE: basepath is the location of the AirMSPI HDF data files
 #       figpath is where the output should be stored
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    #basepath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    #basepath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    basepath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     #figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Retrieval_Files/Plots"
     figpath = 'C:/Users/ULTRASIP_1/Documents/Clarissa/paperfigs'
 
@@ -37,58 +117,19 @@ def main():  # Main code
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 5
+    num_step = 1
     
 # Set the index of the group of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
     step_ind = 0
     
-# Set some bounds for the image (USER INPUT)
-
-    # min_x = 1900
-    # max_x = 2200
-    # min_y = 1900
-    # max_y = 2200
-    
-    # #Bakersfield
-    min_x = 1200
-    max_x = 1900
-    min_y = 1200
-    max_y = 1900
-# Set some bounds for the sample box (USER INPUT)
-# Note: These coordinates are RELATIVE to the overall bounding box
-
-    # box_x1 = 120
-    # box_x2 = 125
-    # box_y1 = 105
-    # box_y2 = 110
-    # box_x1 = 45
-    # box_x2 = 50
-    # box_y1 = 220
-    # box_y2 = 225
-    # box_x1 = 135
-    # box_x2 = 140
-    # box_y1 = 140
-    # box_y2 = 145
-
-
-    #Bakserfield
-    box_x1 = 485
-    box_x2 = 490
-    box_y1 = 485
-    box_y2 = 490
-
-### Read the AirMSPI data
-
-# Change directory to the basepath
-
     os.chdir(basepath)
 
 # Get the list of files in the directory
 # NOTE: Python returns the files in a strange order, so they will need to be sorted by time
 
-    search_str = 'AirMSPI*.hdf'
+    search_str = 'AirMSPI*467A*.hdf'
     dum_list = glob.glob(search_str)
     raw_list = np.array(dum_list)  # Convert to a numpy array
     
@@ -154,134 +195,70 @@ def main():  # Main code
         words = mspi_list[this_ind].split('_')
         timeoffile_hhmmss = words[5]
         angleoffile = words[7]
-
-
         
 # Open the HDF-5 file
 
         f = h5py.File(inputName,'r')
+        
+
 
 # Get the intensity datasets
 
-        dset = f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/']
-        I_355 = dset[:][min_y:max_y,min_x:max_x]
+        I_355 = f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/'][:]  
+        I_355 = image_crop(I_355)
+
     
-        dset = f['/HDFEOS/GRIDS/380nm_band/Data Fields/I/']
-        I_380 = dset[:][min_y:max_y,min_x:max_x]
+        I_380 = f['/HDFEOS/GRIDS/380nm_band/Data Fields/I/'][:]
+        I_380 = image_crop(I_380)
+
+        I_445 = f['/HDFEOS/GRIDS/445nm_band/Data Fields/I/'][:]
+        I_445 = image_crop(I_445)
+
+        I_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/I/'][:]
+        I_470 = image_crop(I_470)
+
+        I_555 = f['/HDFEOS/GRIDS/555nm_band/Data Fields/I/'][:]
+        I_555 = image_crop(I_555)
+
+
+        I_660 = f['/HDFEOS/GRIDS/660nm_band/Data Fields/I/'][:]
+        I_660 = image_crop(I_660)
+
+        I_865 = f['/HDFEOS/GRIDS/865nm_band/Data Fields/I/'][:]
+        I_865 = image_crop(I_865)
+
+
+
     
-        dset = f['/HDFEOS/GRIDS/445nm_band/Data Fields/I/']
-        I_445 = dset[:][min_y:max_y,min_x:max_x]
-    
-        dset = f['/HDFEOS/GRIDS/470nm_band/Data Fields/I/']
-        I_470 = dset[:][min_y:max_y,min_x:max_x]
-    
-        dset = f['/HDFEOS/GRIDS/555nm_band/Data Fields/I/']
-        I_555 = dset[:][min_y:max_y,min_x:max_x]
-    
-        dset = f['/HDFEOS/GRIDS/660nm_band/Data Fields/I/']
-        I_660 = dset[:][min_y:max_y,min_x:max_x]
-    
-        dset = f['/HDFEOS/GRIDS/865nm_band/Data Fields/I/']
-        I_865 = dset[:][min_y:max_y,min_x:max_x]
-    
-        dset = f['/HDFEOS/GRIDS/935nm_band/Data Fields/I/']
-        I_935 = dset[:][min_y:max_y,min_x:max_x]
     
 # Close the file
 
         f.close()
 
-# Print the time
-                
-        img = np.flipud(I_355)
+        img355 = np.flipud(I_355)
+        img380= np.flipud(I_380)
+        img445= np.flipud(I_445)
 
-            
-        #I_355_rolled = np.lib.stride_tricks.sliding_window_view(img, 5, axis = 0)
-        #I_355_rolled = np.lib.stride_tricks.sliding_window_view(img, 5, axis = 1)
-        
-        #rolled_std = np.std(I_355_rolled, axis=2)
+        img470= np.flipud(I_470)
+        img555= np.flipud(I_555)
+        img660= np.flipud(I_660)
 
+
+        img865 = np.flipud(I_660)
         
-    return img
+
+        roi_x, roi_y = choose_roi(img660)
+    return roi_x, roi_y
         
 
 ### END MAIN FUNCTION
 if __name__ == '__main__':
-        img = main() 
+        x,y = main() 
         
-        imgr =  np.lib.stride_tricks.sliding_window_view(img, 5, axis = 0)
-        imroll = np.lib.stride_tricks.sliding_window_view(imgr, 5, axis = 1)
-        
-        std = np.std(imroll,axis=0)
-
-
-        std_min = np.amin(std)
-        std_idx = np.where(std==std_min)
-        
-       # i1 = Ir[std_idx[0][:],std_idx[1][:],std_idx[2][:],std_idx[2][:]]
-       
-        box_x1 = (std_idx[0][2])+5
-        box_x2 =  (std_idx[0][2])-5
-        box_y1 = (std_idx[0][2])+5
-        box_y2 = (std_idx[0][2])-5
-        
-        good = (img > 0.0)
-        img_good = img[good]
-        
-        if(len(img_good) < 1):
-            print("***ERROR***")
-            print("NO VALID PIXELS")
-            print("***ERROR***")
-            print(error)
-
-        img_min = np.amin(img[good])
-        img_max = np.amax(img[good])
-        img_med = np.median(img[good])
-        img_mean = np.mean(img[good])
-    
-        print("IMAGE RANGE")    
-        print(img_min)
-        print(img_max)
-        print(img_mean)
-        print(img_med)
-        
-        stdcheck = np.std(img[box_x2:box_x1,box_y2:box_y1])
-        plot_min = 0.7*img_mean
-        plot_max = 1.5*img_mean
-
-        hold = np.shape(img)
-        xd = hold[1]
-        yd = hold[0]
-        xdim = np.arange(hold[1])
-        ydim = np.arange(hold[0])
-
-# Create 2-D lat/lon arrays from the 1-D arrays
-# NOTE: Change shading from 'flat' to 'nearest' for pcolormesh
-
-        x, y = np.meshgrid(xdim,ydim)
-        
-# Set the plot area
-
-        fig = plt.figure(figsize=(12,6), dpi=120)
-        
-
-# Plot the image
-
-        ax1 = fig.add_subplot(1,1,1)
-    
-        im = ax1.pcolormesh(x,y,img,shading='nearest',cmap=plt.cm.gist_gray,
-            vmin=plot_min,vmax=plot_max)
-
-        # Plot the box
+        print(x,y)
 
         
-        ax1.plot([box_x1,box_x2],[box_y1,box_y1],color="lime",linewidth=1) # Bottom
-        ax1.plot([box_x2,box_x2],[box_y1,box_y2],color="lime",linewidth=1) # Right
-        ax1.plot([box_x1,box_x2],[box_y2,box_y2],color="lime",linewidth=1) # Top
-        ax1.plot([box_x1,box_x1],[box_y1,box_y2],color="lime",linewidth=1) # Left
-                
-        # Set the aspect ratio
-                    
-        ax1.set_aspect('equal')
         
 
+
+      

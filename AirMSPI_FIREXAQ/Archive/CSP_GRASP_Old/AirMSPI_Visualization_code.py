@@ -229,7 +229,7 @@ def main():  # Main code
         
         print(np.size(I_355))
         
-        img = np.flipud(I_355[min_y:max_y,min_x:max_x])
+        img = np.flipud(I_865[min_y:max_y,min_x:max_x])
         
         good = (img > 0.0)
         img_good = img[good]
@@ -296,7 +296,7 @@ def main():  # Main code
         print(timeoffile_hhmmss)
         outfile = "Bakersfield_{}".format(loop)
         outfile = outfile+"_"+str(timeoffile_hhmmss)+"_"+str(step_ind)+"v04.png"
-        plt.axis('off')
+        #plt.axis('off')
         plt.title("Time: " + str(timeoffile_hhmmss)+" Angle: "+str(angleoffile))
         plt.savefig(outfile,dpi=120)
     
