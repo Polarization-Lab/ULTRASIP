@@ -18,9 +18,7 @@ Code Sections:
     a. Put AirMSPI measurements into GRASP geometry 
     b. Normalize radiances
 3. Structure the data products according to the GRASP SDATA format 
-    a. First Output File: Radiometry only in all bands except 935nm
-    b. Second Output File: I, Q, U in polarized bands only
-    c. Third Output File: I in Radiometric Bands and I,Q,U in polarized bands
+    a. Third Output File: I in Radiometric Bands (except 935 nm) and I,Q,U in polarized bands
 4. Visualize ROI and Measurement Values
     a. Intensity vs Scattering Angle
     b. Q and U vs Scattering Angle
@@ -31,7 +29,7 @@ More info on the GRASP geometry and sdata format can be found at grasp-open.com
 and more info on this algoritm can be found in DeLeon et. al. (YYYY)
 
 Creation Date: 2022-08-05
-Last Modified: 2022-12-01
+Last Modified: 2023-04-20
 
 by Michael J. Garay and Clarissa M. DeLeon
 (Michael.J.Garay@jpl.nasa.gov, cdeleon@arizona.edu)
