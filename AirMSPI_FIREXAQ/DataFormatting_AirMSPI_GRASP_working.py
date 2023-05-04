@@ -999,8 +999,7 @@ def main():  # Main code
 
     for loop in range(num_intensity):
         out_str = out_str+'{:16.8f}'.format(sza_mean)
-    
-# View zenith angle per measurement per wavelength
+
     for outer in range(num_meas):
         for inner in range(num_step): 
             out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
