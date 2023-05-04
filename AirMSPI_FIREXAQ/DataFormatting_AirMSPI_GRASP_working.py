@@ -603,6 +603,7 @@ def main():  # Main code
         i_660 = np.median(box_i_660[good])
         i_865 = np.median(box_i_865[good])
         
+        
         scat_355 = np.median(box_scat_355[good])
         scat_380 = np.median(box_scat_380[good])
         scat_445 = np.median(box_scat_445[good])
