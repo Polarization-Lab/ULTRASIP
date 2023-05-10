@@ -56,9 +56,9 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/1FIREX"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data2/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
@@ -90,25 +90,25 @@ def main():  # Main code
 # # Note: These coordinates are RELATIVE to the overall bounding box
 
     # #FIREX
-    min_x = 1900
-    max_x = 2200
-    min_y = 1900
-    max_y = 2200
+    # min_x = 1900
+    # max_x = 2200
+    # min_y = 1900
+    # max_y = 2200
     
 
     
     # #Bakersfield
-    # min_x = 1200
-    # max_x = 1900
-    # min_y = 1200
-    # max_y = 1900
+    min_x = 1200
+    max_x = 1900
+    min_y = 1200
+    max_y = 1900
 # Set some bounds for the sample box (USER INPUT)
 # Note: These coordinates are RELATIVE to the overall bounding box
     #FIREX
-    box_x1 = 120
-    box_x2 = 125
-    box_y1 = 105
-    box_y2 = 110
+    # box_x1 = 120
+    # box_x2 = 125
+    # box_y1 = 105
+    # box_y2 = 110
     
     # #FIREX  8/16
     # box_x1 = 45
@@ -122,10 +122,10 @@ def main():  # Main code
     # box_y2 = 145
 
     # #Bakserfield
-    # box_x1 = 485
-    # box_x2 = 490
-    # box_y1 = 485
-    # box_y2 = 490
+    box_x1 = 485
+    box_x2 = 490
+    box_y1 = 485
+    box_y2 = 490
     
 #_______________Set Data Extraction Bounds___________________#
 # Set the number of wavelengths for radiometric and polarization separately
