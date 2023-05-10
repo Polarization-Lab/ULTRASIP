@@ -25,8 +25,8 @@ def main():  # Main code
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr2523/1_FIREX"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr2523/1_FIREX/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/Bakersfield"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/Bakersfield/Plots"
 
 
 
@@ -836,6 +836,76 @@ def main():  # Main code
    
     plt.tight_layout()  
     plt.show() 
+    
+    fig, ax = plt.subplots(3, 3,
+                           sharex=True, 
+                           sharey='row')
+
+    ax[0,0].plot(scat[:,0],i_obs[:,0],linestyle='dashed',color="green")
+    ax[0,0].plot(scat[:,1],i_obs[:,1],linestyle='dashed',color="pink")
+    ax[0,0].plot(scat[:,2],i_obs[:,2],linestyle='dashed',color="brown")  
+    ax[0,0].plot(scat[:,4],i_obs[:,4],linestyle='dashed',color="purple")
+    
+    ax[0,0].set_ylabel('BRF(I)', fontsize='x-large')
+    ax[0,0].yaxis.set_label_coords(-.4, .5)
+    
+    ax[0,0].plot(scat[:,0],i_mod[:,0],color="green",label="355")
+    ax[0,0].plot(scat[:,1],i_mod[:,1],color="pink",label="380")
+    ax[0,0].plot(scat[:,2],i_mod[:,2],color="brown",label="445")
+    ax[0,0].plot(scat[:,4],i_mod[:,4],color="purple",label="555")
+    
+    ax[0,0].set_yticks([0.06,0.1,0.2])
+    
+    ax[0,1].plot(scat[:,3],i_obs[:,3],linestyle='dashed',color="blue")
+
+    ax[0,1].plot(scat[:,5],i_obs[:,5],linestyle='dashed',color="red")
+    ax[0,1].plot(scat[:,6],i_obs[:,6],linestyle='dashed',color="orange")
+
+    ax[0,1].plot(scat[:,3],i_mod[:,3],color="blue",label='470')
+    ax[0,1].plot(scat[:,5],i_mod[:,5],color="red",label='660')
+    ax[0,1].plot(scat[:,6],i_mod[:,6],color="orange",label='865')
+    
+    ax[0,0].legend(bbox_to_anchor=(3.62,1),
+          ncol=2,fontsize='medium',frameon=False)
+    ax[0,1].legend(bbox_to_anchor=(1.08,0.5),
+          ncol=2,fontsize='medium',frameon=False)
+    
+    fig.delaxes(ax[0,2])
+    
+    ax[2,0].set_ylabel('BRF(U)', fontsize='x-large')
+    ax[2,0].yaxis.set_label_coords(-.4, .5)
+    
+    ax[2,0].plot(scat[:,3],u_obs[:,0],linestyle='dashed',color="blue",label="470nm")
+    ax[2,0].fill_between(np.sort(scat[:,3]), u_obs[:,0]-np.std(u_obs[:,0]), u_obs[:,0]+np.std(u_obs[:,0]),color="blue",alpha=0.2)
+
+    ax[2,1].plot(scat[:,5],u_obs[:,1],linestyle='dashed',color="red",label="660nm")
+    ax[2,1].fill_between(scat[:,5], u_obs[:,1]-np.std(u_obs[:,1]), u_obs[:,1]+np.std(u_obs[:,1]),color="red",alpha=0.2)
+    print(u_obs[:,1]-np.std(u_obs[:,1]))
+    ax[2,2].plot(scat[:,6],u_obs[:,2],linestyle='dashed',color="orange",label="865nm")
+    ax[2,2].fill_between(scat[:,6], u_obs[:,2]-np.std(u_obs[:,2]), u_obs[:,2]+np.std(u_obs[:,2]),color="orange",alpha=0.2)
+
+    ax[2,0].plot(scat[:,3],u_mod[:,0],color="blue")
+    ax[2,1].plot(scat[:,5],u_mod[:,1],color="red")
+    ax[2,2].plot(scat[:,6],u_mod[:,2],color="orange")
+    
+    ax[1,0].set_ylabel('BRF(Q)', fontsize='x-large')
+    ax[1,0].yaxis.set_label_coords(-.4, .5)
+    
+    ax[1,0].plot(scat[:,3],q_obs[:,0],linestyle='dashed',color="blue",label="470nm")
+    ax[1,0].fill_between(scat[:,3], q_obs[:,0]-np.std(q_obs[:,0]), q_obs[:,0]+np.std(q_obs[:,0]),color="blue",alpha=0.2)
+    ax[1,0].fill_between(scat[3:5,3], q_obs[3:5,0]-np.std(q_obs[:,0]), q_obs[3:5,0]+np.std(q_obs[:,0]),facecolor="blue",alpha=0.2)
+
+    ax[1,1].plot(scat[:,5],q_obs[:,1],linestyle='dashed',color="red",label="660nm")
+    ax[1,1].fill_between(scat[:,5], q_obs[:,1]-np.std(q_obs[:,1]), q_obs[:,1]+np.std(q_obs[:,1]),color="red",alpha=0.2)
+    ax[1,1].fill_between(scat[3:5,3], q_obs[3:5,1]-np.std(q_obs[:,1]), q_obs[3:5,1]+np.std(q_obs[:,1]),facecolor="red",alpha=0.2)
+
+    ax[1,2].plot(scat[:,6],q_obs[:,2],linestyle='dashed',color="orange",label="865nm")
+    ax[1,2].fill_between(scat[:,6], q_obs[:,2]-np.std(q_obs[:,2]), q_obs[:,2]+np.std(q_obs[:,2]),color="orange",alpha=0.2)
+    
+    ax[1,0].plot(scat[:,3],q_mod[:,0],color="blue")
+    ax[1,1].plot(scat[:,5],q_mod[:,1],color="red")
+    ax[1,2].plot(scat[:,6],q_mod[:,2],color="orange")
+    ax[2,1].set_xlabel(u"\u03A9 [\u00b0]",fontsize='xx-large')   
     
 ### END MAIN FUNCTION
 if __name__ == '__main__':
