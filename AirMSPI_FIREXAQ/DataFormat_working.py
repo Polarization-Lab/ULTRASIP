@@ -13,7 +13,7 @@ Code Sections:
     a. Load in Data
     b. Set ROI 
     c. Sort and Extract Data
-    d. Take means 
+    d. Take medians 
 2. Geometry Reconciliation 
     a. Put AirMSPI measurements into GRASP geometry 
     b. Normalize radiances
@@ -125,9 +125,9 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data2/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/1FIREXR2"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/2FIREX"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
@@ -163,20 +163,20 @@ def main():  # Main code
     num_meas = 13
 # Angle Arrays
 # ALL ANGLES IN RADIANS
-    scat_mean = np.zeros((num_step,num_int))  # Scattering angle
-    vza_mean = np.zeros((num_step,num_meas))  # View zenith angle
-    raz_mean = np.zeros((num_step,num_meas))  # Relative azimuth angle
-    sza_mean = np.zeros(num_step)  # Solar zenith angle (one per stare)
+    scat_median = np.zeros((num_step,num_int))  # Scattering angle
+    vza_median = np.zeros((num_step,num_meas))  # View zenith angle
+    raz_median = np.zeros((num_step,num_meas))  # Relative azimuth angle
+    sza_median = np.zeros(num_step)  # Solar zenith angle (one per stare)
 
 #Measurement Arrays   
-    i_mean = np.zeros((num_step,num_int))  # Intensity
-    i_in_polar_mean = np.zeros((num_step,num_pol))  # I in polarized bands
-    qd_mean = np.zeros((num_step,num_pol))  # Qscattering plane
-    ud_mean = np.zeros((num_step,num_pol))  # Uscattering plane
-    q_mean = np.zeros((num_step,num_pol))  # Q meridional
-    u_mean = np.zeros((num_step,num_pol))  # U meridional
-    ipol_mean = np.zeros((num_step,num_pol))  # Ipol
-    dolp_mean = np.zeros((num_step,num_pol))  # DoLP
+    i_median = np.zeros((num_step,num_int))  # Intensity
+    i_in_polar_median = np.zeros((num_step,num_pol))  # I in polarized bands
+    qd_median = np.zeros((num_step,num_pol))  # Qscattering plane
+    ud_median = np.zeros((num_step,num_pol))  # Uscattering plane
+    q_median = np.zeros((num_step,num_pol))  # Q meridional
+    u_median = np.zeros((num_step,num_pol))  # U meridional
+    ipol_median = np.zeros((num_step,num_pol))  # Ipol
+    dolp_median = np.zeros((num_step,num_pol))  # DoLP
     esd = 0.0  # Earth-Sun distance (only need one)
 
 #Center point Arrays
@@ -578,18 +578,21 @@ def main():  # Main code
         box_qs_660 = img_qs_660[box_x1:box_x2,box_y1:box_y2]
         box_qs_865 = img_qs_865[box_x1:box_x2,box_y1:box_y2]
         
+        
         box_us_470 = img_us_470[box_x1:box_x2,box_y1:box_y2]
         box_us_660 = img_us_660[box_x1:box_x2,box_y1:box_y2]
         box_us_865 = img_us_865[box_x1:box_x2,box_y1:box_y2]
+        
 
         box_qm_470 = img_qm_470[box_x1:box_x2,box_y1:box_y2]
         box_qm_660 = img_qm_660[box_x1:box_x2,box_y1:box_y2]
         box_qm_865 = img_qm_865[box_x1:box_x2,box_y1:box_y2]
         
+        
         box_um_470 = img_um_470[box_x1:box_x2,box_y1:box_y2]
         box_um_660 = img_um_660[box_x1:box_x2,box_y1:box_y2]
         box_um_865 = img_um_865[box_x1:box_x2,box_y1:box_y2]
-        
+
         box_saz = img_saz[box_x1:box_x2,box_y1:box_y2]
         box_sza = img_sza[box_x1:box_x2,box_y1:box_y2]
         
@@ -600,7 +603,7 @@ def main():  # Main code
             box_lon = img_lon[box_x1:box_x2,box_y1:box_y2]
             box_elev = img_elev[box_x1:box_x2,box_y1:box_y2]
         
-# Extract the valid data and calculate the mean
+# Extract the valid data and calculate the median
 # NOTE: The test is done for all the wavelengths that are read, so if the wavelengths
 #       are changed, then the test needs to change    
         
@@ -618,69 +621,69 @@ def main():  # Main code
             print("***ERROR***")
             print('error')
 
-        i_355 = np.mean(box_i_355[good])
-        i_380 = np.mean(box_i_380[good])
-        i_445 = np.mean(box_i_445[good])
-        i_470 = np.mean(box_i_470[good])
-        i_555 = np.mean(box_i_555[good])
-        i_660 = np.mean(box_i_660[good])
-        i_865 = np.mean(box_i_865[good])
+        i_355 = np.median(box_i_355[good])
+        i_380 = np.median(box_i_380[good])
+        i_445 = np.median(box_i_445[good])
+        i_470 = np.median(box_i_470[good])
+        i_555 = np.median(box_i_555[good])
+        i_660 = np.median(box_i_660[good])
+        i_865 = np.median(box_i_865[good])
         
         
-        scat_355 = np.mean(box_scat_355[good])
-        scat_380 = np.mean(box_scat_380[good])
-        scat_445 = np.mean(box_scat_445[good])
-        scat_470 = np.mean(box_scat_470[good])
-        scat_555 = np.mean(box_scat_555[good])
-        scat_660 = np.mean(box_scat_660[good])
-        scat_865 = np.mean(box_scat_865[good])
+        scat_355 = np.median(box_scat_355[good])
+        scat_380 = np.median(box_scat_380[good])
+        scat_445 = np.median(box_scat_445[good])
+        scat_470 = np.median(box_scat_470[good])
+        scat_555 = np.median(box_scat_555[good])
+        scat_660 = np.median(box_scat_660[good])
+        scat_865 = np.median(box_scat_865[good])
         
-        vaz_355 = np.mean(box_vaz_355[good])
-        vaz_380 = np.mean(box_vaz_380[good])
-        vaz_445 = np.mean(box_vaz_445[good])
-        vaz_470 = np.mean(box_vaz_470[good])
-        vaz_555 = np.mean(box_vaz_555[good])
-        vaz_660 = np.mean(box_vaz_660[good])
-        vaz_865 = np.mean(box_vaz_865[good])
+        vaz_355 = np.median(box_vaz_355[good])
+        vaz_380 = np.median(box_vaz_380[good])
+        vaz_445 = np.median(box_vaz_445[good])
+        vaz_470 = np.median(box_vaz_470[good])
+        vaz_555 = np.median(box_vaz_555[good])
+        vaz_660 = np.median(box_vaz_660[good])
+        vaz_865 = np.median(box_vaz_865[good])
         
-        vza_355 = np.mean(box_vza_355[good])
-        vza_380 = np.mean(box_vza_380[good])
-        vza_445 = np.mean(box_vza_445[good])
-        vza_470 = np.mean(box_vza_470[good])
-        vza_555 = np.mean(box_vza_555[good])
-        vza_660 = np.mean(box_vza_660[good])
-        vza_865 = np.mean(box_vza_865[good])
+        vza_355 = np.median(box_vza_355[good])
+        vza_380 = np.median(box_vza_380[good])
+        vza_445 = np.median(box_vza_445[good])
+        vza_470 = np.median(box_vza_470[good])
+        vza_555 = np.median(box_vza_555[good])
+        vza_660 = np.median(box_vza_660[good])
+        vza_865 = np.median(box_vza_865[good])
         
-        qs_470 = np.mean(box_qs_470[good])
-        qs_660 = np.mean(box_qs_660[good])
-        qs_865 = np.mean(box_qs_865[good])
+        qs_470 = np.median(box_qs_470[good])
+        qs_660 = np.median(box_qs_660[good])
+        qs_865 = np.median(box_qs_865[good])
         
         print("qs std")
         print(np.std(box_qs_470[good]))
         print(np.std(box_qs_660[good]))
         print(np.std(box_qs_865[good]))
         
-        us_470 = np.mean(box_us_470[good])
-        us_660 = np.mean(box_us_660[good])
-        us_865 = np.mean(box_us_865[good])
+        us_470 = np.median(box_us_470[good])
+        us_660 = np.median(box_us_660[good])
+        us_865 = np.median(box_us_865[good])
         
         print("us std")
         print(np.std(box_us_470[good]))
         print(np.std(box_us_660[good]))
         print(np.std(box_us_865[good]))
         
-        qm_470 = np.mean(box_qm_470[good])
-        qm_660 = np.mean(box_qm_660[good])
-        qm_865 = np.mean(box_qm_865[good])
+        qm_470 = np.median(box_qm_470[good])
+        qm_660 = np.median(box_qm_660[good])
+        qm_865 = np.median(box_qm_865[good])
         
         print("qm std")
         print(np.std(box_qm_470[good]))
         print(np.std(box_qm_660[good]))
         print(np.std(box_qm_865[good]))
         
-        um_470 = np.mean(box_um_470[good])
-        um_660 = np.mean(box_um_660[good])
-        um_865 = np.mean(box_um_865[good])
+        um_470 = np.median(box_um_470[good])
+        um_660 = np.median(box_um_660[good])
+        um_865 = np.median(box_um_865[good])
         
         print("um std")
         print(np.std(box_um_470[good]))
@@ -688,18 +691,18 @@ def main():  # Main code
         print(np.std(box_um_865[good]))
         
 
-        saz = np.mean(box_saz[good])
-        sza = np.mean(box_sza[good])
+        saz = np.median(box_saz[good])
+        sza = np.median(box_sza[good])
         
         
 # If this is the center acquisition, process the navigation information
 
         if(loop == mid_step):
-            lat_mean = np.mean(box_lat[good])
-            lon_mean = np.mean(box_lon[good])
-            elev_mean = np.mean(box_elev[good])
-            if(elev_mean < 0.0):
-                elev_mean = 0.0  # Do not allow negative elevation
+            lat_median = np.median(box_lat[good])
+            lon_median = np.median(box_lon[good])
+            elev_median = np.median(box_elev[good])
+            if(elev_median < 0.0):
+                elev_median = 0.0  # Do not allow negative elevation
 
 #________________________Section 2: Geometry Reconciliation___________________________#
 
@@ -714,9 +717,13 @@ def main():  # Main code
         stokesin8 = np.array([[qm_865], [um_865]]) #Meridian
         stokesin8s = np.array([[qs_865], [us_865]]) #Scattering
         
-        qg_470, ug_470 = -stokesin4s
-        qg_660, ug_660 = -stokesin6s
-        qg_865, ug_865 = -stokesin8s
+        # qg_470, ug_470 = -stokesin4s
+        # qg_660, ug_660 = -stokesin6s
+        # qg_865, ug_865 = -stokesin8s
+        
+        qg_470, ug_470 = stokesin4
+        qg_660, ug_660 = stokesin6
+        qg_865, ug_865 = stokesin8
 
         
         if saz >= 180: 
@@ -756,7 +763,7 @@ def main():  # Main code
         
       
         
-### NORMALIZE THE RADIANCES TO THE MEAN EARTH-SUN DISTANCE AND CONVERT TO 
+### NORMALIZE THE RADIANCES TO THE median EARTH-SUN DISTANCE AND CONVERT TO 
 ### EQUIVALENT REFLECTANCES = PI*L/E0
 
         eqr_i_355 = np.pi*i_355*esd**2/E0_355
@@ -778,63 +785,63 @@ def main():  # Main code
 
 #____________________________STORE THE DATA____________________________#
 
-        i_mean[loop,0] = eqr_i_355
-        i_mean[loop,1] = eqr_i_380
-        i_mean[loop,2] = eqr_i_445
-        i_mean[loop,3] = eqr_i_470
-        i_mean[loop,4] = eqr_i_555
-        i_mean[loop,5] = eqr_i_660
-        i_mean[loop,6] = eqr_i_865
+        i_median[loop,0] = eqr_i_355
+        i_median[loop,1] = eqr_i_380
+        i_median[loop,2] = eqr_i_445
+        i_median[loop,3] = eqr_i_470
+        i_median[loop,4] = eqr_i_555
+        i_median[loop,5] = eqr_i_660
+        i_median[loop,6] = eqr_i_865
                 
-        scat_mean[loop,0] = (scat_355)
-        scat_mean[loop,1] = (scat_380)
-        scat_mean[loop,2] = (scat_445)
-        scat_mean[loop,3] = (scat_470)
-        scat_mean[loop,4] = (scat_555)
-        scat_mean[loop,5] = (scat_660)
-        scat_mean[loop,6] = (scat_865)
+        scat_median[loop,0] = (scat_355)
+        scat_median[loop,1] = (scat_380)
+        scat_median[loop,2] = (scat_445)
+        scat_median[loop,3] = (scat_470)
+        scat_median[loop,4] = (scat_555)
+        scat_median[loop,5] = (scat_660)
+        scat_median[loop,6] = (scat_865)
         
         
-        vza_mean[loop,0] = vza_355
-        vza_mean[loop,1] = vza_380
-        vza_mean[loop,2] = vza_445
-        vza_mean[loop,3] = vza_470
-        vza_mean[loop,4] = vza_470
-        vza_mean[loop,5] = vza_470
-        vza_mean[loop,6] = vza_555
-        vza_mean[loop,7] = vza_660
-        vza_mean[loop,8] = vza_660
-        vza_mean[loop,9] = vza_660
-        vza_mean[loop,10] = vza_865
-        vza_mean[loop,11] = vza_865
-        vza_mean[loop,12] = vza_865
+        vza_median[loop,0] = vza_355
+        vza_median[loop,1] = vza_380
+        vza_median[loop,2] = vza_445
+        vza_median[loop,3] = vza_470
+        vza_median[loop,4] = vza_470
+        vza_median[loop,5] = vza_470
+        vza_median[loop,6] = vza_555
+        vza_median[loop,7] = vza_660
+        vza_median[loop,8] = vza_660
+        vza_median[loop,9] = vza_660
+        vza_median[loop,10] = vza_865
+        vza_median[loop,11] = vza_865
+        vza_median[loop,12] = vza_865
         
-        raz_mean[loop,0] = raz_355
-        raz_mean[loop,1] = raz_380
-        raz_mean[loop,2] = raz_445
-        raz_mean[loop,3] = raz_470
-        raz_mean[loop,4] = raz_470
-        raz_mean[loop,5] = raz_470
-        raz_mean[loop,6] = raz_555
-        raz_mean[loop,7] = raz_660
-        raz_mean[loop,8] = raz_660
-        raz_mean[loop,9] = raz_660
-        raz_mean[loop,10] = raz_865
-        raz_mean[loop,11] = raz_865
-        raz_mean[loop,12] = raz_865
+        raz_median[loop,0] = raz_355
+        raz_median[loop,1] = raz_380
+        raz_median[loop,2] = raz_445
+        raz_median[loop,3] = raz_470
+        raz_median[loop,4] = raz_470
+        raz_median[loop,5] = raz_470
+        raz_median[loop,6] = raz_555
+        raz_median[loop,7] = raz_660
+        raz_median[loop,8] = raz_660
+        raz_median[loop,9] = raz_660
+        raz_median[loop,10] = raz_865
+        raz_median[loop,11] = raz_865
+        raz_median[loop,12] = raz_865
 
-        q_mean[loop,0] = eqr_qg_470
-        q_mean[loop,1] = eqr_qg_660
-        q_mean[loop,2] = eqr_qg_865
+        q_median[loop,0] = eqr_qg_470
+        q_median[loop,1] = eqr_qg_660
+        q_median[loop,2] = eqr_qg_865
         
-        u_mean[loop,0] = eqr_ug_470
-        u_mean[loop,1] = eqr_ug_660
-        u_mean[loop,2] = eqr_ug_865
+        u_median[loop,0] = eqr_ug_470
+        u_median[loop,1] = eqr_ug_660
+        u_median[loop,2] = eqr_ug_865
           
         
-        sza_mean[loop] = sza
+        sza_median[loop] = sza
 
-        print(scat_mean[:])
+        print(scat_median[:])
 # #__________________Section 3: Output Data in GRASP SDATA Format__________________#
 # Guide to output file names
 # NOTE: The options more or less correspond to GRASP retrieval.regime_of_measurement_fitting
@@ -848,7 +855,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat'
+    outfile_base = 'RotfromMerd'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
@@ -906,9 +913,9 @@ def main():  # Main code
     out_str = out_str+'           1'  # Pixel column in grid (icol)
     out_str = out_str+'           1'  # Pixel line in grid (row)
 
-    out_str = out_str+'{:19.8f}'.format(lon_mean)  # Longitude
-    out_str = out_str+'{:18.8f}'.format(lat_mean)  # Latitude
-    out_str = out_str+'{:17.8f}'.format(elev_mean) # Elevation
+    out_str = out_str+'{:19.8f}'.format(lon_median)  # Longitude
+    out_str = out_str+'{:18.8f}'.format(lat_median)  # Latitude
+    out_str = out_str+'{:17.8f}'.format(elev_median) # Elevation
 
     out_str = out_str+'      100.000000'  # Percent of land
     out_str = out_str+'{:16d}'.format(num_intensity)  # Number of wavelengths (nwl)
@@ -976,57 +983,57 @@ def main():  # Main code
 #       AERONET), so we take the average solar zenith angle, although this
 #       varies from measurement to measurement from AirMSPI
 
-    sza_mean = np.mean(sza_mean)
+    sza_median = np.median(sza_median)
 
     for loop in range(num_intensity):
-        out_str = out_str+'{:16.8f}'.format(sza_mean)
+        out_str = out_str+'{:16.8f}'.format(sza_median)
 
     for outer in range(num_meas):
         for inner in range(num_step): 
-            out_str = out_str+'{:16.8f}'.format(vza_mean[inner,outer])
+            out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
 
 
 # Relative azimuth angle per measurement per wavelength
     for outer in range(num_meas):
         for inner in range(num_step): 
-            out_str = out_str+'{:16.8f}'.format(raz_mean[inner,outer])
+            out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
 
 
 #Measurements
     for outer in [0,1,2]:  # Loop over wavelengths
         for inner in range(num_step):  # Loop over measurements
-            out_str = out_str+'{:16.8f}'.format(i_mean[inner,outer])
+            out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
     
     for outer in [3]:  # Loop over wavelengths
         for inner in range(num_step):  # Loop over measurements
-            out_str = out_str+'{:16.8f}'.format(i_mean[inner,outer])  # I
+            out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])  # I
         # for inner in range(num_step):  # Loop over measurements
-        #     out_str = out_str+'{:16.8f}'.format(i_in_polar_mean[inner,0])  # Ipol
+        #     out_str = out_str+'{:16.8f}'.format(i_in_polar_median[inner,0])  # Ipol
         for inner in range(num_step):  # Loop over measurements
-            out_str = out_str+'{:16.8f}'.format(q_mean[inner,0])  # Q
+            out_str = out_str+'{:16.8f}'.format(q_median[inner,0])  # Q
         for inner in range(num_step):  # Loop over measurements
-            out_str = out_str+'{:16.8f}'.format(u_mean[inner,0])  # U
+            out_str = out_str+'{:16.8f}'.format(u_median[inner,0])  # U
 
     for outer in [4]:  # Loop over wavelengths
         for inner in range(num_step):  # Loop over measurements
-                out_str = out_str+'{:16.8f}'.format(i_mean[inner,outer])
+                out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])
 
     for outer in [5]:  # Loop over wavelengths
         for inner in range(num_step):  # Loop over measurements
-            out_str = out_str+'{:16.8f}'.format(i_mean[inner,outer])  # I
+            out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])  # I
         for inner in range(num_step):  # Loop over measurements
-            out_str = out_str+'{:16.8f}'.format(q_mean[inner,1])  # Q
+            out_str = out_str+'{:16.8f}'.format(q_median[inner,1])  # Q
         for inner in range(num_step):  # Loop over measurements
-            out_str = out_str+'{:16.8f}'.format(u_mean[inner,1])  # U
+            out_str = out_str+'{:16.8f}'.format(u_median[inner,1])  # U
 
 
     for outer in [6]:  # Loop over wavelengths
         for inner in range(num_step):  # Loop over measurements
-            out_str = out_str+'{:16.8f}'.format(i_mean[inner,outer])  # I
+            out_str = out_str+'{:16.8f}'.format(i_median[inner,outer])  # I
         for inner in range(num_step):  # Loop over measurements
-            out_str = out_str+'{:16.8f}'.format(q_mean[inner,2])  # Q
+            out_str = out_str+'{:16.8f}'.format(q_median[inner,2])  # Q
         for inner in range(num_step):  # Loop over measurements
-            out_str = out_str+'{:16.8f}'.format(u_mean[inner,2])  # U
+            out_str = out_str+'{:16.8f}'.format(u_median[inner,2])  # U
             
             
 ## ADDITIONAL PARAMETERS
@@ -1084,15 +1091,15 @@ def main():  # Main code
                    
 # # Endline
        
-#     out_str = out_str+'\n'
+    out_str = out_str+'\n'
 
-# # Write out the line
+# Write out the line
      
-#     outputFile.write(out_str)
+    outputFile.write(out_str)
 
-# # Close the output file
+# Close the output file
 
-#     outputFile.close()        
+    outputFile.close()        
         
 
 ### END MAIN FUNCTION

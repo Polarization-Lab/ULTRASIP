@@ -58,7 +58,7 @@ def main():  # Main code
 #Work Computer
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data2/"
     datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/Bakersfield"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
