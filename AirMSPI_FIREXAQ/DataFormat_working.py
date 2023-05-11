@@ -1082,17 +1082,17 @@ def main():  # Main code
     out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
     out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
                    
-# Endline
+# # Endline
        
-    out_str = out_str+'\n'
+#     out_str = out_str+'\n'
 
-# Write out the line
+# # Write out the line
      
-    outputFile.write(out_str)
+#     outputFile.write(out_str)
 
-# Close the output file
+# # Close the output file
 
-    outputFile.close()        
+#     outputFile.close()        
         
 
 ### END MAIN FUNCTION

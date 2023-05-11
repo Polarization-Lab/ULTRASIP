@@ -25,11 +25,11 @@ def main():  # Main code
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/Bakersfield"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/Bakersfield/Plots"
+    #basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/Bakersfield"
+    #figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/Bakersfield/Plots"
 
-
-
+    basepath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/1FIREXR2"
+    figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/1FIREXR2/Plots"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -880,7 +880,7 @@ def main():  # Main code
 
     ax[2,1].plot(scat[:,5],u_obs[:,1],linestyle='dashed',color="red",label="660nm")
     ax[2,1].fill_between(scat[:,5], u_obs[:,1]-np.std(u_obs[:,1]), u_obs[:,1]+np.std(u_obs[:,1]),color="red",alpha=0.2)
-    print(u_obs[:,1]-np.std(u_obs[:,1]))
+    print(np.std(u_obs[:,1]))
     ax[2,2].plot(scat[:,6],u_obs[:,2],linestyle='dashed',color="orange",label="865nm")
     ax[2,2].fill_between(scat[:,6], u_obs[:,2]-np.std(u_obs[:,2]), u_obs[:,2]+np.std(u_obs[:,2]),color="orange",alpha=0.2)
 
@@ -893,11 +893,11 @@ def main():  # Main code
     
     ax[1,0].plot(scat[:,3],q_obs[:,0],linestyle='dashed',color="blue",label="470nm")
     ax[1,0].fill_between(scat[:,3], q_obs[:,0]-np.std(q_obs[:,0]), q_obs[:,0]+np.std(q_obs[:,0]),color="blue",alpha=0.2)
-    ax[1,0].fill_between(scat[3:5,3], q_obs[3:5,0]-np.std(q_obs[:,0]), q_obs[3:5,0]+np.std(q_obs[:,0]),facecolor="blue",alpha=0.2)
+    #ax[1,0].fill_between(scat[3:5,3], q_obs[3:5,0]-np.std(q_obs[:,0]), q_obs[3:5,0]+np.std(q_obs[:,0]),facecolor="blue",alpha=0.2)
 
     ax[1,1].plot(scat[:,5],q_obs[:,1],linestyle='dashed',color="red",label="660nm")
-    ax[1,1].fill_between(scat[:,5], q_obs[:,1]-np.std(q_obs[:,1]), q_obs[:,1]+np.std(q_obs[:,1]),color="red",alpha=0.2)
-    ax[1,1].fill_between(scat[3:5,3], q_obs[3:5,1]-np.std(q_obs[:,1]), q_obs[3:5,1]+np.std(q_obs[:,1]),facecolor="red",alpha=0.2)
+    ax[1,1].fill_between(scat[:,5], q_obs[:,1]-0.005, q_obs[:,1]+0.005,color="red",alpha=0.2)
+    #ax[1,1].fill_between(scat[3:5,3], q_obs[3:5,1]-np.std(q_obs[:,1]), q_obs[3:5,1]+np.std(q_obs[:,1]),facecolor="red",alpha=0.2)
 
     ax[1,2].plot(scat[:,6],q_obs[:,2],linestyle='dashed',color="orange",label="865nm")
     ax[1,2].fill_between(scat[:,6], q_obs[:,2]-np.std(q_obs[:,2]), q_obs[:,2]+np.std(q_obs[:,2]),color="orange",alpha=0.2)
