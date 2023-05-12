@@ -11,6 +11,7 @@ import numpy as np
 import os
 import time
 from matplotlib import patches
+from scipy.stats import probplot
 
 #_______________Define ROI Functions___________________________#
 
@@ -93,16 +94,16 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data2/"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data2/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/2FIREX"
+    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/2FIREX"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
 
 # #Home Computer 
-#     datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
-#     outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar1523/1_FIREX"
+    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
+    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/2FIREX"
 
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
@@ -455,11 +456,11 @@ if __name__ == '__main__':
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/2FIREX"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/2FIREX/Plots"
+    #basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/2FIREX"
+    #figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/2FIREX/Plots"
 
-    # basepath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/1FIREXR2"
-    # figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1023/1FIREXR2/Plots"
+    basepath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/2FIREX"
+    figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/2FIREX/Plots"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -1208,20 +1209,23 @@ if __name__ == '__main__':
     ax[1,0].yaxis.set_label_coords(-.2, .5)
     
     
-    ax[1,0].plot(scat[:,3],q_obs[:,0],linestyle='dashed',color="blue",label="470nm",linewidth='3')
-    ax[1,0].errorbar(scat[:,3],q_obs[:,0],qs[:,0], marker = 'd',alpha=0.4,color='blue',markersize=15)
+    #ax[1,0].plot(scat[:,3],q_obs[:,0],linestyle='dotted',color="blue",label="470nm",linewidth='3')
+    ax[1,0].scatter(scat[:,3],q_obs[:,0],marker='o',edgecolors="blue",label="470nm",linestyle='None',facecolors='none')
+    ax[1,0].errorbar(scat[:,3],q_obs[:,0],yerr = qs[:,0], marker = '|',alpha=1,color='blue',linestyle = "None")
     
     ax[1,0].set_yticks([0.30,0.35,0.40,0.45,0.50])
     ax[1,0].yaxis.set_tick_params(labelsize=15)
 
     ax[1,1].plot(scat[:,5],q_obs[:,1],linestyle='dashed',color="red",label="660nm",linewidth='3')
-    ax[1,1].errorbar(scat[:,5],q_obs[:,1],qs[:,1],marker = 'd',alpha=0.4,color='red',markersize=15)
+    ax[1,1].errorbar(scat[:,5],q_obs[:,1],qs[:,1],marker = '|',alpha=1,color='red')
     
     ax[1,1].set_yticks([0.15,0.25,0.30,0.35,0.40])
     ax[1,1].yaxis.set_tick_params(labelsize=15)
 
     ax[1,2].plot(scat[:,6],q_obs[:,2],linestyle='dashed',color="orange",label="865nm",linewidth='3')
-    ax[1,2].errorbar(scat[:,6],q_obs[:,2],qs[:,2], marker = 'd',alpha=0.6,color='orange',markersize=15)
+    ax[1,2].errorbar(scat[:,6],q_obs[:,2],qs[:,2], marker = '|',alpha=1,color='orange')
+    #ax[1,2].fill_between(scat[:,6], q_obs[:,2]-(qs[:,2]), q_obs[:,2]+(qs[:,2]),color="orange",alpha=0.2)
+
     
     ax[1,2].set_yticks([0.05,0.1,0.13,0.15,0.35])
     ax[1,2].yaxis.set_tick_params(labelsize=15)
@@ -1237,19 +1241,19 @@ if __name__ == '__main__':
     ax[2,0].yaxis.set_label_coords(-0.2, .5)
     
     ax[2,0].plot(scat[:,3],u_obs[:,0],linestyle='dashed',color="blue",label="470nm",linewidth='3')
-    ax[2,0].errorbar(scat[:,3],u_obs[:,0],us[:,0], marker = 'd',alpha=0.4,color='blue',markersize=15)
+    ax[2,0].errorbar(scat[:,3],u_obs[:,0],us[:,0], marker = '|',alpha=1,color='blue')
     
     ax[2,0].set_yticks([-0.06,-0.04,-0.02,0,0.1])
     ax[2,0].yaxis.set_tick_params(labelsize=15)
 
     ax[2,1].plot(scat[:,5],u_obs[:,1],linestyle='dashed',color="red",label="660nm",linewidth='3')
-    ax[2,1].errorbar(scat[:,5],u_obs[:,1],us[:,1],marker = 'd',alpha=0.4,color='red',markersize=15)
+    ax[2,1].errorbar(scat[:,5],u_obs[:,1],us[:,1],marker = '|',alpha=1,color='red')
     
     ax[2,1].set_yticks([-0.04,-0.03,-0.02,-0.01,0])
     ax[2,1].yaxis.set_tick_params(labelsize=15)
 
     ax[2,2].plot(scat[:,6],u_obs[:,2],linestyle='dashed',color="orange",label="865nm",linewidth='3')
-    ax[2,2].errorbar(scat[:,6],u_obs[:,2],us[:,2], marker = 'd',alpha=0.6,color='orange',markersize=15)
+    ax[2,2].errorbar(scat[:,6],u_obs[:,2],us[:,2], marker = '|',alpha=0.6,color='orange')
     
     ax[2,2].set_yticks([-0.01,-0.008,-0.004,0,0.003])
     ax[2,2].yaxis.set_tick_params(labelsize=15)
@@ -1267,6 +1271,236 @@ if __name__ == '__main__':
     
     plt.show()
     
+    # define the parameters for the normal distributions
+    mu_vals = q_obs[:,0] #[0, 1, -1, 2, -2]  # medians
+    sigma_vals = qs[:,0]  # standard deviations
+
+    # create a range of x-values to evaluate the normal distributions
+    x_vals = np.linspace(0.3, 0.55, 1000)
+
+    # evaluate the normal distributions at the x-values for each set of parameters
+    y_vals = []
+    for mu, sigma in zip(mu_vals, sigma_vals):
+        y = 1/(sigma*np.sqrt(2*np.pi)) * np.exp(-(x_vals - mu)**2 / (2*sigma**2))
+        y_vals.append(y)
+
+    # plot the normal distributions
+    fig, ax = plt.subplots()
+    for y, mu, sigma in zip(y_vals, mu_vals, sigma_vals):
+        ax.plot(x_vals, y, label=f'mu={mu}, sigma={sigma:.5f}')
+
+    ax.legend()
+    ax.set_xlabel('x')
+    ax.set_ylabel('Probability density')
+    ax.set_title('Normal Distributions with Varying Medians and Standard Deviations')
+    plt.show()
+    
+    # generate example data
+    measured = q_obs[:,0] #np.array([1.0, 1.5, 2.0, 2.5, 3.0])
+    modeled = q_mod[:,0] #np.array([0.8, 1.6, 1.9, 2.3, 3.1])
+    measured_std = qs[:,0] #np.array([0.2, 0.3, 0.3, 0.4, 0.5])
+
+    # create scatter plot with error bars
+    fig, ax = plt.subplots()
+    ax.errorbar(measured, modeled, yerr=measured_std, fmt='o', capsize=5)
+
+    # set axis labels and title
+    ax.set_xlabel('Measured')
+    ax.set_ylabel('Modeled')
+    ax.set_title('Measured vs Modeled Data with Standard Deviation')
+
+    # show the plot
+    plt.show()
+    
+    # calculate upper and lower bounds of shaded region
+    lower = measured - measured_std
+    upper = measured + measured_std
+
+    # create scatter plot with shaded region
+    fig, ax = plt.subplots()
+    ax.plot(measured, modeled, 'o', label='Data')
+    ax.fill_between(measured, lower, upper, alpha=0.8, label='Uncertainty')
+
+    # set axis labels and title
+    ax.set_xlabel('Measured')
+    ax.set_ylabel('Modeled')
+    ax.set_title('Measured vs Modeled Data with Standard Deviation')
+    
+    # add legend and show the plot
+    ax.legend()
+    plt.show()
+    
+    # create histogram of measured and modeled data
+    fig, ax = plt.subplots()
+    bins = np.linspace(min(min(measured), min(modeled)), max(max(measured), max(modeled)), 100)
+    ax.hist(measured, bins=bins, alpha=0.5, label='Measured')
+    ax.hist(modeled, bins=bins, alpha=0.5, label='Modeled')
+
+    # set axis labels and title
+    ax.set_xlabel('Value')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Histogram of Measured and Modeled Data')
+
+    # add legend and show the plot
+    ax.legend()
+    plt.show()
+    
+    # create QQ plot of measured vs modeled data
+fig, ax = plt.subplots()
+probplot(measured, dist='norm', sparams=(measured_std.mean()), plot=ax)
+probplot(modeled, dist='norm', sparams=(measured_std.mean()), plot=ax)
+
+# set axis labels and title
+ax.set_xlabel('GRASP Quantiles')
+ax.set_ylabel('AirMSPI Quantiles')
+ax.set_title('QQ Plot of Measured vs Modeled Q_scatter Data at 470 nm')
+
+# show the plot
+plt.show()
+
+
+
+# Data
+y_meas = np.array([0.33319, 0.30689, 0.47855, 0.52536, 0.44067])
+y_model = np.array([0.30115, 0.28586, 0.44592, 0.5116 , 0.4361 ])
+y_std = np.array([0.00043214, 0.00054246, 0.00080003, 0.00084232, 0.00039753])
+
+# Plot
+plt.errorbar(np.arange(len(y_meas)), y_meas, yerr=y_std, label='Measured', fmt='o')
+plt.errorbar(np.arange(len(y_model)), y_model, label='Model', fmt='o')
+plt.legend()
+plt.xlabel('Data Point')
+plt.ylabel('Value')
+plt.show()
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+y_meas = np.array([0.33319, 0.30689, 0.47855, 0.52536, 0.44067])
+y_model = np.array([0.30115, 0.28586, 0.44592, 0.5116 , 0.4361 ]) 
+y_std = np.array([0.00043214, 0.00054246, 0.00080003, 0.00084232, 0.00039753])
+
+x = np.arange(len(y_meas))
+
+fig, ax = plt.subplots()
+
+sc = ax.scatter(x, y_meas, c=y_std, cmap='viridis', label='Measured')
+cbar = fig.colorbar(sc)
+cbar.set_label('Standard deviation')
+
+ax.plot(x, y_model, 'r-', label='Model')
+
+ax.set_xlabel('Data point')
+ax.set_ylabel('q_scatter at 470 nm')
+ax.set_xticks(x)
+ax.set_xticklabels(('0', '1', '2', '3', '4'))
+
+ax.legend()
+
+plt.tight_layout()
+plt.show()
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+y_meas = np.array([0.33319, 0.30689, 0.47855, 0.52536, 0.44067])
+y_model = np.array([0.30115, 0.28586, 0.44592, 0.5116 , 0.4361 ]) 
+y_std = np.array([0.00043214, 0.00054246, 0.00080003, 0.00084232, 0.00039753])
+
+x = np.arange(len(y_meas))
+
+fig, ax = plt.subplots()
+
+ax.bar(x, y_meas, yerr=y_std, capsize=5, label='Measured')
+ax.plot(x, y_model, 'r-', label='Model')
+
+ax.set_xlabel('Data point')
+ax.set_ylabel('Value')
+ax.set_xticks(x)
+ax.set_xticklabels(('0', '1', '2', '3', '4'))
+
+ax.legend()
+
+plt.tight_layout()
+plt.show()
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+y_meas = np.array([0.33319, 0.30689, 0.47855, 0.52536, 0.44067])
+y_model = np.array([0.30115, 0.28586, 0.44592, 0.5116 , 0.4361 ])
+y_std = np.array([0.00043214, 0.00054246, 0.00080003, 0.00084232, 0.00039753])
+
+fig, ax = plt.subplots()
+
+x = np.arange(len(y_meas))
+
+diff = y_meas - y_model
+error = y_std
+
+ax.bar(x, diff, yerr=error, capsize=5)
+
+ax.set_xticks(x)
+ax.set_xticklabels(['Point {}'.format(i+1) for i in x])
+ax.set_ylabel('Difference: qg - qair ')
+ax.set_title('q_Scatter at 470 nm')
+
+plt.tight_layout()
+plt.show()
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+y_meas = np.array([0.33319, 0.30689, 0.47855, 0.52536, 0.44067])
+y_model = np.array([0.30115, 0.28586, 0.44592, 0.5116, 0.4361])
+y_std = np.array([0.00043214, 0.00054246, 0.00080003, 0.00084232, 0.00039753])
+
+fig, ax = plt.subplots()
+
+ax.errorbar(y_meas, y_model, xerr=y_std, yerr=y_std, fmt='o', label='Data')
+ax.plot([min(y_meas.min(), y_model.min()), max(y_meas.max(), y_model.max())],
+        [min(y_meas.min(), y_model.min()), max(y_meas.max(), y_model.max())], 
+        'k--', label='1:1 line')
+ax.set_xlabel('Measured')
+ax.set_ylabel('Model')
+ax.set_aspect('equal', 'box')
+ax.legend()
+
+plt.show()
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Data
+y_meas = np.array([0.33319, 0.30689, 0.47855, 0.52536, 0.44067]) 
+y_model = np.array([0.30115, 0.28586, 0.44592, 0.5116 , 0.4361 ]) 
+y_std = np.array([0.00043214, 0.00054246, 0.00080003, 0.00084232, 0.00039753])
+
+# Calculate the upper and lower bounds based on the standard deviations
+lower_bound = y_meas - y_std
+upper_bound = y_meas + y_std
+
+# Plot the shaded region
+fig, ax = plt.subplots()
+ax.fill_between(np.arange(len(y_meas)), lower_bound, upper_bound, alpha=0.7, label='Acceptable range')
+
+# Plot the measured and predicted values
+ax.plot(np.arange(len(y_meas)), y_meas, 'o', label='Measured')
+ax.plot(np.arange(len(y_model)), y_model, 'r', label='Model')
+
+# Add axis labels and legend
+ax.set_xlabel('Data point')
+ax.set_ylabel('Value')
+ax.legend()
+plt.show()
+
+
+
+
+
+
+
+
 # ### END MAIN FUNCTION
 # if __name__ == '__plotout__':
 #      plotout(qs,us,qm,um) 
