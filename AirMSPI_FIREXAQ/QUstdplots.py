@@ -94,7 +94,7 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/2FIREX"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
@@ -102,8 +102,8 @@ def main():  # Main code
 
 
 # # #Home Computer 
-#     datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
-#     outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/2FIREX"
+    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
+    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/2FIREX"
 
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
@@ -118,7 +118,7 @@ def main():  # Main code
 # Set the index of the sequence of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
-    step_ind = 0
+    step_ind = 1
     
 # Set the number of wavelengths for radiometric and polarization separately
 #num_int = total number of radiometric channels
@@ -132,6 +132,8 @@ def main():  # Main code
     num_meas = 13
 
 #Measurement Arrays   
+    i_std = np.zeros((num_step,5))
+    ipol_std = np.zeros((num_step,num_pol))# U meridional    
     qs_std = np.zeros((num_step,num_pol))  # Qscattering plane
     us_std = np.zeros((num_step,num_pol))  # Uscattering plane
     qm_std = np.zeros((num_step,num_pol))  # Q meridional
@@ -407,6 +409,13 @@ def main():  # Main code
             print("***ERROR***")
             print('error')
 
+        i_355 = np.std(box_i_355[good])
+        i_380 = np.std(box_i_380[good])
+        i_445 = np.std(box_i_445[good])
+        i_470 = np.std(box_i_470[good])
+        i_555 = np.std(box_i_555[good])
+        i_660 = np.std(box_i_660[good])
+        i_865 = np.std(box_i_865[good])
         
         qs_470 = np.std(box_qs_470[good])
         qs_660 = np.std(box_qs_660[good])
@@ -426,7 +435,16 @@ def main():  # Main code
         um_660 = np.std(box_um_660[good])
         um_865 = np.std(box_um_865[good])
         
-            
+
+        i_std[loop,0] = i_355
+        i_std[loop,1] = i_380
+        i_std[loop,2] = i_445
+        i_std[loop,3] = i_555
+        
+        ipol_std[loop,0] = i_470
+        ipol_std[loop,1] = i_660
+        ipol_std[loop,2] = i_865            
+
         qs_std[loop,0] = qs_470
         qs_std[loop,1] = qs_660
         qs_std[loop,2] = qs_865
@@ -443,11 +461,11 @@ def main():  # Main code
         um_std[loop,1] = um_660
         um_std[loop,2] = um_865
         
-    return qs_std,us_std,qm_std,um_std
+    return qs_std,us_std,qm_std,um_std,ipol_std,i_std
 
 ### END MAIN FUNCTION
 if __name__ == '__main__':
-    qs,us,qm,um = main() 
+    qs,us,qm,um,ipol,i = main() 
      
 #def plotout(qs,us,qm,um):  # Main code
 
@@ -456,11 +474,11 @@ if __name__ == '__main__':
 #       figpath is where the image output should be stored
 
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/1FIREX"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/1FIREX/Plots"
+    # basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/1FIREX"
+    # figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/1FIREX/Plots"
 
-    # basepath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/2FIREX"
-    # figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/2FIREX/Plots"
+    basepath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/2FIREX"
+    figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/2FIREX/Plots"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -1179,6 +1197,9 @@ if __name__ == '__main__':
     
     ax[0,0].set_ylabel('BRF(I)', fontsize='x-large')
     ax[0,0].yaxis.set_label_coords(-0.5, .5)
+    meanstd = np.mean(i[:,:])
+    ax[0,0].text(100, 0.25, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
+
 
     
     ax[0,0].plot(scat[:,0],i_mod[:,0],color="green",label="355",linewidth='3')
@@ -1195,13 +1216,14 @@ if __name__ == '__main__':
     ax[0,1].plot(scat[:,5],i_mod[:,5],color="red",label='660',linewidth='3')
     ax[0,1].plot(scat[:,6],i_mod[:,6],color="orange",label='865',linewidth='3')
     
-
+    meanstd = np.mean(ipol[:,:])
+    ax[0,1].text(100, 0.25, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
     ax[0,1].yaxis.set_tick_params(labelsize=15)
     
-    ax[0,0].legend(bbox_to_anchor=(4.02,1.1),
-          ncol=2,fontsize='xx-large',frameon=False)
+    ax[0,0].legend(bbox_to_anchor=(3.5,1.0),
+          ncol=2,fontsize='large',frameon=False)
     ax[0,1].legend(bbox_to_anchor=(1.1,0.5),
-          ncol=2,fontsize='xx-large',frameon=False)
+          ncol=2,fontsize='large',frameon=False)
     
     
     ax[1,0].set_ylabel('BRF(Q)', fontsize='x-large')
@@ -1210,18 +1232,18 @@ if __name__ == '__main__':
     
     ax[1,0].plot(scat[:,3],q_obs[:,0],linestyle='dashed',color="blue",label="470nm",linewidth='3')
     ax[1,0].yaxis.set_tick_params(labelsize=15)
-    meanstd = np.mean(qs[:,0])
-    ax[1,0].text(110, -0.1, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
+    meanstd = np.mean(qm[:,0])
+    ax[1,0].text(100, 0.39, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
 
     ax[1,1].plot(scat[:,5],q_obs[:,1],linestyle='dashed',color="red",label="660nm",linewidth='3')
     ax[1,1].yaxis.set_tick_params(labelsize=15)
-    meanstd = np.mean(qs[:,1])
-    ax[1,1].text(110, -0.1, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
+    meanstd = np.mean(qm[:,1])
+    ax[1,1].text(100, 0.39, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
 
     ax[1,2].plot(scat[:,6],q_obs[:,2],linestyle='dashed',color="orange",label="865nm",linewidth='3')
     ax[1,2].yaxis.set_tick_params(labelsize=15)
-    meanstd = np.mean(qs[:,2])
-    ax[1,2].text(95, 0.3, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
+    meanstd = np.mean(qm[:,2])
+    ax[1,2].text(100, 0.39, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
 
     
     ax[1,0].plot(scat[:,3],q_mod[:,0],color="blue",linewidth='3')
@@ -1234,20 +1256,20 @@ if __name__ == '__main__':
     ax[2,0].yaxis.set_label_coords(-0.5, .5)
     
     ax[2,0].plot(scat[:,3],u_obs[:,0],linestyle='dashed',color="blue",label="470nm",linewidth='3')
-    meanstd = np.mean(us[:,0])
-    ax[2,0].text(110, 0.44, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
+    meanstd = np.mean(um[:,0])
+    ax[2,0].text(100, 0.54, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
 
     ax[2,0].yaxis.set_tick_params(labelsize=15)
 
     ax[2,1].plot(scat[:,5],u_obs[:,1],linestyle='dashed',color="red",label="660nm",linewidth='3')
-    meanstd = np.mean(us[:,1])
-    ax[2,1].text(110, 0.44, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
+    meanstd = np.mean(um[:,1])
+    ax[2,1].text(100, 0.54, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
 
     ax[2,1].yaxis.set_tick_params(labelsize=15)
 
     ax[2,2].plot(scat[:,6],u_obs[:,2],linestyle='dashed',color="orange",label="865nm",linewidth='3')
-    meanstd = np.mean(us[:,2])
-    ax[2,2].text(110, 0.44, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
+    meanstd = np.mean(um[:,2])
+    ax[2,2].text(100, 0.54, r'$\bar{{\sigma}} = {:.5f}$'.format(meanstd), fontsize=14, ha='center', va='center')
     
     ax[2,2].yaxis.set_tick_params(labelsize=15)
 
@@ -1265,8 +1287,6 @@ if __name__ == '__main__':
     plt.show()
     
 
-
-np.mean(qs[:,1])
 
 
 
