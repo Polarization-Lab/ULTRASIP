@@ -31,11 +31,11 @@ def main():  # Main code
 # NOTE: basepath is the location of the AirMSPI HDF data files
 #       figpath is where the output should be stored
 
-    basepath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    #basepath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #basepath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     #figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Retrieval_Files/Plots"
     figpath = 'C:/Users/ULTRASIP_1/Documents/Clarissa/paperfigs'
-
+    basepath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
     
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
