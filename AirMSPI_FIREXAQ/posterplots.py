@@ -72,7 +72,7 @@ os.chdir(basepath)
 
 # Get the text file listing
 
-file_list = glob.glob('Merd*.txt')
+file_list = glob.glob('Scat*2*.txt')
 
 num_files = len(file_list)
     

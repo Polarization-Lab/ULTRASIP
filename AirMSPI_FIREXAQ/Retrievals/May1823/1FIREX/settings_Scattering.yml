@@ -4,7 +4,7 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX/RotfromScat2.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX/RotfromScatnoneg.sdat"
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
