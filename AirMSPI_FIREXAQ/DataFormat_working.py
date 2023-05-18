@@ -126,15 +126,15 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/1FIREX"
-    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
 
 # #Home Computer 
-    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
-    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/Bakersfield"
+    # datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
+    # outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/Bakersfield"
 
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
@@ -623,77 +623,107 @@ def main():  # Main code
             print('error')
 
         i_355 = np.median(box_i_355[good])
-        i_380 = np.median(box_i_380[good])
-        i_445 = np.median(box_i_445[good])
-        i_470 = np.median(box_i_470[good])
-        i_555 = np.median(box_i_555[good])
-        i_660 = np.median(box_i_660[good])
-        i_865 = np.median(box_i_865[good])
+        idx_355 = np.where(box_i_355[good] == i_355)[0]
+        print("idk is:",idx_355)
         
+        i_380 = box_i_380[good][idx_355]
         
-        scat_355 = np.median(box_scat_355[good])
-        scat_380 = np.median(box_scat_380[good])
-        scat_445 = np.median(box_scat_445[good])
-        scat_470 = np.median(box_scat_470[good])
-        scat_555 = np.median(box_scat_555[good])
-        scat_660 = np.median(box_scat_660[good])
-        scat_865 = np.median(box_scat_865[good])
+        # np.median(box_i_380[good])
+        # idx_380 = np.where(box_i_380[good] == i_380)[0]
+        # print("idk is:",idx_380)
         
-        vaz_355 = np.median(box_vaz_355[good])
-        vaz_380 = np.median(box_vaz_380[good])
-        vaz_445 = np.median(box_vaz_445[good])
-        vaz_470 = np.median(box_vaz_470[good])
-        vaz_555 = np.median(box_vaz_555[good])
-        vaz_660 = np.median(box_vaz_660[good])
-        vaz_865 = np.median(box_vaz_865[good])
+        i_445 = box_i_445[good][idx_355]
+        # np.median(box_i_445[good])
+        # idx_445 = np.where(box_i_445[good] == i_445)[0]
+        # print("idk is:",idx_445)
         
-        vza_355 = np.median(box_vza_355[good])
-        vza_380 = np.median(box_vza_380[good])
-        vza_445 = np.median(box_vza_445[good])
-        vza_470 = np.median(box_vza_470[good])
-        vza_555 = np.median(box_vza_555[good])
-        vza_660 = np.median(box_vza_660[good])
-        vza_865 = np.median(box_vza_865[good])
+        i_470 = box_i_470[good][idx_355]
+        # np.median(box_i_470[good])
+        # idx_470 = np.where(box_i_470[good] == i_470)[0]
+        # print("idk is:",idx_470)
         
-        qs_470 = np.median(box_qs_470[good])
-        qs_660 = np.median(box_qs_660[good])
-        qs_865 = np.median(box_qs_865[good])
+        i_555 = box_i_555[good][idx_355]
+        # np.median(box_i_555[good])
+        # idx_555 = np.where(box_i_555[good] == i_555)[0]
+        # print("idk is:",idx_555)
         
-        print("qs std")
-        print(np.std(box_qs_470[good]))
-        print(np.std(box_qs_660[good]))
-        print(np.std(box_qs_865[good]))
+        i_660 = box_i_660[good][idx_355]
+        # np.median(box_i_660[good])
+        # idx_660 = np.where(box_i_660[good] == i_660)[0]
+        # print("idk is:",idx_660)
         
-        us_470 = np.median(box_us_470[good])
-        us_660 = np.median(box_us_660[good])
-        us_865 = np.median(box_us_865[good])
+        i_865 = box_i_865[good][idx_355]
+        # np.median(box_i_865[good])
+        # idx_865 = np.where(box_i_865[good] == i_865)[0]
+        # print("idk is:",idx_865)
+           
+        vaz_355 = box_vaz_355[good][idx_355]
+        #np.median(box_vaz_355[good])
+        vaz_380 = box_vaz_380[good][idx_355]
+        #np.median(box_vaz_380[good])
+        vaz_445 = box_vaz_445[good][idx_355]
+        #np.median(box_vaz_445[good])
+        vaz_470 = box_vaz_470[good][idx_355]
+        #np.median(box_vaz_470[good])
+        vaz_555 = box_vaz_555[good][idx_355]
+        #np.median(box_vaz_555[good])
+        vaz_660 = box_vaz_660[good][idx_355]
+        #np.median(box_vaz_660[good])
+        vaz_865 = box_vaz_865[good][idx_355]
+        #np.median(box_vaz_865[good])
         
-        print("us std")
-        print(np.std(box_us_470[good]))
-        print(np.std(box_us_660[good]))
-        print(np.std(box_us_865[good]))
+        vza_355 = box_vza_380[good][idx_355]
+        #np.median(box_vza_355[good])
+        vza_380 = box_vza_380[good][idx_355]
+        #np.median(box_vza_380[good])
+        vza_445 = box_vza_445[good][idx_355]
+        #np.median(box_vza_445[good])
+        vza_470 = box_vza_470[good][idx_355]
+        #np.median(box_vza_470[good])
+        vza_555 = box_vza_555[good][idx_355]
+        #np.median(box_vza_555[good])
+        vza_660 = box_vza_660[good][idx_355]
+        #np.median(box_vza_660[good])
+        vza_865 = box_vza_865[good][idx_355]
+        #np.median(box_vza_865[good])
         
-        qm_470 = np.median(box_qm_470[good])
-        qm_660 = np.median(box_qm_660[good])
-        qm_865 = np.median(box_qm_865[good])
+        qs_470 = box_qs_470[good][idx_355]
+        #np.median(box_qs_470[good])
+        qs_660 = box_qs_660[good][idx_355]
+        #np.median(box_qs_660[good])
+        qs_865 = box_qs_865[good][idx_355]
+        #np.median(box_qs_865[good])
         
-        print("qm std")
-        print(np.std(box_qm_470[good]))
-        print(np.std(box_qm_660[good]))
-        print(np.std(box_qm_865[good]))
+        us_470 = box_us_470[good][idx_355]
+        #np.median(box_us_470[good])
+        us_660 = box_us_660[good][idx_355]
+        #np.median(box_us_660[good])
+        us_865 = box_us_865[good][idx_355]
+        #np.median(box_us_865[good])
         
-        um_470 = np.median(box_um_470[good])
-        um_660 = np.median(box_um_660[good])
-        um_865 = np.median(box_um_865[good])
-        
-        print("um std")
-        print(np.std(box_um_470[good]))
-        print(np.std(box_um_660[good]))
-        print(np.std(box_um_865[good]))
-        
+        qm_470 = box_qm_470[good][idx_355]
+        qm_660 = box_qm_660[good][idx_355]
+        qm_865 = box_qm_865[good][idx_355]
 
-        saz = np.median(box_saz[good])
-        sza = np.median(box_sza[good])
+        um_470 = box_um_470[good][idx_355]
+        um_660 = box_um_660[good][idx_355]
+        um_865 = box_um_865[good][idx_355]
+        
+     
+        # qm_470 = np.median(box_qm_470[good])
+        # qm_660 = np.median(box_qm_660[good])
+        # qm_865 = np.median(box_qm_865[good])
+        
+        
+        # um_470 = np.median(box_um_470[good])
+        # um_660 = np.median(box_um_660[good])
+        # um_865 = np.median(box_um_865[good])
+
+
+        # saz = np.median(box_saz[good])
+        # sza = np.median(box_sza[good])
+        saz = box_saz[good][idx_355]
+        sza = box_sza[good][idx_355]
         
         
 # If this is the center acquisition, process the navigation information
@@ -718,13 +748,13 @@ def main():  # Main code
         stokesin8 = np.array([[qm_865], [um_865]]) #Meridian
         stokesin8s = np.array([[qs_865], [us_865]]) #Scattering
         
-        qg_470, ug_470 = stokesin4s
-        qg_660, ug_660 = stokesin6s
-        qg_865, ug_865 = stokesin8s
+        # qg_470, ug_470 = stokesin4s
+        # qg_660, ug_660 = stokesin6s
+        # qg_865, ug_865 = stokesin8s
         
-        # qg_470, ug_470 = stokesin4
-        # qg_660, ug_660 = stokesin6
-        # qg_865, ug_865 = stokesin8
+        qg_470, ug_470 = stokesin4
+        qg_660, ug_660 = stokesin6
+        qg_865, ug_865 = stokesin8
 
         
         if saz >= 180: 
@@ -794,13 +824,6 @@ def main():  # Main code
         i_median[loop,5] = eqr_i_660
         i_median[loop,6] = eqr_i_865
                 
-        scat_median[loop,0] = (scat_355)
-        scat_median[loop,1] = (scat_380)
-        scat_median[loop,2] = (scat_445)
-        scat_median[loop,3] = (scat_470)
-        scat_median[loop,4] = (scat_555)
-        scat_median[loop,5] = (scat_660)
-        scat_median[loop,6] = (scat_865)
         
         
         vza_median[loop,0] = vza_355
@@ -842,7 +865,7 @@ def main():  # Main code
         
         sza_median[loop] = sza
 
-        print(scat_median[:])
+
 # #__________________Section 3: Output Data in GRASP SDATA Format__________________#
 # Guide to output file names
 # NOTE: The options more or less correspond to GRASP retrieval.regime_of_measurement_fitting
