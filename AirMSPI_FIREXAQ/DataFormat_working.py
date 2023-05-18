@@ -758,10 +758,10 @@ def main():  # Main code
 
         print(saz)
         
-        if saz >= 180: 
-            saz = saz - 180
-        else:
-            saz = saz + 180
+        # if saz >= 180: 
+        #     saz = saz - 180
+        # else:
+        #     saz = saz + 180
         
         raz_355 = saz - vaz_355
         raz_380 = saz - vaz_380
@@ -880,7 +880,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat'
+    outfile_base = 'RotfromScat2'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
