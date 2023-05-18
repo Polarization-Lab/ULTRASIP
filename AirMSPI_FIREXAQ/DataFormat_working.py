@@ -748,19 +748,19 @@ def main():  # Main code
         stokesin8 = np.array([[qm_865], [um_865]]) #Meridian
         stokesin8s = np.array([[qs_865], [us_865]]) #Scattering
         
-        # qg_470, ug_470 = stokesin4s
-        # qg_660, ug_660 = stokesin6s
-        # qg_865, ug_865 = stokesin8s
+        qg_470, ug_470 = stokesin4s
+        qg_660, ug_660 = stokesin6s
+        qg_865, ug_865 = stokesin8s
         
-        qg_470, ug_470 = stokesin4
-        qg_660, ug_660 = stokesin6
-        qg_865, ug_865 = stokesin8
+        # qg_470, ug_470 = stokesin4
+        # qg_660, ug_660 = stokesin6
+        # qg_865, ug_865 = stokesin8
 
         
-        if saz >= 180: 
-            saz = saz - 180
-        else:
-            saz = saz + 180
+        # if saz >= 180: 
+        #     saz = saz - 180
+        # else:
+        #     saz = saz + 180
         
         raz_355 = saz - vaz_355
         raz_380 = saz - vaz_380
@@ -879,7 +879,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromMerd'
+    outfile_base = 'RotfromScat2'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
