@@ -615,6 +615,7 @@ def main():  # Main code
         box_good = box_i_355[good]
         
         plt.imshow(box_i_470, cmap = 'gray')
+        print(box_i_470[good])
         
         if(len(box_good) < 1):
             print("***ERROR***")
@@ -1123,7 +1124,7 @@ def main():  # Main code
 
 # Write out the line
      
-    outputFile.write(out_str)
+    # outputFile.write(out_str)
 
 # Close the output file
 
