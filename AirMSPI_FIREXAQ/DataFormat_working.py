@@ -771,10 +771,10 @@ def main():  # Main code
         
 
 
-        if saz >= 180: 
-            saz = saz - 180
-        else:
-            saz = saz + 180
+        # if saz >= 180: 
+        #     saz = saz - 180
+        # else:
+        #     saz = saz + 180
 
         
         raz_355 = saz - vaz_355
