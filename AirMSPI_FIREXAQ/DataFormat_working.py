@@ -143,8 +143,8 @@ def main():  # Main code
     #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
     datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
 
-    #outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/Bakersfield2"
-    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREXR2"
+    #outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
+    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -785,7 +785,7 @@ def main():  # Main code
         raz_660 = saz - vaz_660
         raz_865 = saz - vaz_865
         
-
+        #REMOVE FOR SCAT#
         # if raz_355 < 0:
         #     raz_355 = raz_355 + 360
         # if raz_380 < 0:
@@ -906,7 +906,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat3'
+    outfile_base = 'RotfromScat'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
