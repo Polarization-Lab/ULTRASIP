@@ -132,20 +132,20 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX"
-    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/Bakersfield"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
+    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
 
-# #Home Computer 
-    #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
-    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
+# # #Home Computer 
+#     #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
+#     datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
 
-    #outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
-    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
-# Load in the set of measurement sequences
+#     #outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
+#     outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
+# # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
@@ -760,13 +760,13 @@ def main():  # Main code
         
 
         
-        qg_470, ug_470 = stokesin4s
-        qg_660, ug_660 = stokesin6s
-        qg_865, ug_865 = stokesin8s
+        # qg_470, ug_470 = stokesin4s
+        # qg_660, ug_660 = stokesin6s
+        # qg_865, ug_865 = stokesin8s
         
-        # qg_470, ug_470 = stokesin4
-        # qg_660, ug_660 = stokesin6
-        # qg_865, ug_865 = stokesin8
+        qg_470, ug_470 = stokesin4
+        qg_660, ug_660 = stokesin6
+        qg_865, ug_865 = stokesin8
 
         
 
@@ -787,20 +787,7 @@ def main():  # Main code
         
        
         
-        # if raz_355 < 0:
-        #     raz_355 = raz_355 + 360
-        # if raz_380 < 0:
-        #     raz_380 = raz_380 + 360
-        # if raz_445 < 0:
-        #     raz_445 = raz_445 + 360
-        # if raz_470 < 0:
-        #     raz_470 = raz_470 + 360
-        # if raz_555 < 0:
-        #     raz_555 = raz_555 + 360
-        # if raz_660 < 0:
-        #     raz_660 = raz_660 + 360
-        # if raz_865 < 0:
-        #     raz_865 = raz_865 + 360
+
             
         #print(raz_355,raz_380,raz_445,raz_555,raz_660,raz_865)
 
@@ -874,21 +861,21 @@ def main():  # Main code
         raz_median[loop,11] = raz_865
         raz_median[loop,12] = raz_865
 
-        # q_median[loop,0] = eqr_qg_470
-        # q_median[loop,1] = eqr_qg_660
-        # q_median[loop,2] = eqr_qg_865
+        q_median[loop,0] = eqr_qg_470
+        q_median[loop,1] = eqr_qg_660
+        q_median[loop,2] = eqr_qg_865
     
-        # u_median[loop,0] = eqr_ug_470
-        # u_median[loop,1] = eqr_ug_660
-        # u_median[loop,2] = eqr_ug_865
+        u_median[loop,0] = eqr_ug_470
+        u_median[loop,1] = eqr_ug_660
+        u_median[loop,2] = eqr_ug_865
 
-        q_median[loop,0] = -eqr_qg_470
-        q_median[loop,1] = -eqr_qg_660
-        q_median[loop,2] = -eqr_qg_865
+        # q_median[loop,0] = -eqr_qg_470
+        # q_median[loop,1] = -eqr_qg_660
+        # q_median[loop,2] = -eqr_qg_865
     
-        u_median[loop,0] = -eqr_ug_470
-        u_median[loop,1] = -eqr_ug_660
-        u_median[loop,2] = -eqr_ug_865
+        # u_median[loop,0] = -eqr_ug_470
+        # u_median[loop,1] = -eqr_ug_660
+        # u_median[loop,2] = -eqr_ug_865
         
 
         sza_median[loop] = sza
@@ -907,7 +894,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat2'
+    outfile_base = 'RotfromMerd'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)

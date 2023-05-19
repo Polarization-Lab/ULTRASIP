@@ -23,13 +23,13 @@ import matplotlib.ticker as ticker
 #       figpath is where the image output should be stored
 
 
-# basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX"
-# figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX/Plots"
+basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
+figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX/Plots"
 
-basepath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
-figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
-basepath ="C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
-figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
+# basepath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
+# figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
+# basepath ="C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
+# figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
@@ -773,7 +773,7 @@ ax_new = fig.add_subplot(3, 3, 3)
 ax_new.plot(wave[:],aod[:],linewidth=7, color = 'darkgoldenrod')
 ax_new.xaxis.set_tick_params(labelsize=35)
 ax_new.yaxis.set_tick_params(labelsize=35)
-ax_new.set_yticks([0.8,1.6,2.4])
+#ax_new.set_yticks([0.8,1.6,2.4])
 ax_new.set_ylabel('AOD', fontsize=35,color='darkgoldenrod')
 ax_new.set_xlabel(r'$\lambda$', fontsize=35)
 ax_new2 = ax_new.twinx()
