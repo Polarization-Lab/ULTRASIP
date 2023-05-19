@@ -23,13 +23,13 @@ import matplotlib.ticker as ticker
 #       figpath is where the image output should be stored
 
 
-basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX"
-figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX/Plots"
+# basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX"
+# figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX/Plots"
 
-# basepath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/1FIREX"
-# figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/1FIREX/Plots"
-# basepath ="C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/Bakersfield"
-# figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1423/Bakersfield"
+basepath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
+figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
+basepath ="C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
+figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
@@ -72,7 +72,7 @@ os.chdir(basepath)
 
 # Get the text file listing
 
-file_list = glob.glob('Scat*2*.txt')
+file_list = glob.glob('Scat*.txt')
 
 num_files = len(file_list)
     
