@@ -72,7 +72,7 @@ os.chdir(basepath)
 
 # Get the text file listing
 
-file_list = glob.glob('Scat*.txt')
+file_list = glob.glob('Merd*.txt')
 
 num_files = len(file_list)
     
@@ -773,7 +773,7 @@ ax_new = fig.add_subplot(3, 3, 3)
 ax_new.plot(wave[:],aod[:],linewidth=7, color = 'darkgoldenrod')
 ax_new.xaxis.set_tick_params(labelsize=35)
 ax_new.yaxis.set_tick_params(labelsize=35)
-#ax_new.set_yticks([0.8,1.6,2.4])
+ax_new.set_yticks([0.5,1.0,1.5])
 ax_new.set_ylabel('AOD', fontsize=35,color='darkgoldenrod')
 ax_new.set_xlabel(r'$\lambda$', fontsize=35)
 ax_new2 = ax_new.twinx()
