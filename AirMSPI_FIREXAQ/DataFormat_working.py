@@ -886,6 +886,7 @@ def main():  # Main code
         um_660 = np.pi*um_660*esd**2/E0_660
         um_865 = np.pi*um_865*esd**2/E0_865
         
+        print(eqr_qg_470,eqr_ug_470)
         print('scat',calculate_dolp(np.array([[eqr_qg_470],[eqr_ug_470]])))
         print('merd',calculate_dolp(np.array([[qm_470],[um_470]])))
 
