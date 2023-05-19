@@ -45,6 +45,13 @@ import time
 from matplotlib import patches
 
 #_______________Define ROI Functions___________________________#
+def calculate_dolp(stokesparam):
+
+    #I = stokesparam[0]
+    Q = stokesparam[0]
+    U = stokesparam[1]
+    dolp = ((Q**2 + U**2)**(1/2)) #/I
+    return dolp
 
 def image_crop(a):
         #np.clip(a, 0, None, out=a)
@@ -749,6 +756,8 @@ def main():  # Main code
         stokesin8 = np.array([[qm_865], [um_865]]) #Meridian
         stokesin8s = np.array([[qs_865], [us_865]]) #Scattering
         
+
+        
         qg_470, ug_470 = stokesin4s
         qg_660, ug_660 = stokesin6s
         qg_865, ug_865 = stokesin8s
@@ -818,6 +827,9 @@ def main():  # Main code
         eqr_ug_660 = np.pi*ug_660*esd**2/E0_660
         eqr_ug_865 = np.pi*ug_865*esd**2/E0_865
         
+        # print('dolp:',calculate_dolp(stokesin4))
+        # print('dolps:',calculate_dolp(stokesin4s))
+        
 
 #____________________________STORE THE DATA____________________________#
 
@@ -866,8 +878,17 @@ def main():  # Main code
         u_median[loop,0] = -eqr_ug_470
         u_median[loop,1] = -eqr_ug_660
         u_median[loop,2] = -eqr_ug_865
-          
         
+        qm_470 = np.pi*qm_470*esd**2/E0_470
+        qm_660 = np.pi*qm_660*esd**2/E0_660
+        qm_865 = np.pi*qm_865*esd**2/E0_865  
+        um_470 = np.pi*um_470*esd**2/E0_470
+        um_660 = np.pi*um_660*esd**2/E0_660
+        um_865 = np.pi*um_865*esd**2/E0_865
+        
+        print('scat',calculate_dolp(np.array([[eqr_qg_470],[eqr_ug_470]])))
+        print('merd',calculate_dolp(np.array([[qm_470],[um_470]])))
+
         sza_median[loop] = sza
 
 
