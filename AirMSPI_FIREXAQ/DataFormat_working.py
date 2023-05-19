@@ -786,20 +786,20 @@ def main():  # Main code
         raz_865 = saz - vaz_865
         
 
-        if raz_355 < 0:
-            raz_355 = raz_355 + 360
-        if raz_380 < 0:
-            raz_380 = raz_380 + 360
-        if raz_445 < 0:
-            raz_445 = raz_445 + 360
-        if raz_470 < 0:
-            raz_470 = raz_470 + 360
-        if raz_555 < 0:
-            raz_555 = raz_555 + 360
-        if raz_660 < 0:
-            raz_660 = raz_660 + 360
-        if raz_865 < 0:
-            raz_865 = raz_865 + 360
+        # if raz_355 < 0:
+        #     raz_355 = raz_355 + 360
+        # if raz_380 < 0:
+        #     raz_380 = raz_380 + 360
+        # if raz_445 < 0:
+        #     raz_445 = raz_445 + 360
+        # if raz_470 < 0:
+        #     raz_470 = raz_470 + 360
+        # if raz_555 < 0:
+        #     raz_555 = raz_555 + 360
+        # if raz_660 < 0:
+        #     raz_660 = raz_660 + 360
+        # if raz_865 < 0:
+        #     raz_865 = raz_865 + 360
             
         #print(raz_355,raz_380,raz_445,raz_555,raz_660,raz_865)
 
@@ -873,21 +873,21 @@ def main():  # Main code
         raz_median[loop,11] = raz_865
         raz_median[loop,12] = raz_865
 
-        q_median[loop,0] = eqr_qg_470
-        q_median[loop,1] = eqr_qg_660
-        q_median[loop,2] = eqr_qg_865
+        # q_median[loop,0] = eqr_qg_470
+        # q_median[loop,1] = eqr_qg_660
+        # q_median[loop,2] = eqr_qg_865
     
-        u_median[loop,0] = eqr_ug_470
-        u_median[loop,1] = eqr_ug_660
-        u_median[loop,2] = eqr_ug_865
+        # u_median[loop,0] = eqr_ug_470
+        # u_median[loop,1] = eqr_ug_660
+        # u_median[loop,2] = eqr_ug_865
 
-        # q_median[loop,0] = -eqr_qg_470
-        # q_median[loop,1] = -eqr_qg_660
-        # q_median[loop,2] = -eqr_qg_865
+        q_median[loop,0] = -eqr_qg_470
+        q_median[loop,1] = -eqr_qg_660
+        q_median[loop,2] = -eqr_qg_865
     
-        # u_median[loop,0] = -eqr_ug_470
-        # u_median[loop,1] = -eqr_ug_660
-        # u_median[loop,2] = -eqr_ug_865
+        u_median[loop,0] = -eqr_ug_470
+        u_median[loop,1] = -eqr_ug_660
+        u_median[loop,2] = -eqr_ug_865
         
 
         sza_median[loop] = sza
