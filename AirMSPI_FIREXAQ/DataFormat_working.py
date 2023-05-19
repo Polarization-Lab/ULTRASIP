@@ -758,15 +758,14 @@ def main():  # Main code
         
 
         
-        qg_470, ug_470 = stokesin4s
-        qg_660, ug_660 = stokesin6s
-        qg_865, ug_865 = stokesin8s
+        # qg_470, ug_470 = stokesin4s
+        # qg_660, ug_660 = stokesin6s
+        # qg_865, ug_865 = stokesin8s
         
-        # qg_470, ug_470 = stokesin4
-        # qg_660, ug_660 = stokesin6
-        # qg_865, ug_865 = stokesin8
+        qg_470, ug_470 = stokesin4
+        qg_660, ug_660 = stokesin6
+        qg_865, ug_865 = stokesin8
 
-        print(saz)
         
         #Take out for scattering 
         
@@ -871,13 +870,13 @@ def main():  # Main code
         raz_median[loop,11] = raz_865
         raz_median[loop,12] = raz_865
 
-        q_median[loop,0] = -eqr_qg_470
-        q_median[loop,1] = -eqr_qg_660
-        q_median[loop,2] = -eqr_qg_865
+        q_median[loop,0] = eqr_qg_470
+        q_median[loop,1] = eqr_qg_660
+        q_median[loop,2] = eqr_qg_865
     
-        u_median[loop,0] = -eqr_ug_470
-        u_median[loop,1] = -eqr_ug_660
-        u_median[loop,2] = -eqr_ug_865
+        u_median[loop,0] = eqr_ug_470
+        u_median[loop,1] = eqr_ug_660
+        u_median[loop,2] = eqr_ug_865
         
         qm_470 = np.pi*qm_470*esd**2/E0_470
         qm_660 = np.pi*qm_660*esd**2/E0_660
@@ -886,9 +885,6 @@ def main():  # Main code
         um_660 = np.pi*um_660*esd**2/E0_660
         um_865 = np.pi*um_865*esd**2/E0_865
         
-        print(eqr_qg_470,eqr_ug_470)
-        print('scat',calculate_dolp(np.array([[eqr_qg_470],[eqr_ug_470]])))
-        print('merd',calculate_dolp(np.array([[qm_470],[um_470]])))
 
         sza_median[loop] = sza
 
@@ -906,7 +902,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat'
+    outfile_base = 'RotfromMerd'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
