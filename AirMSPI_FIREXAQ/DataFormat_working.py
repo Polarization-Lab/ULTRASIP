@@ -140,9 +140,11 @@ def main():  # Main code
 
 
 # #Home Computer 
-    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
-    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/Bakersfield2"
+    #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
+    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
 
+    #outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/Bakersfield2"
+    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREXR2"
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -758,22 +760,22 @@ def main():  # Main code
         
 
         
-        qg_470, ug_470 = stokesin4s
-        qg_660, ug_660 = stokesin6s
-        qg_865, ug_865 = stokesin8s
+        # qg_470, ug_470 = stokesin4s
+        # qg_660, ug_660 = stokesin6s
+        # qg_865, ug_865 = stokesin8s
         
-        # qg_470, ug_470 = stokesin4
-        # qg_660, ug_660 = stokesin6
-        # qg_865, ug_865 = stokesin8
+        qg_470, ug_470 = stokesin4
+        qg_660, ug_660 = stokesin6
+        qg_865, ug_865 = stokesin8
 
         
-        #Take out for scattering 
+
         
         if saz >= 180: 
             saz = saz - 180
         else:
             saz = saz + 180
-        #####^^^^^^^^^^^^###############
+
         
         raz_355 = saz - vaz_355
         raz_380 = saz - vaz_380
@@ -783,20 +785,21 @@ def main():  # Main code
         raz_660 = saz - vaz_660
         raz_865 = saz - vaz_865
         
-        # if raz_355 < 0:
-        #     raz_355 = raz_355 + 360
-        # if raz_380 < 0:
-        #     raz_380 = raz_380 + 360
-        # if raz_445 < 0:
-        #     raz_445 = raz_445 + 360
-        # if raz_470 < 0:
-        #     raz_470 = raz_470 + 360
-        # if raz_555 < 0:
-        #     raz_555 = raz_555 + 360
-        # if raz_660 < 0:
-        #     raz_660 = raz_660 + 360
-        # if raz_865 < 0:
-        #     raz_865 = raz_865 + 360
+        ######REMOVE FOR SCAT#########
+        if raz_355 < 0:
+            raz_355 = raz_355 + 360
+        if raz_380 < 0:
+            raz_380 = raz_380 + 360
+        if raz_445 < 0:
+            raz_445 = raz_445 + 360
+        if raz_470 < 0:
+            raz_470 = raz_470 + 360
+        if raz_555 < 0:
+            raz_555 = raz_555 + 360
+        if raz_660 < 0:
+            raz_660 = raz_660 + 360
+        if raz_865 < 0:
+            raz_865 = raz_865 + 360
             
         #print(raz_355,raz_380,raz_445,raz_555,raz_660,raz_865)
 
@@ -870,14 +873,21 @@ def main():  # Main code
         raz_median[loop,11] = raz_865
         raz_median[loop,12] = raz_865
 
-        q_median[loop,0] = -eqr_qg_470
-        q_median[loop,1] = -eqr_qg_660
-        q_median[loop,2] = -eqr_qg_865
+        q_median[loop,0] = eqr_qg_470
+        q_median[loop,1] = eqr_qg_660
+        q_median[loop,2] = eqr_qg_865
     
-        u_median[loop,0] = -eqr_ug_470
-        u_median[loop,1] = -eqr_ug_660
-        u_median[loop,2] = -eqr_ug_865
+        u_median[loop,0] = eqr_ug_470
+        u_median[loop,1] = eqr_ug_660
+        u_median[loop,2] = eqr_ug_865
 
+        # q_median[loop,0] = -eqr_qg_470
+        # q_median[loop,1] = -eqr_qg_660
+        # q_median[loop,2] = -eqr_qg_865
+    
+        # u_median[loop,0] = -eqr_ug_470
+        # u_median[loop,1] = -eqr_ug_660
+        # u_median[loop,2] = -eqr_ug_865
         
 
         sza_median[loop] = sza
@@ -896,7 +906,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat'
+    outfile_base = 'RotfromMerd'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
