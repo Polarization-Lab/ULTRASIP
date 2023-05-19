@@ -125,16 +125,16 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX"
+    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
 
 # #Home Computer 
-    # datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
-    # outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/Bakersfield"
+    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
+    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/Bakersfield2"
 
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
@@ -859,13 +859,13 @@ def main():  # Main code
         raz_median[loop,11] = raz_865
         raz_median[loop,12] = raz_865
 
-        q_median[loop,0] = eqr_qg_470
-        q_median[loop,1] = eqr_qg_660
-        q_median[loop,2] = eqr_qg_865
+        q_median[loop,0] = -eqr_qg_470
+        q_median[loop,1] = -eqr_qg_660
+        q_median[loop,2] = -eqr_qg_865
     
-        u_median[loop,0] = eqr_ug_470
-        u_median[loop,1] = eqr_ug_660
-        u_median[loop,2] = eqr_ug_865
+        u_median[loop,0] = -eqr_ug_470
+        u_median[loop,1] = -eqr_ug_660
+        u_median[loop,2] = -eqr_ug_865
           
         
         sza_median[loop] = sza
@@ -884,7 +884,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScatnoneg'
+    outfile_base = 'RotfromScat'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
@@ -1124,7 +1124,7 @@ def main():  # Main code
 
 # Write out the line
      
-    # outputFile.write(out_str)
+    outputFile.write(out_str)
 
 # Close the output file
 

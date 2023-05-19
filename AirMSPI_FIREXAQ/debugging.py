@@ -35,7 +35,7 @@ def calculate_dolp(stokesparam):
     I = stokesparam[0]
     Q = stokesparam[1]
     U = stokesparam[2]
-    dolp = ((Q**2 + U**2)**(1/2))/I
+    dolp = ((Q**2 + U**2)**(1/2)) #/I
     return dolp
 
     
@@ -105,16 +105,16 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX"
+    # datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    # #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    # outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/1FIREX"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
 
 # #Home Computer 
-    # datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
-    # outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/Bakersfield"
+    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
+    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1823/Bakersfield"
 
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
@@ -158,6 +158,12 @@ def main():  # Main code
     ipol_median = np.zeros((num_step,num_pol))  # Ipol
     dolp_median = np.zeros((num_step,num_pol))  # DoLP
     esd = 0.0  # Earth-Sun distance (only need one)
+    
+    i_values = np.zeros((num_step,num_pol))
+    qs_values = np.zeros((num_step,num_pol))
+    us_values = np.zeros((num_step,num_pol))
+    qm_values = np.zeros((num_step,num_pol))
+    um_values = np.zeros((num_step,num_pol))
 
 #Center point Arrays
     center_wave = np.zeros(num_int)  # Center wavelengths  
@@ -434,47 +440,160 @@ def main():  # Main code
         img_um_660 = np.flipud(image_crop(Um_660))
         img_um_865 = np.flipud(image_crop(Um_865))
         
+        if loop == 0: 
+            plt.figure()
+            plt.imshow(I_470)
+            plt.figure()
+            plt.imshow(img_i_470)
+            x_center, y_center = choose_roi(img_i_470)
+        
+        box_x1 = x_center - 2 
+        box_x2 = x_center + 3 
+        box_y1 = y_center - 2 
+        box_y2 = y_center + 3 
+        print(box_x1,box_x2,box_y1,box_y2)
+        
+            
+# Extract the values from the ROI
+# NOTE: The coordinates are relative to the flipped "img" array
+
+        i_355 = img_i_355[box_x1:box_x2,box_y1:box_y2]
+        i_380 = img_i_380[box_x1:box_x2,box_y1:box_y2]
+        i_445 = img_i_445[box_x1:box_x2,box_y1:box_y2]
+        i_470 = img_i_470[box_x1:box_x2,box_y1:box_y2]
+        i_555 = img_i_555[box_x1:box_x2,box_y1:box_y2]
+        i_660 = img_i_660[box_x1:box_x2,box_y1:box_y2]
+        i_865 = img_i_865[box_x1:box_x2,box_y1:box_y2]
         
         
-        DOLP_470 = img_DOLP_470[200,200]
-        DOLP_660 = img_DOLP_660[200,200]
-        DOLP_865 = img_DOLP_865[200,200]
+        qs_470 = img_qs_470[box_x1:box_x2,box_y1:box_y2]
+        qs_660 = img_qs_660[box_x1:box_x2,box_y1:box_y2]
+        qs_865 = img_qs_865[box_x1:box_x2,box_y1:box_y2]
         
-        i_470 = img_i_470[200,200]
-        i_660 = img_i_660[200,200]
-        i_865 = img_i_865[200,200]
- 
-        qs_470 = img_qs_470[200,200]
-        qs_660 = img_qs_660[200,200]
-        qs_865 = img_qs_865[200,200]
-        us_470 = img_us_470[200,200]
-        us_660 = img_us_660[200,200]
-        us_865 = img_us_865[200,200]
         
-        qm_470 = img_qm_470[200,200]
-        qm_660 = img_qm_660[200,200]
-        qm_865 = img_qm_865[200,200]
-        um_470 = img_um_470[200,200]
-        um_660 = img_um_660[200,200]
-        um_865 = img_um_865[200,200]
+        us_470 = img_us_470[box_x1:box_x2,box_y1:box_y2]
+        us_660 = img_us_660[box_x1:box_x2,box_y1:box_y2]
+        us_865 = img_us_865[box_x1:box_x2,box_y1:box_y2]
         
-        #Input
-        #470
-        stokesin4 = np.array([[i_470],[qm_470], [um_470]]) #Meridian
-        stokesin4s = np.array([[i_470],[qs_470], [us_470]]) #Scattering
-        #660
-        stokesin6 = np.array([[i_660],[qm_660], [um_660]]) #Meridian
-        stokesin6s = np.array([[i_660],[qs_660], [us_660]]) #Scattering
-        #865
-        stokesin8 = np.array([[i_865],[qm_865], [um_865]]) #Meridian
-        stokesin8s = np.array([[i_865],[qs_865], [us_865]]) #Scattering
+
+        qm_470 = img_qm_470[box_x1:box_x2,box_y1:box_y2]
+        qm_660 = img_qm_660[box_x1:box_x2,box_y1:box_y2]
+        qm_865 = img_qm_865[box_x1:box_x2,box_y1:box_y2]
         
-    return stokesin4, stokesin4s, stokesin6, stokesin6s, stokesin8, stokesin8s,DOLP_470,DOLP_660,DOLP_865
         
+        um_470 = img_um_470[box_x1:box_x2,box_y1:box_y2]
+        um_660 = img_um_660[box_x1:box_x2,box_y1:box_y2]
+        um_865 = img_um_865[box_x1:box_x2,box_y1:box_y2]
+        
+        DOLP_470 = img_DOLP_470[box_x1:box_x2,box_y1:box_y2]
+        DOLP_660 = img_DOLP_660[box_x1:box_x2,box_y1:box_y2]
+        DOLP_865 = img_DOLP_865[box_x1:box_x2,box_y1:box_y2]
+        
+        good = ((i_355 > 0.0) & (i_380 > 0.0) & (i_445 > 0.0) &
+            (i_470 > 0.0) & (i_555 > 0.0) & (i_660 > 0.0) &
+            (i_865 > 0.0))
+            
+        box_good = i_470[good]
+
+        if(len(box_good) < 1):
+            print("***ERROR***")
+            print("NO VALID PIXELS")
+            print("***ERROR***")
+            print('error')
+        
+        i_470_box = i_470[good]
+        i_470med = np.median(i_470)
+        idx = 2 #np.where(i_470_box == i_470med)[0]
+        print("idk is:",idx)
+        i_470 = i_470[good][idx]
+        i_660 = i_660[good][idx]
+        i_865 = i_865[good][idx]
+
+        DOLP_470 = DOLP_470[good][idx]
+        DOLP_660 = DOLP_660[good][idx]
+        DOLP_865 = DOLP_865[good][idx]
+        
+        qm_470 = qm_470[good][idx]
+        qm_660 = qm_660[good][idx]
+        qm_865 = qm_865[good][idx]
+        um_470 = um_470[good][idx]
+        um_660 = um_660[good][idx]
+        um_865 = um_865[good][idx]
+        
+        qs_470 = qs_470[good][idx]
+        qs_660 = qs_660[good][idx]
+        qs_865 = qs_865[good][idx]
+        us_470 = us_470[good][idx]
+        us_660 = us_660[good][idx]
+        us_865 = us_865[good][idx]
+
+        i_355 = np.pi*i_355*esd**2/E0_355
+        i_380 = np.pi*i_380*esd**2/E0_380
+        i_445 = np.pi*i_445*esd**2/E0_445
+        i_470 = np.pi*i_470*esd**2/E0_470
+        i_555 = np.pi*i_555*esd**2/E0_555
+        i_660 = np.pi*i_660*esd**2/E0_660
+        i_865 = np.pi*i_865*esd**2/E0_865
+        
+        qs_470 = -np.pi*qs_470*esd**2/E0_470
+        qs_660 = -np.pi*qs_660*esd**2/E0_660
+        qs_865 = -np.pi*qs_865*esd**2/E0_865  
+        us_470 = -np.pi*us_470*esd**2/E0_470
+        us_660 = -np.pi*us_660*esd**2/E0_660
+        us_865 = -np.pi*us_865*esd**2/E0_865
+
+        qm_470 = np.pi*qm_470*esd**2/E0_470
+        qm_660 = np.pi*qm_660*esd**2/E0_660
+        qm_865 = np.pi*qm_865*esd**2/E0_865  
+        um_470 = np.pi*um_470*esd**2/E0_470
+        um_660 = np.pi*um_660*esd**2/E0_660
+        um_865 = np.pi*um_865*esd**2/E0_865
+
+        # #Input
+        # #470
+        # stokesin4 = np.array([[i_470],[qm_470], [um_470]]) #Meridian
+        # stokesin4s = np.array([[i_470],[-qs_470], [-us_470]]) #Scattering
+        # #660
+        # stokesin6 = np.array([[i_660],[qm_660], [um_660]]) #Meridian
+        # stokesin6s = np.array([[i_660],[-qs_660], [-us_660]]) #Scattering
+        # #865
+        # stokesin8 = np.array([[i_865],[qm_865], [um_865]]) #Meridian
+        # stokesin8s = np.array([[i_865],[-qs_865], [-us_865]]) #Scattering
+        
+
+        i_values[loop,0] = i_470
+        i_values[loop,1] = i_660
+        i_values[loop,2] = i_865
+        
+        qs_values[loop,0] = qs_470
+        qs_values[loop,1] = qs_660
+        qs_values[loop,2] = qs_865
+        
+        us_values[loop,0] = us_470
+        us_values[loop,1] = us_660
+        us_values[loop,2] = us_865
+        
+        qm_values[loop,0] = qm_470
+        qm_values[loop,1] = qm_660
+        qm_values[loop,2] = qm_865
+        
+        um_values[loop,0] = um_470
+        um_values[loop,1] = um_660
+        um_values[loop,2] = um_865
+        
+
+    #return stokesin4, stokesin4s, stokesin6, stokesin6s, stokesin8, stokesin8s,DOLP_470,DOLP_660,DOLP_865,box_good
+    return i_values, qs_values,us_values,qm_values,um_values
         
 ### END MAIN FUNCTION
 if __name__ == '__main__':
-     merd4,scat4,merd6,scat6,merd8,scat8,dolp4,dolp6,dolp8 = main()     
+      i,qs,us,qm,um = main()     
 
-     dolp4calc = calculate_dolp(merd4)
-     dolp4calcscat = calculate_dolp(scat4)
+     # dolp4calc = calculate_dolp(merd4)
+     # dolp4calcscat = calculate_dolp(scat4)
+     
+     # dolp6calc = calculate_dolp(merd6)
+     # dolp6calcscat = calculate_dolp(scat6)
+     
+     # dolp8calc = calculate_dolp(merd8)
+     # dolp8calcscat = calculate_dolp(scat8)
