@@ -633,7 +633,7 @@ def main():  # Main code
             print('error')
 
         i_355 = np.median(box_i_355[good])
-        idx_355 = 14 #np.where(box_i_355[good] == i_355)[0]
+        idx_355 = np.where(box_i_355[good] == i_355)[0]
         print("idk is:",idx_355)
         
         i_380 = box_i_380[good][idx_355]
