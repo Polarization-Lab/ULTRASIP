@@ -1,5 +1,7 @@
 # ULTRASIP
 
+***POSTER FOR GRASP WORKSHOP 2023: https://github.com/Polarization-Lab/ULTRASIP/files/11539729/DeLeon_GRASPWorkshopPoster.pdf
+
 The UV Polarimetry for Wildfire Smoke project is combines radiative transfer simulations and development of a ultraviolet linear stokes imaging polarimeter. 
 ULTRASIP is an Ultraviolet Linear Stokes Imaging Polarimeter developed by the Polarization Lab at the Wyant College of Optical Sciences at the University of Arizona. ULTRASIP was initially developed for imaging optically thin clouds but is currently being upgraded to provide ground-based remote sensing measurements of wildfire smoke.
 Code for the calibration and control of ULTRASIP can be found under the Instrument Control folder. 
