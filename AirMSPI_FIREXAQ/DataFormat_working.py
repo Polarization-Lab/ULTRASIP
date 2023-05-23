@@ -633,7 +633,7 @@ def main():  # Main code
             print('error')
 
         i_355 = np.median(box_i_355[good])
-        idx_355 = np.where(box_i_355[good] == i_355)[0]
+        idx_355 = 7 #np.where(box_i_355[good] == i_355)[0]
         print("idk is:",idx_355)
         
         i_380 = box_i_380[good][idx_355]
@@ -894,7 +894,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromScat'
+    outfile_base = 'RotfromScat2'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
