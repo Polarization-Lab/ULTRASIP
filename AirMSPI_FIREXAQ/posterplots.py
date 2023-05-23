@@ -23,8 +23,8 @@ import matplotlib.ticker as ticker
 #       figpath is where the image output should be stored
 
 
-basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
-figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX/Plots"
+basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREXROI2"
+figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREXROI2/Plots"
 
 # basepath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
 # figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
@@ -72,7 +72,7 @@ os.chdir(basepath)
 
 # Get the text file listing
 
-file_list = glob.glob('Merd*.txt')
+file_list = glob.glob('Scat*.txt')
 
 num_files = len(file_list)
     
