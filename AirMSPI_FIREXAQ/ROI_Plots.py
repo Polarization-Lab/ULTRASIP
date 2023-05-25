@@ -105,7 +105,7 @@ def main():  # Main code
 # #Home Computer 
     #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
     #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
-    datapath = "C:/Users/ULTRASIP_1/Documents/McCall/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Pinehurst/"
    # outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/McCall"
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations

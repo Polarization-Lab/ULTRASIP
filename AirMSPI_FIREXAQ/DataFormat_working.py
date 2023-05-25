@@ -133,9 +133,9 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
-    datapath = "C:/Users/ULTRASIP_1/Documents/McCall/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Pinehurst/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/McCall"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Pine"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
@@ -761,13 +761,13 @@ def main():  # Main code
         
 
         
-        # qg_470, ug_470 = stokesin4s
-        # qg_660, ug_660 = stokesin6s
-        # qg_865, ug_865 = stokesin8s
+        qg_470, ug_470 = stokesin4s
+        qg_660, ug_660 = stokesin6s
+        qg_865, ug_865 = stokesin8s
         
-        qg_470, ug_470 = stokesin4
-        qg_660, ug_660 = stokesin6
-        qg_865, ug_865 = stokesin8
+        # qg_470, ug_470 = stokesin4
+        # qg_660, ug_660 = stokesin6
+        # qg_865, ug_865 = stokesin8
 
         
 
@@ -865,21 +865,21 @@ def main():  # Main code
         raz_median[loop,11] = raz_865
         raz_median[loop,12] = raz_865
 
-        q_median[loop,0] = eqr_qg_470
-        q_median[loop,1] = eqr_qg_660
-        q_median[loop,2] = eqr_qg_865
+        # q_median[loop,0] = eqr_qg_470
+        # q_median[loop,1] = eqr_qg_660
+        # q_median[loop,2] = eqr_qg_865
     
-        u_median[loop,0] = eqr_ug_470
-        u_median[loop,1] = eqr_ug_660
-        u_median[loop,2] = eqr_ug_865
+        # u_median[loop,0] = eqr_ug_470
+        # u_median[loop,1] = eqr_ug_660
+        # u_median[loop,2] = eqr_ug_865
 
-        # q_median[loop,0] = -eqr_qg_470
-        # q_median[loop,1] = -eqr_qg_660
-        # q_median[loop,2] = -eqr_qg_865
+        q_median[loop,0] = -eqr_qg_470
+        q_median[loop,1] = -eqr_qg_660
+        q_median[loop,2] = -eqr_qg_865
     
-        # u_median[loop,0] = -eqr_ug_470
-        # u_median[loop,1] = -eqr_ug_660
-        # u_median[loop,2] = -eqr_ug_865
+        u_median[loop,0] = -eqr_ug_470
+        u_median[loop,1] = -eqr_ug_660
+        u_median[loop,2] = -eqr_ug_865
         
 
         sza_median[loop] = sza
@@ -898,7 +898,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromMerd'
+    outfile_base = 'RotfromScat'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
