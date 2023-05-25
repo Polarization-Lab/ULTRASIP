@@ -104,8 +104,9 @@ def main():  # Main code
 
 # #Home Computer 
     #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
-    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
-
+    #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
+    datapath = "C:/Users/ULTRASIP_1/Documents/McCall/"
+   # outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/McCall"
 # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
@@ -119,7 +120,7 @@ def main():  # Main code
 # Set the index of the sequence of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
-    step_ind = 1
+    step_ind = 0
     
 # Set the number of wavelengths for radiometric and polarization separately
 #num_int = total number of radiometric channels
