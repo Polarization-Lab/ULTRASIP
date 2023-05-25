@@ -4,12 +4,12 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/1FIREX/RotfromMerd.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX/RotfromMerd.sdat"
   
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["Merd_1FIREX.txt", screen] # screen, "filename"
+        stream: ["Merd_2FIREX.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
