@@ -23,13 +23,16 @@ import matplotlib.ticker as ticker
 #       figpath is where the image output should be stored
 
 
-basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX"
-figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX/Plots"
+#basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX"
+#figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX/Plots"
+
+basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield"
+figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield/Plots"
 
 # basepath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
 # figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
-# basepath ="C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
-# figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
+# basepath ="C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield"
+# figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield"
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
@@ -773,14 +776,14 @@ ax_new = fig.add_subplot(3, 3, 3)
 ax_new.plot(wave[:],aod[:],linewidth=7, color = 'darkgoldenrod')
 ax_new.xaxis.set_tick_params(labelsize=35)
 ax_new.yaxis.set_tick_params(labelsize=35)
-ax_new.set_yticks([0.5,1.0,1.5])
+#ax_new.set_yticks([0.5,1.0,1.5])
 ax_new.set_ylabel('AOD', fontsize=35,color='darkgoldenrod')
 ax_new.set_xlabel(r'$\lambda$', fontsize=35)
 ax_new2 = ax_new.twinx()
 ax_new2.plot(wave[:],ssa[:], color = 'brown',linewidth = '7')
 ax_new2.yaxis.set_tick_params(labelsize=35)
 ax_new2.set_ylabel('SSA',fontsize=35,color='brown')
-ax_new2.set_yticks([0.75,0.85,0.95])
+#ax_new2.set_yticks([0.75,0.85,0.95])
 ax_new.xaxis.set_major_locator(ticker.MaxNLocator(num_ticks))
 # ax_new.yaxis.set_major_locator(ticker.MaxNLocator(num_ticks))
 # ax_new2.yaxis.set_major_locator(ticker.MaxNLocator(num_ticks))
