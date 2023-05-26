@@ -306,8 +306,8 @@ retrieval:
             retrieved: true
             mode[1]: 
                 initial_guess: 
-                    value:                        [10e-6]
-                    min:                          [10e-10]
+                    value:                        [1e-6]
+                    min:                          [1e-10]
                     max:                          [0.001]
                     index_of_wavelength_involved: [0]
                 single_pixel:
@@ -318,8 +318,8 @@ retrieval:
                         lagrange_multiplier: 0.0
             mode[2]: 
                 initial_guess: 
-                    value:                        [10e-6]
-                    min:                          [10e-10]
+                    value:                        [1e-6]
+                    min:                          [1e-10]
                     max:                          [0.001]
                     index_of_wavelength_involved: [0]
                 single_pixel:
