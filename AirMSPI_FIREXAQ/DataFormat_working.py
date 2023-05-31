@@ -132,9 +132,9 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data2/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Pinehurst/"
-    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX"
     outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
@@ -341,6 +341,7 @@ def main():  # Main code
         Um_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/U_meridian/'][:]
         vaz_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/View_azimuth/'][:]
         vza_470 = f['/HDFEOS/GRIDS/470nm_band/Data Fields/View_zenith/'][:]
+
         
 # Set the datasets and read (555 nm)
 # Radiometric Channel
@@ -469,6 +470,10 @@ def main():  # Main code
         img_i_660 = np.flipud(image_crop(I_660))
         img_i_865 = np.flipud(image_crop(I_865))
         
+        plt.figure()
+        plt.imshow(img_i_470)
+        plt.title('I_470 Cropped')
+        
         img_scat_355 = np.flipud(image_crop(scat_355))
         img_scat_380 = np.flipud(image_crop(scat_380))
         img_scat_445 = np.flipud(image_crop(scat_445))
@@ -535,6 +540,8 @@ def main():  # Main code
             print("NO VALID PIXELS")
             print("***ERROR***")
             print('error')
+         
+     
         
         if loop == 0: 
             plt.figure()
@@ -542,14 +549,18 @@ def main():  # Main code
             plt.figure()
             plt.imshow(img_i_470)
             x_center, y_center = choose_roi(img_i_470)
+        else:
+            plt.figure()
+            plt.imshow(I_470)
+            plt.title('I_470')
+            plt.figure()
+            plt.imshow(img_i_470)
         
         box_x1 = x_center - 2 
         box_x2 = x_center + 3 
         box_y1 = y_center - 2 
         box_y2 = y_center + 3 
-        print(box_x1,box_x2,box_y1,box_y2)
-        
-            
+                    
 # Extract the values from the ROI
 # NOTE: The coordinates are relative to the flipped "img" array
 
@@ -898,7 +909,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromMerd'
+    outfile_base = 'RotfromMerdtest'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
@@ -1134,15 +1145,15 @@ def main():  # Main code
                    
 # # Endline
        
-    out_str = out_str+'\n'
+ #   out_str = out_str+'\n'
 
 # Write out the line
      
-    outputFile.write(out_str)
+   # outputFile.write(out_str)
 
 # Close the output file
 
-    outputFile.close()        
+   # outputFile.close()        
         
 
 ### END MAIN FUNCTION
