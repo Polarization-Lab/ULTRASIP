@@ -301,6 +301,7 @@ retrieval:
                        lagrange_multiplier_of_Y_variability: 0.0e-3
                        derivative_order_of_T_variability:    1
                        lagrange_multiplier_of_T_variability: 1.0e-0  
+
         characteristic[8]:
             mode[1]:
                 initial_guess:
