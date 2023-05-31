@@ -132,11 +132,11 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Pinehurst/"
-    #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield_0708/"
+    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield_2"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
 
@@ -909,7 +909,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromMerdtest'
+    outfile_base = 'RotfromMerd'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
@@ -1145,15 +1145,15 @@ def main():  # Main code
                    
 # # Endline
        
- #   out_str = out_str+'\n'
+    out_str = out_str+'\n'
 
 # Write out the line
      
-   # outputFile.write(out_str)
+    outputFile.write(out_str)
 
 # Close the output file
 
-   # outputFile.close()        
+    outputFile.close()        
         
 
 ### END MAIN FUNCTION
