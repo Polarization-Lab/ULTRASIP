@@ -129,26 +129,9 @@ retrieval:
                        derivative_order_of_Y_variability:    1
                        lagrange_multiplier_of_Y_variability: 1.0e-1                     
                        derivative_order_of_T_variability:    1
-                       lagrange_multiplier_of_T_variability: 5.0e-4        
-        
-	characterisitc[2]:                
-	    type: aerosol_concnetration 
-            retrieved: true 
-            mode[1]:
-                initial_guess:
-                    index_of_wavelength_involved: [0]
-                    max:   [5.00001]
-                    min:   [0.00000001]
-                    value: [0.01]
-            retrieved: true
-            mode[2]:
-                initial_guess:
-                    index_of_wavelength_involved: [0]
-                    max:   [5.00001]
-                    min:   [0.00000001]
-                    value: [0.0.01] #frac_vol                                          
+                       lagrange_multiplier_of_T_variability: 5.0e-4                                                                  
 
-        characteristic[3]: #2
+        characteristic[2]: #2
             type: real_part_of_refractive_index_spectral_dependent
             retrieved: true
             mode[1]:
@@ -170,7 +153,7 @@ retrieval:
                        derivative_order_of_T_variability:    0
                        lagrange_multiplier_of_T_variability: 0.0                    
                                                      
-        characteristic[4]: #3
+        characteristic[3]: #3
             type: imaginary_part_of_refractive_index_spectral_dependent
             retrieved: true
             mode[1]:
@@ -192,7 +175,7 @@ retrieval:
                        derivative_order_of_T_variability:    0
                        lagrange_multiplier_of_T_variability: 0.0                    
  
-        characteristic[5]: #4
+        characteristic[4]: #4
             type: sphere_fraction
             retrieved: true
             mode[1]:
@@ -214,7 +197,7 @@ retrieval:
                        derivative_order_of_T_variability:    0
                        lagrange_multiplier_of_T_variability: 0.0  
 
-        characteristic[6]: #6
+        characteristic[5]: #6
             type: vertical_profile_parameter_height
             retrieved: true
             mode[1]:
@@ -237,7 +220,7 @@ retrieval:
                        lagrange_multiplier_of_T_variability: 0.0               
                                                
                         
-        characteristic[7]: #7
+        characteristic[6]: #7
             type: surface_land_brdf_ross_li
             retrieved: true
             mode[1]:    
@@ -297,7 +280,7 @@ retrieval:
                        derivative_order_of_T_variability:    1
                        lagrange_multiplier_of_T_variability: 1.0e-0                            
 
-        characteristic[8]: #8
+        characteristic[7]: #8
             type: surface_land_polarized_maignan_breon
             retrieved: true
             mode[1]:
@@ -307,6 +290,33 @@ retrieval:
                     max:                            [10.03 ]
                     index_of_wavelength_involved:   [0]
                 single_pixel:
+                    smoothness_constraints:
+                        difference_order: 0
+                        lagrange_multiplier: 0.0e-0
+                multi_pixel:
+                   smoothness_constraints:
+                       derivative_order_of_X_variability:    1
+                       lagrange_multiplier_of_X_variability: 0.0e-3                        
+                       derivative_order_of_Y_variability:    1
+                       lagrange_multiplier_of_Y_variability: 0.0e-3
+                       derivative_order_of_T_variability:    1
+                       lagrange_multiplier_of_T_variability: 1.0e-0  
+        characteristic[8]:
+            type: aerosol_concentration
+            retrieved: true
+            mode[1]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [5.00001]
+                    min:   [0.00000001]
+                    value: [0.04303543]
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [5.00001]
+                    min:   [0.00000001]
+                    value: [0.06] #frac_vol
+               single_pixel:
                     smoothness_constraints:
                         difference_order: 0
                         lagrange_multiplier: 0.0e-0
