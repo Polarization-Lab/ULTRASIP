@@ -315,5 +315,5 @@ retrieval:
                     max:   [5.00001]
                     min:   [0.00000001]
                     value: [0.1]
-            retrieved: true
+            retrieved: false
             type: aerosol_concentration
