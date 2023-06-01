@@ -469,11 +469,7 @@ def main():  # Main code
         img_i_555 = np.flipud(image_crop(I_555))
         img_i_660 = np.flipud(image_crop(I_660))
         img_i_865 = np.flipud(image_crop(I_865))
-        
-        plt.figure()
-        plt.imshow(img_i_470)
-        plt.title('I_470 Cropped')
-        
+           
         img_scat_355 = np.flipud(image_crop(scat_355))
         img_scat_380 = np.flipud(image_crop(scat_380))
         img_scat_445 = np.flipud(image_crop(scat_445))

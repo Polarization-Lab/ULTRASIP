@@ -26,8 +26,8 @@ import matplotlib.ticker as ticker
 #basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX"
 #figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX/Plots"
 
-basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield"
-figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield/Plots"
+basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield_2"
+figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield_2/Plots"
 
 # basepath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
 # figpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
@@ -75,7 +75,7 @@ os.chdir(basepath)
 
 # Get the text file listing
 
-file_list = glob.glob('Scat*.txt')
+file_list = glob.glob('Merd*.txt')
 
 num_files = len(file_list)
     
@@ -109,6 +109,7 @@ for line in inputFile:
             words = line.split()
             print(words)
             per_sphere = float(words[1])
+            print('sphere',per_sphere)
             
         if(data_count==100):  # Sphericity
             words = line.split()
@@ -120,6 +121,7 @@ for line in inputFile:
             print(words)
             wave[0] = float(words[0])
             aod[0] = float(words[1])
+            print(aod[0])
             
         if(data_count==103):
             words = line.split()
