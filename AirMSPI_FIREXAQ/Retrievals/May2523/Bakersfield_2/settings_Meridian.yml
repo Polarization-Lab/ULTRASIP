@@ -310,18 +310,18 @@ retrieval:
                     max:   [5.00001]
                     min:   [0.00000001]
                     value: [0.04303543]
-            single_pixel:
+                single_pixel:
                     smoothness_constraints:
                         difference_order: 0
                         lagrange_multiplier: 0.0e-0
-	    multi_pixel:
+                multi_pixel:
                    smoothness_constraints:
-                       derivative_order_of_X_variability:    1
-                       lagrange_multiplier_of_X_variability: 0.0e-3                        
-                       derivative_order_of_Y_variability:    1
-                       lagrange_multiplier_of_Y_variability: 0.0e-3
+                       derivative_order_of_X_variability:    0
+                       lagrange_multiplier_of_X_variability: 1.0e-3                        
+                       derivative_order_of_Y_variability:    0
+                       lagrange_multiplier_of_Y_variability: 1.0e-3
                        derivative_order_of_T_variability:    1
-                       lagrange_multiplier_of_T_variability: 1.0e-0  
+                       lagrange_multiplier_of_T_variability: 1.0e-0      
 
             mode[2]:
                 initial_guess:
@@ -329,15 +329,15 @@ retrieval:
                     max:   [5.00001]
                     min:   [0.00000001]
                     value: [0.06] #frac_vol
-               single_pixel:
+                single_pixel:
                     smoothness_constraints:
                         difference_order: 0
                         lagrange_multiplier: 0.0e-0
                 multi_pixel:
                    smoothness_constraints:
-                       derivative_order_of_X_variability:    1
-                       lagrange_multiplier_of_X_variability: 0.0e-3                        
-                       derivative_order_of_Y_variability:    1
-                       lagrange_multiplier_of_Y_variability: 0.0e-3
+                       derivative_order_of_X_variability:    0
+                       lagrange_multiplier_of_X_variability: 1.0e-3                        
+                       derivative_order_of_Y_variability:    0
+                       lagrange_multiplier_of_Y_variability: 1.0e-3
                        derivative_order_of_T_variability:    1
-                       lagrange_multiplier_of_T_variability: 1.0e-0  
+                       lagrange_multiplier_of_T_variability: 1.0e-0      
