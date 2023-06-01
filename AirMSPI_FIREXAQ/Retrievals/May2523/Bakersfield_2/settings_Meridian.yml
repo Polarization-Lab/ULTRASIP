@@ -309,7 +309,7 @@ retrieval:
                     index_of_wavelength_involved: [0]
                     max:   [5.00001]
                     min:   [0.00000001]
-                    value: [0.001]
+                    value: [0.01]
                 single_pixel:
                     smoothness_constraints:
                         difference_order: 0
@@ -328,7 +328,7 @@ retrieval:
                     index_of_wavelength_involved: [0]
                     max:   [5.00001]
                     min:   [0.00000001]
-                    value: [0.001] #frac_vol
+                    value: [0.01] #frac_vol
                 single_pixel:
                     smoothness_constraints:
                         difference_order: 0

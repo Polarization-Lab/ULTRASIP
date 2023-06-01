@@ -4,11 +4,12 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield_2/RotfromScat.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield/RotfromScat.sdat"
+  
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["Scat_Bakers.txt", screen] # screen, "filename"
+        stream: ["Merd_Bakers.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
@@ -65,7 +66,7 @@ retrieval:
             number_of_layers: 50
             aerosol_profile_vertical_type:    exponential
             molecular_profile_vertical_type: standard_atmosphere
-            reference_plane_for_polarization: principal_plane #meridian   
+            reference_plane_for_polarization: principal_plane   
             simulating_observation:
                 order_of_scattering: multiple_scattering
                 number_of_gaussian_quadratures_for_expansion_coefficients:  41 
@@ -300,3 +301,43 @@ retrieval:
                        lagrange_multiplier_of_Y_variability: 0.0e-3
                        derivative_order_of_T_variability:    1
                        lagrange_multiplier_of_T_variability: 1.0e-0  
+        characteristic[8]:
+            type: aerosol_concentration
+            retrieved: true
+            mode[1]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [5.00001]
+                    min:   [0.00000001]
+                    value: [0.01]
+                single_pixel:
+                    smoothness_constraints:
+                        difference_order: 0
+                        lagrange_multiplier: 0.0e-0
+                multi_pixel:
+                   smoothness_constraints:
+                       derivative_order_of_X_variability:    0
+                       lagrange_multiplier_of_X_variability: 1.0e-3                        
+                       derivative_order_of_Y_variability:    0
+                       lagrange_multiplier_of_Y_variability: 1.0e-3
+                       derivative_order_of_T_variability:    1
+                       lagrange_multiplier_of_T_variability: 1.0e-0      
+
+            mode[2]:
+                initial_guess:
+                    index_of_wavelength_involved: [0]
+                    max:   [5.00001]
+                    min:   [0.00000001]
+                    value: [0.01] #frac_vol
+                single_pixel:
+                    smoothness_constraints:
+                        difference_order: 0
+                        lagrange_multiplier: 0.0e-0
+                multi_pixel:
+                   smoothness_constraints:
+                       derivative_order_of_X_variability:    0
+                       lagrange_multiplier_of_X_variability: 1.0e-3                        
+                       derivative_order_of_Y_variability:    0
+                       lagrange_multiplier_of_Y_variability: 1.0e-3
+                       derivative_order_of_T_variability:    1
+                       lagrange_multiplier_of_T_variability: 1.0e-0      
