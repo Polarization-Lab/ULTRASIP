@@ -18,7 +18,15 @@ from matplotlib import patches
 
 def image_crop(a):
         #np.clip(a, 0, None, out=a)
-        a[a == -999] = np.nan
+        # a[a == -999] = np.nan
+        # a = a[~np.isnan(a).all(axis=1), :]
+        # a = a[~np.isnan(a).all(axis=1)]
+        
+        a = a[~(a== -999).all(axis=1)]
+        a = a[:,~(a== -999).all(axis=0)]
+        a[np.where(a == -999)] = np.nan
+
+
         mid_row = a.shape[0] // 2
         mid_col = a.shape[1] // 2
         start_row = mid_row - 262
@@ -27,6 +35,7 @@ def image_crop(a):
         end_col = mid_col + 262
         
         a = a[start_row:end_row, start_col:end_col]
+        
         return a
 
 
@@ -95,7 +104,7 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data2/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Inchelium/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/1FIREX"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
@@ -111,7 +120,7 @@ def main():  # Main code
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 5
+    num_step = 9
     
 # Calculate the middle of the sequence
 
@@ -120,7 +129,7 @@ def main():  # Main code
 # Set the index of the sequence of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
-    step_ind = 0
+    step_ind = 1
     
 # Set the number of wavelengths for radiometric and polarization separately
 #num_int = total number of radiometric channels
