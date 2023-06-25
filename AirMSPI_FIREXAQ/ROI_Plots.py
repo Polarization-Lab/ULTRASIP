@@ -104,7 +104,7 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Inchelium/"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/Inchelium/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/1FIREX"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
@@ -112,7 +112,7 @@ def main():  # Main code
 
 
 # #Home Computer 
-    #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
+    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Washington"
     #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Pinehurst/"
    # outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/McCall"
@@ -129,7 +129,7 @@ def main():  # Main code
 # Set the index of the sequence of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
-    step_ind = 1
+    step_ind = 0
     
 # Set the number of wavelengths for radiometric and polarization separately
 #num_int = total number of radiometric channels
@@ -367,7 +367,9 @@ def main():  # Main code
 
         # Plot the original image with the selected region of interest highlighted
         plt.figure()
-        plt.imshow(img_i_470, cmap='gray')
+        cmap = plt.cm.gray
+        cmap.set_bad('black')
+        plt.imshow(img_i_470, cmap=cmap)
         plt.gca().add_patch(patches.Rectangle((box_x1, box_y1), box_x2 - box_x1, box_y2 - box_y1,
                                       linewidth=5, edgecolor='orange', facecolor='none'))
         

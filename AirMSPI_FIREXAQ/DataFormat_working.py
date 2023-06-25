@@ -55,7 +55,15 @@ def calculate_dolp(stokesparam):
 
 def image_crop(a):
         #np.clip(a, 0, None, out=a)
-        a[a == -999] = np.nan
+        # a[a == -999] = np.nan
+        # a = a[~np.isnan(a).all(axis=1), :]
+        # a = a[~np.isnan(a).all(axis=1)]
+        
+        a = a[~(a== -999).all(axis=1)]
+        a = a[:,~(a== -999).all(axis=0)]
+        a[np.where(a == -999)] = np.nan
+
+
         mid_row = a.shape[0] // 2
         mid_col = a.shape[1] // 2
         start_row = mid_row - 262
@@ -64,8 +72,8 @@ def image_crop(a):
         end_col = mid_col + 262
         
         a = a[start_row:end_row, start_col:end_col]
+        
         return a
-
 
 def calculate_std(image):
 # Define the size of the regions we'll calculate the standard deviation for
@@ -134,23 +142,23 @@ def main():  # Main code
 #Work Computer
     #datapath = "C:/Users/ULTRASIP_1/Documents/Prescott817_Data/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Pinehurst/"
-    datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield_0708/"
+    #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield_0708/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield_2"
+    #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield_2"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
 
 
 # # #Home Computer 
-#     #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Bakersfield707_Data"
+    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Washington"
 #     datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
 
-#     #outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/Bakersfield"
+    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1"
 #     outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
 # # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 5
+    num_step = 9
     
 # Calculate the middle of the sequence
 
@@ -641,7 +649,7 @@ def main():  # Main code
             print('error')
 
         i_355 = np.median(box_i_355[good])
-        idx_355 = np.where(box_i_355[good] == i_355)[0]
+        idx_355 = 1 #np.where(box_i_355[good] == i_355)[0]
         print("idk is:",idx_355)
         
         i_380 = box_i_380[good][idx_355]
@@ -905,7 +913,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromMerd'
+    outfile_base = 'RotfromMerd1'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
