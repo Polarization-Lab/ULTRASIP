@@ -146,13 +146,16 @@ def main():  # Main code
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield_2"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Inchelium"
+    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1"
+
 
 
 # # #Home Computer 
-    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Washington"
+    #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Washington"
 #     datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
 
-    outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1"
+    #outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1"
 #     outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1923/1FIREX"
 # # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
@@ -649,7 +652,7 @@ def main():  # Main code
             print('error')
 
         i_355 = np.median(box_i_355[good])
-        idx_355 = 1 #np.where(box_i_355[good] == i_355)[0]
+        idx_355 = 11 #np.where(box_i_355[good] == i_355)[0]
         print("idk is:",idx_355)
         
         i_380 = box_i_380[good][idx_355]
