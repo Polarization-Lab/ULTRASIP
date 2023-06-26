@@ -104,7 +104,7 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    #datapath = "C:/Users/ULTRASIP_1/Documents/Inchelium/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/Inchelium/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/1FIREX"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
@@ -112,7 +112,7 @@ def main():  # Main code
 
 
 # #Home Computer 
-    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Washington"
+    #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Washington"
     #datapath = "C:/Users/Clarissa/Documents/AirMSPI/Prescott/FIREX-AQ_8172019"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Pinehurst/"
    # outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/McCall"
