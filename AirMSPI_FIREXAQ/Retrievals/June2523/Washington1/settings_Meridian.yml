@@ -8,8 +8,8 @@ input:
   
 output:
     segment:
-        function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["Merd_Inchelium.txt", screen] # screen, "filename"
+        function: [csv, classic] # classic, classic_plot, csv, none
+        stream: ["Merd_Inchelium.csv", screen] # screen, "filename"
     
 retrieval:     
     general:
