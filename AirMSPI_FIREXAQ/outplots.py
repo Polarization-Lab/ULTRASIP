@@ -13,7 +13,9 @@ import matplotlib.pyplot as plt
 
 # Open the text file in read mode
 # Define GRASP output file path 
-outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1/Merd_Inchelium.txt"
+#outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1/Merd_Inchelium.txt"
+outpath =  "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1/Merd_Inchelium.txt"
+
 
 file = open(outpath)
 content = file.readlines()
@@ -42,35 +44,82 @@ for i in range(len(content)):
     if 'meas_I' in content[i]:
         n=n+1
         for num in range(i+1, i+meas_num+1):
-            meas_I[n].append(content[num].split()[5])
-            fit_I[n].append(content[num].split()[6])
+            meas_I[n].append(float(content[num].split()[5]))
+            fit_I[n].append(float(content[num].split()[6]))
         
-            sza[n].append(content[num].split()[1])
-            scat[n].append(content[num].split()[4])
+            sza[n].append(float(content[num].split()[1]))
+            scat[n].append(float(content[num].split()[4]))
     
     elif 'meas_U/I' in content[i]:
         m=m+1
         for num in range(i+1, i+meas_num+1):
-            meas_U[m].append(content[num].split()[5])
-            fit_U[m].append(content[num].split()[6])
+            meas_U[m].append(float(content[num].split()[5]))
+            fit_U[m].append(float(content[num].split()[6]))
             
     
     elif 'meas_Q/I' in content[i]:
         t=t+1
         for num in range(i+1, i+meas_num+1):
-            meas_Q[t].append(content[num].split()[5])
-            fit_Q[t].append(content[num].split()[6])
+            meas_Q[t].append(float(content[num].split()[5]))
+            fit_Q[t].append(float(content[num].split()[6]))
             
             
 #Plots 
 
 plt.figure()
-plt.plot(scat[1],meas_I[1],linestyle='dashed',color='green')
-plt.plot(scat[1],fit_I[1],color='green')
+plt.plot(scat[0],meas_I[0],linestyle='dashed',color='gray')
+plt.plot(scat[0],fit_I[0],color='gray')
 
+plt.plot(scat[1],meas_I[1],linestyle='dashed',color='pink')
+plt.plot(scat[1],fit_I[1],color='pink')
+
+plt.plot(scat[2],meas_I[2],linestyle='dashed',color='violet')
+plt.plot(scat[2],fit_I[2],color='violet')
+
+plt.plot(scat[3],meas_I[3],linestyle='dashed',color='blue')
+plt.plot(scat[3],fit_I[3],color='blue')
+
+plt.plot(scat[4],meas_I[4],linestyle='dashed',color='green')
+plt.plot(scat[4],fit_I[4],color='green')
+
+plt.plot(scat[5],meas_I[5],linestyle='dashed',color='red')
+plt.plot(scat[5],fit_I[5],color='red')
+
+plt.plot(scat[6],meas_I[6],linestyle='dashed',color='orange')
+plt.plot(scat[6],fit_I[6],color='orange')
+
+plt.xlabel('Scattering Angle')
+plt.ylabel('BRF(I)')
+plt.show()
+
+plt.figure()
+plt.plot(scat[3],meas_Q[0],linestyle='dashed',color='blue')
+plt.plot(scat[3],fit_Q[0],color='blue')
+
+plt.plot(scat[5],meas_Q[1],linestyle='dashed',color='red')
+plt.plot(scat[5],fit_Q[1],color='red')
+
+plt.plot(scat[6],meas_Q[2],linestyle='dashed',color='orange')
+plt.plot(scat[6],fit_Q[2],color='orange')
+
+plt.xlabel('Scattering Angle')
+plt.ylabel('BRF(Q)')
 plt.show()
 
 
+plt.figure()
+plt.plot(scat[3],meas_U[0],linestyle='dashed',color='blue')
+plt.plot(scat[3],fit_U[0],color='blue')
+
+plt.plot(scat[5],meas_U[1],linestyle='dashed',color='red')
+plt.plot(scat[5],fit_U[1],color='red')
+
+plt.plot(scat[6],meas_U[2],linestyle='dashed',color='orange')
+plt.plot(scat[6],fit_U[2],color='orange')
+
+plt.xlabel('Scattering Angle')
+plt.ylabel('BRF(U)')
+plt.show()
 
 # fig, (ax1,ax2,ax3) = plt.subplots(
 #           nrows=3, ncols=1, dpi=240,figsize=(6, 8))
