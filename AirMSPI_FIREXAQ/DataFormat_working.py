@@ -170,7 +170,7 @@ def main():  # Main code
 # Set the index of the sequence of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
-    step_ind = 0
+    step_ind = 1
     
 # Set the number of wavelengths for radiometric and polarization separately
 #num_int = total number of radiometric channels
@@ -916,7 +916,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'RotfromMerd1'
+    outfile_base = 'RotfromMerd2'
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
