@@ -141,13 +141,13 @@ out_str = out_str+'{:12d}'.format(meas_num)
 
 for i in range(len(content)):
     if ' wavelength # ' in content[i]:    
-        for n in range(3,3+meas_num):
+        for n in range(3,3+wave_num):
             print(content[i+n].split()[1])
             out_str = out_str+' '+content[i+n].split()[1]
-        for n in range(3,3+meas_num):
+        for n in range(3,3+wave_num):
             print(content[i+n].split()[2])
             out_str = out_str+' '+content[i+n].split()[2]
-        for n in range(3,3+meas_num):
+        for n in range(3,3+wave_num):
             print(content[i+n].split()[3])
             out_str = out_str+' '+content[i+n].split()[3]
             
