@@ -6,6 +6,7 @@ Created on Tue Jun 27 14:29:00 2023
 """
 #import libraries 
 import os
+import numpy as np
 
 #header stuff, meas types/wavelength, num of valid meas/wavelength/type,sza,thetav/meas/wavelength,raz/meas/wavelength,meas/wave/type
 
@@ -96,13 +97,16 @@ for i in range(len(content)):
            out_str = out_str +' '+content[num].split()[0]
        
 # Loop over the number of types of measurements per wavelength
-out_str = out_str+'{:12d}'.format(1)
-out_str = out_str+'{:12d}'.format(1) # 1 measurement per wavelength
-out_str = out_str+'{:12d}'.format(1)
+
 out_str = out_str+'{:12d}'.format(1)
 out_str = out_str+'{:12d}'.format(1)
 out_str = out_str+'{:12d}'.format(1)
+out_str = out_str+'{:12d}'.format(1) # 1 meas per wave
 out_str = out_str+'{:12d}'.format(1)
+out_str = out_str+'{:12d}'.format(1)
+out_str = out_str+'{:12d}'.format(1)
+
+
 
 # # Loop over the measurement types per wavelength
 # # NOTE: Values can be found in the GRASP documentation in Table 4.5
@@ -120,13 +124,13 @@ out_str = out_str+'{:12d}'.format(12)
 # # Loop over the number of measurements per wavelength per meas type
 # # Note: This is the number of stares in the step-and-stare sequence
 
-out_str = out_str+'{:12d}'.format(1)
-out_str = out_str+'{:12d}'.format(1)
-out_str = out_str+'{:12d}'.format(1)
-out_str = out_str+'{:12d}'.format(1)
-out_str = out_str+'{:12d}'.format(1)
-out_str = out_str+'{:12d}'.format(1)
-out_str = out_str+'{:12d}'.format(1)
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num) 
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
 
 ## ANGLE DEFINITIONS
 
@@ -138,14 +142,20 @@ out_str = out_str+'{:12d}'.format(1)
 for i in range(len(content)):
     if ' wavelength # ' in content[i]:    
         for n in range(3,3+wave_num):
-            print(content[i+n].split())
+            #print(content[i+n].split())
             out_str = out_str+' '+content[i+n].split()[1]
         for n in range(3,3+meas_num):
-            print(content[i+n].split())
+            #print(content[i+n].split())
             out_str = out_str+' '+content[i+n].split()[2]
         for n in range(3,3+meas_num):
-            print(content[i+n].split())
+            #print(content[i+n].split())
             out_str = out_str+' '+content[i+n].split()[3]
+
+    if ', AOD_Total' in content[i]: 
+        for n in range(1,1+wave_num):
+           aod = ' ' + (content[i+n].split()[1])+' '
+           out_str = out_str+aod*9
+
 # for outer in range(num_meas):
 #     for inner in range(num_step): 
 #         out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
