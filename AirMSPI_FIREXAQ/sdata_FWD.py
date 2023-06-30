@@ -142,7 +142,7 @@ out_str = out_str+'{:12d}'.format(meas_num)
 for i in range(len(content)):
     if ' wavelength # ' in content[i]:    
         for n in range(3,3+wave_num):
-            #print(content[i+n].split())
+            print(content[i+n].split()[1])
             out_str = out_str+' '+content[i+n].split()[1]
         for n in range(3,3+meas_num):
             #print(content[i+n].split())
@@ -150,7 +150,8 @@ for i in range(len(content)):
         for n in range(3,3+meas_num):
             #print(content[i+n].split())
             out_str = out_str+' '+content[i+n].split()[3]
-
+            
+for i in range(len(content)):
     if ', AOD_Total' in content[i]: 
         for n in range(1,1+wave_num):
            aod = ' ' + (content[i+n].split()[1])+' '
