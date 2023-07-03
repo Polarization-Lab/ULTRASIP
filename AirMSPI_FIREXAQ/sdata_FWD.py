@@ -139,44 +139,58 @@ out_str = out_str+'{:12d}'.format(meas_num)
 #       AERONET), so we take the average solar zenith angle, although this
 #       varies from measurement to measurement from AirMSPI
 
+#sun zenith/wavelength
 for i in range(len(content)):
-    if ' wavelength # ' in content[i]:    
-        for n in range(3,3+wave_num):
-            print(content[i+n].split()[1])
-            out_str = out_str+' '+content[i+n].split()[1]
-        for n in range(3,3+wave_num):
-            print(content[i+n].split()[2])
-            out_str = out_str+' '+content[i+n].split()[2]
-        for n in range(3,3+wave_num):
-            print(content[i+n].split()[3])
-            out_str = out_str+' '+content[i+n].split()[3]
-            
+    if 'sza' in content[i]: 
+        sza = ' ' + content[i+1].split()[1]
+out_str = out_str+' '+sza*7
+
+#view angle/meas
 for i in range(len(content)):
-    if ', AOD_Total' in content[i]: 
-        for n in range(1,1+wave_num):
-           aod = ' ' + (content[i+n].split()[1])+' '
-           out_str = out_str+aod*9
-
-# for outer in range(num_meas):
-#     for inner in range(num_step): 
-#         out_str = out_str+'{:16.8f}'.format(vza_median[inner,outer])
-
-
-# # Relative azimuth angle per measurement per wavelength
-# for outer in range(num_meas):
-#     for inner in range(num_step): 
-#         out_str = out_str+'{:16.8f}'.format(raz_median[inner,outer])
-
-
-
-# for i in range(len(content)):
-
-#     if ', AOD_Total' in content[i]:
+    if 'vis' in content[i]:
+        vza1 = ' ' + content[i+1].split()[2]
+        vza2 = ' ' + content[i+2].split()[2]
+        vza3 = ' ' + content[i+3].split()[2]
+        vza4 = ' ' + content[i+4].split()[2]
+        vza5 = ' ' + content[i+5].split()[2]
+        vza6 = ' ' + content[i+6].split()[2]
+        vza7 = ' ' + content[i+7].split()[2]
+        vza8 = ' ' + content[i+8].split()[2]
+        vza9 = ' ' + content[i+9].split()[2]
         
-#         print(content[i])   
-#         for num in range(i+1, i+wave_num+1):           
-#             outfile = outfile + (content[num].split()[0])
-    
+        vza = vza1+vza2+vza3+vza4+vza5+vza6+vza7+vza8+vza9
+        
+        out_str = out_str+' '+vza
+
+#relative azimuth/meas
+for i in range(len(content)):
+    if 'fis' in content[i]:
+        raz1 = ' ' + content[i+1].split()[3]
+        raz2 = ' ' + content[i+2].split()[3]
+        raz3 = ' ' + content[i+3].split()[3]
+        raz4 = ' ' + content[i+4].split()[3]
+        raz5 = ' ' + content[i+5].split()[3]
+        raz6 = ' ' + content[i+6].split()[3]
+        raz7 = ' ' + content[i+7].split()[3]
+        raz8 = ' ' + content[i+8].split()[3]
+        raz9 = ' ' + content[i+9].split()[3]
+        
+        raz = raz1+raz2+raz3+raz4+raz5+raz6+raz7+raz8+raz9
+        
+        out_str = out_str+' '+raz
+        
+for i in range(len(content)):
+    if ', AOD' in content[i]:
+        out_str = out_str+'{:12f}'.format(float(content[i+1].split()[1]))*9
+        out_str = out_str+'{:12f}'.format(float(content[i+2].split()[1]))*9
+        out_str = out_str+'{:12f}'.format(float(content[i+3].split()[1]))*9
+        out_str = out_str+'{:12f}'.format(float(content[i+4].split()[1]))*9
+        out_str = out_str+'{:12f}'.format(float(content[i+5].split()[1]))*9
+        out_str = out_str+'{:12f}'.format(float(content[i+6].split()[1]))*9
+        out_str = out_str+'{:12f}'.format(float(content[i+7].split()[1]))*9
+
+        
+        
 ## ADDITIONAL PARAMETERS
 # NOTE: This is kludgy and GRASP seems to run without this being entirely correct
 
