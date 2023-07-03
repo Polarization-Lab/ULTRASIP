@@ -122,8 +122,36 @@ retrieval:
                        derivative_order_of_T_variability:    1
                        lagrange_multiplier_of_T_variability: 5.0e-4                         
                                          
+        characteristic[2]: 
+            type: aerosol_concentration
+            retrieved: true
+            mode[1]: 
+                initial_guess: 
+                    value:                        [0.007]
+                    min:                          [0.001]
+                    max:                          [0.500]
+                    index_of_wavelength_involved: [0]
+                single_pixel:
+                    a_priori_estimates:
+                        lagrange_multiplier:      [0]
+                    smoothness_constraints:
+                        difference_order: 0
+                        lagrange_multiplier: 0.0
+            mode[2]: 
+                initial_guess: 
+                    value:                        [0.001]
+                    min:                          [0.001]
+                    max:                          [0.500]
+                    index_of_wavelength_involved: [0]
+                single_pixel:
+                    a_priori_estimates:
+                        lagrange_multiplier:      [ 0 ]
+                    smoothness_constraints:
+                        difference_order: 0
+                        lagrange_multiplier: 0.0
 
-        characteristic[2]: #2
+
+        characteristic[3]: 
             type: real_part_of_refractive_index_spectral_dependent
             retrieved: false
             mode[1]:
@@ -145,7 +173,7 @@ retrieval:
                        derivative_order_of_T_variability:    0
                        lagrange_multiplier_of_T_variability: 0.0                    
                                                      
-        characteristic[3]: #3
+        characteristic[4]: 
             type: imaginary_part_of_refractive_index_spectral_dependent
             retrieved: false
             mode[1]:
@@ -167,7 +195,7 @@ retrieval:
                        derivative_order_of_T_variability:    0
                        lagrange_multiplier_of_T_variability: 0.0                    
  
-        characteristic[4]: #4
+        characteristic[5]: 
             type: sphere_fraction
             retrieved: false
             mode[1]:
@@ -189,7 +217,7 @@ retrieval:
                        derivative_order_of_T_variability:    0
                        lagrange_multiplier_of_T_variability: 0.0  
 
-        characteristic[5]: #6
+        characteristic[6]: 
             type: vertical_profile_parameter_height
             retrieved: false
             mode[1]:
