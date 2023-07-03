@@ -160,7 +160,7 @@ for i in range(len(content)):
         
         vza = vza1+vza2+vza3+vza4+vza5+vza6+vza7+vza8+vza9
         
-        out_str = out_str+' '+vza
+out_str = out_str+' '+vza*7
 
 #relative azimuth/meas
 for i in range(len(content)):
@@ -177,7 +177,7 @@ for i in range(len(content)):
         
         raz = raz1+raz2+raz3+raz4+raz5+raz6+raz7+raz8+raz9
         
-        out_str = out_str+' '+raz
+out_str = out_str+' '+raz*7
         
 for i in range(len(content)):
     if ', AOD' in content[i]:
