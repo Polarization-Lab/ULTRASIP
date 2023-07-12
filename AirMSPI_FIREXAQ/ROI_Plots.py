@@ -129,7 +129,7 @@ def main():  # Main code
 # Set the index of the sequence of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
-    step_ind = 1
+    step_ind = 0
     
 # Set the number of wavelengths for radiometric and polarization separately
 #num_int = total number of radiometric channels
