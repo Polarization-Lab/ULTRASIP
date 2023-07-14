@@ -115,18 +115,39 @@ out_str = out_str+'{:12d}'.format(2)
 
 out_str = out_str+'{:12d}'.format(12)
 out_str = out_str+'{:12d}'.format(41)
+out_str = out_str+'{:12d}'.format(42)
+out_str = out_str+'{:12d}'.format(43)
+
 out_str = out_str+'{:12d}'.format(12)
 out_str = out_str+'{:12d}'.format(41)
+out_str = out_str+'{:12d}'.format(42)
+out_str = out_str+'{:12d}'.format(43)
+
 out_str = out_str+'{:12d}'.format(12)
 out_str = out_str+'{:12d}'.format(41)
+out_str = out_str+'{:12d}'.format(42)
+out_str = out_str+'{:12d}'.format(43)
+
 out_str = out_str+'{:12d}'.format(12)
 out_str = out_str+'{:12d}'.format(41)
+out_str = out_str+'{:12d}'.format(42)
+out_str = out_str+'{:12d}'.format(43)
+
 out_str = out_str+'{:12d}'.format(12)
 out_str = out_str+'{:12d}'.format(41)
+out_str = out_str+'{:12d}'.format(42)
+out_str = out_str+'{:12d}'.format(43)
+
 out_str = out_str+'{:12d}'.format(12)
 out_str = out_str+'{:12d}'.format(41)
+out_str = out_str+'{:12d}'.format(42)
+out_str = out_str+'{:12d}'.format(43)
+
 out_str = out_str+'{:12d}'.format(12)
 out_str = out_str+'{:12d}'.format(41)
+out_str = out_str+'{:12d}'.format(42)
+out_str = out_str+'{:12d}'.format(43)
+
 
      
 # # Loop over the number of measurements per wavelength per meas type
@@ -134,24 +155,45 @@ out_str = out_str+'{:12d}'.format(41)
 
 out_str = out_str+'{:12d}'.format(meas_num)
 out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+
 
 out_str = out_str+'{:12d}'.format(meas_num) 
 out_str = out_str+'{:12d}'.format(meas_num)
-
 out_str = out_str+'{:12d}'.format(meas_num)
 out_str = out_str+'{:12d}'.format(meas_num)
 
-out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(meas_num)
 
 out_str = out_str+'{:12d}'.format(meas_num)
 out_str = out_str+'{:12d}'.format(meas_num)
-
 out_str = out_str+'{:12d}'.format(meas_num)
 out_str = out_str+'{:12d}'.format(meas_num)
 
+
 out_str = out_str+'{:12d}'.format(meas_num)
 out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+
+
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+
+
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+
+
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(meas_num)
+
 
 
 ## ANGLE DEFINITIONS
@@ -181,7 +223,7 @@ for i in range(len(content)):
         vza9 = ' ' + content[i+9].split()[2]
         
         vza = vza1+vza2+vza3+vza4+vza5+vza6+vza7+vza8+vza9
-        vza = vza*14
+        vza = vza*21
         
 out_str = out_str+' '+vza
 
@@ -199,7 +241,7 @@ for i in range(len(content)):
         raz9 = ' ' + content[i+9].split()[3]
         
         raz = raz1+raz2+raz3+raz4+raz5+raz6+raz7+raz8+raz9
-        raz = raz*14
+        raz = raz*21
         
 out_str = out_str+' '+raz
         
@@ -207,23 +249,43 @@ for i in range(len(content)):
     if ', AOD' in content[i]:
         out_str = out_str+'{:12f}'.format(float(content[i+1].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
+
 
         out_str = out_str+'{:12f}'.format(float(content[i+2].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
+
 
         out_str = out_str+'{:12f}'.format(float(content[i+3].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
+
 
         out_str = out_str+'{:12f}'.format(float(content[i+4].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
+
 
         out_str = out_str+'{:12f}'.format(float(content[i+5].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
+
 
         out_str = out_str+'{:12f}'.format(float(content[i+6].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
+
 
         out_str = out_str+'{:12f}'.format(float(content[i+7].split()[1]))*9
+        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(10)*9
         out_str = out_str +'{:12f}'.format(10)*9
 
 
