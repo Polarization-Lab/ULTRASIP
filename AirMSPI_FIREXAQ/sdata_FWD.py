@@ -182,7 +182,7 @@ for i in range(len(content)):
         
         vza = vza1+vza2+vza3+vza4+vza5+vza6+vza7+vza8+vza9
         
-out_str = out_str+' '+vza*14
+out_str = out_str+' '+vza+' '+vza
 
 #relative azimuth/meas
 for i in range(len(content)):
@@ -199,19 +199,32 @@ for i in range(len(content)):
         
         raz = raz1+raz2+raz3+raz4+raz5+raz6+raz7+raz8+raz9
         
-out_str = out_str+' '+raz*14
+out_str = out_str+' '+raz+' '+raz
         
 for i in range(len(content)):
     if ', AOD' in content[i]:
         out_str = out_str+'{:12f}'.format(float(content[i+1].split()[1]))*9
-        out_str = out_str+'{:12f}'.format(float(content[i+2].split()[1]))*9
-        out_str = out_str+'{:12f}'.format(float(content[i+3].split()[1]))*9
-        out_str = out_str+'{:12f}'.format(float(content[i+4].split()[1]))*9
-        out_str = out_str+'{:12f}'.format(float(content[i+5].split()[1]))*9
-        out_str = out_str+'{:12f}'.format(float(content[i+6].split()[1]))*9
-        out_str = out_str+'{:12f}'.format(float(content[i+7].split()[1]))*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
 
-out_str = out_str +'{:12f}'.format(0.1)*63
+        out_str = out_str+'{:12f}'.format(float(content[i+2].split()[1]))*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+
+        out_str = out_str+'{:12f}'.format(float(content[i+3].split()[1]))*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+
+        out_str = out_str+'{:12f}'.format(float(content[i+4].split()[1]))*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+
+        out_str = out_str+'{:12f}'.format(float(content[i+5].split()[1]))*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+
+        out_str = out_str+'{:12f}'.format(float(content[i+6].split()[1]))*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+
+        out_str = out_str+'{:12f}'.format(float(content[i+7].split()[1]))*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+
+
         
 ## ADDITIONAL PARAMETERS
 # NOTE: This is kludgy and GRASP seems to run without this being entirely correct
