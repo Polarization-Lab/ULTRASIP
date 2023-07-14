@@ -133,25 +133,25 @@ out_str = out_str+'{:12d}'.format(41)
 # # Note: This is the number of stares in the step-and-stare sequence
 
 out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(0)
+out_str = out_str+'{:12d}'.format(meas_num)
 
 out_str = out_str+'{:12d}'.format(meas_num) 
-out_str = out_str+'{:12d}'.format(0)
+out_str = out_str+'{:12d}'.format(meas_num)
 
 out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(0)
+out_str = out_str+'{:12d}'.format(meas_num)
 
 out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(0)
+out_str = out_str+'{:12d}'.format(meas_num)
 
 out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(0)
+out_str = out_str+'{:12d}'.format(meas_num)
 
 out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(0)
+out_str = out_str+'{:12d}'.format(meas_num)
 
 out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(0)
+out_str = out_str+'{:12d}'.format(meas_num)
 
 
 ## ANGLE DEFINITIONS
@@ -211,7 +211,7 @@ for i in range(len(content)):
         out_str = out_str+'{:12f}'.format(float(content[i+6].split()[1]))*9
         out_str = out_str+'{:12f}'.format(float(content[i+7].split()[1]))*9
 
-        
+out_str = out_str +'{:12f}'.format(0.1)*63
         
 ## ADDITIONAL PARAMETERS
 # NOTE: This is kludgy and GRASP seems to run without this being entirely correct
