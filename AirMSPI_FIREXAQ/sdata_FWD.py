@@ -181,7 +181,7 @@ for i in range(len(content)):
         vza9 = ' ' + content[i+9].split()[2]
         
         vza = vza1+vza2+vza3+vza4+vza5+vza6+vza7+vza8+vza9
-        vza = vza*9
+        vza = vza*18
         
 out_str = out_str+' '+vza
 
@@ -199,7 +199,7 @@ for i in range(len(content)):
         raz9 = ' ' + content[i+9].split()[3]
         
         raz = raz1+raz2+raz3+raz4+raz5+raz6+raz7+raz8+raz9
-        raz = raz*9
+        raz = raz*18
         
 out_str = out_str+' '+raz
         
