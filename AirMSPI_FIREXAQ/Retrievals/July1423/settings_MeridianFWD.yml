@@ -37,18 +37,11 @@ retrieval:
             noise[1]:
                 standard_deviation_synthetic: 0.0
                 error_type:  relative
-                standard_deviation:  0.02
-                measurement_type[1]:
-                    type: AOD
-                    index_of_wavelength_involved: [ 1, 2, 3, 4, 5, 6, 7]
-            noise[2]:
-                standard_deviation_synthetic: 0.0
-                error_type:  relative
                 standard_deviation:  0.010
                 measurement_type[1]:
                     type: I
                     index_of_wavelength_involved: [ 1, 2, 3, 4, 5, 6, 7]
-            noise[3]:
+            noise[2]:
                 standard_deviation_synthetic: 0.0
                 error_type:  absolute
                 standard_deviation:  0.005
