@@ -349,6 +349,13 @@ out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
                    
 # # Endline
 out_str = out_str+'\n'
