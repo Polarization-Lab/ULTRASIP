@@ -4,7 +4,7 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July1423/RotfromMerdFWD.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July1423/MerdFWDI.sdat"
   
 output:
     segment:
@@ -48,16 +48,6 @@ retrieval:
                 measurement_type[1]:
                     type: I
                     index_of_wavelength_involved: [ 1, 2, 3, 4, 5, 6, 7]
-            noise[3]:
-                standard_deviation_synthetic: 0.0
-                error_type:  absolute
-                standard_deviation:  0.005
-                measurement_type[1]:
-                    type: Q
-                    index_of_wavelength_involved: [ 4, 6, 7 ]
-                measurement_type[2]:
-                    type: U
-                    index_of_wavelength_involved: [ 4, 6, 7 ]
 
                     
     forward_model:
