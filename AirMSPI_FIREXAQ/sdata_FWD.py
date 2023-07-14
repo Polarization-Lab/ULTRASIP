@@ -98,13 +98,13 @@ for i in range(len(content)):
        
 # Loop over the number of types of measurements per wavelength
 
-out_str = out_str+'{:12d}'.format(2)
-out_str = out_str+'{:12d}'.format(2)
-out_str = out_str+'{:12d}'.format(2)
-out_str = out_str+'{:12d}'.format(2) # 1 meas per wave
-out_str = out_str+'{:12d}'.format(2)
-out_str = out_str+'{:12d}'.format(2)
-out_str = out_str+'{:12d}'.format(2)
+out_str = out_str+'{:12d}'.format(4)
+out_str = out_str+'{:12d}'.format(4)
+out_str = out_str+'{:12d}'.format(4)
+out_str = out_str+'{:12d}'.format(4) # 1 meas per wave
+out_str = out_str+'{:12d}'.format(4)
+out_str = out_str+'{:12d}'.format(4)
+out_str = out_str+'{:12d}'.format(4)
 
 
 
