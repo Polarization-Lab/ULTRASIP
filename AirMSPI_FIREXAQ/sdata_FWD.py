@@ -12,7 +12,7 @@ import numpy as np
 
 #load in GRASP output 
 # Define GRASP output file path 
-outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1"
+outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July1423/"
 
 
 
@@ -32,7 +32,7 @@ temp = words[len(words)-1]  # Choose the last element
 hold = temp.split('.')
 vers = hold[0]
 
-outfile_base = 'RotfromMerdFWD'
+outfile_base = 'MerdFWDI'
         
 # Generate an output file name
 
@@ -98,13 +98,13 @@ for i in range(len(content)):
        
 # Loop over the number of types of measurements per wavelength
 
-out_str = out_str+'{:12d}'.format(1)
-out_str = out_str+'{:12d}'.format(1)
-out_str = out_str+'{:12d}'.format(1)
-out_str = out_str+'{:12d}'.format(1) # 1 meas per wave
-out_str = out_str+'{:12d}'.format(1)
-out_str = out_str+'{:12d}'.format(1)
-out_str = out_str+'{:12d}'.format(1)
+out_str = out_str+'{:12d}'.format(2)
+out_str = out_str+'{:12d}'.format(2)
+out_str = out_str+'{:12d}'.format(2)
+out_str = out_str+'{:12d}'.format(2) # 1 meas per wave
+out_str = out_str+'{:12d}'.format(2)
+out_str = out_str+'{:12d}'.format(2)
+out_str = out_str+'{:12d}'.format(2)
 
 
 
@@ -114,23 +114,45 @@ out_str = out_str+'{:12d}'.format(1)
 # #       12 = AOD
 
 out_str = out_str+'{:12d}'.format(12)
+out_str = out_str+'{:12d}'.format(41)
 out_str = out_str+'{:12d}'.format(12)
+out_str = out_str+'{:12d}'.format(41)
 out_str = out_str+'{:12d}'.format(12)
+out_str = out_str+'{:12d}'.format(41)
 out_str = out_str+'{:12d}'.format(12)
+out_str = out_str+'{:12d}'.format(41)
 out_str = out_str+'{:12d}'.format(12)
+out_str = out_str+'{:12d}'.format(41)
 out_str = out_str+'{:12d}'.format(12)
+out_str = out_str+'{:12d}'.format(41)
 out_str = out_str+'{:12d}'.format(12)
+out_str = out_str+'{:12d}'.format(41)
+
      
 # # Loop over the number of measurements per wavelength per meas type
 # # Note: This is the number of stares in the step-and-stare sequence
 
 out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(0)
+
 out_str = out_str+'{:12d}'.format(meas_num) 
+out_str = out_str+'{:12d}'.format(0)
+
 out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(0)
+
 out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(0)
+
 out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(0)
+
 out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(0)
+
 out_str = out_str+'{:12d}'.format(meas_num)
+out_str = out_str+'{:12d}'.format(0)
+
 
 ## ANGLE DEFINITIONS
 
