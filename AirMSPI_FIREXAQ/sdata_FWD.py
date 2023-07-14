@@ -206,25 +206,25 @@ out_str = out_str+' '+raz
 for i in range(len(content)):
     if ', AOD' in content[i]:
         out_str = out_str+'{:12f}'.format(float(content[i+1].split()[1]))*9
-        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(10)*9
 
         out_str = out_str+'{:12f}'.format(float(content[i+2].split()[1]))*9
-        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(10)*9
 
         out_str = out_str+'{:12f}'.format(float(content[i+3].split()[1]))*9
-        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(10)*9
 
         out_str = out_str+'{:12f}'.format(float(content[i+4].split()[1]))*9
-        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(10)*9
 
         out_str = out_str+'{:12f}'.format(float(content[i+5].split()[1]))*9
-        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(10)*9
 
         out_str = out_str+'{:12f}'.format(float(content[i+6].split()[1]))*9
-        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(10)*9
 
         out_str = out_str+'{:12f}'.format(float(content[i+7].split()[1]))*9
-        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(10)*9
 
 
         
