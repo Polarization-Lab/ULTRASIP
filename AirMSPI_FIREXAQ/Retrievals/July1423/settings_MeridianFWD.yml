@@ -163,10 +163,10 @@ retrieval:
             retrieved: false
             mode[1]:
                 initial_guess:                      #1         #2        #3
-                    value:                         [1.52337 ]
-                    min:                           [1.33]
-                    max:                           [1.6 ]
-                    index_of_wavelength_involved:  [0 ]
+                    value:                         [^repeat(1.52337;7) ]
+                    min:                           [^repeat(1.33;7)]
+                    max:                           [^repeat(1.6;7) ]
+                    index_of_wavelength_involved:  [^expand(1;7) ]
                 single_pixel:
                     smoothness_constraints:
                         difference_order: 1
@@ -185,7 +185,7 @@ retrieval:
             retrieved: false
             mode[1]:
                 initial_guess:                       #1         #2        #3 
-                    value:                          [^repeat(0.0048;7)     ]
+                    value:                          [0.00486,0.00481,0.00470,0.00467,0.00465,0.00467,0.00475     ]
                     min:                            [^repeat(0.00005;7)   ]
                     max:                            [^repeat(0.1;7)       ]
                     index_of_wavelength_involved:   [^expand(1;7)         ]
