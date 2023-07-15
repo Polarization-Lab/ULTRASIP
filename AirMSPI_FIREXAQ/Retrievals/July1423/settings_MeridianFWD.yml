@@ -51,6 +51,13 @@ retrieval:
                 measurement_type[2]:
                     type: U
                     index_of_wavelength_involved: [ 1, 2, 3, 4, 5, 6, 7 ]
+            noise[3]:
+                standard_deviation_synthetic: 0.0
+                error_type:  relative
+                standard_deviation:  0.020
+                measurement_type[1]:
+                    type: AOD
+                    index_of_wavelength_involved: [ 1, 2, 3, 4, 5, 6, 7]
                     
     forward_model:
         phase_matrix:
