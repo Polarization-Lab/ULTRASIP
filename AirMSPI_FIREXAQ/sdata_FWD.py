@@ -111,7 +111,7 @@ out_str = out_str+'{:12d}'.format(4)
 # # Loop over the measurement types per wavelength
 # # NOTE: Values can be found in the GRASP documentation in Table 4.5
 # #       41 = Normalized radiance (I = rad*pi/E0) - GRASP calls normalized (reduced) radiance
-# #       12 = AOD
+# #       12 = AOD, 42 = Q, 43 = U
 
 out_str = out_str+'{:12d}'.format(12)
 out_str = out_str+'{:12d}'.format(41)
@@ -249,44 +249,44 @@ for i in range(len(content)):
     if ', AOD' in content[i]:
         out_str = out_str+'{:12f}'.format(float(content[i+1].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
 
 
         out_str = out_str+'{:12f}'.format(float(content[i+2].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
 
 
         out_str = out_str+'{:12f}'.format(float(content[i+3].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
 
 
         out_str = out_str+'{:12f}'.format(float(content[i+4].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
 
 
         out_str = out_str+'{:12f}'.format(float(content[i+5].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
 
 
         out_str = out_str+'{:12f}'.format(float(content[i+6].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
 
 
         out_str = out_str+'{:12f}'.format(float(content[i+7].split()[1]))*9
         out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
-        out_str = out_str +'{:12f}'.format(10)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
+        out_str = out_str +'{:12f}'.format(0.1)*9
 
 
         
