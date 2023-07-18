@@ -66,10 +66,10 @@ def image_crop(a):
 
         mid_row = a.shape[0] // 2
         mid_col = a.shape[1] // 2
-        start_row = mid_row - 262
-        end_row = mid_row + 262
-        start_col = mid_col - 262
-        end_col = mid_col + 262
+        start_row = mid_row - 1048
+        end_row = mid_row + 1048
+        start_col = mid_col - 1048
+        end_col = mid_col + 1048
         
         a = a[start_row:end_row, start_col:end_col]
         
@@ -81,9 +81,9 @@ def calculate_std(image):
 
     # Calculate the standard deviation over the regions
     std_dev = np.zeros_like(image)
-    for i in range(region_size//2, image.shape[0] - region_size//2):
-        for j in range(region_size//2, image.shape[1] - region_size//2):
-            std_dev[i,j] = np.std(image[i-region_size//2:i+region_size//2+1, j-region_size//2:j+region_size//2+1])
+    # for i in range(region_size//2, image.shape[0] - region_size//2):
+    #     for j in range(region_size//2, image.shape[1] - region_size//2):
+    #         std_dev[i,j] = np.std(image[i-region_size//2:i+region_size//2+1, j-region_size//2:j+region_size//2+1])
 
     return std_dev
 
@@ -146,8 +146,8 @@ def main():  # Main code
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/2FIREX"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May2523/Bakersfield_2"
     #outpath = "C:/Users/ULTRASIP_1/Desktop/ForGRASP/Retrieval_Files"
-    datapath = "C:/Users/ULTRASIP_1/Documents/Inchelium"
-    outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1"
+    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Inchelium"
+    outpath = "C:/Users/Clarissa/Documents/Github/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July1723"
 
 
 
@@ -170,7 +170,7 @@ def main():  # Main code
 # Set the index of the sequence of step-and-stare files
 # NOTE: This is 0 for the first group in the directory, 1 for the second group, etc.
 
-    step_ind = 1
+    step_ind = 0
     
 # Set the number of wavelengths for radiometric and polarization separately
 #num_int = total number of radiometric channels

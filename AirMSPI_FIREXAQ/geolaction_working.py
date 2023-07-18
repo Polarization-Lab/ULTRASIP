@@ -1,27 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jul 13 12:13:39 2023
+Created on Mon Jul 17 19:22:30 2023
 
 @author: Clarissa
 """
 
-#_______________Import Packages_________________#
-import glob
 import h5py
-import matplotlib.pyplot as plt
-import numpy as np
 import os
-import time
-from matplotlib import patches
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 
-#_______________Define ROI Functions___________________________#
-def calculate_dolp(stokesparam):
-
-    #I = stokesparam[0]
-    Q = stokesparam[0]
-    U = stokesparam[1]
-    dolp = ((Q**2 + U**2)**(1/2)) #/I
-    return dolp
 
 def image_crop(a):
         #np.clip(a, 0, None, out=a)
@@ -44,11 +33,50 @@ def image_crop(a):
         a = a[start_row:end_row, start_col:end_col]
         
         return a
+    
+def plot_radiance(latitude, longitude, radiance):
+    plt.figure(figsize=(18, 10))
+    plt.scatter(longitude, latitude, c=radiance, cmap='jet', s=5)
+    plt.colorbar(label='Radiance')
+    plt.xlabel('Longitude')
+    plt.ylabel('Latitude')
+    plt.title('Radiance over Latitude and Longitude')
+    # Add more grid lines
+    plt.gca().xaxis.set_major_locator(MultipleLocator(0.001))
+    plt.gca().yaxis.set_major_locator(MultipleLocator(0.01))
+    
+    # Show every third label on the x-axis
+    plt.gca().xaxis.set_major_locator(MultipleLocator(base=0.01))
+    plt.gca().xaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+    
+    plt.grid(which='both', linestyle='--', linewidth=0.5)
+    
+    plt.xticks(rotation=45)
+    
+    plt.show()
 
-#_______________Start the main code____________#
-def main():  # Main code
+# def get_radiance_at_location(latitude, longitude, radiance, target_lat, target_lon):
+
+#     lat_idx,lon_idx = np.where((latitude == target_lat) & (longitude == target_lon))
+
+#     radiance_at_location = radiance[lat_idx, lon_idx]
+#     return radiance_at_location
+
+def get_radiance_at_location(latitude, longitude, radiance, target_lat, target_lon):
+    lat_idx, lon_idx = np.where((latitude == target_lat) & (longitude == target_lon))
+
+    if len(lat_idx) == 0 or len(lon_idx) == 0:
+        print(f"No radiance data found at Lat: {target_lat}, Lon: {target_lon}")
+        return None
+
+    radiance_at_location = radiance[lat_idx[0], lon_idx[0]]
+    return radiance_at_location
+
+
+
+def main():
     # Change directory to the datapath
-    datapath = "C:/Users/ULTRASIP_1/Documents/Inchelium"
+    datapath = "C:/Users/Clarissa/Documents/AirMSPI/Washington"
     os.chdir(datapath)
     # Open the HDF file
     file = h5py.File('AirMSPI_ER2_GRP_TERRAIN_20190807_202556Z_WA-Inchelium_571F_F01_V006.hdf', 'r')
@@ -60,53 +88,19 @@ def main():  # Main code
     latitude_data = file['/HDFEOS/GRIDS/Ancillary/Data Fields/Latitude/'][:]
     longitude_data = file['/HDFEOS/GRIDS/Ancillary/Data Fields/Longitude/'][:]
     
-    attribute_data = image_crop(attribute_data)
-    latitude_data = image_crop(latitude_data)
-    longitude_data = image_crop(longitude_data)
+    radiance = image_crop(attribute_data)
+    latitude = image_crop(latitude_data)
+    longitude = image_crop(longitude_data)
     
-    # Plot the attribute 'I' over geolocation
-    plt.figure(figsize=(10, 8))
-    plt.scatter(longitude_data, latitude_data, c=attribute_data, cmap='gray')
-    plt.colorbar(label='Attribute I')
-    plt.xlabel('Longitude')
-    plt.ylabel('Latitude')
-    plt.title('Attribute I over Geolocation')
-    plt.show()
-    
-    # Prompt the user to enter the center latitude and longitude
-    center_lat = float(input("Enter the center latitude: "))
-    center_lon = float(input("Enter the center longitude: "))
+    target_latitude = 47.945  # Replace with your desired latitude
+    target_longitude = -118.445  # Replace with your desired longitude
 
-    # Specify the size of the region of interest (ROI)
-    roi_size = 2  # Size of the ROI (10 by 10)
-    latitude_data = np.round(latitude_data,decimals=3)
-    longitude_data = np.round(longitude_data,decimals=3)
-    
-    # Calculate the index ranges for the ROI
-    lat_start,lon_start= np.where((latitude_data == center_lat) & (longitude_data == center_lon))
+    # Step 2: Plot radiance over latitude and longitude
+    plot_radiance(latitude, longitude, radiance)
 
-    roi_attribute = attribute_data[lat_start,lon_start]
-    
-    # Extract the ROI data
-    roi_latitude = latitude_data[lat_start,lon_start]
-    roi_longitude = longitude_data[lat_start,lon_start]
-    
-    # Close the HDF file
-    file.close()
+    # Step 3: Get radiance data for a specific latitude and longitude
+    radiance_at_location = get_radiance_at_location(latitude, longitude, radiance, target_latitude, target_longitude)
+    print(f"Radiance at Lat: {target_latitude}, Lon: {target_longitude} = {radiance_at_location[0]:.2f}")
 
-    
-    # Plot the attribute 'I' over the ROI
-    plt.figure(figsize=(10, 8))
-    plt.scatter(roi_longitude, roi_latitude, c=roi_attribute, cmap='gray')
-    plt.colorbar(label='Attribute I')
-    plt.xlabel('Longitude')
-    plt.ylabel('Latitude')
-    plt.title('Attribute I over ROI')
-    plt.show()
-
-    return roi_attribute
-    
-### END MAIN FUNCTION
-if __name__ == '__main__':
-   roi= main() 
-     
+if __name__ == "__main__":
+    main()
