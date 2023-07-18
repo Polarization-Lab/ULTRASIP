@@ -17,26 +17,36 @@ from matplotlib import patches
 #_______________Define ROI Functions___________________________#
 
 def image_crop(a):
-        #np.clip(a, 0, None, out=a)
-        # a[a == -999] = np.nan
-        # a = a[~np.isnan(a).all(axis=1), :]
-        # a = a[~np.isnan(a).all(axis=1)]
-        
-        a = a[~(a== -999).all(axis=1)]
-        a = a[:,~(a== -999).all(axis=0)]
-        a[np.where(a == -999)] = np.nan
+    a = a[~(a == -999).all(axis=1)]
+    a = a[:, ~(a == -999).all(axis=0)]
+    a[np.where(a == -999)] = np.nan
 
+    mid_row = a.shape[0] // 2
+    mid_col = a.shape[1] // 2
 
-        mid_row = a.shape[0] // 2
-        mid_col = a.shape[1] // 2
-        start_row = mid_row - 262
-        end_row = mid_row + 262
-        start_col = mid_col - 262
-        end_col = mid_col + 262
-        
-        a = a[start_row:end_row, start_col:end_col]
-        
-        return a
+    # Define the desired crop size (2096x2096)
+    crop_size = 2096
+
+    # Calculate start and end row indices for cropping
+    start_row = max(mid_row - (crop_size // 2), 0)
+    end_row = start_row + crop_size
+
+    # Calculate start and end column indices for cropping
+    start_col = max(mid_col - (crop_size // 2), 0)
+    end_col = start_col + crop_size
+
+    # Crop the image to the desired size (2096x2096)
+    a = a[start_row:end_row, start_col:end_col]
+
+    # Check if the cropped array is smaller than 2096x2096 and pad if necessary
+    if a.shape[0] < crop_size:
+        padding_rows = crop_size - a.shape[0]
+        a = np.pad(a, ((0, padding_rows), (0, 0)), mode='constant', constant_values=np.nan)
+    if a.shape[1] < crop_size:
+        padding_cols = crop_size - a.shape[1]
+        a = np.pad(a, ((0, 0), (0, padding_cols)), mode='constant', constant_values=np.nan)
+
+    return a
 
 
 def calculate_std(image):
@@ -45,9 +55,9 @@ def calculate_std(image):
 
     # Calculate the standard deviation over the regions
     std_dev = np.zeros_like(image)
-    for i in range(region_size//2, image.shape[0] - region_size//2):
-        for j in range(region_size//2, image.shape[1] - region_size//2):
-            std_dev[i,j] = np.std(image[i-region_size//2:i+region_size//2+1, j-region_size//2:j+region_size//2+1])
+    # for i in range(region_size//2, image.shape[0] - region_size//2):
+    #     for j in range(region_size//2, image.shape[1] - region_size//2):
+    #         std_dev[i,j] = np.std(image[i-region_size//2:i+region_size//2+1, j-region_size//2:j+region_size//2+1])
 
     return std_dev
 
@@ -104,7 +114,7 @@ def main():  # Main code
 # NOTE: datapath is the location of the AirMSPI HDF data files
 #       outpath is where the output should be stored
 #Work Computer
-    datapath = "C:/Users/ULTRASIP_1/Documents/Inchelium/"
+    datapath = "C:/Users/ULTRASIP_1/Documents/SPIE/"
     #datapath = "C:/Users/ULTRASIP_1/Documents/Bakersfield707_DataCopy/"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/May1123/1FIREX"
     #outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Apr1823/Merd_Bakersfield"
@@ -120,7 +130,7 @@ def main():  # Main code
 # Set the length of one measurement sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 9
+    num_step = 7
     
 # Calculate the middle of the sequence
 
