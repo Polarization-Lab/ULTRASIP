@@ -88,6 +88,7 @@ def calculate_std(image):
     return std_dev
 
 
+
 def  choose_roi(image): 
             std_dev = calculate_std(image)
     # Plot the original image and the standard deviation image side by side
