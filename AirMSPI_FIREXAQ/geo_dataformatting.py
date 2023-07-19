@@ -66,54 +66,22 @@ def calculate_dolp(stokesparam):
     dolp = ((Q**2 + U**2)**(1/2)) #/I
     return dolp
 
-# def image_crop(a):
-#         a = a[~(a== -999).all(axis=1)]
-#         a = a[:,~(a== -999).all(axis=0)]
-#         a[np.where(a == -999)] = np.nan
-        
-#         mid_row = a.shape[0] // 2
-#         mid_col = a.shape[1] // 2
-#         start_row = mid_row - 1048
-#         end_row = mid_row +1048
-#         start_col = mid_col - 1048
-#         end_col = mid_col + 1048
-        
-#         a = a[start_row:end_row, start_col:end_col]
-#         return a
-
-import numpy as np
-
 def image_crop(a):
-    a = a[~(a == -999).all(axis=1)]
-    a = a[:, ~(a == -999).all(axis=0)]
-    a[np.where(a == -999)] = 1e-6
+        a = a[~(a== -999).all(axis=1)]
+        a = a[:,~(a== -999).all(axis=0)]
+        a[np.where(a == -999)] = np.nan
+        
+        mid_row = a.shape[0] // 2
+        mid_col = a.shape[1] // 2
+        start_row = mid_row - 1048
+        end_row = mid_row +1048
+        start_col = mid_col - 1048
+        end_col = mid_col + 1048
+        
+        a = a[start_row:end_row, start_col:end_col]
+        return a
 
-    mid_row = a.shape[0] // 2
-    mid_col = a.shape[1] // 2
 
-    # Define the desired crop size (2096x2096)
-    crop_size = 2096
-
-    # Calculate start and end row indices for cropping
-    start_row = max(mid_row - (crop_size // 2), 0)
-    end_row = start_row + crop_size
-
-    # Calculate start and end column indices for cropping
-    start_col = max(mid_col - (crop_size // 2), 0)
-    end_col = start_col + crop_size
-
-    # Crop the image to the desired size (2096x2096)
-    a = a[start_row:end_row, start_col:end_col]
-
-    # Check if the cropped array is smaller than 2096x2096 and pad if necessary
-    if a.shape[0] < crop_size:
-        padding_rows = crop_size - a.shape[0]
-        a = np.pad(a, ((0, padding_rows), (0, 0)), mode='constant', constant_values=1e-6)
-    if a.shape[1] < crop_size:
-        padding_cols = crop_size - a.shape[1]
-        a = np.pad(a, ((0, 0), (0, padding_cols)), mode='constant', constant_values=1e-6)
-
-    return a
 
 
 
@@ -150,19 +118,14 @@ def  choose_roi(latitude,longitude,image):
             
             plt.grid(which='both', linestyle='--', linewidth=0.5)
             plt.xticks(rotation=45)
-            
-   
-            #ax[1].grid(True)
-            #cbar = fig.colorbar(im, ax = ax[1], fraction = 0.046, pad=0.04)
+            ax[1].grid(True)
             
             plt.show()
 
         # Prompt the user to choose a region
             x = int(input('Enter x-coordinate of region: '))
             y = int(input('Enter y-coordinate of region: '))
-            
-            print(latitude[x,y])
-            
+                        
             
             return x,y
         
@@ -513,33 +476,37 @@ def main():  # Main code
 # NOTE: The test is done for all the wavelengths that are read, so if the wavelengths
 #       are changed, then the test needs to change  - note about missing data  
         
-        good = ((img_i_355 > 0.0) & (img_i_380 > 0.0) & (img_i_445 > 0.0) &
-            (img_i_470 > 0.0) & (img_i_555 > 0.0) & (img_i_660 > 0.0) &
-            (img_i_865 > 0.0))
+        # good = ((img_i_355 > 0.0) & (img_i_380 > 0.0) & (img_i_445 > 0.0) &
+        #     (img_i_470 > 0.0) & (img_i_555 > 0.0) & (img_i_660 > 0.0) &
+        #     (img_i_865 > 0.0))
             
-        img_good = img_i_355[good]
+        # img_good = img_i_355[good]
         
-        if(len(img_good) < 1):
-            print("***ERROR***")
-            print("NO VALID PIXELS")
-            print("***ERROR***")
-            print('error')
+        # if(len(img_good) < 1):
+        #     print("***ERROR***")
+        #     print("NO VALID PIXELS")
+        #     print("***ERROR***")
+        #     print('error')
          
      
         
         if loop == 0: 
             x, y = choose_roi(img_lat,img_lon,img_i_470)
         
-
-                    
+        #3x3 ROI for mean
+        x_b = x-25;
+        x_a = x+25;
+        y_b = y-25;
+        y_a = y+25;
 # Extract the values from the ROI
-        i_355 = img_i_355[x,y]
-        i_380 = img_i_380[x,y]
-        i_445 = img_i_445[x,y]
-        i_470 = img_i_470[x,y]
-        i_555 = img_i_555[x,y]
-        i_660 = img_i_660[x,y]
-        i_865 = img_i_865[x,y]
+        i_355 = np.nanmean(img_i_355[x_b:x_a,y_b:y_a])
+        print(img_i_355[x_b:x_a,y_b:y_a])
+        i_380 = np.nanmean(img_i_380[x_b:x_a,y_b:y_a])
+        i_445 = np.nanmean(img_i_445[x_b:x_a,y_b:y_a])
+        i_470 = np.nanmean(img_i_470[x_b:x_a,y_b:y_a])
+        i_555 = np.nanmean(img_i_555[x_b:x_a,y_b:y_a])
+        i_660 = np.nanmean(img_i_660[x_b:x_a,y_b:y_a])
+        i_865 = np.nanmean(img_i_865[x_b:x_a,y_b:y_a])
            
         qs_470 = img_qs_470[x,y]
         qs_660 = img_qs_660[x,y]
@@ -731,7 +698,7 @@ def main():  # Main code
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-    outfile_base = 'Rotfrom'+pol_ref_plane
+    outfile_base = 'test-Rotfrom'+pol_ref_plane
 
 # Get the software version number to help track issues
     hold = os.path.basename(__file__)
