@@ -90,12 +90,15 @@ nadir = [string for string in data_files if '000N' in string][0]
 
 f = h5py.File(nadir,'r')
 
-i_355 = image_format(f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/'][:])
+i_470 = image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/I/'][:])
+i_555 = image_format(f['/HDFEOS/GRIDS/555nm_band/Data Fields/I/'][:])
+i_660 = image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/I/'][:])
 
+i_rgb = i_470+i_555+i_660
 
 plt.figure(figsize=(10, 10))
-plt.imshow(i_355 , cmap = 'jet')
-plt.title('I_355 at Nadir')
+plt.imshow(i_rgb, cmap = 'bone')
+plt.title('I_RGB at Nadir')
 plt.grid(True)
 plt.colorbar()
 
@@ -121,8 +124,8 @@ except ValueError:
 
 # Now, plot the image with the black square marker on top
 plt.figure(figsize=(10, 10))
-plt.imshow(i_355, cmap='jet')
-plt.title('I_355 at Nadir')
+plt.imshow(i_rgb, cmap='jet')
+plt.title('I_RGB at Nadir')
 plt.grid(True)
 plt.colorbar()
 
@@ -380,7 +383,7 @@ os.chdir(outpath)
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-outfile_base = 'R3-Rotfrom'+pol_ref_plane
+outfile_base = 'test-Rotfrom'+pol_ref_plane
 
 # Get the software version number to help track issues
 hold = os.path.basename(__file__)

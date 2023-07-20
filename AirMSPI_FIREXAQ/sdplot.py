@@ -30,13 +30,13 @@ def main():  # Main code
     # basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX"
     # figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX/Plots"
     
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/8_Bakersfield"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/8_Bakersfield/Plots"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2023/"
+    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2023/"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 5
+    num_step = 9
 
     
 # Set the number of wavelengths
@@ -75,7 +75,7 @@ def main():  # Main code
 
 # Get the text file listing
 
-    file_list = glob.glob('Retrieval*.txt')
+    file_list = glob.glob('Merd_*R1*.txt')
     
     num_files = len(file_list)
     

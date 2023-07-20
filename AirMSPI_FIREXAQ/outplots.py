@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 # Open the text file in read mode
 # Define GRASP output file path 
-outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1/Merd_Inchelium2.txt"
+outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2023/Merd_R1_INV.txt"
 #outpath =  "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1/Merd_Inchelium.txt"
 
 
