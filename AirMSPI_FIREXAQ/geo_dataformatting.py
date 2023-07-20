@@ -350,9 +350,7 @@ def main():  # Main code
             center_raw = f['/Channel_Information/Center_wavelength/'][:]   
             E0_wave = f['/Channel_Information/Solar_irradiance_at_1_AU/'][:]
 
-# Get the actual center wavelengths and E0 values
-            center_raw = f['/Channel_Information/Center_wavelength/'][:]       
-            E0_wave = f['/Channel_Information/Solar_irradiance_at_1_AU/'][:]
+
 
 # Calculate the effective center wavelengths by appropriate averaging
 # NOTE: Essentially, for the radiometric only bands, the center wavelength is given in the
