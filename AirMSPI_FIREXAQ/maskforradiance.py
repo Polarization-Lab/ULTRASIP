@@ -5,37 +5,12 @@ Created on Tue Jul 18 17:43:53 2023
 @author: Clarissa
 """
 
-def image_crop(a):
-    # a = a[~(a == 0).all(axis=1)]
-    # a = a[:, ~(a == 0).all(axis=0)]
-    a[np.where(a == 0)] = np.nan
-
-    # mid_row = a.shape[0] // 2
-    # mid_col = a.shape[1] // 2
-
-    # # Define the desired crop size (2096x2096)
-    # crop_size = 2096
-
-    # # Calculate start and end row indices for cropping
-    # start_row = max(mid_row - (crop_size // 2), 0)
-    # end_row = start_row + crop_size
-
-    # # Calculate start and end column indices for cropping
-    # start_col = max(mid_col - (crop_size // 2), 0)
-    # end_col = start_col + crop_size
-
-    # # Crop the image to the desired size (2096x2096)
-    # a = a[start_row:end_row, start_col:end_col]
-
-    # # Check if the cropped array is smaller than 2096x2096 and pad if necessary
-    # if a.shape[0] < crop_size:
-    #     padding_rows = crop_size - a.shape[0]
-    #     a = np.pad(a, ((0, padding_rows), (0, 0)), mode='constant', constant_values=np.nan)
-    # if a.shape[1] < crop_size:
-    #     padding_cols = crop_size - a.shape[1]
-    #     a = np.pad(a, ((0, 0), (0, padding_cols)), mode='constant', constant_values=np.nan)
-
-    return a
+def image_crop(image):
+    
+    image[np.where(image == -999)] = np.nan
+    new_image = image[1100:2800,500:2200]
+    
+    return new_image
 
 def update(frame_number):
     plt.clf()
@@ -69,7 +44,7 @@ def main():  # Main code
 #       outpath is where the output should be stored
 #Work Computer
     datapath = "C:/Users/ULTRASIP_1/Documents/SPIE"
-    outpath = "C:/Users/Clarissa/Documents/Github/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July1823"
+    outpath = "C:/Users/ULTRASIP_1/Documents/SPIE"
 
 # # Load in the set of measurement sequences
 # Set the length of one measurement sequence of step-and-stare observations
@@ -114,7 +89,7 @@ def main():  # Main code
     print("AirMSPI Files Found: ",num_files)
     
 
-    I = np.zeros((3584,3584) )
+    I = np.zeros((1700,1700))
     I_med_list = []  # List to store the I_med images
     title_list = []  # List to store the titles
     
@@ -139,13 +114,13 @@ def main():  # Main code
 # Radiometric Channel
 
         print("355nm")
-        I_355 = image_crop(f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/'][:]*f['/HDFEOS/GRIDS/355nm_band/Data Fields/I.mask/'][:]) 
-        I_380 = image_crop(f['/HDFEOS/GRIDS/380nm_band/Data Fields/I/'][:]*f['/HDFEOS/GRIDS/380nm_band/Data Fields/I.mask/'][:])
-        I_445 = image_crop(f['/HDFEOS/GRIDS/445nm_band/Data Fields/I/'][:]*f['/HDFEOS/GRIDS/445nm_band/Data Fields/I.mask/'][:])
-        I_470 = image_crop(f['/HDFEOS/GRIDS/470nm_band/Data Fields/I/'][:]*f['/HDFEOS/GRIDS/470nm_band/Data Fields/I.mask/'][:])
-        I_555 = image_crop(f['/HDFEOS/GRIDS/555nm_band/Data Fields/I/'][:]*f['/HDFEOS/GRIDS/555nm_band/Data Fields/I.mask/'][:])
-        I_660 = image_crop(f['/HDFEOS/GRIDS/660nm_band/Data Fields/I/'][:]*f['/HDFEOS/GRIDS/660nm_band/Data Fields/I.mask/'][:])
-        I_865 = image_crop(f['/HDFEOS/GRIDS/865nm_band/Data Fields/I/'][:]*f['/HDFEOS/GRIDS/865nm_band/Data Fields/I.mask/'][:])
+        I_355 = image_crop(f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/'][:]) 
+        I_380 = image_crop(f['/HDFEOS/GRIDS/380nm_band/Data Fields/I/'][:])
+        I_445 = image_crop(f['/HDFEOS/GRIDS/445nm_band/Data Fields/I/'][:])
+        I_470 = image_crop(f['/HDFEOS/GRIDS/470nm_band/Data Fields/I/'][:])
+        I_555 = image_crop(f['/HDFEOS/GRIDS/555nm_band/Data Fields/I/'][:])
+        I_660 = image_crop(f['/HDFEOS/GRIDS/660nm_band/Data Fields/I/'][:])
+        I_865 = image_crop(f['/HDFEOS/GRIDS/865nm_band/Data Fields/I/'][:])
         
         I_med = I_355 + I_380 + I_445 + I_470 + I_555 + I_660 + I_865
         I = I + I_med

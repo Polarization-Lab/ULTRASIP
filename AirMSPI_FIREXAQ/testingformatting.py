@@ -97,7 +97,7 @@ i_660 = image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/I/'][:])
 i_rgb = i_470+i_555+i_660
 
 plt.figure(figsize=(10, 10))
-plt.imshow(i_rgb, cmap = 'bone')
+plt.imshow(i_rgb, cmap = 'jet')
 plt.title('I_RGB at Nadir')
 plt.grid(True)
 plt.colorbar()
@@ -116,8 +116,10 @@ plt.show()
 
 # Get user input for the (x, y) coordinates
 try:
-    x = int(input("Enter the x-coordinate: "))
-    y = int(input("Enter the y-coordinate: "))
+    
+    
+    row = int(input("Enter the row-coordinate: "))
+    column= int(input("Enter the column-coordinate: "))
 except ValueError:
     print("Invalid input. Please enter integer values for coordinates.")
     exit()
@@ -129,31 +131,41 @@ plt.title('I_RGB at Nadir')
 plt.grid(True)
 plt.colorbar()
 
-# Plot a marker at the chosen (x, y) coordinate on top of the I_355 image
-plt.scatter(x, y, c='black', marker='s', facecolors='none', edgecolors='black', s=100)
+# Plot a marker at the chosen (row, column) coordinate on top of the I_355 image
+plt.scatter(column, row, c='black', marker='s', facecolors='none', edgecolors='black', s=100)
 
 plt.show()
 
+#Define ROI 
+
+row_upper = row+10
+row_lower = row-10
+column_upper = column+10 
+column_lower = column-10
+idx=-1
+
 loop = len(data_files)
-for idx in range(loop):
+for i in range(loop):
     
-    f = h5py.File(data_files[idx],'r')
-        
-    i_355= image_format(f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/'][:])[x,y]
+    f = h5py.File(data_files[i],'r')
+    
+    i_355= np.nanmean(image_format(f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/'][:])[row_lower:row_upper,column_lower:column_upper])
     plt.figure()
     plt.imshow(image_format(f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/'][:]),cmap='jet')
 
-    if np.any(np.isnan(i_355)):
+    if np.isnan(i_355):
         print("NaN values")
+        num_step = num_step-1
         continue
     else:     
         #get metadata
+        idx = idx + 1
         words = nadir.split('_')
         date = words[5][0:4] +'-'+words[5][4:6]+'-'+words[5][6:8]
         time = words[6][0:2]+':'+words[6][2:4]+':'+words[6][4:8]
-        elev = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Elevation/'][:])[x,y]
-        lat = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Latitude/'][:])[x,y]
-        lon = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Longitude/'][:])[x,y]
+        elev = np.nanmean(image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Elevation/'][:])[row_lower:row_upper,column_lower:column_upper])
+        lat = np.nanmean(image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Latitude/'][:])[row_lower:row_upper,column_lower:column_upper])
+        lon = np.nanmean(image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Longitude/'][:])[row_lower:row_upper,column_lower:column_upper])
 # Get the Earth-Sun distance from the file attributes from the first file
         if(esd == 0.0):
             print("GETTING EARTH-SUN DISTANCE")
@@ -193,46 +205,46 @@ for idx in range(loop):
             E0_865 = (E0_wave[10]+E0_wave[11]+E0_wave[12])/3.0 # 865 nm       
             E0_935 = E0_wave[13]  # 935 nm
     
-        vaz_355 = image_format(f['/HDFEOS/GRIDS/355nm_band/Data Fields/View_azimuth/'][:])[x,y]     
-        vza_355 = image_format(f['/HDFEOS/GRIDS/355nm_band/Data Fields/View_zenith/'][:])[x,y]
+        vaz_355 = np.nanmean(image_format(f['/HDFEOS/GRIDS/355nm_band/Data Fields/View_azimuth/'][:])[row_lower:row_upper,column_lower:column_upper])  
+        vza_355 = np.nanmean(image_format(f['/HDFEOS/GRIDS/355nm_band/Data Fields/View_zenith/'][:])[row_lower:row_upper,column_lower:column_upper])
         
-        i_380= image_format(f['/HDFEOS/GRIDS/380nm_band/Data Fields/I/'][:])[x,y]     
-        vaz_380 = image_format(f['/HDFEOS/GRIDS/380nm_band/Data Fields/View_azimuth/'][:])[x,y]   
-        vza_380 = image_format(f['/HDFEOS/GRIDS/380nm_band/Data Fields/View_zenith/'][:])[x,y]   
+        i_380= np.nanmean(image_format(f['/HDFEOS/GRIDS/380nm_band/Data Fields/I/'][:])[row_lower:row_upper,column_lower:column_upper])
+        vaz_380 = np.nanmean(image_format(f['/HDFEOS/GRIDS/380nm_band/Data Fields/View_azimuth/'][:])[row_lower:row_upper,column_lower:column_upper]) 
+        vza_380 = np.nanmean(image_format(f['/HDFEOS/GRIDS/380nm_band/Data Fields/View_zenith/'][:])[row_lower:row_upper,column_lower:column_upper])   
         
-        i_445= image_format(f['/HDFEOS/GRIDS/445nm_band/Data Fields/I/'][:])[x,y]
-        vaz_445 = image_format(f['/HDFEOS/GRIDS/445nm_band/Data Fields/View_azimuth/'][:])[x,y]
-        vza_445 = image_format(f['/HDFEOS/GRIDS/445nm_band/Data Fields/View_zenith/'][:])[x,y]
+        i_445= np.nanmean(image_format(f['/HDFEOS/GRIDS/445nm_band/Data Fields/I/'][:])[row_lower:row_upper,column_lower:column_upper])
+        vaz_445 = np.nanmean(image_format(f['/HDFEOS/GRIDS/445nm_band/Data Fields/View_azimuth/'][:])[row_lower:row_upper,column_lower:column_upper])
+        vza_445 = np.nanmean(image_format(f['/HDFEOS/GRIDS/445nm_band/Data Fields/View_zenith/'][:])[row_lower:row_upper,column_lower:column_upper])
         
-        i_470= image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/I/'][:])[x,y]
-        saz = image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/Sun_azimuth/'][:])[x,y]
-        sza = image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/Sun_zenith/'][:])[x,y]
-        qs_470 = image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/Q_scatter/'][:])[x,y]
-        us_470 = image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/U_scatter/'][:])[x,y]
-        qm_470 = image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/Q_meridian/'][:])[x,y]
-        um_470 = image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/U_meridian/'][:])[x,y]
-        vaz_470 = image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/View_azimuth/'][:])[x,y]
-        vza_470 = image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/View_zenith/'][:])[x,y]
+        i_470= np.nanmean(image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/I/'][:])[row_lower:row_upper,column_lower:column_upper])
+        saz = np.nanmean(image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/Sun_azimuth/'][:])[row_lower:row_upper,column_lower:column_upper])
+        sza = np.nanmean(image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/Sun_zenith/'][:])[row_lower:row_upper,column_lower:column_upper])
+        qs_470 = np.nanmean(image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/Q_scatter/'][:])[row_lower:row_upper,column_lower:column_upper])
+        us_470 = np.nanmean(image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/U_scatter/'][:])[row_lower:row_upper,column_lower:column_upper])
+        qm_470 = np.nanmean(image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/Q_meridian/'][:])[row_lower:row_upper,column_lower:column_upper])
+        um_470 = np.nanmean(image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/U_meridian/'][:])[row_lower:row_upper,column_lower:column_upper])
+        vaz_470 = np.nanmean(image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/View_azimuth/'][:])[row_lower:row_upper,column_lower:column_upper])
+        vza_470 = np.nanmean(image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/View_zenith/'][:])[row_lower:row_upper,column_lower:column_upper])
         
-        i_555= image_format(f['/HDFEOS/GRIDS/555nm_band/Data Fields/I/'][:])[x,y]
-        vaz_555 = image_format(f['/HDFEOS/GRIDS/555nm_band/Data Fields/View_azimuth/'][:])[x,y]
-        vza_555 = image_format(f['/HDFEOS/GRIDS/555nm_band/Data Fields/View_zenith/'][:])[x,y]
+        i_555= np.nanmean(image_format(f['/HDFEOS/GRIDS/555nm_band/Data Fields/I/'][:])[row_lower:row_upper,column_lower:column_upper])
+        vaz_555 = np.nanmean(image_format(f['/HDFEOS/GRIDS/555nm_band/Data Fields/View_azimuth/'][:])[row_lower:row_upper,column_lower:column_upper])
+        vza_555 = np.nanmean(image_format(f['/HDFEOS/GRIDS/555nm_band/Data Fields/View_zenith/'][:])[row_lower:row_upper,column_lower:column_upper])
         
-        i_660= image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/I/'][:])[x,y]
-        qs_660 = image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/Q_scatter/'][:])[x,y]
-        us_660 = image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/U_scatter/'][:])[x,y]
-        qm_660 = image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/Q_meridian/'][:])[x,y]
-        um_660 = image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/U_meridian/'][:])[x,y]
-        vaz_660 = image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/View_azimuth/'][:])[x,y]
-        vza_660 = image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/View_zenith/'][:])[x,y]
+        i_660= np.nanmean(image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/I/'][:])[row_lower:row_upper,column_lower:column_upper])
+        qs_660 = np.nanmean(image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/Q_scatter/'][:])[row_lower:row_upper,column_lower:column_upper])
+        us_660 = np.nanmean(image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/U_scatter/'][:])[row_lower:row_upper,column_lower:column_upper])
+        qm_660 = np.nanmean(image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/Q_meridian/'][:])[row_lower:row_upper,column_lower:column_upper])
+        um_660 = np.nanmean(image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/U_meridian/'][:])[row_lower:row_upper,column_lower:column_upper])
+        vaz_660 = np.nanmean(image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/View_azimuth/'][:])[row_lower:row_upper,column_lower:column_upper])
+        vza_660 = np.nanmean(image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/View_zenith/'][:])[row_lower:row_upper,column_lower:column_upper])
         
-        i_865= image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/I/'][:])[x,y]
-        qs_865 = image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/Q_scatter/'][:])[x,y]
-        us_865 = image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/U_scatter/'][:])[x,y]
-        qm_865 = image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/Q_meridian/'][:])[x,y]
-        um_865 = image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/U_meridian/'][:])[x,y]
-        vaz_865 = image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/View_azimuth/'][:])[x,y]
-        vza_865 = image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/View_zenith/'][:])[x,y]
+        i_865= np.nanmean(image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/I/'][:])[row_lower:row_upper,column_lower:column_upper])
+        qs_865 = np.nanmean(image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/Q_scatter/'][:])[row_lower:row_upper,column_lower:column_upper])
+        us_865 = np.nanmean(image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/U_scatter/'][:])[row_lower:row_upper,column_lower:column_upper])
+        qm_865 = np.nanmean(image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/Q_meridian/'][:])[row_lower:row_upper,column_lower:column_upper])
+        um_865 = np.nanmean(image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/U_meridian/'][:])[row_lower:row_upper,column_lower:column_upper])
+        vaz_865 = np.nanmean(image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/View_azimuth/'][:])[row_lower:row_upper,column_lower:column_upper])
+        vza_865 = np.nanmean(image_format(f['/HDFEOS/GRIDS/865nm_band/Data Fields/View_zenith/'][:])[row_lower:row_upper,column_lower:column_upper])
 
         print(idx,i_355,i_380,i_470,i_555,i_660,i_865)
         
@@ -310,6 +322,7 @@ for idx in range(loop):
                 
 
 #____________________________STORE THE DATA____________________________#
+
 
         i_median[idx,0] = eqr_i_355
         i_median[idx,1] = eqr_i_380
