@@ -51,7 +51,7 @@ def image_format(image):
     return new_image
 
 #Variable Defns
-num_step = 9
+num_step = 5
 step_ind = 0
 esd = 0.0
 num_int = 8 
@@ -161,8 +161,8 @@ for i in range(loop):
         #get metadata
         idx = idx + 1
         words = nadir.split('_')
-        date = words[5][0:4] +'-'+words[5][4:6]+'-'+words[5][6:8]
-        time = words[6][0:2]+':'+words[6][2:4]+':'+words[6][4:8]
+        date = words[4][0:4] +'-'+words[4][4:6]+'-'+words[4][6:8]
+        time = words[5][0:2]+':'+words[5][2:4]+':'+words[5][4:8]
         elev = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Elevation/'][:])[row,column]
         lat = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Latitude/'][:])[row,column]
         lon = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Longitude/'][:])[row,column]
