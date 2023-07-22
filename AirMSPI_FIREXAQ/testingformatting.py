@@ -163,9 +163,10 @@ for i in range(loop):
         words = nadir.split('_')
         date = words[5][0:4] +'-'+words[5][4:6]+'-'+words[5][6:8]
         time = words[6][0:2]+':'+words[6][2:4]+':'+words[6][4:8]
-        elev = np.nanmean(image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Elevation/'][:])[row_lower:row_upper,column_lower:column_upper])
-        lat = np.nanmean(image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Latitude/'][:])[row_lower:row_upper,column_lower:column_upper])
-        lon = np.nanmean(image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Longitude/'][:])[row_lower:row_upper,column_lower:column_upper])
+        elev = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Elevation/'][:])[row,column]
+        lat = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Latitude/'][:])[row,column]
+        lon = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Longitude/'][:])[row,column]
+        
 # Get the Earth-Sun distance from the file attributes from the first file
         if(esd == 0.0):
             print("GETTING EARTH-SUN DISTANCE")
@@ -396,7 +397,7 @@ os.chdir(outpath)
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-outfile_base = 'test-Rotfrom'+pol_ref_plane
+outfile_base = 'R2-Rotfrom'+pol_ref_plane
 
 # Get the software version number to help track issues
 hold = os.path.basename(__file__)
