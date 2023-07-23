@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 # Open the text file in read mode
 # Define GRASP output file path 
-outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2023/Merd_R1_INV.txt"
+outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2223/Merd_R8_INV.txt"
 #outpath =  "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1/Merd_Inchelium.txt"
 
 
@@ -23,7 +23,7 @@ n = -1
 m=t=n
 
 #Set number of measurements and number of radiometric and polarimetric channels
-meas_num = 9
+meas_num = 5
 rad_chnls = 7
 pol_chnls = 3
 # Initialize lists for each column
@@ -87,6 +87,7 @@ plt.plot(scat[5],fit_I[5],color='red')
 
 plt.plot(scat[6],meas_I[6],linestyle='dashed',color='orange')
 plt.plot(scat[6],fit_I[6],color='orange')
+plt.legend(loc=1)  # Upper right
 
 plt.xlabel('Scattering Angle')
 plt.ylabel('BRF(I)')

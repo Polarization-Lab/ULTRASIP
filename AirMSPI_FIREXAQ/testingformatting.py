@@ -227,6 +227,13 @@ for i in range(loop):
         vaz_470 = np.nanmean(image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/View_azimuth/'][:])[row_lower:row_upper,column_lower:column_upper])
         vza_470 = np.nanmean(image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/View_zenith/'][:])[row_lower:row_upper,column_lower:column_upper])
         
+        scat_355 = np.nanmean(image_format(f['/HDFEOS/GRIDS/355nm_band/Data Fields/Scattering_angle/'][:])[row_lower:row_upper,column_lower:column_upper])
+        scat_470 = np.nanmean(image_format(f['/HDFEOS/GRIDS/470nm_band/Data Fields/Scattering_angle/'][:])[row_lower:row_upper,column_lower:column_upper])
+        scat_555 = np.nanmean(image_format(f['/HDFEOS/GRIDS/555nm_band/Data Fields/Scattering_angle/'][:])[row_lower:row_upper,column_lower:column_upper])
+        scat_660 = np.nanmean(image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/Scattering_angle/'][:])[row_lower:row_upper,column_lower:column_upper])
+
+        print(scat_355,scat_470,scat_555,scat_660)
+        
         i_555= np.nanmean(image_format(f['/HDFEOS/GRIDS/555nm_band/Data Fields/I/'][:])[row_lower:row_upper,column_lower:column_upper])
         vaz_555 = np.nanmean(image_format(f['/HDFEOS/GRIDS/555nm_band/Data Fields/View_azimuth/'][:])[row_lower:row_upper,column_lower:column_upper])
         vza_555 = np.nanmean(image_format(f['/HDFEOS/GRIDS/555nm_band/Data Fields/View_zenith/'][:])[row_lower:row_upper,column_lower:column_upper])

@@ -12,14 +12,14 @@ import numpy as np
 
 #load in GRASP output 
 # Define GRASP output file path 
-outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July1423/"
+outpath = "C:/Users/Clarissa/Documents/Github/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2223/"
 
 
 
-file = open(outpath+"/Merd_Inchelium.txt")
+file = open(outpath+"/Merd_R1_INV.txt")
 content = file.readlines()
 wave_num = 7
-meas_num = 9
+meas_num = 5
 
 
 # Change to the output directory
@@ -32,7 +32,7 @@ temp = words[len(words)-1]  # Choose the last element
 hold = temp.split('.')
 vers = hold[0]
 
-outfile_base = 'MerdFWDI'
+outfile_base = 'R1-MerdFWD'
         
 # Generate an output file name
 
@@ -217,12 +217,12 @@ for i in range(len(content)):
         vza3 = ' ' + content[i+3].split()[2]
         vza4 = ' ' + content[i+4].split()[2]
         vza5 = ' ' + content[i+5].split()[2]
-        vza6 = ' ' + content[i+6].split()[2]
-        vza7 = ' ' + content[i+7].split()[2]
-        vza8 = ' ' + content[i+8].split()[2]
-        vza9 = ' ' + content[i+9].split()[2]
+        # vza6 = ' ' + content[i+6].split()[2]
+        # vza7 = ' ' + content[i+7].split()[2]
+        # vza8 = ' ' + content[i+8].split()[2]
+        # vza9 = ' ' + content[i+9].split()[2]
         
-        vza = vza1+vza2+vza3+vza4+vza5+vza6+vza7+vza8+vza9
+        vza = vza1+vza2+vza3+vza4+vza5 #+vza6+vza7+vza8+vza9
         vza = vza*28
         
 out_str = out_str+' '+vza
@@ -235,12 +235,12 @@ for i in range(len(content)):
         raz3 = ' ' + content[i+3].split()[3]
         raz4 = ' ' + content[i+4].split()[3]
         raz5 = ' ' + content[i+5].split()[3]
-        raz6 = ' ' + content[i+6].split()[3]
-        raz7 = ' ' + content[i+7].split()[3]
-        raz8 = ' ' + content[i+8].split()[3]
-        raz9 = ' ' + content[i+9].split()[3]
+        # raz6 = ' ' + content[i+6].split()[3]
+        # raz7 = ' ' + content[i+7].split()[3]
+        # raz8 = ' ' + content[i+8].split()[3]
+        # raz9 = ' ' + content[i+9].split()[3]
         
-        raz = raz1+raz2+raz3+raz4+raz5+raz6+raz7+raz8+raz9
+        raz = raz1+raz2+raz3+raz4+raz5 #+raz6+raz7+raz8+raz9
         raz = raz*28
         
 out_str = out_str+' '+raz
