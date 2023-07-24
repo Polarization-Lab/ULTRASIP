@@ -404,7 +404,7 @@ os.chdir(outpath)
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-outfile_base = 'R2-Rotfrom'+pol_ref_plane
+outfile_base = 'R3-Rotfrom'+pol_ref_plane
 
 # Get the software version number to help track issues
 hold = os.path.basename(__file__)
