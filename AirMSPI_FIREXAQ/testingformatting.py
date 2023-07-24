@@ -137,7 +137,7 @@ plt.scatter(column, row, c='black', marker='s', facecolors='none', edgecolors='b
 plt.show()
 
 #Define ROI 
-del_ROI = 5
+del_ROI = 3
 row_upper = row+del_ROI
 row_lower = row-del_ROI
 column_upper = column+del_ROI
