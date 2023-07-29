@@ -150,8 +150,8 @@ for i in range(loop):
     f = h5py.File(data_files[i],'r')
     
     i_355= np.nanmean(image_format(f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/'][:])[row_lower:row_upper,column_lower:column_upper])
-    plt.figure()
-    plt.imshow(image_format(f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/'][:]),cmap='jet')
+    #plt.figure()
+    #plt.imshow(image_format(f['/HDFEOS/GRIDS/355nm_band/Data Fields/I/'][:]),cmap='jet')
 
     if np.isnan(i_355):
         print("NaN values")
@@ -161,8 +161,8 @@ for i in range(loop):
         #get metadata
         idx = idx + 1
         words = nadir.split('_')
-        date = words[5][0:4] +'-'+words[5][4:6]+'-'+words[5][6:8]
-        time = words[6][0:2]+':'+words[6][2:4]+':'+words[6][4:8]
+        date = words[4][0:4] +'-'+words[4][4:6]+'-'+words[4][6:8]
+        time = words[5][0:2]+':'+words[5][2:4]+':'+words[5][4:8]
         elev = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Elevation/'][:])[row,column]
         lat = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Latitude/'][:])[row,column]
         lon = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Longitude/'][:])[row,column]
@@ -404,7 +404,7 @@ os.chdir(outpath)
 # Generate the base output file name
     #outfile_base = "AirMSPI_"+this_date_str+"_"+this_time_str+"_"
     #outfile_base = outfile_base+this_target_str+"_"
-outfile_base = 'R8-Rotfrom'+pol_ref_plane
+outfile_base = 'R12-Rotfrom'+pol_ref_plane
 
 # Get the software version number to help track issues
 hold = os.path.basename(__file__)
