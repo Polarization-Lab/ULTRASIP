@@ -15,7 +15,7 @@ retrieval:
     general:
         path_to_internal_files: "/home/cdeleon/grasp/src/retrieval/internal_files/" 
 
-    mode: inversion
+    mode: forward
     
     inversion:
         regime: single_pixel
