@@ -14,6 +14,8 @@ import os
 import time
 from matplotlib import patches
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
+import matplotlib.ticker as ticker
+
 
 def format_directory():
     
@@ -51,7 +53,8 @@ def load_hdf_files(folder_path, group_size,idx):
 def image_format(image):
     
     image[np.where(image == -999)] = np.nan
-    new_image = image[1100:2800,500:2200]
+    #new_image = image[1100:2800,500:2200]
+    new_image = image[1900:2400,1100:1750]
     
     return new_image
 
@@ -76,27 +79,101 @@ f = h5py.File(nadir,'r')
 i_445 = image_format(f['/HDFEOS/GRIDS/445nm_band/Data Fields/I/'][:])
 i_555 = image_format(f['/HDFEOS/GRIDS/555nm_band/Data Fields/I/'][:])
 i_660 = image_format(f['/HDFEOS/GRIDS/660nm_band/Data Fields/I/'][:])
+latitude = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Latitude/'][:])
+longitude = image_format(f['/HDFEOS/GRIDS/Ancillary/Data Fields/Longitude/'][:])
+
 
 i_rgb = (i_445+i_555+i_660)
 
 f.close()
 
-plt.figure(figsize=(10, 10))
-plt.imshow(i_rgb)
-plt.title('I_RGB at Nadir')
+# plt.figure(figsize=(10, 10))
+# plt.imshow(i_rgb)
+# plt.title('I_RGB at Nadir')
 
-plt.show()
+# plt.show()
 
 # Assuming the data needs to be rescaled to the range [0, 255]
 i_445_rescaled = (i_445 - np.nanmin(i_445)) * 255.0 / (np.nanmax(i_445) - np.nanmin(i_445))
 i_555_rescaled = (i_555 - np.nanmin(i_555)) * 255.0 / (np.nanmax(i_555) - np.nanmin(i_555))
 i_660_rescaled = (i_660 - np.nanmin(i_660)) * 255.0 / (np.nanmax(i_660) - np.nanmin(i_660))
 
+# # Combining the rescaled channels to create the RGB image
+# i_rgb = np.stack([i_660_rescaled, i_555_rescaled, i_445_rescaled], axis=-1)
+
+# plt.figure(figsize=(10, 10))
+# plt.imshow(i_rgb.astype(np.uint8))  # Convert to uint8 to ensure correct data type for displaying the image
+# plt.title('I_RGB at Nadir')
+# plt.axis('on')
+# plt.show()
+
+# Combining the rescaled channels to create the RGB image
+#i_rgb = np.stack([i_660_rescaled, i_555_rescaled, i_445_rescaled], axis=-1)
+
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+
+# ... (existing code) ...
+
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+
+# ... (existing code) ...
+
 # Combining the rescaled channels to create the RGB image
 i_rgb = np.stack([i_660_rescaled, i_555_rescaled, i_445_rescaled], axis=-1)
 
-plt.figure(figsize=(10, 10))
-plt.imshow(i_rgb.astype(np.uint8))  # Convert to uint8 to ensure correct data type for displaying the image
-plt.title('I_RGB at Nadir')
-plt.axis('off')
+# Normalize the RGB data to the range [0, 1]
+i_rgb = i_rgb / 255.0
+
+# Define the geographical extent of the plot
+min_lon, max_lon = np.min(longitude), np.max(longitude)
+min_lat, max_lat = np.min(latitude), np.max(latitude)
+
+# Create a Cartopy PlateCarree projection (unprojected geographic coordinates)
+projection = ccrs.PlateCarree()
+
+# Create the figure and axis
+plt.figure(figsize=(6, 4))
+ax = plt.axes(projection=projection)
+
+# Plot the RGB image using imshow and latitude/longitude extents
+plt.imshow(i_rgb, origin='upper', extent=[min_lon, max_lon, min_lat, max_lat],
+           transform=projection)
+
+# Add coastlines and gridlines
+ax.coastlines(resolution='10m', color='black', linewidth=0.5)
+ax.gridlines(draw_labels=True, dms=True, x_inline=False, y_inline=False)
+
+# Set the title and labels with increased font size
+#plt.title('RGB Image with Georeferenced Plot', fontsize=18)
+# plt.xlabel('Longitude', fontsize=50)
+# plt.ylabel('Latitude', fontsize=50)
+
+# Latitude and Longitude pairs (Replace these with your own 12 coordinates)
+lat_lon_pairs = [
+    (47.9392, -118.4957),
+    (47.9392, -118.4924),
+    (47.9402,-118.4891),
+    (47.9416,-118.4824),
+    (47.9439,-118.4791),
+    (47.9440,-118.4758),
+    (47.9422,-118.4690),
+    (47.9419,-118.4623),
+    (47.9415,-118.4556),
+    (47.9353,-118.4521),
+    (47.9443,-118.4457),
+    (47.9446,-118.4256)
+]
+
+# Extract latitudes and longitudes from the pairs
+latitudes, longitudes = zip(*lat_lon_pairs)
+
+# Plot the dots on the map
+ax.scatter(longitudes, latitudes, color='cyan', s=60, transform=projection)
+
+
+# Show the plot
 plt.show()
+
+
