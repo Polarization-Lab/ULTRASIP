@@ -236,7 +236,7 @@ retrieval:
                        derivative_order_of_T_variability:    1
                        lagrange_multiplier_of_T_variability: 1.0e-0  
 
-	characteristic[5]: #2
+        characteristic[5]: #2
             type: real_part_of_refractive_index_spectral_dependent
             retrieved: false
             mode[1]:
