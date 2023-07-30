@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 # Open the text file in read mode
 # Define GRASP output file path 
-outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2223/Merd_R8_INV.txt"
+outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2923/Merd_R1_INV.txt"
 #outpath =  "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1/Merd_Inchelium.txt"
 
 
@@ -38,6 +38,8 @@ fit_Q = [[] for _ in range(pol_chnls)]
 
 meas_U = [[] for _ in range(pol_chnls)]
 fit_U = [[] for _ in range(pol_chnls)]
+
+
 
 for i in range(len(content)):
 
@@ -121,6 +123,26 @@ plt.plot(scat[6],fit_U[2],color='orange')
 plt.xlabel('Scattering Angle')
 plt.ylabel('BRF(U)')
 plt.show()
+
+def calculate_DoLP(Q, U):
+    I = 1  # Assuming constant intensity for all pairs
+    DoLP = np.sqrt(np.array(Q)**2 + np.array(U)**2) / I
+    return DoLP
+
+# Calculate DoLP for each pair of Q and U
+DoLP_values = []
+for n in range(len(fit_Q)):
+    DoLP_values.append(calculate_DoLP(fit_Q[n], fit_U[n]))
+
+# Plot DoLP[0] against Scattering_angles[4]
+plt.plot(scat[4],DoLP_values[0], marker='o', linestyle='-')
+plt.ylabel('DoLP')
+plt.xlabel('Scattering Angle')
+plt.title('DoLP')
+plt.grid(True)
+plt.show()
+
+
 
 # fig, (ax1,ax2,ax3) = plt.subplots(
 #           nrows=3, ncols=1, dpi=240,figsize=(6, 8))
