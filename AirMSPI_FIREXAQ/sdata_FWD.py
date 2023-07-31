@@ -228,7 +228,7 @@ out_str = out_str+' '+sza*7
 #         vza = vza1+vza2+vza3+vza4+vza5 #+vza6+vza7+vza8+vza9
 #         vza = vza*28
 
-vza = (' ' + str(110))*45
+vza = (' ' + str(110))*55
 out_str = out_str+' '+vza
 
 #relative azimuth/meas
