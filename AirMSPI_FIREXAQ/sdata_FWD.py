@@ -33,7 +33,7 @@ temp = words[len(words)-1]  # Choose the last element
 hold = temp.split('.')
 vers = hold[0]
 
-outfile_base = 'Rtest-MerdFWD'
+outfile_base = 'Rtest2-MerdFWD'
         
 # Generate an output file name
 
