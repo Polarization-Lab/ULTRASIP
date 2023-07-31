@@ -248,7 +248,7 @@ out_str = out_str+' '+vza
 #         raz = raz*28
 
 # Using a list comprehension to generate the numbers in the specified range
-numbers = [str(num) for num in range(180, 360 + 1, 36)]
+numbers = [str(num) for num in range(190, 360, 40)]
 # Joining the numbers with a comma separator to create the final string
 raz = " ".join(numbers) + ' '
 # Repeating the sequence 28 times
