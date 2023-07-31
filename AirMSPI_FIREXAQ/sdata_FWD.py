@@ -33,7 +33,7 @@ temp = words[len(words)-1]  # Choose the last element
 hold = temp.split('.')
 vers = hold[0]
 
-outfile_base = 'R13-MerdFWD'
+outfile_base = 'Rtest-MerdFWD'
         
 # Generate an output file name
 
@@ -207,43 +207,53 @@ out_str = out_str+'{:12d}'.format(meas_num)
 #sun zenith/wavelength
 for i in range(len(content)):
     if 'sza' in content[i]: 
-        sza = ' ' + content[i+1].split()[1]
+        #sza = ' ' + content[i+1].split()[1]
+        sza = ' ' + str(70)
 out_str = out_str+' '+sza*7
 
+
 #view angle/meas
-for i in range(len(content)):
-    if 'vis' in content[i]:
-        vza1 = ' ' + content[i+1].split()[2]
-        vza2 = ' ' + content[i+2].split()[2]
-        vza3 = ' ' + content[i+3].split()[2]
-        vza4 = ' ' + content[i+4].split()[2]
-        vza5 = ' ' + content[i+5].split()[2]
-        # vza6 = ' ' + content[i+6].split()[2]
-        # vza7 = ' ' + content[i+7].split()[2]
-        # vza8 = ' ' + content[i+8].split()[2]
-        # vza9 = ' ' + content[i+9].split()[2]
+# for i in range(len(content)):
+#     if 'vis' in content[i]:
+#         vza1 = ' ' + content[i+1].split()[2]
+#         vza2 = ' ' + content[i+2].split()[2]
+#         vza3 = ' ' + content[i+3].split()[2]
+#         vza4 = ' ' + content[i+4].split()[2]
+#         vza5 = ' ' + content[i+5].split()[2]
+#         # vza6 = ' ' + content[i+6].split()[2]
+#         # vza7 = ' ' + content[i+7].split()[2]
+#         # vza8 = ' ' + content[i+8].split()[2]
+#         # vza9 = ' ' + content[i+9].split()[2]
         
-        vza = vza1+vza2+vza3+vza4+vza5 #+vza6+vza7+vza8+vza9
-        vza = vza*28
-        
+#         vza = vza1+vza2+vza3+vza4+vza5 #+vza6+vza7+vza8+vza9
+#         vza = vza*28
+
+vza = str(110)*28
 out_str = out_str+' '+vza
 
 #relative azimuth/meas
-for i in range(len(content)):
-    if 'fis' in content[i]:
-        raz1 = ' ' + content[i+1].split()[3]
-        raz2 = ' ' + content[i+2].split()[3]
-        raz3 = ' ' + content[i+3].split()[3]
-        raz4 = ' ' + content[i+4].split()[3]
-        raz5 = ' ' + content[i+5].split()[3]
-        # raz6 = ' ' + content[i+6].split()[3]
-        # raz7 = ' ' + content[i+7].split()[3]
-        # raz8 = ' ' + content[i+8].split()[3]
-        # raz9 = ' ' + content[i+9].split()[3]
+# for i in range(len(content)):
+#     if 'fis' in content[i]:
+#         raz1 = ' ' + content[i+1].split()[3]
+#         raz2 = ' ' + content[i+2].split()[3]
+#         raz3 = ' ' + content[i+3].split()[3]
+#         raz4 = ' ' + content[i+4].split()[3]
+#         raz5 = ' ' + content[i+5].split()[3]
+#         # raz6 = ' ' + content[i+6].split()[3]
+#         # raz7 = ' ' + content[i+7].split()[3]
+#         # raz8 = ' ' + content[i+8].split()[3]
+#         # raz9 = ' ' + content[i+9].split()[3]
         
-        raz = raz1+raz2+raz3+raz4+raz5 #+raz6+raz7+raz8+raz9
-        raz = raz*28
-        
+#         raz = raz1+raz2+raz3+raz4+raz5 #+raz6+raz7+raz8+raz9
+#         raz = raz*28
+
+# Using a list comprehension to generate the numbers in the specified range
+numbers = [str(num) for num in range(180, 360 + 1, 36)]
+# Joining the numbers with a comma separator to create the final string
+raz = ",".join(numbers)
+# Repeating the sequence 28 times
+vza = vza * 28
+
 out_str = out_str+' '+raz
         
 for i in range(len(content)):
