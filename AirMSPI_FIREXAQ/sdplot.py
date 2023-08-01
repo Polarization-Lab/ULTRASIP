@@ -30,13 +30,13 @@ def main():  # Main code
     # basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX"
     # figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX/Plots"
     
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2023/"
-    figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2023/"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2923/"
+    #figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2923/"
 
 # Set the length of a sequence of step-and-stare observations
 # NOTE: This will typically be an odd number (9,7,5,...)
 
-    num_step = 9
+    num_step = 5
 
     
 # Set the number of wavelengths
@@ -75,7 +75,7 @@ def main():  # Main code
 
 # Get the text file listing
 
-    file_list = glob.glob('Merd_*R1*.txt')
+    file_list = glob.glob('Merd_R13_INV.txt')
     
     num_files = len(file_list)
     
@@ -112,12 +112,11 @@ def main():  # Main code
             radius = np.append(radius,float(words[0]))
             sd = np.append(sd,float(words[1]))
 
-      
         data_count = data_count+1
 
 # Close the input file
     print("DONE")
-    print(radius)
+    print(sd)
     inputFile.close()                
 
     fig = plt.figure()
@@ -141,17 +140,19 @@ def main():  # Main code
 
 # Generate the output file name
     
-    hold = inputName.split(".")
-    out_base = hold[0]
-    outfile = out_base+'_VIS_v'+'_sd.png'
-    print("Saving: "+outfile)
-    plt.savefig(outfile,dpi=300) 
+    # hold = inputName.split(".")
+    # out_base = hold[0]
+    # outfile = out_base+'_VIS_v'+'_sd.png'
+    # print("Saving: "+outfile)
+    # plt.savefig(outfile,dpi=300) 
 
 # Show the plot
     
     plt.show() 
     
     plt.close()
+    
+    return radius[:],sd[:]
 
 #Tell user completion was successful
 print("\nSuccessful Completion\n")
@@ -160,4 +161,4 @@ print("\nSuccessful Completion\n")
 
 
 if __name__ == '__main__':
-    main() 
+   radius,size =  main() 

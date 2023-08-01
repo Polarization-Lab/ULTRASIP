@@ -8,12 +8,12 @@ Created on Mon Jun 26 13:25:49 2023
 # Import Libraries 
 import numpy as np
 import matplotlib.pyplot as plt
-
+plt.rcParams["font.family"] = "Times New Roman"
 
 
 # Open the text file in read mode
 # Define GRASP output file path 
-outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2923/Merd_R1_INV.txt"
+outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2923/Merd_R11_FWD.txt"
 #outpath =  "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1/Merd_Inchelium.txt"
 
 
@@ -25,7 +25,7 @@ m=t=n
 #Set number of measurements and number of radiometric and polarimetric channels
 meas_num = 5
 rad_chnls = 7
-pol_chnls = 3
+pol_chnls = 7
 # Initialize lists for each column
 sza =  [[] for _ in range(rad_chnls)]
 scat =  [[] for _ in range(rad_chnls)]
@@ -68,81 +68,144 @@ for i in range(len(content)):
             
 #Plots 
 
-plt.figure()
-plt.plot(scat[0],meas_I[0],linestyle='dashed',color='gray')
-plt.plot(scat[0],fit_I[0],color='gray')
+# plt.figure()
+# plt.plot(scat[0],meas_I[0],linestyle='dashed',color='gray')
+# plt.plot(scat[0],fit_I[0],color='gray')
 
-plt.plot(scat[1],meas_I[1],linestyle='dashed',color='pink')
-plt.plot(scat[1],fit_I[1],color='pink')
+# plt.plot(scat[1],meas_I[1],linestyle='dashed',color='pink')
+# plt.plot(scat[1],fit_I[1],color='pink')
 
-plt.plot(scat[2],meas_I[2],linestyle='dashed',color='violet')
-plt.plot(scat[2],fit_I[2],color='violet')
+# plt.plot(scat[2],meas_I[2],linestyle='dashed',color='violet')
+# plt.plot(scat[2],fit_I[2],color='violet')
 
-plt.plot(scat[3],meas_I[3],linestyle='dashed',color='blue')
-plt.plot(scat[3],fit_I[3],color='blue')
+# plt.plot(scat[3],meas_I[3],linestyle='dashed',color='blue')
+# plt.plot(scat[3],fit_I[3],color='blue')
 
-plt.plot(scat[4],meas_I[4],linestyle='dashed',color='green')
-plt.plot(scat[4],fit_I[4],color='green')
+# plt.plot(scat[4],meas_I[4],linestyle='dashed',color='green')
+# plt.plot(scat[4],fit_I[4],color='green')
 
-plt.plot(scat[5],meas_I[5],linestyle='dashed',color='red')
-plt.plot(scat[5],fit_I[5],color='red')
+# plt.plot(scat[5],meas_I[5],linestyle='dashed',color='red')
+# plt.plot(scat[5],fit_I[5],color='red')
 
-plt.plot(scat[6],meas_I[6],linestyle='dashed',color='orange')
-plt.plot(scat[6],fit_I[6],color='orange')
-plt.legend(loc=1)  # Upper right
+# plt.plot(scat[6],meas_I[6],linestyle='dashed',color='orange')
+# plt.plot(scat[6],fit_I[6],color='orange')
+# plt.legend(loc=1)  # Upper right
 
-plt.xlabel('Scattering Angle')
-plt.ylabel('BRF(I)')
-plt.show()
+# plt.xlabel('Scattering Angle')
+# plt.ylabel('BRF(I)')
+# plt.show()
 
-plt.figure()
-plt.plot(scat[3],meas_Q[0],linestyle='dashed',color='blue')
-plt.plot(scat[3],fit_Q[0],color='blue')
+# plt.figure()
+# plt.plot(scat[3],meas_Q[0],linestyle='dashed',color='blue')
+# plt.plot(scat[3],fit_Q[0],color='blue')
 
-plt.plot(scat[5],meas_Q[1],linestyle='dashed',color='red')
-plt.plot(scat[5],fit_Q[1],color='red')
+# plt.plot(scat[5],meas_Q[1],linestyle='dashed',color='red')
+# plt.plot(scat[5],fit_Q[1],color='red')
 
-plt.plot(scat[6],meas_Q[2],linestyle='dashed',color='orange')
-plt.plot(scat[6],fit_Q[2],color='orange')
+# plt.plot(scat[6],meas_Q[2],linestyle='dashed',color='orange')
+# plt.plot(scat[6],fit_Q[2],color='orange')
 
-plt.xlabel('Scattering Angle')
-plt.ylabel('BRF(Q)')
-plt.show()
+# plt.xlabel('Scattering Angle')
+# plt.ylabel('BRF(Q)')
+# plt.show()
 
 
-plt.figure()
-plt.plot(scat[3],meas_U[0],linestyle='dashed',color='blue')
-plt.plot(scat[3],fit_U[0],color='blue')
+# plt.figure()
+# plt.plot(scat[3],meas_U[0],linestyle='dashed',color='blue')
+# plt.plot(scat[3],fit_U[0],color='blue')
 
-plt.plot(scat[5],meas_U[1],linestyle='dashed',color='red')
-plt.plot(scat[5],fit_U[1],color='red')
+# plt.plot(scat[5],meas_U[1],linestyle='dashed',color='red')
+# plt.plot(scat[5],fit_U[1],color='red')
 
-plt.plot(scat[6],meas_U[2],linestyle='dashed',color='orange')
-plt.plot(scat[6],fit_U[2],color='orange')
+# plt.plot(scat[6],meas_U[2],linestyle='dashed',color='orange')
+# plt.plot(scat[6],fit_U[2],color='orange')
 
-plt.xlabel('Scattering Angle')
-plt.ylabel('BRF(U)')
-plt.show()
+# plt.xlabel('Scattering Angle')
+# plt.ylabel('BRF(U)')
+# plt.show()
 
 def calculate_DoLP(Q, U):
-    I = 1  # Assuming constant intensity for all pairs
-    DoLP = np.sqrt(np.array(Q)**2 + np.array(U)**2) / I
+    DoLP = np.sqrt(np.array(Q)**2 + np.array(U)**2) 
     return DoLP
 
-# Calculate DoLP for each pair of Q and U
-DoLP_values = []
-for n in range(len(fit_Q)):
-    DoLP_values.append(calculate_DoLP(fit_Q[n], fit_U[n]))
+def calculate_AoLP(Q, U):
+    AoLP = (1/2)*np.arctan(np.array(U)/np.array(Q))
+    return AoLP
 
-# Plot DoLP[0] against Scattering_angles[4]
-plt.plot(scat[4],DoLP_values[0], marker='o', linestyle='-')
-plt.ylabel('DoLP')
+# Calculate DoLP for each pair of Q and U
+DoLP11_values = []
+AoLP11_values = []
+for n in range(7):
+    DoLP11_values.append(calculate_DoLP(fit_Q[n], fit_U[n]))
+    AoLP11_values.append(calculate_AoLP(fit_Q[n], fit_U[n]))
+    
+
+
+# plt.plot(scat[0],DoLP13_values[0], marker='o', linestyle='-',label='355 nm')
+# plt.plot(scat[1],DoLP13_values[1], marker='o', linestyle='-',label='380 nm')
+# plt.plot(scat[2],DoLP13_values[2], marker='o', linestyle='-',label='445 nm')
+# plt.plot(scat[3],DoLP13_values[3], marker='o', linestyle='-',label='470 nm')
+# plt.plot(scat[4],DoLP13_values[4], marker='o', linestyle='-',label='555 nm')
+# plt.plot(scat[5],DoLP13_values[5], marker='o', linestyle='-',label='660 nm')
+# plt.plot(scat[6],DoLP13_values[6], marker='o', linestyle='-',label='865 nm')
+
+# plt.ylabel('DoLP')
+# plt.xlabel('Scattering Angle')
+# plt.title('R13')
+# plt.legend()
+# plt.grid(True)
+# plt.show()
+
+# plt.plot(scat[0],AoLP13_values[0], marker='o', linestyle='-',label='355 nm')
+# plt.plot(scat[1],AoLP13_values[1], marker='o', linestyle='-',label='380 nm')
+# plt.plot(scat[2],AoLP13_values[2], marker='o', linestyle='-',label='445 nm')
+# plt.plot(scat[3],AoLP13_values[3], marker='o', linestyle='-',label='470 nm')
+# plt.plot(scat[4],AoLP13_values[4], marker='o', linestyle='-',label='555 nm')
+# plt.plot(scat[5],AoLP13_values[5], marker='o', linestyle='-',label='660 nm')
+# plt.plot(scat[6],AoLP13_values[6], marker='o', linestyle='-',label='865 nm')
+
+# plt.ylabel('AoLP')
+# plt.xlabel('Scattering Angle')
+# plt.title('R13')
+# plt.legend()
+# plt.grid(True)
+# plt.show()
+
+plt.plot(scat[0],DoLP13_values[0]-DoLP11_values[0], marker='o', linestyle='-',label='355 nm')
+plt.plot(scat[1],DoLP13_values[1]-DoLP11_values[1], marker='o', linestyle='-',label='380 nm')
+plt.plot(scat[2],DoLP13_values[2]-DoLP11_values[2], marker='o', linestyle='-',label='445 nm')
+plt.plot(scat[3],DoLP13_values[3]-DoLP11_values[3], marker='o', linestyle='-',label='470 nm')
+plt.plot(scat[4],DoLP13_values[4]-DoLP11_values[4], marker='o', linestyle='-',label='555 nm')
+plt.plot(scat[5],DoLP13_values[5]-DoLP11_values[5], marker='o', linestyle='-',label='660 nm')
+plt.plot(scat[6],DoLP13_values[6]-DoLP11_values[6], marker='o', linestyle='-',label='865 nm')
+
+plt.ylabel('DoLP Difference')
 plt.xlabel('Scattering Angle')
-plt.title('DoLP')
+# Set the y-axis range and tick marks
+plt.ylim(-0.025,-0.001)  # Set the y-axis range
+#plt.yticks([i/1000 for i in range(5, 201, 1)])  # Set the tick marks in steps of 0.001 (0.005 to 0.2)
+plt.title('R12-R11')
+plt.legend(ncol=3)
 plt.grid(True)
 plt.show()
 
+plt.plot(scat[0],AoLP13_values[0]-AoLP11_values[0], marker='o', linestyle='-',label='355 nm')
+plt.plot(scat[1],AoLP13_values[1]-AoLP11_values[1], marker='o', linestyle='-',label='380 nm')
+plt.plot(scat[2],AoLP13_values[2]-AoLP11_values[2], marker='o', linestyle='-',label='445 nm')
+plt.plot(scat[3],AoLP13_values[3]-AoLP11_values[3], marker='o', linestyle='-',label='470 nm')
+plt.plot(scat[4],AoLP13_values[4]-AoLP11_values[4], marker='o', linestyle='-',label='555 nm')
+plt.plot(scat[5],AoLP13_values[5]-AoLP11_values[5], marker='o', linestyle='-',label='660 nm')
+plt.plot(scat[6],AoLP13_values[6]-AoLP11_values[6], marker='o', linestyle='-',label='865 nm')
 
+plt.ylabel('AoLP Difference [radians]')
+# Set the y-axis range and tick marks
+plt.ylim(-0.003, 0.001) # Set the y-axis range
+# plt.yticks([i/100 for i in range(-2, 11, 1)])  # Set the tick marks in steps of 0.01 (0.00 to 0.1)
+plt.xlabel('Scattering Angle')
+plt.title('R12-R11')
+plt.legend(ncol=3)
+plt.grid(True)
+plt.show()
 
 # fig, (ax1,ax2,ax3) = plt.subplots(
 #           nrows=3, ncols=1, dpi=240,figsize=(6, 8))
