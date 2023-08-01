@@ -30,7 +30,7 @@ def main():  # Main code
     # basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX"
     # figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Mar0923/1_FIREX/Plots"
     
-    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2923/"
+    basepath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug123/"
     #figpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2923/"
 
 # Set the length of a sequence of step-and-stare observations
@@ -75,7 +75,7 @@ def main():  # Main code
 
 # Get the text file listing
 
-    file_list = glob.glob('Merd_R13_INV.txt')
+    file_list = glob.glob('Merd_R12_INV.txt')
     
     num_files = len(file_list)
     
@@ -106,7 +106,11 @@ def main():  # Main code
     i=0
     for line in inputFile:
         
-        if data_count in range(42,87):
+        #if data_count in range(48,93): #SD
+        #if data_count in range(116,123):    #SSA
+        # if data_count in range(108,115):    #AOD
+        # if data_count in range(132,139):    #nr
+        if data_count in range(140,147):    #nr
             words = line.split()
             print(words[0])
             radius = np.append(radius,float(words[0]))

@@ -13,7 +13,7 @@ plt.rcParams["font.family"] = "Times New Roman"
 
 # Open the text file in read mode
 # Define GRASP output file path 
-outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2923/Merd_R11_FWD.txt"
+outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug123/Merd_R13_INV.txt"
 #outpath =  "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1/Merd_Inchelium.txt"
 
 
@@ -129,83 +129,83 @@ def calculate_DoLP(Q, U):
     return DoLP
 
 def calculate_AoLP(Q, U):
-    AoLP = (1/2)*np.arctan(np.array(U)/np.array(Q))
+    AoLP = (1/2)*np.degrees(np.arctan(np.array(U)/np.array(Q)))
     return AoLP
 
 # Calculate DoLP for each pair of Q and U
-DoLP11_values = []
-AoLP11_values = []
+DoLP_values = []
+AoLP_values = []
 for n in range(7):
-    DoLP11_values.append(calculate_DoLP(fit_Q[n], fit_U[n]))
-    AoLP11_values.append(calculate_AoLP(fit_Q[n], fit_U[n]))
+    DoLP_values.append(calculate_DoLP(fit_Q[n], fit_U[n]))
+    AoLP_values.append(calculate_AoLP(fit_Q[n], fit_U[n]))
     
 
 
-# plt.plot(scat[0],DoLP13_values[0], marker='o', linestyle='-',label='355 nm')
-# plt.plot(scat[1],DoLP13_values[1], marker='o', linestyle='-',label='380 nm')
-# plt.plot(scat[2],DoLP13_values[2], marker='o', linestyle='-',label='445 nm')
-# plt.plot(scat[3],DoLP13_values[3], marker='o', linestyle='-',label='470 nm')
-# plt.plot(scat[4],DoLP13_values[4], marker='o', linestyle='-',label='555 nm')
-# plt.plot(scat[5],DoLP13_values[5], marker='o', linestyle='-',label='660 nm')
-# plt.plot(scat[6],DoLP13_values[6], marker='o', linestyle='-',label='865 nm')
+plt.plot(scat[0],DoLP_values[0], marker='o', linestyle='-',label='355 nm')
+plt.plot(scat[1],DoLP_values[1], marker='o', linestyle='-',label='380 nm')
+plt.plot(scat[2],DoLP_values[2], marker='o', linestyle='-',label='445 nm')
+# plt.plot(scat[3],DoLP_values[3], marker='o', linestyle='-',label='470 nm')
+# plt.plot(scat[4],DoLP_values[4], marker='o', linestyle='-',label='555 nm')
+# plt.plot(scat[5],DoLP_values[5], marker='o', linestyle='-',label='660 nm')
+# plt.plot(scat[6],DoLP_values[6], marker='o', linestyle='-',label='865 nm')
 
-# plt.ylabel('DoLP')
-# plt.xlabel('Scattering Angle')
-# plt.title('R13')
-# plt.legend()
-# plt.grid(True)
-# plt.show()
-
-# plt.plot(scat[0],AoLP13_values[0], marker='o', linestyle='-',label='355 nm')
-# plt.plot(scat[1],AoLP13_values[1], marker='o', linestyle='-',label='380 nm')
-# plt.plot(scat[2],AoLP13_values[2], marker='o', linestyle='-',label='445 nm')
-# plt.plot(scat[3],AoLP13_values[3], marker='o', linestyle='-',label='470 nm')
-# plt.plot(scat[4],AoLP13_values[4], marker='o', linestyle='-',label='555 nm')
-# plt.plot(scat[5],AoLP13_values[5], marker='o', linestyle='-',label='660 nm')
-# plt.plot(scat[6],AoLP13_values[6], marker='o', linestyle='-',label='865 nm')
-
-# plt.ylabel('AoLP')
-# plt.xlabel('Scattering Angle')
-# plt.title('R13')
-# plt.legend()
-# plt.grid(True)
-# plt.show()
-
-plt.plot(scat[0],DoLP13_values[0]-DoLP11_values[0], marker='o', linestyle='-',label='355 nm')
-plt.plot(scat[1],DoLP13_values[1]-DoLP11_values[1], marker='o', linestyle='-',label='380 nm')
-plt.plot(scat[2],DoLP13_values[2]-DoLP11_values[2], marker='o', linestyle='-',label='445 nm')
-plt.plot(scat[3],DoLP13_values[3]-DoLP11_values[3], marker='o', linestyle='-',label='470 nm')
-plt.plot(scat[4],DoLP13_values[4]-DoLP11_values[4], marker='o', linestyle='-',label='555 nm')
-plt.plot(scat[5],DoLP13_values[5]-DoLP11_values[5], marker='o', linestyle='-',label='660 nm')
-plt.plot(scat[6],DoLP13_values[6]-DoLP11_values[6], marker='o', linestyle='-',label='865 nm')
-
-plt.ylabel('DoLP Difference')
-plt.xlabel('Scattering Angle')
-# Set the y-axis range and tick marks
-plt.ylim(-0.025,-0.001)  # Set the y-axis range
-#plt.yticks([i/1000 for i in range(5, 201, 1)])  # Set the tick marks in steps of 0.001 (0.005 to 0.2)
-plt.title('R12-R11')
-plt.legend(ncol=3)
+plt.ylabel('DoLP')
+plt.xlabel('Scattering Angle [Degrees]')
+plt.title('R1')
+plt.legend()
 plt.grid(True)
 plt.show()
 
-plt.plot(scat[0],AoLP13_values[0]-AoLP11_values[0], marker='o', linestyle='-',label='355 nm')
-plt.plot(scat[1],AoLP13_values[1]-AoLP11_values[1], marker='o', linestyle='-',label='380 nm')
-plt.plot(scat[2],AoLP13_values[2]-AoLP11_values[2], marker='o', linestyle='-',label='445 nm')
-plt.plot(scat[3],AoLP13_values[3]-AoLP11_values[3], marker='o', linestyle='-',label='470 nm')
-plt.plot(scat[4],AoLP13_values[4]-AoLP11_values[4], marker='o', linestyle='-',label='555 nm')
-plt.plot(scat[5],AoLP13_values[5]-AoLP11_values[5], marker='o', linestyle='-',label='660 nm')
-plt.plot(scat[6],AoLP13_values[6]-AoLP11_values[6], marker='o', linestyle='-',label='865 nm')
+plt.plot(scat[0],AoLP_values[0], marker='o', linestyle='-',label='355 nm')
+plt.plot(scat[1],AoLP_values[1], marker='o', linestyle='-',label='380 nm')
+plt.plot(scat[2],AoLP_values[2], marker='o', linestyle='-',label='445 nm')
+# plt.plot(scat[3],AoLP_values[3], marker='o', linestyle='-',label='470 nm')
+# plt.plot(scat[4],AoLP_values[4], marker='o', linestyle='-',label='555 nm')
+# plt.plot(scat[5],AoLP_values[5], marker='o', linestyle='-',label='660 nm')
+# plt.plot(scat[6],AoLP_values[6], marker='o', linestyle='-',label='865 nm')
 
-plt.ylabel('AoLP Difference [radians]')
-# Set the y-axis range and tick marks
-plt.ylim(-0.003, 0.001) # Set the y-axis range
-# plt.yticks([i/100 for i in range(-2, 11, 1)])  # Set the tick marks in steps of 0.01 (0.00 to 0.1)
-plt.xlabel('Scattering Angle')
-plt.title('R12-R11')
-plt.legend(ncol=3)
+plt.ylabel('AoLP [Degrees]')
+plt.xlabel('Scattering Angle [Degrees]')
+plt.title('R1')
+plt.legend()
 plt.grid(True)
 plt.show()
+
+# plt.plot(scat[0],DoLP13_values[0]-DoLP11_values[0], marker='o', linestyle='-',label='355 nm')
+# plt.plot(scat[1],DoLP13_values[1]-DoLP11_values[1], marker='o', linestyle='-',label='380 nm')
+# plt.plot(scat[2],DoLP13_values[2]-DoLP11_values[2], marker='o', linestyle='-',label='445 nm')
+# plt.plot(scat[3],DoLP13_values[3]-DoLP11_values[3], marker='o', linestyle='-',label='470 nm')
+# plt.plot(scat[4],DoLP13_values[4]-DoLP11_values[4], marker='o', linestyle='-',label='555 nm')
+# plt.plot(scat[5],DoLP13_values[5]-DoLP11_values[5], marker='o', linestyle='-',label='660 nm')
+# plt.plot(scat[6],DoLP13_values[6]-DoLP11_values[6], marker='o', linestyle='-',label='865 nm')
+
+# plt.ylabel('DoLP Difference')
+# plt.xlabel('Scattering Angle')
+# # Set the y-axis range and tick marks
+# plt.ylim(-0.025,-0.001)  # Set the y-axis range
+# #plt.yticks([i/1000 for i in range(5, 201, 1)])  # Set the tick marks in steps of 0.001 (0.005 to 0.2)
+# plt.title('R12-R11')
+# plt.legend(ncol=3)
+# plt.grid(True)
+# plt.show()
+
+# plt.plot(scat[0],AoLP13_values[0]-AoLP11_values[0], marker='o', linestyle='-',label='355 nm')
+# plt.plot(scat[1],AoLP13_values[1]-AoLP11_values[1], marker='o', linestyle='-',label='380 nm')
+# plt.plot(scat[2],AoLP13_values[2]-AoLP11_values[2], marker='o', linestyle='-',label='445 nm')
+# plt.plot(scat[3],AoLP13_values[3]-AoLP11_values[3], marker='o', linestyle='-',label='470 nm')
+# plt.plot(scat[4],AoLP13_values[4]-AoLP11_values[4], marker='o', linestyle='-',label='555 nm')
+# plt.plot(scat[5],AoLP13_values[5]-AoLP11_values[5], marker='o', linestyle='-',label='660 nm')
+# plt.plot(scat[6],AoLP13_values[6]-AoLP11_values[6], marker='o', linestyle='-',label='865 nm')
+
+# plt.ylabel('AoLP Difference [radians]')
+# # Set the y-axis range and tick marks
+# plt.ylim(-0.003, 0.001) # Set the y-axis range
+# # plt.yticks([i/100 for i in range(-2, 11, 1)])  # Set the tick marks in steps of 0.01 (0.00 to 0.1)
+# plt.xlabel('Scattering Angle')
+# plt.title('R12-R11')
+# plt.legend(ncol=3)
+# plt.grid(True)
+# plt.show()
 
 # fig, (ax1,ax2,ax3) = plt.subplots(
 #           nrows=3, ncols=1, dpi=240,figsize=(6, 8))
