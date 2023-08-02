@@ -75,7 +75,7 @@ def main():  # Main code
 
 # Get the text file listing
 
-    file_list = glob.glob('Merd_R12_INV.txt')
+    file_list = glob.glob('Merd_R1_FWD.txt')
     
     num_files = len(file_list)
     
@@ -110,35 +110,42 @@ def main():  # Main code
         #if data_count in range(116,123):    #SSA
         # if data_count in range(108,115):    #AOD
         # if data_count in range(132,139):    #nr
-        if data_count in range(140,147):    #nr
+        #if data_count in range(140,147):    #ni
+        # if data_count in range(140,147):    #nr
+        #     words = line.split()
+        #     print(words[0])
+        #     radius = np.append(radius,float(words[0]))
+        #     sd = np.append(sd,float(words[1]))
+        if data_count in range(242,247):    #dolp
             words = line.split()
-            print(words[0])
-            radius = np.append(radius,float(words[0]))
-            sd = np.append(sd,float(words[1]))
+            radius = np.append(radius,float(words[6]))
+        if data_count in range(248,253):    #dolp
+            words = line.split()
+            sd = np.append(sd,float(words[6]))
 
         data_count = data_count+1
 
-# Close the input file
-    print("DONE")
-    print(sd)
-    inputFile.close()                
+# # Close the input file
+#     print("DONE")
+#     print(sd)
+#     inputFile.close()                
 
-    fig = plt.figure()
-    ax1 = fig.add_subplot(111)
+#     fig = plt.figure()
+#     ax1 = fig.add_subplot(111)
 
-    ax1.plot(radius[:],sd[:],color="blue")
+#     ax1.plot(radius[:],sd[:],color="blue")
 
-    #print(i_mod[:,3])
-    #print(i_obs[:,3])
-    # print(scat[:,6])
-    # ax1.set_xlim(60,180)
-    # ax1.set_xticks(np.arange(60,190,30))
-    ax1.set_xlabel("Radius [um]")
-    ax1.set_xscale('log')
+#     #print(i_mod[:,3])
+#     #print(i_obs[:,3])
+#     # print(scat[:,6])
+#     # ax1.set_xlim(60,180)
+#     # ax1.set_xticks(np.arange(60,190,30))
+#     ax1.set_xlabel("Radius [um]")
+#     ax1.set_xscale('log')
 
-    # ax1.set_ylim(-0.1,0.4)
-    # ax1.set_yticks(np.arange(-0.1,0.5,0.1))
-    ax1.set_ylabel('Normalized Size Distribution')
+#     # ax1.set_ylim(-0.1,0.4)
+#     # ax1.set_yticks(np.arange(-0.1,0.5,0.1))
+#     ax1.set_ylabel('Normalized Size Distribution')
     # ax1.legend(loc=1)  # Upper right
 
 
@@ -150,11 +157,11 @@ def main():  # Main code
     # print("Saving: "+outfile)
     # plt.savefig(outfile,dpi=300) 
 
-# Show the plot
+# # Show the plot
     
-    plt.show() 
+#     plt.show() 
     
-    plt.close()
+#     plt.close()
     
     return radius[:],sd[:]
 
@@ -165,4 +172,20 @@ print("\nSuccessful Completion\n")
 
 
 if __name__ == '__main__':
-   radius,size =  main() 
+   fit_Q,fit_U =  main() 
+   
+def calculate_DoLP(Q, U):
+    DoLP = np.sqrt(np.array(Q)**2 + np.array(U)**2) 
+    return DoLP
+
+def calculate_AoLP(Q, U):
+    AoLP = (1/2)*np.degrees(np.arctan(np.array(U)/np.array(Q)))
+    return AoLP
+
+# Calculate DoLP for each pair of Q and U
+DoLP_values = []
+# AoLP_values = []
+for n in range(5):
+    DoLP_values.append(np.round(calculate_DoLP(fit_Q[n], fit_U[n]),3))
+    # AoLP_values.append(calculate_AoLP(fit_Q[n], fit_U[n]))   
+   

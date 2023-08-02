@@ -13,7 +13,7 @@ plt.rcParams["font.family"] = "Times New Roman"
 
 # Open the text file in read mode
 # Define GRASP output file path 
-outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug123/Merd_R13_INV.txt"
+outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug123/Merd_R13_FWD.txt"
 #outpath =  "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/June2523/Washington1/Merd_Inchelium.txt"
 
 
@@ -144,30 +144,30 @@ for n in range(7):
 plt.plot(scat[0],DoLP_values[0], marker='o', linestyle='-',label='355 nm')
 plt.plot(scat[1],DoLP_values[1], marker='o', linestyle='-',label='380 nm')
 plt.plot(scat[2],DoLP_values[2], marker='o', linestyle='-',label='445 nm')
-# plt.plot(scat[3],DoLP_values[3], marker='o', linestyle='-',label='470 nm')
-# plt.plot(scat[4],DoLP_values[4], marker='o', linestyle='-',label='555 nm')
-# plt.plot(scat[5],DoLP_values[5], marker='o', linestyle='-',label='660 nm')
-# plt.plot(scat[6],DoLP_values[6], marker='o', linestyle='-',label='865 nm')
+plt.plot(scat[3],DoLP_values[3], marker='o', linestyle='-',label='470 nm')
+plt.plot(scat[4],DoLP_values[4], marker='o', linestyle='-',label='555 nm')
+plt.plot(scat[5],DoLP_values[5], marker='o', linestyle='-',label='660 nm')
+plt.plot(scat[6],DoLP_values[6], marker='o', linestyle='-',label='865 nm')
 
 plt.ylabel('DoLP')
 plt.xlabel('Scattering Angle [Degrees]')
 plt.title('R1')
-plt.legend()
+plt.legend(ncol=3)
 plt.grid(True)
 plt.show()
 
 plt.plot(scat[0],AoLP_values[0], marker='o', linestyle='-',label='355 nm')
 plt.plot(scat[1],AoLP_values[1], marker='o', linestyle='-',label='380 nm')
 plt.plot(scat[2],AoLP_values[2], marker='o', linestyle='-',label='445 nm')
-# plt.plot(scat[3],AoLP_values[3], marker='o', linestyle='-',label='470 nm')
-# plt.plot(scat[4],AoLP_values[4], marker='o', linestyle='-',label='555 nm')
-# plt.plot(scat[5],AoLP_values[5], marker='o', linestyle='-',label='660 nm')
-# plt.plot(scat[6],AoLP_values[6], marker='o', linestyle='-',label='865 nm')
+plt.plot(scat[3],AoLP_values[3], marker='o', linestyle='-',label='470 nm')
+plt.plot(scat[4],AoLP_values[4], marker='o', linestyle='-',label='555 nm')
+plt.plot(scat[5],AoLP_values[5], marker='o', linestyle='-',label='660 nm')
+plt.plot(scat[6],AoLP_values[6], marker='o', linestyle='-',label='865 nm')
 
 plt.ylabel('AoLP [Degrees]')
 plt.xlabel('Scattering Angle [Degrees]')
 plt.title('R1')
-plt.legend()
+plt.legend(ncol=3)
 plt.grid(True)
 plt.show()
 
