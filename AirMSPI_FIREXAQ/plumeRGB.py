@@ -143,7 +143,7 @@ plt.imshow(i_rgb, origin='upper', extent=[min_lon, max_lon, min_lat, max_lat],
 
 # Add coastlines and gridlines
 ax.coastlines(resolution='10m', color='black', linewidth=0.5)
-ax.gridlines(draw_labels=True, dms=True, x_inline=False, y_inline=False)
+ax.gridlines(draw_labels=True, dms=False, x_inline=False, y_inline=False)
 
 # Set the title and labels with increased font size
 #plt.title('RGB Image with Georeferenced Plot', fontsize=18)
@@ -171,7 +171,7 @@ lat_lon_pairs = [
 latitudes, longitudes = zip(*lat_lon_pairs)
 
 # Plot the dots on the map
-ax.scatter(longitudes, latitudes, color='cyan', s=60, transform=projection)
+ax.scatter(longitudes, latitudes, facecolors='none', edgecolors='cyan', s=60, transform=projection)
 
 
 # Show the plot
