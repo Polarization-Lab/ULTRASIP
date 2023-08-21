@@ -310,3 +310,31 @@ retrieval:
                        derivative_order_of_T_variability:    0
                        lagrange_multiplier_of_T_variability: 0.0  
 
+        characteristic[8]: 
+            type: aerosol_concentration
+            retrieved: false
+            mode[1]: 
+                initial_guess: 
+                    value:                        [0.0468]
+                    min:                          [1e-10]
+                    max:                          [0.001]
+                    index_of_wavelength_involved: [0]
+                single_pixel:
+                    a_priori_estimates:
+                        lagrange_multiplier:      [0]
+                    smoothness_constraints:
+                        difference_order: 0
+                        lagrange_multiplier: 0.0
+            mode[2]: 
+                initial_guess: 
+                    value:                        [1e-6]
+                    min:                          [1e-10]
+                    max:                          [0.001]
+                    index_of_wavelength_involved: [0]
+                single_pixel:
+                    a_priori_estimates:
+                        lagrange_multiplier:      [ 0 ]
+                    smoothness_constraints:
+                        difference_order: 0
+                        lagrange_multiplier: 0.0
+
