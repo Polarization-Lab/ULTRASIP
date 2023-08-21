@@ -9,7 +9,7 @@ input:
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["Scatv8_R5_FWD.txt", screen] # screen, "filename"
+        stream: ["Scatv8_R5_merdFWD.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
