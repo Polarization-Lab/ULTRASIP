@@ -9,7 +9,7 @@ input:
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["ScatRayleigh_R5_FWD.txt", screen] # screen, "filename"
+        stream: ["MerdRayleigh_R5_FWD.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
@@ -74,7 +74,7 @@ retrieval:
             number_of_layers: 50
             aerosol_profile_vertical_type:    exponential
             molecular_profile_vertical_type: standard_atmosphere
-            reference_plane_for_polarization: principal_plane  
+            reference_plane_for_polarization: meridian 
             simulating_observation:
                 order_of_scattering: multiple_scattering
                 number_of_gaussian_quadratures_for_expansion_coefficients:  41 

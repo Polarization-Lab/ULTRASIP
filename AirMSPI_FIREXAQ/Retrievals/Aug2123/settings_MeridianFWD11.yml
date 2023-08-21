@@ -4,12 +4,12 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2123/R5v1-ScatFWD.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2123/R11v1-ScatFWD.sdat"
   
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["ScatRayleigh_R5_FWD.txt", screen] # screen, "filename"
+        stream: ["MerdRayleigh_R11_FWD.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
@@ -74,7 +74,7 @@ retrieval:
             number_of_layers: 50
             aerosol_profile_vertical_type:    exponential
             molecular_profile_vertical_type: standard_atmosphere
-            reference_plane_for_polarization: principal_plane  
+            reference_plane_for_polarization: meridian #principal_plane  
             simulating_observation:
                 order_of_scattering: multiple_scattering
                 number_of_gaussian_quadratures_for_expansion_coefficients:  41 
@@ -249,10 +249,10 @@ retrieval:
             retrieved: false
             mode[1]:
                 initial_guess:                      #1         #2        #3
-                    value:                         [1.44677,1.45023,1.45956,1.46173,1.50361,1.49075, 1.46284]
-                    min:                           [^repeat(1.00;7)]
-                    max:                           [^repeat(1.8;7) ]
-                    index_of_wavelength_involved:  [^expand(1;7) ]
+                    value:                         [1.68381,1.68390,1.63755,1.62214,1.66564,1.72187,1.75103]
+                    min:                           [repeat^(1.00;7)]
+                    max:                           [repeat^(1.8;7) ]
+                    index_of_wavelength_involved:  [0 ]
                 single_pixel:
                     smoothness_constraints:
                         difference_order: 1
@@ -271,7 +271,7 @@ retrieval:
             retrieved: false
             mode[1]:
                 initial_guess:                       #1         #2        #3 
-                    value:                          [0.046450,0.047281,0.049555,0.050372,0.052810,0.055095,0.057897 ]
+                    value:                          [0.10000, 0.082890,0.038049,0.029218,0.013876,0.0063207,0.0019149]
                     min:                            [^repeat(0.00005;7)   ]
                     max:                            [^repeat(0.1;7)       ]
                     index_of_wavelength_involved:   [^expand(1;7)         ]
@@ -293,7 +293,7 @@ retrieval:
             retrieved: false
             mode[1]:
                 initial_guess:                       #1      
-                    value:                          [0.12616]
+                    value:                          [0.99990]
                     min:                            [0.00001]
                     max:                            [0.9999]
                     index_of_wavelength_involved:   [0]
@@ -310,7 +310,6 @@ retrieval:
                        derivative_order_of_T_variability:    0
                        lagrange_multiplier_of_T_variability: 0.0  
 
-
         characteristic[8]: 
             type: aerosol_concentration
             retrieved: false
@@ -326,3 +325,4 @@ retrieval:
                     smoothness_constraints:
                         difference_order: 0
                         lagrange_multiplier: 0.0
+
