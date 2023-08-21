@@ -317,7 +317,7 @@ retrieval:
                 initial_guess: 
                     value:                        [0.0468]
                     min:                          [1e-10]
-                    max:                          [0.001]
+                    max:                          [0.1]
                     index_of_wavelength_involved: [0]
                 single_pixel:
                     a_priori_estimates:
