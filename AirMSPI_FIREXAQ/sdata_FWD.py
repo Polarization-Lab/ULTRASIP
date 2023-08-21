@@ -21,7 +21,7 @@ outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug
 file = open(outpath+"/Merd_R11_INV.txt")
 content = file.readlines()
 wave_num = 7
-meas_num = 15
+meas_num = 18
 
 
 # Change to the output directory
@@ -34,7 +34,7 @@ temp = words[len(words)-1]  # Choose the last element
 hold = temp.split('.')
 vers = hold[0]
 
-outfile_base = 'R11v4-ScatFWD'
+outfile_base = 'R5v4-ScatFWD'
         
 # Generate an output file name
 
