@@ -18,7 +18,7 @@ outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug
 #outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2023/"
 
 
-file = open(outpath+"/Merd_R5_INV.txt")
+file = open(outpath+"/Merd_R11_INV.txt")
 content = file.readlines()
 wave_num = 7
 meas_num = 15
@@ -34,7 +34,7 @@ temp = words[len(words)-1]  # Choose the last element
 hold = temp.split('.')
 vers = hold[0]
 
-outfile_base = 'R5zen-ScatFWD'
+outfile_base = 'R11v4-ScatFWD'
         
 # Generate an output file name
 
@@ -209,7 +209,7 @@ out_str = out_str+'{:12d}'.format(meas_num)
 for i in range(len(content)):
     if 'sza' in content[i]: 
         #sza = ' ' + content[i+1].split()[1]
-        sza = ' ' + str(0)
+        sza = ' ' + str(30)
 out_str = out_str+' '+sza*7
 
 
@@ -230,7 +230,7 @@ out_str = out_str+' '+sza*7
 #         vza = vza*28
 
 # Using a list comprehension to generate the numbers in the specified range
-numbers = [str(180-num) for num in range(0,75,5)]
+numbers = [str(180-num) for num in range(0,90,5)]
 # Joining the numbers with a comma separator to create the final string
 vza = " ".join(numbers) + ' '
 # Repeating the sequence 28 times
@@ -255,7 +255,7 @@ out_str = out_str+' '+vza
 #         raz = raz*28
 
 # Using a list comprehension to generate the numbers in the specified range
-numbers = [str(num) for num in range(0, 190, 13)]
+numbers = [str(num) for num in range(0, 180, 10)]
 # Joining the numbers with a comma separator to create the final string
 raz = " ".join(numbers) + ' '
 # Repeating the sequence 28 times
