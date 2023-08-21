@@ -315,9 +315,9 @@ retrieval:
             retrieved: false
             mode[1]: 
                 initial_guess: 
-                    value:                        [0.0468]
+                    value:                        [0.11378]
                     min:                          [1e-10]
-                    max:                          [0.1]
+                    max:                          [1]
                     index_of_wavelength_involved: [0]
                 single_pixel:
                     a_priori_estimates:
@@ -325,16 +325,5 @@ retrieval:
                     smoothness_constraints:
                         difference_order: 0
                         lagrange_multiplier: 0.0
-            mode[2]: 
-                initial_guess: 
-                    value:                        [1e-6]
-                    min:                          [1e-10]
-                    max:                          [0.001]
-                    index_of_wavelength_involved: [0]
-                single_pixel:
-                    a_priori_estimates:
-                        lagrange_multiplier:      [ 0 ]
-                    smoothness_constraints:
-                        difference_order: 0
-                        lagrange_multiplier: 0.0
+
 
