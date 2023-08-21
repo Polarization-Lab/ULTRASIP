@@ -4,12 +4,12 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2023/R11v5-ScatFWD.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2023/R11v6-ScatFWD.sdat"
   
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["Scatv5_R11_FWD.txt", screen] # screen, "filename"
+        stream: ["Scatv6_R11_FWD.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
