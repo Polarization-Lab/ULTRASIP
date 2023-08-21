@@ -4,12 +4,12 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2023/R5v4-ScatFWD.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2023/R5v5-ScatFWD.sdat"
   
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["Scatv4_R5_FWD.txt", screen] # screen, "filename"
+        stream: ["Scatv5_R5_FWD.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
@@ -315,6 +315,18 @@ retrieval:
             type: aerosol_concentration
             retrieved: false
             mode[1]: 
+                initial_guess: 
+                    value:                        [0.12182]
+                    min:                          [1e-10]
+                    max:                          [1]
+                    index_of_wavelength_involved: [0]
+                single_pixel:
+                    a_priori_estimates:
+                        lagrange_multiplier:      [0]
+                    smoothness_constraints:
+                        difference_order: 0
+                        lagrange_multiplier: 0.0
+            mode[2]: 
                 initial_guess: 
                     value:                        [0.12182]
                     min:                          [1e-10]

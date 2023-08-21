@@ -34,7 +34,7 @@ temp = words[len(words)-1]  # Choose the last element
 hold = temp.split('.')
 vers = hold[0]
 
-outfile_base = 'R5v4-ScatFWD'
+outfile_base = 'R11v5-ScatFWD'
         
 # Generate an output file name
 
@@ -209,7 +209,7 @@ out_str = out_str+'{:12d}'.format(meas_num)
 for i in range(len(content)):
     if 'sza' in content[i]: 
         #sza = ' ' + content[i+1].split()[1]
-        sza = ' ' + str(30)
+        sza = ' ' + str(45)
 out_str = out_str+' '+sza*7
 
 
