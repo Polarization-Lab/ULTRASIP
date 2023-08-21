@@ -71,7 +71,7 @@ for i in range(len(content)):
         lat_median = content[i].split()[2]
 
 out_str = '  1   '+sdat_date+'T'+sdat_time
-out_str = out_str+'       70.00   0   1   : NPIXELS  TIMESTAMP  HEIGHT_OBS(m)  NSURF  IFGAS    1\n'
+out_str = out_str+'       60.00   0   1   : NPIXELS  TIMESTAMP  HEIGHT_OBS(m)  NSURF  IFGAS    1\n'
 outputFile.write(out_str)
     
 # Generate content for sdat (single line)
