@@ -252,7 +252,7 @@ retrieval:
                     value:                         [1.68381,1.68390,1.63755,1.62214,1.66564,1.72187,1.75103]
                     min:                           [repeat^(1.00;7)]
                     max:                           [repeat^(1.8;7) ]
-                    index_of_wavelength_involved:  [0 ]
+                    index_of_wavelength_involved:  [^expand(1;7) ]
                 single_pixel:
                     smoothness_constraints:
                         difference_order: 1
