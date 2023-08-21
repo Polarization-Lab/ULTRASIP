@@ -12,12 +12,13 @@ import numpy as np
 
 #load in GRASP output 
 # Define GRASP output file path 
-#outpath = "C:/Users/Clarissa/Documents/Github/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2223/"
 
-outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2923/"
+outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2023"
+
+#outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2023/"
 
 
-file = open(outpath+"/Merd_R13_INV.txt")
+file = open(outpath+"/Merd_R1_INV.txt")
 content = file.readlines()
 wave_num = 7
 meas_num = 5
@@ -33,7 +34,7 @@ temp = words[len(words)-1]  # Choose the last element
 hold = temp.split('.')
 vers = hold[0]
 
-outfile_base = 'R13-MerdFWD'
+outfile_base = 'R1-MerdFWD'
         
 # Generate an output file name
 
@@ -70,7 +71,7 @@ for i in range(len(content)):
         lat_median = content[i].split()[2]
 
 out_str = '  1   '+sdat_date+'T'+sdat_time
-out_str = out_str+'       70000.00   0   1   : NPIXELS  TIMESTAMP  HEIGHT_OBS(m)  NSURF  IFGAS    1\n'
+out_str = out_str+'       70.00   0   1   : NPIXELS  TIMESTAMP  HEIGHT_OBS(m)  NSURF  IFGAS    1\n'
 outputFile.write(out_str)
     
 # Generate content for sdat (single line)
@@ -84,7 +85,7 @@ out_str = out_str+'           1'  # Pixel line in grid (row)
 
 out_str = out_str+' ' + lon_median  # Longitude
 out_str = out_str+" " +lat_median # Latitude
-out_str = out_str+'{:17.8f}'.format(669.31402666) # Elevation-read from inv sdat
+out_str = out_str+'{:17.8f}'.format(60) # Elevation-read from inv sdat
 
 out_str = out_str+'      100.000000'  # Percent of land
 out_str = out_str+'{:16d}'.format(wave_num)  # Number of wavelengths (nwl)
@@ -228,7 +229,13 @@ out_str = out_str+' '+sza*7
 #         vza = vza1+vza2+vza3+vza4+vza5 #+vza6+vza7+vza8+vza9
 #         vza = vza*28
 
-vza = (' ' + str(110))*140
+# Using a list comprehension to generate the numbers in the specified range
+numbers = [str(180-num) for num in range(0,75,15)]
+# Joining the numbers with a comma separator to create the final string
+vza = " ".join(numbers) + ' '
+# Repeating the sequence 28 times
+vza = vza * 28
+
 out_str = out_str+' '+vza
 
 #relative azimuth/meas
@@ -248,7 +255,7 @@ out_str = out_str+' '+vza
 #         raz = raz*28
 
 # Using a list comprehension to generate the numbers in the specified range
-numbers = [str(num) for num in range(190, 360, 40)]
+numbers = [str(num) for num in range(0, 190, 40)]
 # Joining the numbers with a comma separator to create the final string
 raz = " ".join(numbers) + ' '
 # Repeating the sequence 28 times
