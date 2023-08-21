@@ -4,12 +4,12 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2123/R11v1-ScatFWD.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2123/R11v2-ScatFWD.sdat"
   
 output:
     segment:
         function: [classic, classic] # classic, classic_plot, csv, none
-        stream: ["MerdRayleigh_R11_FWD.txt", screen] # screen, "filename"
+        stream: ["Rayleigh_R11v2_FWD.txt", screen] # screen, "filename"
     
 retrieval:     
     general:
@@ -74,7 +74,7 @@ retrieval:
             number_of_layers: 50
             aerosol_profile_vertical_type:    exponential
             molecular_profile_vertical_type: standard_atmosphere
-            reference_plane_for_polarization: meridian #principal_plane  
+            reference_plane_for_polarization: meridian 
             simulating_observation:
                 order_of_scattering: multiple_scattering
                 number_of_gaussian_quadratures_for_expansion_coefficients:  41 
@@ -315,7 +315,7 @@ retrieval:
             retrieved: false
             mode[1]: 
                 initial_guess: 
-                    value:                        [1e-6]
+                    value:                        [0.11378]
                     min:                          [1e-10]
                     max:                          [1]
                     index_of_wavelength_involved: [0]
