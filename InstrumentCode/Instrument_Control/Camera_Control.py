@@ -6,8 +6,10 @@ from example: https://pypi.org/project/hamamatsu/
 
 NOTE: Must download API specific to your frame grabber 
 from: https://dcam-api.com/downloads/
+then, pip install hamamatsu
 """
 #Last edit: 06.28.2022
+
 
 #Import Libraries 
 import logging
@@ -20,7 +22,7 @@ with dcam:
     with camera:
         print(camera.info)
         print(camera['image_width'].value, camera['image_height'].value)
-        print(camera['digital_gain'].value)
+        #print(camera['digital_gain'].value)
         # Simple acquisition example
         nb_frames = 5
         camera["exposure_time"] = 1e-6

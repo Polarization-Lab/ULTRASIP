@@ -15,6 +15,8 @@ import time
 from matplotlib import patches
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 import matplotlib.ticker as ticker
+plt.rcParams["font.family"] = "Times New Roman"
+plt.rcParams['figure.dpi'] = 200
 
 
 def format_directory():
@@ -134,44 +136,48 @@ min_lat, max_lat = np.min(latitude), np.max(latitude)
 projection = ccrs.PlateCarree()
 
 # Create the figure and axis
-plt.figure(figsize=(6, 4))
+
+plt.figure()
+
+
+
 ax = plt.axes(projection=projection)
+
+
 
 # Plot the RGB image using imshow and latitude/longitude extents
 plt.imshow(i_rgb, origin='upper', extent=[min_lon, max_lon, min_lat, max_lat],
            transform=projection)
 
 # Add coastlines and gridlines
-ax.coastlines(resolution='10m', color='black', linewidth=0.5)
+ax.coastlines(resolution='10m')
 ax.gridlines(draw_labels=True, dms=False, x_inline=False, y_inline=False)
 
-# Set the title and labels with increased font size
-#plt.title('RGB Image with Georeferenced Plot', fontsize=18)
-# plt.xlabel('Longitude', fontsize=50)
-# plt.ylabel('Latitude', fontsize=50)
 
 # Latitude and Longitude pairs (Replace these with your own 12 coordinates)
 lat_lon_pairs = [
-    (47.9392, -118.4957),
-    (47.9392, -118.4924),
-    (47.9402,-118.4891),
-    (47.9416,-118.4824),
+    # (47.9392, -118.4957),
+    # (47.9392, -118.4924),
+    # (47.9402,-118.4891),
+    # (47.9416,-118.4824),
     (47.9439,-118.4791),
-    (47.9440,-118.4758),
-    (47.9422,-118.4690),
-    (47.9419,-118.4623),
-    (47.9415,-118.4556),
-    (47.9443,-118.4524),
+    # (47.9440,-118.4758),
+    # (47.9422,-118.4690),
+    # (47.9419,-118.4623),
+    # (47.9415,-118.4556),
+    # (47.9443,-118.4524),
     (47.9443,-118.4457),
-    (47.9446,-118.4256),
-    (47.9445,-118.4323)
+    # (47.9446,-118.4256),
+    # (47.9445,-118.4323)
 ]
 
 # Extract latitudes and longitudes from the pairs
 latitudes, longitudes = zip(*lat_lon_pairs)
 
 # Plot the dots on the map
-ax.scatter(longitudes, latitudes, facecolors='none', edgecolors='cyan', s=60, transform=projection)
+ax.scatter(longitudes[0], latitudes[0], facecolors='cyan', edgecolors='cyan', s=60, transform=projection)
+ax.scatter(longitudes[1], latitudes[1], facecolors='red', edgecolors='red', s=60, transform=projection)
+
 
 
 # Show the plot
