@@ -22,10 +22,10 @@ import h5py
 from datetime import datetime
 # Set Measurement Parameters
 # Moog Connections
-moog = serial.Serial()
-moog.baudrate = 9600
-moog.port = 'COM2'
-moog.open()
+# moog = serial.Serial()
+# moog.baudrate = 9600
+# moog.port = 'COM2'
+# moog.open()
 
 #Output path
 
@@ -47,23 +47,23 @@ angles = [0, 45, 90, 135]
 nb_frames = 1
 exposure = 1e-6
 
-# Position Moog
-mc.init_autobaud(moog)
-mc.get_status_jog(moog)
-mc.mv_to_home(moog, 0000, 0000)
+# # Position Moog
+# mc.init_autobaud(moog)
+# mc.get_status_jog(moog)
+# mc.mv_to_home(moog, 0000, 0000)
 
-#mc.mv_to_coord(moog, pan, tilt)
-#mc.mv_to_coord(moog, 9999, tilt)
+# #mc.mv_to_coord(moog, pan, tilt)
+# #mc.mv_to_coord(moog, 9999, tilt)
 
-time.sleep(4)
+# time.sleep(4)
 
-# Home the rotator before usage
-ro.home()
+# # Home the rotator before usage
+# ro.home()
 
-# set an offset
-#offset = 0
-offset = -0.025
-tic = time.perf_counter()
+# # set an offset
+# #offset = 0
+# offset = -0.025
+# tic = time.perf_counter()
 
 #Loop over a list of angles and acquire for each
 for angle in angles:
@@ -91,10 +91,10 @@ for angle in angles:
     hf.close()
 
 
-print(toc-tic)
+#print(toc-tic)
 
-#Home and close everything
-mc.mv_to_home(moog, 0000, 0000)
-moog.close()
+# #Home and close everything
+# mc.mv_to_home(moog, 0000, 0000)
+# moog.close()
 ro.home()
 ro.close()
