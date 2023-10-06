@@ -22,7 +22,7 @@ with dcam:
     with camera:
         print(camera.info)
         print(camera['image_width'].value, camera['image_height'].value)
-        #print(camera['digital_gain'].value)
+        print(camera['digital_gain'].value)
         # Simple acquisition example
         nb_frames = 5
         camera["exposure_time"] = 1e-6
