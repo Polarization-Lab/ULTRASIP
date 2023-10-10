@@ -26,8 +26,8 @@ dolp = aolp.copy()
 
 for xx in range(0,xsize): # for loop over x pixel index
     for yy in range(0,ysize): # for loop over y pixel index
-        aolp[xx,yy] = 0.5*np.arctan2((xx-xsize/2)/xsize,(yy-ysize/2)/ysize) 
-        dolp[xx,yy] = np.sqrt(((xx-xsize/2)/xsize)**2+((yy-ysize/2)/ysize)**2) #define DoLP with radial distance from singularity    
+        aolp[xx,yy] = 0.5*np.arctan2((xx-xsize-5/2)/xsize,(yy-ysize-5/2)/ysize) 
+        dolp[xx,yy] = np.sqrt(((xx-xsize-5/2)/xsize)**2+((yy-ysize-5/2)/ysize)**2) #define DoLP with radial distance from singularity    
 
 I = np.ones((ysize, xsize));
 Q = I*dolp*np.cos(2*aolp)
@@ -109,6 +109,44 @@ dolp_m = (np.sqrt(Qo**2+Uo**2)/Io)
 aolp_m = 0.5*np.arctan2(Uo,Qo)
 
 
+#Plot estimated fluxes
+# Create a 2x2 grid of subplots
+fig, axes = plt.subplots(2, 2, figsize=(10, 10))
+
+# Plot data on each subplot
+im1=axes[0, 0].imshow(p[0],cmap='bwr', vmin = 0, vmax = 1)
+axes[0, 0].set_title('P0')
+cbar = fig.colorbar(im1)
+axes[0, 0].set_xticks([])
+axes[0, 0].set_yticks([])
+
+im2=axes[1, 0].imshow(p[1],cmap='bwr', vmin = 0, vmax = 1)
+axes[1, 0].set_title('P90')
+cbar = fig.colorbar(im2)
+axes[1, 0].set_xticks([])
+axes[1, 0].set_yticks([])
+
+im3 = axes[0, 1].imshow(p[2],cmap='bwr', vmin = 0, vmax = 1)
+axes[0, 1].set_title('P45')
+cbar = fig.colorbar(im3)
+axes[0, 1].set_xticks([])
+axes[0, 1].set_yticks([])
+
+im4 = axes[1, 1].imshow(p[3],cmap='bwr', vmin = 0, vmax = 1)
+axes[1, 1].set_title('P135')
+cbar = fig.colorbar(im4)
+axes[1, 1].set_xticks([])
+axes[1, 1].set_yticks([])
+
+# Add figure title
+fig.suptitle('Estimated Fluxes', fontsize=20)
+
+# Adjust spacing between subplots
+plt.tight_layout(rect=[0, 0, 1, 0.95])
+
+# Show the plot
+plt.show()
+
 #Plot output 
 # Create a 2x2 grid of subplots
 fig, axes = plt.subplots(3, 2, figsize=(10, 10))
@@ -153,5 +191,28 @@ fig.suptitle('Output Polarization', fontsize=20)
 plt.tight_layout(rect=[0, 0, 1, 0.95])
 
 # Show the plot
+plt.show()
+
+dn0 = np.array([])
+dn135 = np.array([])
+dn90 = np.array([])
+dn45 = np.array([])
+
+for yidx in range(ysize):
+    dn0 = np.append(dn0,p[0][2,yidx])
+    dn90 = np.append(dn90,p[1][2,yidx])
+for xidx in range(xsize):
+    dn135 = np.append(dn135,p[3][xidx,2])
+    dn45 = np.append(dn45,p[2][xidx,2])
+
+plt.figure()
+plt.scatter(range(ysize),dn0,label='P[0]')
+plt.scatter(range(xsize),dn135,label='P[135]')
+plt.scatter(range(ysize),dn90,label='P[90]')
+plt.scatter(range(xsize),dn45,label='P[45]')
+plt.ylabel("Digital Number")
+plt.xlabel("Pixel Index")
+plt.title("Neutral Point Shifted")
+plt.legend()
 plt.show()
 
