@@ -115,10 +115,7 @@ i_660_rescaled = (i_660 - np.nanmin(i_660)) * 255.0 / (np.nanmax(i_660) - np.nan
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 
-# ... (existing code) ...
 
-import cartopy.crs as ccrs
-import cartopy.feature as cfeature
 
 # ... (existing code) ...
 

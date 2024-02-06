@@ -61,7 +61,7 @@ exposure = 1e-6
 # ro.home()
 
 # # set an offset
-# #offset = 0
+offset = 0
 # offset = -0.025
 # tic = time.perf_counter()
 

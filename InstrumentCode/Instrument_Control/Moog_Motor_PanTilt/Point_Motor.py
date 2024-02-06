@@ -51,18 +51,21 @@ if __name__ == '__main__':
     # pan = 150;
     # tilt = 20;
     #mc.mv_to_coord(moog,pan,tilt)
-    move_to_coords(tilt=-50.0)
+    # move_to_coords(pan=2.0,tilt=-40.0)
+    # time.sleep(3)
+    # move_to_coords(pan=0,tilt=0)
+    # time.sleep(3)
+    # move_to_coords(pan=-40,tilt=2.0)
     time.sleep(3)
-    move_to_coords(tilt=0)
-    time.sleep(3)
-    move_to_coords(tilt=50.0)
-    time.sleep(3)
-    #mc.get_set_pan_tilt_soft_lims(moog, LimitAxis.CW)
-    #mc.get_set_pan_tilt_soft_lims(moog, LimitAxis.CCW)
-    #mc.get_set_pan_tilt_soft_lims(moog, LimitAxis.UP)
-    #mc.get_set_pan_tilt_soft_lims(moog, LimitAxis.DOWN)
+    mc.get_set_pan_tilt_soft_lims(moog, LimitAxis.CW)
+    mc.get_set_pan_tilt_soft_lims(moog, LimitAxis.CCW)
+    mc.get_set_pan_tilt_soft_lims(moog, LimitAxis.UP)
+    mc.get_set_pan_tilt_soft_lims(moog, LimitAxis.DOWN)
    
-    #mc.mv_to_coord(moog,9999,-100)
+    mc.mv_to_coord(moog,400,-100)
+    time.sleep(3)
+    mc.mv_to_coord(moog,100,200)
+
 
     time.sleep(3)
     mc.mv_to_home(moog,0000,0000)

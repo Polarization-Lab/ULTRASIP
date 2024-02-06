@@ -26,8 +26,8 @@ dolp = aolp.copy()
 
 for xx in range(0,xsize): # for loop over x pixel index
     for yy in range(0,ysize): # for loop over y pixel index
-        aolp[xx,yy] = 0.5*np.arctan2((xx-xsize-5/2)/xsize,(yy-ysize-5/2)/ysize) 
-        dolp[xx,yy] = np.sqrt(((xx-xsize-5/2)/xsize)**2+((yy-ysize-5/2)/ysize)**2) #define DoLP with radial distance from singularity    
+        aolp[xx,yy] = 0.5*np.arctan2((xx-50-xsize/2)/xsize,(yy-13-ysize/2)/ysize) 
+        dolp[xx,yy] = np.sqrt(((xx-50-xsize/2)/xsize)**2+((yy-13-ysize/2)/ysize)**2) #define DoLP with radial distance from singularity    
 
 I = np.ones((ysize, xsize));
 Q = I*dolp*np.cos(2*aolp)
@@ -93,11 +93,11 @@ S_out = np.reshape(S_out,(3,ysize,xsize))
 p = np.reshape(p,(4,ysize,xsize))
 
 
-grad0=np.round(np.gradient(p[0],axis=1),6)
-grad3=np.round(np.gradient(p[3],axis=0),6)
+# grad0=np.round(np.gradient(p[0],axis=1),6)
+# grad3=np.round(np.gradient(p[3],axis=0),6)
 
-grad1=np.round(np.gradient(p[1],axis=1),6)
-grad2=np.round(np.gradient(p[2],axis=0),6)
+# grad1=np.round(np.gradient(p[1],axis=1),6)
+# grad2=np.round(np.gradient(p[2],axis=0),6)
 
 
 #Define I,Q,U
@@ -114,25 +114,25 @@ aolp_m = 0.5*np.arctan2(Uo,Qo)
 fig, axes = plt.subplots(2, 2, figsize=(10, 10))
 
 # Plot data on each subplot
-im1=axes[0, 0].imshow(p[0],cmap='bwr', vmin = 0, vmax = 1)
+im1=axes[0, 0].imshow(p[0],cmap='winter', vmin = 0, vmax = 1)
 axes[0, 0].set_title('P0')
 cbar = fig.colorbar(im1)
 axes[0, 0].set_xticks([])
 axes[0, 0].set_yticks([])
 
-im2=axes[1, 0].imshow(p[1],cmap='bwr', vmin = 0, vmax = 1)
+im2=axes[1, 0].imshow(p[1],cmap='winter', vmin = 0, vmax = 1)
 axes[1, 0].set_title('P90')
 cbar = fig.colorbar(im2)
 axes[1, 0].set_xticks([])
 axes[1, 0].set_yticks([])
 
-im3 = axes[0, 1].imshow(p[2],cmap='bwr', vmin = 0, vmax = 1)
+im3 = axes[0, 1].imshow(p[2],cmap='winter', vmin = 0, vmax = 1)
 axes[0, 1].set_title('P45')
 cbar = fig.colorbar(im3)
 axes[0, 1].set_xticks([])
 axes[0, 1].set_yticks([])
 
-im4 = axes[1, 1].imshow(p[3],cmap='bwr', vmin = 0, vmax = 1)
+im4 = axes[1, 1].imshow(p[3],cmap='winter', vmin = 0, vmax = 1)
 axes[1, 1].set_title('P135')
 cbar = fig.colorbar(im4)
 axes[1, 1].set_xticks([])
@@ -198,21 +198,27 @@ dn135 = np.array([])
 dn90 = np.array([])
 dn45 = np.array([])
 
-for yidx in range(ysize):
-    dn0 = np.append(dn0,p[0][2,yidx])
-    dn90 = np.append(dn90,p[1][2,yidx])
-for xidx in range(xsize):
-    dn135 = np.append(dn135,p[3][xidx,2])
-    dn45 = np.append(dn45,p[2][xidx,2])
+avg0 = np.average(p[0], axis=0)
+avg135 = np.average(p[3], axis=1)
+
+
+# for yidx in range(ysize):
+#     dn0 = np.append(dn0,p[0][2,yidx])
+#     dn90 = np.append(dn90,p[1][2,yidx])
+# for xidx in range(xsize):
+#     dn135 = np.append(dn135,p[3][xidx,2])
+#     dn45 = np.append(dn45,p[2][xidx,2])
 
 plt.figure()
-plt.scatter(range(ysize),dn0,label='P[0]')
-plt.scatter(range(xsize),dn135,label='P[135]')
-plt.scatter(range(ysize),dn90,label='P[90]')
-plt.scatter(range(xsize),dn45,label='P[45]')
+plt.scatter(range(ysize),avg0,label='P[0]',color='green')
+plt.scatter(range(xsize),avg135,label='P[135]',color='red')
+
 plt.ylabel("Digital Number")
 plt.xlabel("Pixel Index")
-plt.title("Neutral Point Shifted")
+plt.title("Know Neutral Point is at (178,141) in Image")
+plt.grid()
+plt.minorticks_on()
 plt.legend()
 plt.show()
+
 
