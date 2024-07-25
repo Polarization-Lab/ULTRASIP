@@ -13,7 +13,7 @@ import numpy as np
 #load in GRASP output 
 # Define GRASP output file path 
 
-outpath = "C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2123"
+outpath = "C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2524"
 
 #outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2023/"
 
@@ -34,7 +34,7 @@ temp = words[len(words)-1]  # Choose the last element
 hold = temp.split('.')
 vers = hold[0]
 
-outfile_base = 'R1v1-MerdFWD_24'
+outfile_base = 'FWD_Scat'
         
 # Generate an output file name
 

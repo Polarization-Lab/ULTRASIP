@@ -39,7 +39,7 @@ def format_directory():
 
 def load_hdf_files(folder_path, group_size,idx):
     # Get a list of HDF file paths in the folder
-    file_paths = glob.glob(os.path.join(folder_path, '*.hdf'))
+    file_paths = glob.glob(os.path.join(folder_path, '*ID*.hdf'))
 
     # Sort file paths based on date and time in the file name
     sorted_file_paths = sorted(file_paths, key=lambda x: (os.path.basename(x).split('_')[5][0:8], os.path.basename(x).split('_')[5][8:14]))
@@ -56,7 +56,8 @@ def image_format(image):
     
     image[np.where(image == -999)] = np.nan
     #new_image = image[1100:2800,500:2200]
-    new_image = image[1900:2400,1100:1750]
+    #new_image = image[1900:2400,1100:1750]
+    new_image = image[:,:]
     
     return new_image
 
@@ -151,29 +152,29 @@ ax.coastlines(resolution='10m')
 ax.gridlines(draw_labels=True, dms=False, x_inline=False, y_inline=False)
 
 
-# Latitude and Longitude pairs (Replace these with your own 12 coordinates)
-lat_lon_pairs = [
-    # (47.9392, -118.4957),
-    # (47.9392, -118.4924),
-    # (47.9402,-118.4891),
-    # (47.9416,-118.4824),
-    (47.9439,-118.4791),
-    # (47.9440,-118.4758),
-    # (47.9422,-118.4690),
-    # (47.9419,-118.4623),
-    # (47.9415,-118.4556),
-    # (47.9443,-118.4524),
-    (47.9443,-118.4457),
-    # (47.9446,-118.4256),
-    # (47.9445,-118.4323)
-]
+# # Latitude and Longitude pairs (Replace these with your own 12 coordinates)
+# lat_lon_pairs = [
+#     # (47.9392, -118.4957),
+#     # (47.9392, -118.4924),
+#     # (47.9402,-118.4891),
+#     # (47.9416,-118.4824),
+#     (47.9439,-118.4791),
+#     # (47.9440,-118.4758),
+#     # (47.9422,-118.4690),
+#     # (47.9419,-118.4623),
+#     # (47.9415,-118.4556),
+#     # (47.9443,-118.4524),
+#     (47.9443,-118.4457),
+#     # (47.9446,-118.4256),
+#     # (47.9445,-118.4323)
+# ]
 
-# Extract latitudes and longitudes from the pairs
-latitudes, longitudes = zip(*lat_lon_pairs)
+# # Extract latitudes and longitudes from the pairs
+# latitudes, longitudes = zip(*lat_lon_pairs)
 
-# Plot the dots on the map
-ax.scatter(longitudes[0], latitudes[0], facecolors='cyan', edgecolors='cyan', s=60, transform=projection)
-ax.scatter(longitudes[1], latitudes[1], facecolors='red', edgecolors='red', s=60, transform=projection)
+# # Plot the dots on the map
+# ax.scatter(longitudes[0], latitudes[0], facecolors='cyan', edgecolors='cyan', s=60, transform=projection)
+# ax.scatter(longitudes[1], latitudes[1], facecolors='red', edgecolors='red', s=60, transform=projection)
 
 
 
