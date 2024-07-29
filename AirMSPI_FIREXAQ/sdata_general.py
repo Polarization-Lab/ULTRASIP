@@ -37,7 +37,7 @@ outputFile.write(out_str)
 out_str = '\n'
 outputFile.write(out_str)
 
-sdat_date = '2024-07-29T'
+sdat_date = '2024-07-29'
 sdat_time = '13:19:00Z'
 lon_median = -110
 lat_median = 32
@@ -126,14 +126,16 @@ for w in range(0,wave_num):
     out_str = out_str+' '+str(32)
 
 #view zenith
-for x in range(6):
-    for num in range(sza,sza+30,1):
-        vza = num
-        out_str = out_str+' '+str(vza)
-    
-for num in range(0,180,1):
-    vaz = num
-    out_str = out_str+' '+str(vaz)
+for y in range(4):
+    for x in range(6):
+        for num in range(sza,sza+30,1):
+            vza = num
+            out_str = out_str+' '+str(vza)
+
+for y in range(4):
+    for num in range(0,180,1):
+        vaz = num
+        out_str = out_str+' '+str(vaz)
     
 out_str = out_str +'{:12f}'.format(0.1)*meas_num
 out_str = out_str +'{:12f}'.format(0.1)*meas_num
