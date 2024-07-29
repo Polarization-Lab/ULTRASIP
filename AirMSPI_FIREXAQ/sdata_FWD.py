@@ -103,7 +103,7 @@ for i in range(len(content)):
 out_str = out_str+'{:12d}'.format(4)
 out_str = out_str+'{:12d}'.format(4)
 out_str = out_str+'{:12d}'.format(4)
-out_str = out_str+'{:12d}'.format(4) # 1 meas per wave
+out_str = out_str+'{:12d}'.format(4) #  meas per wave
 out_str = out_str+'{:12d}'.format(4)
 out_str = out_str+'{:12d}'.format(4)
 out_str = out_str+'{:12d}'.format(4)

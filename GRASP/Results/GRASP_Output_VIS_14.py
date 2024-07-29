@@ -26,9 +26,9 @@ def main():  # Main code
 # Set the paths
 
     #basepath = '/Users/mgaray/Desktop/Radiative_Transfer/RT_CODES/grasp-master/APOLO/2019_11_08/'
-    basepath = 'C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Aug16_2019_RetrievalFiles'
+    basepath = 'C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug1923'
     #figpath = '/Users/mgaray/Desktop/CODING/PYTHON/PY36/NOV19/APOLO/FIGS/'
-    figpath = 'C:/Users/ULTRASIP_1/Documents/ULTRASIP/AirMSPI_FIREXAQ/Figures'
+    figpath = 'C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Figures'
 # Set the base output file name
 
     #out_base = '_AirMSPI_test_20b_14.png'
@@ -39,7 +39,7 @@ def main():  # Main code
 
 # Get the text file listing
 
-    file_list = glob.glob('AirMSPI*GRASP*.txt')
+    file_list = glob.glob('*Merd_R5*.txt')
     #file_list = glob.glob('bench_FWD_IQU_rslts.txt')
     
     num_files = len(file_list)
@@ -139,19 +139,19 @@ def main():  # Main code
 # Look for the size parameters
 
                 if(words[0] == 'cv'):
-                    cv_fit[cv_fit_count] = np.float(words[2])
+                    cv_fit[cv_fit_count] = float(words[2])
                     cv_fit_count = cv_fit_count + 1
                     if(cv_fit_count > 3):
                        print('error')
                        
                 if(words[0] == 'rv'):
-                    rv_fit[rv_fit_count] = np.float(words[2])
+                    rv_fit[rv_fit_count] = float(words[2])
                     rv_fit_count = rv_fit_count + 1
                     if(rv_fit_count > 3):
                        print('error')
                        
                 if(words[0] == 'std'):
-                    std_fit[std_fit_count] = np.float(words[2])
+                    std_fit[std_fit_count] = float(words[2])
                     std_fit_count = std_fit_count + 1
                     if(std_fit_count > 3):
                        print('error')
@@ -192,8 +192,8 @@ def main():  # Main code
 # Extract the size distribution information
 
             if(data_count-size_bin_0 > 0):
-                size_bin[size_bin_count] = np.float(words[0])
-                size_bin_val[size_bin_count] = np.float(words[1])
+                size_bin[size_bin_count] = float(words[0])
+                size_bin_val[size_bin_count] = float(words[1])
                 size_bin_count = size_bin_count+1
                 if(size_bin_count == num_size_bins):
                     size_bin_0 = 9999
@@ -201,8 +201,8 @@ def main():  # Main code
 # Extract the spectral AOD information
 
             if(data_count-aod_0 > 0):
-                wave[wave_count] = np.float(words[0])
-                aod[wave_count] = np.float(words[1])
+                wave[wave_count] = float(words[0])
+                aod[wave_count] = float(words[1])
                 wave_count = wave_count+1
                 if(wave_count == num_wave):
                     aod_0 = 9999
@@ -211,7 +211,7 @@ def main():  # Main code
 # Extract the spectral SSA information
 
             if(data_count-ssa_0 > 0):
-                ssa[wave_count] = np.float(words[1])
+                ssa[wave_count] = float(words[1])
                 wave_count = wave_count+1
                 if(wave_count == num_wave):
                     ssa_0 = 9999
@@ -221,7 +221,7 @@ def main():  # Main code
 # NOTE: Have to skip a line
 
             if(data_count-nr_0 > 1):
-                nr[wave_count] = np.float(words[1])
+                nr[wave_count] = float(words[1])
                 wave_count = wave_count+1
                 if(wave_count == num_wave):
                     nr_0 = 9999
@@ -231,7 +231,7 @@ def main():  # Main code
 # NOTE: Have to skip a line
 
             if(data_count-ni_0 > 1):
-                ni[wave_count] = np.float(words[1])
+                ni[wave_count] = float(words[1])
                 wave_count = wave_count+1
                 if(wave_count == num_wave):
                     ni_0 = 9999
@@ -240,13 +240,13 @@ def main():  # Main code
 # Extract the percentage of spherical particles
 
             if(data_count-per_bin_0 > 0):
-                percent_sphere = np.float(words[1])
+                percent_sphere = float(words[1])
                 per_bin_0 = 9999
                 
 # Extract the Angstrom Exponent
 
             if(data_count-ae_0 > 0):
-                ae = np.float(words[0])
+                ae = float(words[0])
                 ae_0 = 9999
 
 # Extract the fitting information
@@ -260,20 +260,20 @@ def main():  # Main code
                     continue
                 else:
                     if(fit_counter_1 == 0):
-                        scat_temp = np.float(words[4])
-                        meas_temp = np.float(words[5])
-                        fit_temp = np.float(words[6])
+                        scat_temp = float(words[4])
+                        meas_temp = float(words[5])
+                        fit_temp = float(words[6])
                         band1_scat_raw.append(scat_temp)
                         band1_meas_I_raw.append(meas_temp)
                         band1_fit_I_raw.append(fit_temp)
                     if(fit_counter_1 == 1):
-                        meas_temp = np.float(words[5])
-                        fit_temp = np.float(words[6])
+                        meas_temp = float(words[5])
+                        fit_temp = float(words[6])
                         band1_meas_q_raw.append(meas_temp)
                         band1_fit_q_raw.append(fit_temp)
                     if(fit_counter_1 == 2):
-                        meas_temp = np.float(words[5])
-                        fit_temp = np.float(words[6])
+                        meas_temp = float(words[5])
+                        fit_temp = float(words[6])
                         band1_meas_u_raw.append(meas_temp)
                         band1_fit_u_raw.append(fit_temp)
                     
@@ -290,20 +290,20 @@ def main():  # Main code
                     continue
                 else:
                     if(fit_counter_2 == 0):
-                        scat_temp = np.float(words[4])
-                        meas_temp = np.float(words[5])
-                        fit_temp = np.float(words[6])
+                        scat_temp = float(words[4])
+                        meas_temp = float(words[5])
+                        fit_temp = float(words[6])
                         band2_scat_raw.append(scat_temp)
                         band2_meas_I_raw.append(meas_temp)
                         band2_fit_I_raw.append(fit_temp)
                     if(fit_counter_2 == 1):
-                        meas_temp = np.float(words[5])
-                        fit_temp = np.float(words[6])
+                        meas_temp = float(words[5])
+                        fit_temp = float(words[6])
                         band2_meas_q_raw.append(meas_temp)
                         band2_fit_q_raw.append(fit_temp)
                     if(fit_counter_2 == 2):
-                        meas_temp = np.float(words[5])
-                        fit_temp = np.float(words[6])
+                        meas_temp = float(words[5])
+                        fit_temp = float(words[6])
                         band2_meas_u_raw.append(meas_temp)
                         band2_fit_u_raw.append(fit_temp)
                     
@@ -311,9 +311,9 @@ def main():  # Main code
                 if(len(line) == 1):  #  This set does not have the same separator
                     band3_0 = 9999
                 else:
-                    scat_temp = np.float(words[4])
-                    meas_temp = np.float(words[5])
-                    fit_temp = np.float(words[6])
+                    scat_temp = float(words[4])
+                    meas_temp = float(words[5])
+                    fit_temp = float(words[6])
                     # band3_scat_raw.append(scat_temp)
                     # band3_meas_raw.append(meas_temp)
                     # band3_fit_raw.append(fit_temp)
