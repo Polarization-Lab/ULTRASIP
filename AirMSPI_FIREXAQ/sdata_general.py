@@ -113,7 +113,7 @@ for y in range(28):
 
 for y in range(28):
     for num in range(0,180,1):
-        vaz = 180
+        vaz = 110
         out_str = out_str+' '+str(vaz)
 
 for n in range(wave_num):
