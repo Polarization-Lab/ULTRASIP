@@ -126,13 +126,13 @@ for w in range(0,wave_num):
     out_str = out_str+' '+str(32)
 
 #view zenith
-for y in range(4):
+for y in range(12):
     for x in range(6):
         for num in range(sza,sza+30,1):
             vza = num
             out_str = out_str+' '+str(vza)
 
-for y in range(4):
+for y in range(12):
     for num in range(0,180,1):
         vaz = num
         out_str = out_str+' '+str(vaz)
