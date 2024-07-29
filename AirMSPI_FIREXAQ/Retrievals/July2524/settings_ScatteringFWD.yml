@@ -169,7 +169,7 @@ retrieval:
                 initial_guess:                       #1     #2     #3
                     value:                          [^repeat(0.1;3)   ]     
                     min:                            [^repeat(0.001;3)]
-                    max:                            [0.2, 0.2,  0.2,   0.3,  0.4,   0.7,   0.8]
+                    max:                            [0.2, 0.2,  0.2]
                     index_of_wavelength_involved:   [^expand(1;3)]
                 single_pixel:
                     smoothness_constraints:
