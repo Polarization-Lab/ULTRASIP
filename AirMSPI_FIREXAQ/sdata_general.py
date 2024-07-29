@@ -138,17 +138,17 @@ for y in range(12):
         out_str = out_str+' '+str(vaz)
     
 out_str = out_str +'{:12f}'.format(0.1)*meas_num
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
-
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
+out_str = out_str +'{:12f}'.format(10)*meas_num
 out_str = out_str +'{:12f}'.format(0.1)*meas_num
 out_str = out_str +'{:12f}'.format(0.1)*meas_num
 
 out_str = out_str +'{:12f}'.format(0.1)*meas_num
+out_str = out_str +'{:12f}'.format(10)*meas_num
 out_str = out_str +'{:12f}'.format(0.1)*meas_num
+out_str = out_str +'{:12f}'.format(0.1)*meas_num
+
+out_str = out_str +'{:12f}'.format(0.1)*meas_num
+out_str = out_str +'{:12f}'.format(10)*meas_num
 out_str = out_str +'{:12f}'.format(0.1)*meas_num
 out_str = out_str +'{:12f}'.format(0.1)*meas_num
 
