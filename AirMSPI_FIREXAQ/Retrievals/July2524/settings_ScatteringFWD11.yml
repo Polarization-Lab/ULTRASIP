@@ -315,7 +315,7 @@ retrieval:
             retrieved: false
             mode[1]: 
                 initial_guess: 
-                    value:                        [1e-6]
+                    value:                        [0.8]
                     min:                          [1e-10]
                     max:                          [1]
                     index_of_wavelength_involved: [0]
