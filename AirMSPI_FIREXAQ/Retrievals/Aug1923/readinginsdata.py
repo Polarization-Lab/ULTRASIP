@@ -7,7 +7,7 @@ Created on Mon Jul 29 09:57:32 2024
 import numpy as np
 import matplotlib.pyplot as plt
 
-file = open("C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2123/rayleightest.txt","r")
+file = open("C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2524/test.txt","r")
 
 lines = file.readlines()
 sza = []
@@ -23,18 +23,19 @@ for x in lines:
         sca = np.append(sca, float(x.split()[4]))
         data = np.append(data,float(x.split()[6]))
 
-I = data[0:44]
-Q = data[45:89]
-U = data[90:134]
+I = data[0:180]
+Q = data[180:360] #Q/I
+U = data[360:541] #U/I
 
-dolp = (np.sqrt(Q[:]**2+U[:]**2)/I[:])*100
+dolp = (np.sqrt(Q[:]**2+U[:]**2))*100
 aolp = 0.5*np.arctan2(U[:],Q[:])
 
-sza = sza[0:44]
-vza = vza[0:44]
-vaz = vaz[0:44]
-sca = sca[0:44]
+sza = sza[0:180]
+vza = vza[0:180] #view zenith angle
+vaz = vaz[0:180] #view azimuth angle
+sca = 180-sca[0:180]
 
-plt.plot(sca,dolp)
+plt.plot(vza[0:30],dolp[0:30])
+
 
 file.close()
