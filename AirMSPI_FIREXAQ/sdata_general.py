@@ -37,8 +37,8 @@ outputFile.write(out_str)
 out_str = '\n'
 outputFile.write(out_str)
 
-sdat_date = '2024_07_29'
-sdat_time = '13:19:00'
+sdat_date = '2024-07-29T'
+sdat_time = '13:19:00Z'
 lon_median = -110
 lat_median = 32
 wave_num = 3
@@ -94,7 +94,7 @@ out_str = out_str+'{:12d}'.format(43)
 
 # # Loop over the number of measurements per wavelength per meas type
 # # Note: This is the number of stares in the step-and-stare sequence
-meas_num = 1
+meas_num = 180
 
 out_str = out_str+'{:12d}'.format(meas_num)
 out_str = out_str+'{:12d}'.format(meas_num)
@@ -126,9 +126,10 @@ for w in range(0,wave_num):
     out_str = out_str+' '+str(32)
 
 #view zenith
-for num in range(sza,sza+30,1):
-    vza = num
-    out_str = out_str+' '+str(vza)
+for x in range(6):
+    for num in range(sza,sza+30,1):
+        vza = num
+        out_str = out_str+' '+str(vza)
     
 for num in range(0,180,1):
     vaz = num
