@@ -41,8 +41,8 @@ sdat_date = '2024-07-29'
 sdat_time = '13:19:00Z'
 lon_median = -110
 lat_median = 32
-wave_num = 3
-waves = np.array(['0.340', '0.355', '0.400']) #wavelengths in um 
+wave_num = 7
+waves = np.array(['0.35510', '0.37720', '0.44330', '0.46910','0.55350', '0.65913', '0.86370' ]) #wavelengths in um 
 
 out_str = '  1   '+sdat_date+'T'+sdat_time
 out_str = out_str+'       60.00   0   1   : NPIXELS  TIMESTAMP  HEIGHT_OBS(m)  NSURF  IFGAS    1\n'
@@ -64,54 +64,33 @@ out_str = out_str+'{:17.8f}'.format(60) # Elevation-read from inv sdat
 out_str = out_str+'      100.000000'  # Percent of land
 out_str = out_str+'{:16d}'.format(wave_num)  # Number of wavelengths (nwl)
 #   ## SET UP THE WAVELENGTH AND MEASUREMENT INFORMATION
-for value in range(wave_num):
+for value in range(0,wave_num):
     out_str = out_str+' '+waves[value]
 
 # Loop over the number of types of measurements per wavelength
-out_str = out_str+'{:12d}'.format(4)
-out_str = out_str+'{:12d}'.format(4)
-out_str = out_str+'{:12d}'.format(4)
+for n in range(0,wave_num):
+    out_str = out_str+'{:12d}'.format(4)
+
 
 # # Loop over the measurement types per wavelength
 # # NOTE: Values can be found in the GRASP documentation in Table 4.5
 # #       41 = Normalized radiance (I = rad*pi/E0) - GRASP calls normalized (reduced) radiance
 # #       12 = AOD, 42 = Q, 43 = U
-
-out_str = out_str+'{:12d}'.format(12)
-out_str = out_str+'{:12d}'.format(41)
-out_str = out_str+'{:12d}'.format(42)
-out_str = out_str+'{:12d}'.format(43)
-
-out_str = out_str+'{:12d}'.format(12)
-out_str = out_str+'{:12d}'.format(41)
-out_str = out_str+'{:12d}'.format(42)
-out_str = out_str+'{:12d}'.format(43)
-
-out_str = out_str+'{:12d}'.format(12)
-out_str = out_str+'{:12d}'.format(41)
-out_str = out_str+'{:12d}'.format(42)
-out_str = out_str+'{:12d}'.format(43)
+for n in range(0,wave_num):
+    out_str = out_str+'{:12d}'.format(12)
+    out_str = out_str+'{:12d}'.format(41)
+    out_str = out_str+'{:12d}'.format(42)
+    out_str = out_str+'{:12d}'.format(43)
 
 # # Loop over the number of measurements per wavelength per meas type
 # # Note: This is the number of stares in the step-and-stare sequence
 meas_num = 180
 
-out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(meas_num)
-
-
-out_str = out_str+'{:12d}'.format(meas_num) 
-out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(meas_num)
-
-
-out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(meas_num)
-out_str = out_str+'{:12d}'.format(meas_num)
+for n in range(0,wave_num):
+    out_str = out_str+'{:12d}'.format(meas_num)
+    out_str = out_str+'{:12d}'.format(meas_num)
+    out_str = out_str+'{:12d}'.format(meas_num)
+    out_str = out_str+'{:12d}'.format(meas_num)
 
 ## ANGLE DEFINITIONS
 
@@ -136,21 +115,13 @@ for y in range(12):
     for num in range(0,180,1):
         vaz = num
         out_str = out_str+' '+str(vaz)
-    
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
-out_str = out_str +'{:12f}'.format(10)*meas_num
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
 
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
-out_str = out_str +'{:12f}'.format(10)*meas_num
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
+for n in range(wave_num):
+    out_str = out_str +'{:12f}'.format(0.22)*meas_num
+    out_str = out_str +'{:12f}'.format(10)*meas_num
+    out_str = out_str +'{:12f}'.format(0.1)*meas_num
+    out_str = out_str +'{:12f}'.format(0.1)*meas_num
 
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
-out_str = out_str +'{:12f}'.format(10)*meas_num
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
-out_str = out_str +'{:12f}'.format(0.1)*meas_num
 
 ## ADDITIONAL PARAMETERS
 # NOTE: This is kludgy and GRASP seems to run without this being entirely correct
@@ -158,30 +129,67 @@ out_str = out_str +'{:12f}'.format(0.1)*meas_num
 out_str = out_str+'       0.00000000'  # Ground parameter (wave 1)
 out_str = out_str+'       0.00000000'  # Ground parameter (wave 2)
 out_str = out_str+'       0.00000000'  # Ground parameter (wave 3)
+out_str = out_str+'       0.00000000'  # Ground parameter (wave 4)
+out_str = out_str+'       0.00000000'  # Ground parameter (wave 5)
+out_str = out_str+'       0.00000000'  # Ground parameter (wave 6)
+out_str = out_str+'       0.00000000'  # Ground parameter (wave 7)
 out_str = out_str+'       0'  # Gas parameter (wave 1)
 out_str = out_str+'       0'  # Gas parameter (wave 2)
 out_str = out_str+'       0'  # Gas parameter (wave 3)
+out_str = out_str+'       0'  # Gas parameter (wave 4)
+out_str = out_str+'       0'  # Gas parameter (wave 5)
+out_str = out_str+'       0'  # Gas parameter (wave 6)
+out_str = out_str+'       0'  # Gas parameter (wave 7)
 out_str = out_str+'       0'  # Covariance matrix (wave 1)
 out_str = out_str+'       0'  # Covariance matrix (wave 2)
 out_str = out_str+'       0'  # Covariance matrix (wave 3)
+out_str = out_str+'       0'  # Covariance matrix (wave 4)
+out_str = out_str+'       0'  # Covariance matrix (wave 5)
+out_str = out_str+'       0'  # Covariance matrix (wave 6)
+out_str = out_str+'       0'  # Covariance matrix (wave 7)
 out_str = out_str+'       0'  # Vertical profile (wave 1)
 out_str = out_str+'       0'  # Vertical profile (wave 2)
 out_str = out_str+'       0'  # Vertical profile (wave 3)
+out_str = out_str+'       0'  # Vertical profile (wave 4)
+out_str = out_str+'       0'  # Vertical profile (wave 5)
+out_str = out_str+'       0'  # Vertical profile (wave 6)
+out_str = out_str+'       0'  # Vertical profile (wave 7)
 out_str = out_str+'       0'  # (Dummy) (wave 1)
 out_str = out_str+'       0'  # (Dummy) (wave 2)
 out_str = out_str+'       0'  # (Dummy) (wave 3)
+out_str = out_str+'       0'  # (Dummy) (wave 4)
+out_str = out_str+'       0'  # (Dummy) (wave 5)
+out_str = out_str+'       0'  # (Dummy) (wave 6)
+out_str = out_str+'       0'  # (Dummy) (wave 7)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 1)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 2)
 out_str = out_str+'       0'  # (Extra Dummy) (wave 3)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 4)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 5)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 6)
+out_str = out_str+'       0'  # (Extra Dummy) (wave 7)
+                   
                    
 # # Endline
 out_str = out_str+'\n'
