@@ -209,7 +209,7 @@ out_str = out_str+'{:12d}'.format(meas_num)
 for i in range(len(content)):
     if 'sza' in content[i]: 
         #sza = ' ' + content[i+1].split()[1]
-        sza = ' ' + str(0)
+        sza = ' ' + str(32)
 out_str = out_str+' '+sza*7
 
 
