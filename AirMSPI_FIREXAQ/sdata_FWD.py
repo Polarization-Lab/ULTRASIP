@@ -230,7 +230,7 @@ out_str = out_str+' '+sza*7
 #         vza = vza*28
 
 # Using a list comprehension to generate the numbers in the specified range
-numbers = [str(180-num) for num in range(0,180,10)]
+numbers = [str(180-num) for num in range(0,75,5)]
 # Joining the numbers with a comma separator to create the final string
 vza = " ".join(numbers) + ' '
 # Repeating the sequence 28 times
