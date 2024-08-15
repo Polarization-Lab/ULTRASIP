@@ -13,7 +13,7 @@ import numpy as np
 #load in GRASP output 
 # Define GRASP output file path 
 
-outpath = "C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2524"
+outpath = "C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug1524"
 
 #outpath = "C:/Users/Clarissa/Documents/GitHub/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2023/"
 

@@ -7,7 +7,7 @@ Created on Mon Jul 29 09:57:32 2024
 import numpy as np
 import matplotlib.pyplot as plt
 
-file = open("C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2524/rayleigh.txt","r")
+file = open("C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2524/higher_concentration.txt","r")
 
 lines = file.readlines()
 sza = []
@@ -41,7 +41,7 @@ sca = 180-sca[0:180]
 plt.plot(sca[0:30],dolp[0:30],label='DoLP [%]')
 plt.plot(sca[0:30],aolp[0:30],label='AoLP [deg]')
 plt.xlabel('Scattering Angle')
-plt.title('GRASP Forward Simulation Rayleigh Atmosphere-No Neutral Points')
+plt.title('GRASP Forward Simulation AOD = 4 Atmosphere-No Neutral Points')
 plt.legend()
 
 file.close()

@@ -4,7 +4,7 @@
 
 input:
     driver: sdata
-    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2524/FWD_Scat.sdat"
+    file:  "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug1524/FWD_Scat.sdat"
   
 output:
     segment:
@@ -315,7 +315,7 @@ retrieval:
             retrieved: false
             mode[1]: 
                 initial_guess: 
-                    value:                        [1]
+                    value:                        [1e-9]
                     min:                          [1e-10]
                     max:                          [1]
                     index_of_wavelength_involved: [0]
