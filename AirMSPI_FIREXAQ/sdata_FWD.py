@@ -21,7 +21,7 @@ outpath = "C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retri
 file = open(outpath+"/Merd_R5_INV.txt")
 content = file.readlines()
 wave_num = 7
-meas_num = 90
+meas_num = 18
 
 
 # Change to the output directory
@@ -230,7 +230,7 @@ out_str = out_str+' '+sza*7
 #         vza = vza*28
 
 # Using a list comprehension to generate the numbers in the specified range
-numbers = [str(180-num) for num in range(0,180,2)]
+numbers = [str(180-num) for num in range(0,180,10)]
 # Joining the numbers with a comma separator to create the final string
 vza = " ".join(numbers) + ' '
 # Repeating the sequence 28 times
@@ -255,7 +255,7 @@ out_str = out_str+' '+vza
 #         raz = raz*28
 
 # Using a list comprehension to generate the numbers in the specified range
-numbers = [str(num) for num in range(0, 180, 2)]
+numbers = [str(num) for num in range(0, 180, 10)]
 # Joining the numbers with a comma separator to create the final string
 raz = " ".join(numbers) + ' '
 # Repeating the sequence 28 times
