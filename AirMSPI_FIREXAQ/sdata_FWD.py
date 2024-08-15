@@ -21,7 +21,7 @@ outpath = "C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retri
 file = open(outpath+"/Merd_R5_INV.txt")
 content = file.readlines()
 wave_num = 7
-meas_num = 18
+meas_num = 180
 
 
 # Change to the output directory
