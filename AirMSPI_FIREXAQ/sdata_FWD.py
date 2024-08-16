@@ -233,8 +233,11 @@ out_str = out_str+' '+sza*7
 numbers = [str(180-num) for num in range(0,90,1)]
 # Joining the numbers with a comma separator to create the final string
 vza = " ".join(numbers) + ' '
+print(len(range(0,90,1)))
 # Repeating the sequence 28 times
 vza = vza * 28
+
+
 
 out_str = out_str+' '+vza
 
