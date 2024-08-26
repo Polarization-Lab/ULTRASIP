@@ -84,7 +84,7 @@ for n in range(0,wave_num):
 
 # # Loop over the number of measurements per wavelength per meas type
 # # Note: This is the number of stares in the step-and-stare sequence
-meas_num = 90
+meas_num = 90 #angle values 
 
 for n in range(0,wave_num):
     out_str = out_str+'{:12d}'.format(meas_num)
@@ -104,17 +104,31 @@ sza=32
 for w in range(0,wave_num):
     out_str = out_str+' '+str(60)
 
-vaz = np.arange(2,182,2)
-vza = np.arange(91,181,1)
+# vaz = np.arange(2,182,2)
+# vza = np.arange(91,181,1)
 
 
-for num in range(28): 
-    for val in range(len(vza)):
-        out_str = out_str +' ' + str(vza[val])
+# for num in range(28): 
+#     for val in range(len(vza)):
+#         out_str = out_str +' ' + str(vza[val])
+        
+# for num in range(28): 
+#     for val in range(len(vaz)):
+#         out_str = out_str +' ' + str(vaz[val])
+
+vaz = []
+vza = np.arange(91,181,10)
+
+for val in range(5,185,5):
+    vaz = np.append(vaz,np.repeat(val,len(vza)))
         
 for num in range(28): 
     for val in range(len(vaz)):
         out_str = out_str +' ' + str(vaz[val])
+        
+for num in range(324): 
+    for val in range(len(vza)):
+        out_str = out_str+' '+str(vza[val])
 
 for n in range(wave_num):
     out_str = out_str +'{:12f}'.format(0.22)*meas_num
