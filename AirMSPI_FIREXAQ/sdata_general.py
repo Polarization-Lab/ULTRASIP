@@ -10,7 +10,7 @@ import os
 import numpy as np
 import itertools as it
 
-outpath = "C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/July2524"
+outpath = "C:/Users/ULTRASIP_1/OneDrive/Documents/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug2624"
 
 # Change to the output directory
 os.chdir(outpath) 
@@ -84,7 +84,7 @@ for n in range(0,wave_num):
 
 # # Loop over the number of measurements per wavelength per meas type
 # # Note: This is the number of stares in the step-and-stare sequence
-meas_num = 180
+meas_num = 28
 
 for n in range(0,wave_num):
     out_str = out_str+'{:12d}'.format(meas_num)
@@ -102,19 +102,19 @@ for n in range(0,wave_num):
 #sun zenith/wavelength
 sza=32
 for w in range(0,wave_num):
-    out_str = out_str+' '+str(32)
+    out_str = out_str+' '+str(60)
 
-#view zenith
-for y in range(28):
-    for x in range(6):
-        for num in range(sza,sza+30,1):
-            vza = num
-            out_str = out_str+' '+str(vza)
+vaz = np.arange(0,182,2)
+vza = np.arange(90,181,1)
 
-for y in range(28):
-    for num in range(0,180,1):
-        vaz = 0
-        out_str = out_str+' '+str(vaz)
+
+for num in range(meas_num): 
+    for val in range(len(vza)):
+        out_str = out_str +' ' + str(vza[val])
+        
+for num in range(meas_num): 
+    for val in range(len(vaz)):
+        out_str = out_str +' ' + str(vaz[val])
 
 for n in range(wave_num):
     out_str = out_str +'{:12f}'.format(0.22)*meas_num
