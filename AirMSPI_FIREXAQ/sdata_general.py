@@ -108,11 +108,11 @@ vaz = np.arange(0,182,2)
 vza = np.arange(90,181,1)
 
 
-for num in range(meas_num): 
+for num in range(28): 
     for val in range(len(vza)):
         out_str = out_str +' ' + str(vza[val])
         
-for num in range(meas_num): 
+for num in range(28): 
     for val in range(len(vaz)):
         out_str = out_str +' ' + str(vaz[val])
 
