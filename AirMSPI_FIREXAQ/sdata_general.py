@@ -123,15 +123,15 @@ theta_v = []
 for x in range(10):
     theta_v = np.concatenate((theta_v,vza))
     
+for meas in range(28):
+    for val in range(len(theta_v)):
+        out_str = out_str +' '+ str(theta_v[val]) 
+    
     
 for meas in range(28):
     for val in range(len(vaz)):
         out_str = out_str +' '+ str(vaz[val]) 
         
-        
-for meas in range(28):
-    for val in range(len(theta_v)):
-        out_str = out_str +' '+ str(theta_v[val]) 
         
     
 
