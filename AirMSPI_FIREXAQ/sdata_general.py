@@ -116,11 +116,11 @@ for w in range(0,wave_num):
 #     for val in range(len(vaz)):
 #         out_str = out_str +' ' + str(vaz[val])
 
-vaz = np.repeat(np.arange(180,380,20),18)
-vza = np.arange(91,180,5)
+vaz = np.repeat(np.arange(180,370,10),9)
+vza = np.arange(91,180,10)
 theta_v = []
 
-for x in range(10):
+for x in range(19):
     theta_v = np.concatenate((theta_v,vza))
     
 for meas in range(28):
@@ -131,9 +131,6 @@ for meas in range(28):
 for meas in range(28):
     for val in range(len(vaz)):
         out_str = out_str +' '+ str(vaz[val]) 
-        
-        
-    
 
 for n in range(wave_num):
     out_str = out_str +'{:12f}'.format(0.22)*meas_num
