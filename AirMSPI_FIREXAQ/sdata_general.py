@@ -84,7 +84,7 @@ for n in range(0,wave_num):
 
 # # Loop over the number of measurements per wavelength per meas type
 # # Note: This is the number of stares in the step-and-stare sequence
-meas_num = 180 #angle values 
+meas_num = 171 #angle values 
 
 for n in range(0,wave_num):
     out_str = out_str+'{:12d}'.format(meas_num)
