@@ -116,8 +116,8 @@ for w in range(0,wave_num):
 #     for val in range(len(vaz)):
 #         out_str = out_str +' ' + str(vaz[val])
 
-vaz = np.repeat(np.arange(180,360,20),19)
-vza = np.arange(91,185,5)
+vaz = np.repeat(np.arange(180,360,20),18)
+vza = np.arange(91,180,5)
 theta_v = []
 
 for x in range(9):
