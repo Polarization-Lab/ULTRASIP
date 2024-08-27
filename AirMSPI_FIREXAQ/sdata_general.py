@@ -84,7 +84,7 @@ for n in range(0,wave_num):
 
 # # Loop over the number of measurements per wavelength per meas type
 # # Note: This is the number of stares in the step-and-stare sequence
-meas_num = 171 #angle values 
+meas_num = 190 #angle values 
 
 for n in range(0,wave_num):
     out_str = out_str+'{:12d}'.format(meas_num)
@@ -116,11 +116,12 @@ for w in range(0,wave_num):
 #     for val in range(len(vaz)):
 #         out_str = out_str +' ' + str(vaz[val])
 
-vaz = np.repeat(np.arange(180,370,10),9)
-vza = np.arange(91,180,10)
+vaz = np.repeat(np.arange(180,370,20),19)
+vza = np.array([91,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180])
 theta_v = []
 
-for x in range(19):
+
+for x in range(10):
     theta_v = np.concatenate((theta_v,vza))
     
 for meas in range(28):
