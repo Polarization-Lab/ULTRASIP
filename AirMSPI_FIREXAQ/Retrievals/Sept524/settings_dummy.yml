@@ -188,51 +188,7 @@ retrieval:
                        derivative_order_of_T_variability:    1
                        lagrange_multiplier_of_T_variability: 2.0e-2
 
-        characteristic[4]: #4
-            type: sphere_fraction
-            retrieved: true
-            mode[1]:
-                initial_guess:                      #1      
-                    value:                          [0.99   ]
-                    min:                            [0.005 ]
-                    max:                            [0.9999]
-                    index_of_wavelength_involved:   [0     ]
-                single_pixel:
-                    smoothness_constraints:
-                        difference_order: 0
-                        lagrange_multiplier: 0.0
-                multi_pixel:
-                   smoothness_constraints:
-                       derivative_order_of_X_variability:    0
-                       lagrange_multiplier_of_X_variability: 0.0
-                       derivative_order_of_Y_variability:    0
-                       lagrange_multiplier_of_Y_variability: 0.0
-                       derivative_order_of_T_variability:    0
-                       lagrange_multiplier_of_T_variability: 0.0 
-
-	characteristic[5]: #5
-            type: aerosol_concentration
-            retrieved: true
-            mode[1]:
-                initial_guess:
-                    value:                 [1e-9]
-                    min:                   [1e-10]
-                    max:                   [5.0]
-                    index_of_wavelength_involved:   [0]
-                single_pixel:
-                    smoothness_constraints:
-                        difference_order: 0
-                        lagrange_multiplier: 0.0
-                multi_pixel:
-                  smoothness_constraints:
-                       derivative_order_of_X_variability:    0
-                       lagrange_multiplier_of_X_variability: 0.0
-                       derivative_order_of_Y_variability:    0
-                       lagrange_multiplier_of_Y_variability: 0.0
-                       derivative_order_of_T_variability:    0
-                       lagrange_multiplier_of_T_variability: 0.0 
-
-        characteristic[6]: #5
+        characteristic[4]: #5
             type: vertical_profile_parameter_height
             retrieved: true
             mode[1]:
@@ -255,7 +211,7 @@ retrieval:
                        lagrange_multiplier_of_T_variability: 1.0e-2
 
                          
-        characteristic[7]: #7
+        characteristic[5]: #7
             type: surface_land_brdf_ross_li
             retrieved: true
             mode[1]:    
@@ -315,7 +271,7 @@ retrieval:
                        derivative_order_of_T_variability:    1
                        lagrange_multiplier_of_T_variability: 1.0e-0                            
 
-        characteristic[8]: #8
+        characteristic[6]: #8
             type: surface_land_polarized_maignan_breon
             retrieved: true
             mode[1]:
@@ -337,7 +293,7 @@ retrieval:
                        derivative_order_of_T_variability:    1
                        lagrange_multiplier_of_T_variability: 1.0e-0  
              
-        characteristic[9]: #9
+        characteristic[7]: #9
             type: surface_water_cox_munk_iso
             retrieved: true
             mode[1]:    
@@ -398,5 +354,47 @@ retrieval:
                        derivative_order_of_T_variability:    0
                        lagrange_multiplier_of_T_variability: 1.0e-3
 
+        characteristic[8]: #4
+            type: sphere_fraction
+            retrieved: false
+            mode[1]:
+                initial_guess:                      #1      
+                    value:                          [0.99   ]
+                    min:                            [0.005 ]
+                    max:                            [0.9999]
+                    index_of_wavelength_involved:   [0     ]
+                single_pixel:
+                    smoothness_constraints:
+                        difference_order: 0
+                        lagrange_multiplier: 0.0
+                multi_pixel:
+                   smoothness_constraints:
+                       derivative_order_of_X_variability:    0
+                       lagrange_multiplier_of_X_variability: 0.0
+                       derivative_order_of_Y_variability:    0
+                       lagrange_multiplier_of_Y_variability: 0.0
+                       derivative_order_of_T_variability:    0
+                       lagrange_multiplier_of_T_variability: 0.0 
 
+	characteristic[9]: #5
+            type: aerosol_concentration
+            retrieved: false
+            mode[1]:
+                initial_guess:
+                    value:                 [1e-9]
+                    min:                   [1e-10]
+                    max:                   [5.0]
+                    index_of_wavelength_involved:   [0]
+                single_pixel:
+                    smoothness_constraints:
+                        difference_order: 0
+                        lagrange_multiplier: 0.0
+                multi_pixel:
+                  smoothness_constraints:
+                       derivative_order_of_X_variability:    0
+                       lagrange_multiplier_of_X_variability: 0.0
+                       derivative_order_of_Y_variability:    0
+                       lagrange_multiplier_of_Y_variability: 0.0
+                       derivative_order_of_T_variability:    0
+                       lagrange_multiplier_of_T_variability: 0.0 
 
