@@ -203,12 +203,12 @@ retrieval:
                         lagrange_multiplier: 0.0
                 multi_pixel:
                    smoothness_constraints:
-                       derivative_order_of_X_variability:    1
-                       lagrange_multiplier_of_X_variability: 1.0e-1                        
-                       derivative_order_of_Y_variability:    1
-                       lagrange_multiplier_of_Y_variability: 1.0e-1                     
-                       derivative_order_of_T_variability:    1
-                       lagrange_multiplier_of_T_variability: 1.0e-2
+                       derivative_order_of_X_variability:    0
+                       lagrange_multiplier_of_X_variability: 0.0
+                       derivative_order_of_Y_variability:    0
+                       lagrange_multiplier_of_Y_variability: 0.0
+                       derivative_order_of_T_variability:    0
+                       lagrange_multiplier_of_T_variability: 0.0 
 
 	characteristic[5]: #5
             type: aerosol_concentration
