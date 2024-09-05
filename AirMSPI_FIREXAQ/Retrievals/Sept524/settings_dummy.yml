@@ -30,7 +30,7 @@ retrieval:
     mode: forward # forward
     
     inversion: 
-        regime: multi_pixel   
+        regime: single_pixel   
         
         convergence:
     #        stop_before_performing_retrieval: false
