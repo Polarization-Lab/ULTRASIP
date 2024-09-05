@@ -52,7 +52,7 @@ retrieval:
     forward_model:
         phase_matrix:
             size_binning_method_for_triangle_bins: logarithm
-            number_of_elements: 4
+            number_of_elements: 0
             kernels_folder: "KERNELS_BASE/"
             radius:
                 mode[1]:
