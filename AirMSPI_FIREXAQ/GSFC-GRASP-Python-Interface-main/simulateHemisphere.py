@@ -6,7 +6,7 @@ import numpy as np
 import datetime as dt
 
 # Path to the YAML file you want to use for the aerosol and surface definition
-fwdModelYAMLpath = "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug1524/settings_ScatteringFWD5.yml"
+fwdModelYAMLpath = "/home/cdeleon/ULTRASIP/AirMSPI_FIREXAQ/Retrievals/Aug1524/settings_ScatteringFWD11.yml"
 
 # paths to GRASP binary and kernels
 # binPathGRASP = '/home/respinosa/GRASP_GSFC/build/bin/grasp'

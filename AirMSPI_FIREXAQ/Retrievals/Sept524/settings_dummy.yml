@@ -8,21 +8,6 @@ output:
         function: [classic, classic] # classic, classic_plot, csv, none
         stream: ["Output_FWD2.txt", screen] # screen, "filename"
 
-
-    
-# Settings example to retrieve aerosol and surface parameters from synthetic POLDER (I, Q and U) observations (multi-pixel)
-# Authors: Pavel Litvinov, Xin Huang, Anton Lopatin
-# date of last modification: 2016-09-11 (Anton Lopatin)
-
-# Other comments:
-#   fast settings
-#   monomodal triangular bins
-#   monomodal spectral dependent refractive index
-#   exponential aerosol vertical profile with retrieved scale altitude
-#   both land and ocean surface
-#   characteristics, optics, refractive index, surface, residual and size distribution bimodal properties provided
-
-        
 retrieval:
     general:
         path_to_internal_files: "/home/cdeleon/grasp/src/retrieval/internal_files/" 
@@ -118,7 +103,7 @@ retrieval:
             isotropic_bihemispherical_reflectance: false
 
     debug:
-        additional_information: true
+        additional_information: false
         verbose: true
 
     constraints:
