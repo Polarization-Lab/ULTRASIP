@@ -43,8 +43,8 @@ retrieval:
             normal_system_solver:       sparse_matrix_solver
             shift_for_applying_logarithm_to_negative_values: 1.1
 
-        measurement_fitting:
-            polarization: degree_of_polarization
+        #measurement_fitting:
+         #   polarization: degree_of_polarization
 
         noises:
             noise[1]:
@@ -77,7 +77,7 @@ retrieval:
             number_of_layers: 50
             aerosol_profile_vertical_type:    exponential
             absolute_error_rt_calculations: 0.0005
-            reference_plane_for_polarization:   meridian
+            reference_plane_for_polarization:  principal_plane  
             simulating_observation:
                 order_of_scattering: multiple_scattering
                 number_of_gaussian_quadratures_for_expansion_coefficients:  15
