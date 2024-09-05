@@ -210,29 +210,7 @@ retrieval:
                        derivative_order_of_T_variability:    1
                        lagrange_multiplier_of_T_variability: 1.0e-2
 
-        characteristic[5]: #5
-            type: vertical_profile_parameter_height
-            retrieved: true
-            mode[1]:
-                initial_guess:                      #1          
-                    value:                          [2500.0 ]
-                    min:                            [10.0   ] 
-                    max:                            [5000.0 ]
-                    index_of_wavelength_involved:   [0      ]
-                single_pixel:
-                    smoothness_constraints:
-                        difference_order: 0
-                        lagrange_multiplier: 0
-                multi_pixel:
-                   smoothness_constraints:
-                       derivative_order_of_X_variability:    1
-                       lagrange_multiplier_of_X_variability: 1.0e-1                        
-                       derivative_order_of_Y_variability:    1
-                       lagrange_multiplier_of_Y_variability: 1.0e-1                     
-                       derivative_order_of_T_variability:    1
-                       lagrange_multiplier_of_T_variability: 1.0e-2
-        
-	characteristic[6]: #5
+	characteristic[5]: #5
             type: aerosol_concentration
             retrieved: true
             mode[1]:
@@ -253,6 +231,28 @@ retrieval:
                        lagrange_multiplier_of_Y_variability: 0.0
                        derivative_order_of_T_variability:    0
                        lagrange_multiplier_of_T_variability: 0.0 
+
+        characteristic[6]: #5
+            type: vertical_profile_parameter_height
+            retrieved: true
+            mode[1]:
+                initial_guess:                      #1          
+                    value:                          [2000.0 ]
+                    min:                            [10.0   ] 
+                    max:                            [5000.0 ]
+                    index_of_wavelength_involved:   [0      ]
+                single_pixel:
+                    smoothness_constraints:
+                        difference_order: 0
+                        lagrange_multiplier: 0
+                multi_pixel:
+                   smoothness_constraints:
+                       derivative_order_of_X_variability:    1
+                       lagrange_multiplier_of_X_variability: 1.0e-1                        
+                       derivative_order_of_Y_variability:    1
+                       lagrange_multiplier_of_Y_variability: 1.0e-1                     
+                       derivative_order_of_T_variability:    1
+                       lagrange_multiplier_of_T_variability: 1.0e-2
 
                          
         characteristic[7]: #7
