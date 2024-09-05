@@ -137,12 +137,12 @@ retrieval:
                         lagrange_multiplier: 0.0
                 multi_pixel:
                    smoothness_constraints:
-                       derivative_order_of_X_variability:    1
-                       lagrange_multiplier_of_X_variability: 1.0e-1                        
-                       derivative_order_of_Y_variability:    1
-                       lagrange_multiplier_of_Y_variability: 1.0e-1                     
-                       derivative_order_of_T_variability:    1
-                       lagrange_multiplier_of_T_variability: 5.0e-4
+                       derivative_order_of_X_variability:    0
+                       lagrange_multiplier_of_X_variability: 0.0                        
+                       derivative_order_of_Y_variability:    0
+                       lagrange_multiplier_of_Y_variability: 0.0                     
+                       derivative_order_of_T_variability:    0
+                       lagrange_multiplier_of_T_variability: 0.0
                                                 
         characteristic[2]: #2
             type: real_part_of_refractive_index_spectral_dependent
