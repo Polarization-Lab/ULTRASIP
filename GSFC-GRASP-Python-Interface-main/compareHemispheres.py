@@ -1,22 +1,22 @@
 from runGRASP import graspDB, graspRun, pixel
 from matplotlib import pyplot as plt
 import os
-#if os.uname()[1]=='uranus': plt.switch_backend('agg')
+if os.uname()[1]=='uranus': plt.switch_backend('agg')
 import numpy as np
 import datetime as dt
 
 # Path to the YAML file you want to use for the aerosol and surface definition
-YAMLpaths = ['C:/Users/ULTRASIP_1/OneDrive/Desktop/test/settingfiles/settings_ScatteringFWD5.yml']
+YAMLpaths = ['/Users/wrespino/Synced/MADCAP_CAPER/PCA_landModels/settings_FWD_IQU_POLAR_1lambda_RTLS_orig_0.yml']
 
 # paths to GRASP binary and kernels
-binPathGRASP = 'C:/Users/ULTRASIP_1/OneDrive/Desktop/test/grasp/build/bin/grasp'
-krnlPathGRASP = 'C:/Users/ULTRASIP_1/OneDrive/Desktop/test/grasp/src/retrieval/internal_files'
+binPathGRASP = '/Users/wrespino/Synced/Local_Code_MacBook/grasp_open/build/bin/grasp'
+krnlPathGRASP = '/Users/wrespino/Synced/Local_Code_MacBook/grasp_open/src/retrieval/internal_files'
 
 # path to save the figure (None to just display to screen) – NOT SETUP YET
 # figSavePath = '/Users/wrespino/Documents/lev2CasePCA.png'
 figSavePath = None
 
-graspSavePath = 'C:/Users/ULTRASIP_1/OneDrive/Desktop/test/compareRTLS_bigOne.pkl'
+graspSavePath = '/Users/wrespino/Documents/compareRTLS_bigOne.pkl'
 
 hemiTrueInd = 0
 hemiDiffInd = 0 # diff this YAML file against the one above; maps to YAMLpaths
@@ -25,8 +25,8 @@ histYamlLegend = ['Conventional','New Method']
 pxInd = 0 # pxInd to plot; maps to szas below
 wvInd = 2 # wvInd to plot; maps to wvls below
 szas = [60] # solar zenith angle
-wvls = [0.36, 0.38, 0.41, 0.55, 0.67, 0.87, 1.55, 1.65] # wavelengths in μm
-#wvls = [1.36, 1.38, 1.41, 1.55, 1.67, 1.87, 2.55, 2.65] # wavelengths in μm HACK TO ELIMINATE RAYLEIGH
+# wvls = [0.36, 0.38, 0.41, 0.55, 0.67, 0.87, 1.55, 1.65] # wavelengths in μm
+wvls = [1.36, 1.38, 1.41, 1.55, 1.67, 1.87, 2.55, 2.65] # wavelengths in μm HACK TO ELIMINATE RAYLEIGH
 msTyp = [41] # grasp measurements types (I, Q, U) [must be in ascending order]
 azmthΑng = np.r_[0:180:10] # azimuth angles to simulate (0,10,...,175)
 vza = np.r_[0:65:5] # viewing zenith angles to simulate [in GRASP cord. sys.]
