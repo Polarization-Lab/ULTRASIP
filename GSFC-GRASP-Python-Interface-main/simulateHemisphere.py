@@ -7,7 +7,7 @@ import numpy as np
 import datetime as dt
 from runGRASP import graspRun, pixel
 # RtrvSimParentDir = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) # we assume GSFC-GRASP-Python-Interface is in parent of GSFC-Retrieval-Simulators
-sys.path.insert(0,'ULTRASIP/GSFC-Retrieval-Simulators-main/ACCP_ArchitectureAndCanonicalCases/')
+sys.path.insert('ULTRASIP/GSFC-Retrieval-Simulators-main/ACCP_ArchitectureAndCanonicalCases/')
 from canonicalCaseMap import setupConCaseYAML
 
 # Path to the YAML file you want to use for the aerosol and surface definition
