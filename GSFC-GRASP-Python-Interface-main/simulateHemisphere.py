@@ -13,12 +13,12 @@ from canonicalCaseMap import setupConCaseYAML
 
 # Path to the YAML file you want to use for the aerosol and surface definition
 # baseYAML = '/Users/wrespino/Synced/Local_Code_MacBook/GSFC-Retrieval-Simulators/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda.yml'
-baseYAML = ['/Users/wrespino/Synced/Local_Code_MacBook/GSFC-Retrieval-Simulators/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda.yml',
-            '/Users/wrespino/Synced/Local_Code_MacBook/GSFC-Retrieval-Simulators/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda-mod.yml']
+baseYAML = ['/home/cdeleon/ULTRASIP/GSFC-Retrieval-Simulators-main/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda.yml',
+            '/home/cdeleon/ULTRASIP/GSFC-Retrieval-Simulators-main/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda-mod.yml']
 
 # paths to GRASP binary and kernels
-binPathGRASP = '/Users/wrespino/Synced/Local_Code_MacBook/grasp_open/build/bin/grasp'
-krnlPathGRASP = '/Users/wrespino/Synced/Local_Code_MacBook/grasp_open/src/retrieval/internal_files'
+binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
+krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files/'
 
 # path to save the figure (None to just display to screen)
 # figSavePath = '/Users/wrespino/Documents/lev2CasePCA.png'
