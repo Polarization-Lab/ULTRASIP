@@ -12,7 +12,7 @@ from canonicalCaseMap import setupConCaseYAML
 
 # Path to the YAML file you want to use for the aerosol and surface definition
 # baseYAML = '/Users/wrespino/Synced/Local_Code_MacBook/GSFC-Retrieval-Simulators/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda.yml'
-baseYAML = ['/home/cdeleon/ULTRASIP/GSFC-Retrieval-Simulators-main/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda_TAMU.yml']
+baseYAML = ['/home/cdeleon/ULTRASIP/GSFC-Retrieval-Simulators-main/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda.yml']
 
 # paths to GRASP binary and kernels
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
