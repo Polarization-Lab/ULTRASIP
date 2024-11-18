@@ -195,4 +195,4 @@ retrieval:
             retrieved: true
             type: surface_land_polarized_maignan_breon
 settings:
-    strict: true
+    strict: false
