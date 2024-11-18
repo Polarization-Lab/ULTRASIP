@@ -12,8 +12,7 @@ from canonicalCaseMap import setupConCaseYAML
 
 # Path to the YAML file you want to use for the aerosol and surface definition
 # baseYAML = '/Users/wrespino/Synced/Local_Code_MacBook/GSFC-Retrieval-Simulators/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda.yml'
-baseYAML = ['/home/cdeleon/ULTRASIP/GSFC-Retrieval-Simulators-main/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda.yml',
-            '/home/cdeleon/ULTRASIP/GSFC-Retrieval-Simulators-main/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda-mod.yml']
+baseYAML = '/home/cdeleon/ULTRASIP/GSFC-Retrieval-Simulators-main/ACCP_ArchitectureAndCanonicalCases/settings_FWD_IQU_POLAR_1lambda.yml'
 
 # paths to GRASP binary and kernels
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
@@ -25,7 +24,7 @@ figSavePath = None
 
 # wvls = [0.36, 0.38, 0.41, 0.55, 0.67, 0.87, 1.55, 1.65] # wavelengths in μm
 wvls = [0.67] # wavelengths in μm
-caseStrs = ['lwcloud', 'lwcloud-mod']
+caseStrs = ['lwcloud']
 tauFactor = 1.0 # applies to all cases currently
 
 sza = 30 # solar zenith angle
