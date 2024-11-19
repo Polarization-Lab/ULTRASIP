@@ -2,7 +2,7 @@ input: {driver: sdata, file: bench.sdat}
 output:
     segment: {function: classic, stream: bench_FWD_IQU_rslts.txt}
 retrieval:
-    general: {path_to_internal_files: /home/cdeleon/grasp/src/retrieval/internal_files/}
+    general: {path_to_internal_files: /home/cdeleon/grasp/build/src/retrieval/internal_files/}
     mode: forward
     inversion:
         regime: single_pixel

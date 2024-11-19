@@ -16,7 +16,7 @@ baseYAML = ['/home/cdeleon/ULTRASIP/GSFC-Retrieval-Simulators-main/ACCP_Architec
 
 # paths to GRASP binary and kernels
 binPathGRASP = '/home/cdeleon/grasp/build/bin/grasp'
-krnlPathGRASP = '/home/cdeleon/grasp/src/retrieval/internal_files/'
+krnlPathGRASP = '/home/cdeleon/grasp/build/src/retrieval/internal_files/'
 
 # path to save the figure (None to just display to screen)
 # figSavePath = '/Users/wrespino/Documents/lev2CasePCA.png'
