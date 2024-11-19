@@ -10,8 +10,9 @@ import os
 import sys
 import pickle
 import re
-RtrvSimParentDir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))) # we assume GSFC-GRASP-Python-Interface is in parent of GSFC-Retrieval-Simulators
-sys.path.append(os.path.join(RtrvSimParentDir, "GSFC-GRASP-Python-Interface"))
+#RtrvSimParentDir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))) # we assume GSFC-GRASP-Python-Interface is in parent of GSFC-Retrieval-Simulators
+#sys.path.append(os.path.join(RtrvSimParentDir, "GSFC-GRASP-Python-Interface"))
+sys.path.append('/home/cdeleon/ULTRASIP/GSFC-Retrieval-Simulators-main/ACCP_ArchitectureAndCanonicalCases/')
 from miscFunctions import logNormal, loguniform, slope4RRI
 import runGRASP as rg
 
